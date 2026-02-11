@@ -15,12 +15,13 @@
     }
 
     :root {
-      --black: #000000;
+      --black: #0a0a0a;
       --white: #ffffff;
       --gray-light: #f5f5f5;
-      --gray: #888888;
-      --gray-dark: #333333;
-      --accent: #00aa00;
+      --gray: #666666;
+      --gray-dark: #1a1a1a;
+      --accent: #00ff88;
+      --accent-dark: #00cc6a;
     }
 
     body {
@@ -54,28 +55,38 @@
       letter-spacing: -0.5px;
     }
 
+    /* Section */
+    section {
+      padding: 100px 0;
+    }
+
+    section h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+    }
+
     /* Hero */
     .hero {
-      padding: 120px 0 100px;
+      padding: 140px 0 120px;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(56px, 10vw, 96px);
       font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.1;
+      letter-spacing: -3px;
+      line-height: 1;
       margin-bottom: 24px;
-    }
-
-    .hero h1 .accent {
-      color: var(--accent);
     }
 
     .hero .tagline {
       font-size: 20px;
       color: var(--gray-dark);
-      margin-bottom: 40px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
     }
 
     .hero .buttons {
@@ -96,14 +107,14 @@
     }
 
     .btn-primary {
-      background: var(--black);
-      color: var(--white);
-      border: 2px solid var(--black);
+      background: var(--accent);
+      color: var(--black);
+      border: 2px solid var(--accent);
     }
 
     .btn-primary:hover {
-      background: var(--accent);
-      border-color: var(--accent);
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
     }
 
     .btn-secondary {
@@ -114,86 +125,6 @@
 
     .btn-secondary:hover {
       border-color: var(--black);
-    }
-
-    /* Section */
-    section {
-      padding: 100px 0;
-    }
-
-    section h2 {
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 24px;
-    }
-
-    /* Tiers */
-    .tiers {
-      background: var(--gray-light);
-    }
-
-    .tiers h2 {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .tier-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-    }
-
-    .tier-card {
-      background: var(--white);
-      padding: 40px;
-      border-radius: 8px;
-      border: 1px solid var(--gray-light);
-    }
-
-    .tier-card h3 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
-    }
-
-    .tier-card ul {
-      list-style: none;
-    }
-
-    .tier-card li {
-      padding: 8px 0;
-      padding-left: 24px;
-      position: relative;
-    }
-
-    .tier-card li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* Why Modular */
-    .why-modular {
-      text-align: center;
-    }
-
-    .why-modular h2 {
-      margin-bottom: 40px;
-    }
-
-    .why-modular ul {
-      list-style: none;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .why-modular li {
-      padding: 12px 0;
-      font-size: 18px;
     }
 
     /* Problem */
@@ -211,6 +142,39 @@
       line-height: 1.8;
       max-width: 700px;
       color: #cccccc;
+    }
+
+    /* Solution */
+    .solution {
+      background: var(--gray-light);
+    }
+
+    .solution h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .solution ul {
+      list-style: none;
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .solution li {
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .solution li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 24px;
     }
 
     /* How It Works */
@@ -252,24 +216,6 @@
     .step h4 {
       font-weight: 600;
       margin-bottom: 8px;
-    }
-
-    /* Pricing */
-    .pricing {
-      background: var(--gray-light);
-      text-align: center;
-    }
-
-    .pricing h2 {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .pricing .copy {
-      font-size: 18px;
-      color: var(--gray-dark);
-      max-width: 600px;
-      margin: 0 auto;
     }
 
     /* Final CTA */
@@ -316,10 +262,6 @@
         flex-direction: column;
         align-items: center;
       }
-
-      .tier-card {
-        padding: 32px 24px;
-      }
     }
   </style>
 </head>
@@ -334,89 +276,12 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1>Own Your Web.<br>Build it. <span class="accent">Protect it.</span> Automate it.</h1>
+      <h1>Own Your Web.</h1>
       <p class="tagline">We build and deploy self-hosted websites for creators and businesses who want control.</p>
       <div class="buttons">
         <a href="#contact" class="btn btn-primary">Get Started</a>
         <a href="#how-it-works" class="btn btn-secondary">Learn How It Works</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Tiers -->
-  <section class="tiers">
-    <div class="container">
-      <h2>Modular Offer Structure</h2>
-      <p style="text-align: center; margin-bottom: 40px; color: var(--gray-dark);">Foundation → Control → Automation → Scale</p>
-      <div class="tier-cards">
-        <div class="tier-card">
-          <h3>🧱 Foundation</h3>
-          <p style="margin-bottom: 16px; color: var(--accent); font-weight: 600;">Own Your Web Starter</p>
-          <ul>
-            <li>1–5 page custom website</li>
-            <li>Domain setup</li>
-            <li>Self-hosted deployment</li>
-            <li>SSL + basic security</li>
-            <li>Documentation walkthrough</li>
-            <li>30-day support</li>
-          </ul>
-          <p style="margin-top: 24px; font-weight: 700;">$999 – $1,500</p>
-          <p style="font-size: 14px; color: var(--gray); margin-top: 8px;">Your website, not rented</p>
-        </div>
-        <div class="tier-card">
-          <h3>🛠 Control</h3>
-          <p style="margin-bottom: 16px; color: var(--accent); font-weight: 600;">Ownership Upgrade</p>
-          <ul>
-            <li>Advanced security hardening</li>
-            <li>Backup system</li>
-            <li>Uptime monitoring</li>
-            <li>Performance optimization</li>
-            <li>Email system setup</li>
-            <li>Migration off platforms</li>
-          </ul>
-          <p style="margin-top: 24px; font-weight: 700;">$750 – $1,500 <span style="font-weight: 400; color: var(--gray);">add-on</span></p>
-          <p style="font-size: 14px; color: var(--gray); margin-top: 8px;">Protection + stability</p>
-        </div>
-        <div class="tier-card">
-          <h3>🤖 Automation</h3>
-          <p style="margin-bottom: 16px; color: var(--accent); font-weight: 600;">Agent Layer</p>
-          <ul>
-            <li>Automated uptime recovery</li>
-            <li>Form intake automation</li>
-            <li>Content update workflows</li>
-            <li>Internal task automation</li>
-            <li>Optional CRM connection</li>
-          </ul>
-          <p style="margin-top: 24px; font-weight: 700;">$1,000 – $2,500</p>
-          <p style="font-size: 14px; color: var(--gray); margin-top: 8px;">Your site works while you sleep</p>
-        </div>
-        <div class="tier-card">
-          <h3>🏗 Scale</h3>
-          <p style="margin-bottom: 16px; color: var(--accent); font-weight: 600;">Infrastructure Buildout</p>
-          <ul>
-            <li>Multi-site systems</li>
-            <li>Internal dashboards</li>
-            <li>Backend automations</li>
-            <li>Advanced hosting config</li>
-            <li>Long-term system architecture</li>
-          </ul>
-          <p style="margin-top: 24px; font-weight: 700;">Custom Quote</p>
-          <p style="font-size: 14px; color: var(--gray); margin-top: 8px;">For serious operators</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Modular -->
-  <section class="why-modular">
-    <div class="container">
-      <h2>Why Modular Works For You</h2>
-      <ul>
-        <li>You don't overwhelm new small businesses</li>
-        <li>You upsell naturally</li>
-        <li>You build recurring relationships</li>
-        <li>You build authority slowly</li>
-      </ul>
     </div>
   </section>
 
@@ -429,6 +294,24 @@
         you're renting. Platforms change rules. Accounts get locked. Features disappear.
         <br><br>
         Ownership is stability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section class="solution">
+    <div class="container">
+      <h2>We build systems, not just websites.</h2>
+      <ul>
+        <li>Custom website development</li>
+        <li>Self-hosted deployment</li>
+        <li>Local or controlled hosting environments</li>
+        <li>Security-first configuration</li>
+        <li>Automation-ready architecture</li>
+      </ul>
+      <p style="margin-top: 32px; padding: 24px; background: var(--white); border-radius: 8px; border-left: 4px solid var(--accent);">
+        <strong>How Is This Possible?</strong><br>
+        Powered by modern agent infrastructure for reliability and control.
       </p>
     </div>
   </section>
@@ -456,28 +339,9 @@
         </div>
         <div class="step">
           <div class="number">5</div>
-          <h4>Optional Management</h4>
+          <h4>Optional Ongoing Management</h4>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Pricing / Growth Path -->
-  <section class="pricing">
-    <div class="container">
-      <h2>How This Feels To You</h2>
-      <p class="copy" style="margin-bottom: 32px;">
-        Instead of "buy hosting," you see a clear path:
-      </p>
-      <div style="display: grid; gap: 16px; max-width: 600px; margin: 0 auto;">
-        <p>1️⃣ Get your site</p>
-        <p>2️⃣ Protect it</p>
-        <p>3️⃣ Automate it</p>
-        <p>4️⃣ Scale it</p>
-      </div>
-      <p class="copy" style="margin-top: 32px; color: var(--accent);">
-        It feels like growth.
-      </p>
     </div>
   </section>
 
