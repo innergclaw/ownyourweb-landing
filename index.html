@@ -212,6 +212,128 @@
       text-shadow: 0 0 10px var(--button-glow);
     }
 
+    /* Modules */
+    .modules {
+      background: var(--bg);
+    }
+
+    .modules h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .modules-sub {
+      text-align: center;
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 60px;
+    }
+
+    .module-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .module-card {
+      background: var(--surface);
+      padding: 40px 32px;
+      border-radius: 16px;
+      border: 1px solid var(--surface);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .module-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .module-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .module-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .module-features li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .module-features li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .module-position {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .module-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .btn-module {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted);
+    }
+
+    .btn-module:hover {
+      background: var(--text-muted);
+      color: var(--bg);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .modules-progression {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+
+    .modules-progression span {
+      opacity: 0.5;
+    }
+
     /* How It Works */
     .how-it-works {
       text-align: center;
@@ -356,6 +478,87 @@
       <p style="margin-top: 32px; padding: 24px; background: var(--surface); border-radius: 12px; border: 1px solid var(--accent-amber); box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);">
         <strong style="color: var(--accent-amber);">How Is This Possible?</strong><br>
         <span style="color: var(--text-muted);">Powered by modern agent infrastructure for reliability and control.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Modules / Pricing -->
+  <section class="modules">
+    <div class="container">
+      <h2>Choose Your Level of Ownership</h2>
+      <p class="modules-sub">Start with Foundation. Upgrade as you grow.</p>
+
+      <div class="module-stack">
+        <div class="module-card" style="border-color: var(--accent-teal);">
+          <h3 style="color: var(--accent-teal);">Module 1 — Foundation</h3>
+          <p class="module-title">Own Your Web Starter</p>
+          <ul class="module-features">
+            <li>Custom website (1–5 pages)</li>
+            <li>Domain setup</li>
+            <li>Self-hosted deployment</li>
+            <li>SSL security</li>
+            <li>Documentation walkthrough</li>
+            <li>30-day support</li>
+          </ul>
+          <p class="module-position">Your website, not rented.</p>
+          <p class="module-price">Starting at $999</p>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Foundation%20Module" class="btn-module">Start Here</a>
+        </div>
+
+        <div class="module-card" style="border-color: var(--accent-cyan);">
+          <h3 style="color: var(--accent-cyan);">Module 2 — Control</h3>
+          <p class="module-title">Ownership Upgrade</p>
+          <ul class="module-features">
+            <li>Advanced security hardening</li>
+            <li>Automated backups</li>
+            <li>Uptime monitoring</li>
+            <li>Performance optimization</li>
+            <li>Email system setup</li>
+            <li>Platform migration (if needed)</li>
+          </ul>
+          <p class="module-position">Protection and stability.</p>
+          <p class="module-price">Add-on starting at $750</p>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Control%20Module" class="btn-module">Add This Module</a>
+        </div>
+
+        <div class="module-card" style="border-color: var(--accent-lime);">
+          <h3 style="color: var(--accent-lime);">Module 3 — Automation</h3>
+          <p class="module-title">Agent Layer</p>
+          <ul class="module-features">
+            <li>Automated uptime recovery</li>
+            <li>Form intake automation</li>
+            <li>Content workflows</li>
+            <li>Internal task automation</li>
+            <li>Optional CRM integration</li>
+          </ul>
+          <p class="module-position">Your site works while you sleep.</p>
+          <p class="module-price">Add-on starting at $1,000</p>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Automation%20Module" class="btn-module">Add This Module</a>
+        </div>
+
+        <div class="module-card" style="border-color: var(--accent-amber);">
+          <h3 style="color: var(--accent-amber);">Module 4 — Scale</h3>
+          <p class="module-title">Infrastructure Buildout</p>
+          <ul class="module-features">
+            <li>Multi-site systems</li>
+            <li>Backend dashboards</li>
+            <li>Advanced hosting configuration</li>
+            <li>Long-term architecture planning</li>
+          </ul>
+          <p class="module-position">Built for operators.</p>
+          <p class="module-price">Custom quote</p>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Scale%20Module" class="btn-module">Get Quote</a>
+        </div>
+      </div>
+
+      <p class="modules-progression">
+        <span style="color: var(--accent-teal);">Foundation</span>
+        →
+        <span style="color: var(--accent-cyan);">Control</span>
+        →
+        <span style="color: var(--accent-lime);">Automation</span>
+        →
+        <span style="color: var(--accent-amber);">Scale</span>
       </p>
     </div>
   </section>
