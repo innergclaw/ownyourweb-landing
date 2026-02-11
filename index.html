@@ -349,7 +349,7 @@
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 32px;
       max-width: 900px;
       margin: 0 auto;
@@ -377,8 +377,62 @@
 
     .step h4 {
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       color: var(--text);
+    }
+
+    /* Collapsible Details */
+    .step details {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+      margin-top: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .step details:hover {
+      border-color: rgba(199, 244, 100, 0.3);
+    }
+
+    .step details[open] {
+      border-color: var(--accent-lime);
+      box-shadow: 0 4px 20px rgba(199, 244, 100, 0.15);
+    }
+
+    .step summary {
+      font-weight: 600;
+      color: var(--accent-lime);
+      cursor: pointer;
+      list-style: none;
+      font-size: 14px;
+      padding: 4px 0;
+    }
+
+    .step summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .step summary::after {
+      content: " +";
+      float: right;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
+    .step details[open] summary::after {
+      content: " −";
+      transform: rotate(0deg);
+    }
+
+    .step .detail-content {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     /* Final CTA */
@@ -574,18 +628,42 @@
         <div class="step">
           <div class="number">1</div>
           <h4>Strategy Call</h4>
+          <details>
+            <summary>Expand</summary>
+            <div class="detail-content">
+              We define your goals, audience, and technical needs. This is where we decide what you actually need to own — and what you don't.
+            </div>
+          </details>
         </div>
         <div class="step">
           <div class="number">2</div>
           <h4>System Design</h4>
+          <details>
+            <summary>Expand</summary>
+            <div class="detail-content">
+              We map your site architecture, hosting environment, and automation layers. Everything is planned before a single line is deployed.
+            </div>
+          </details>
         </div>
         <div class="step">
           <div class="number">3</div>
           <h4>Build + Deploy</h4>
+          <details>
+            <summary>Expand</summary>
+            <div class="detail-content">
+              Your website is developed, configured, secured, and deployed in a controlled hosting environment. Tested for performance and stability.
+            </div>
+          </details>
         </div>
         <div class="step">
           <div class="number">4</div>
           <h4>Ownership Handoff</h4>
+          <details>
+            <summary>Expand</summary>
+            <div class="detail-content">
+              You receive full access, documentation, and control. No lock-in. No dependency. Your system belongs to you.
+            </div>
+          </details>
         </div>
       </div>
     </div>
