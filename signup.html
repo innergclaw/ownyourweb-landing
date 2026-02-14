@@ -441,6 +441,16 @@
   </footer>
 
   <script>
+    // Pre-select interest from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const preselectedInterest = urlParams.get('interest');
+    if (preselectedInterest) {
+      const interestInput = document.querySelector(`input[name="interest"][value="${preselectedInterest}"]`);
+      if (interestInput) {
+        interestInput.checked = true;
+      }
+    }
+
     const form = document.getElementById('signup-form');
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
