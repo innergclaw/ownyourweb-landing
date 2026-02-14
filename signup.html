@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — OwnYourWeb</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0F1115;
+      --surface: #1A1E24;
+      --surface-hover: #222832;
+      --text: #E8E8E8;
+      --text-muted: #9CA3AF;
+      --accent-teal: #00D1C7;
+      --accent-cyan: #2DE2E6;
+      --accent-lime: #C7F464;
+      --accent-amber: #F5A623;
+      --border-glow: rgba(45, 226, 230, 0.3);
+      --button-glow: rgba(0, 209, 199, 0.4);
+      --error: #EF4444;
+      --success: #10B981;
+    }
+
+    body {
+      font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--surface);
+      background: var(--bg);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -1px;
+      color: var(--accent-teal);
+      text-shadow: 0 0 20px var(--border-glow);
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Form Section */
+    .signup-section {
+      flex: 1;
+      padding: 80px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 48px 40px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--surface);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--bg);
+      border: 1px solid var(--surface);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-teal);
+      box-shadow: 0 0 0 3px rgba(0, 209, 199, 0.1);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(156, 163, 175, 0.5);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Interest Level Cards */
+    .interest-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .interest-card {
+      input {
+        display: none;
+      }
+
+      .card-content {
+        padding: 20px 16px;
+        background: var(--bg);
+        border: 2px solid var(--surface);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      &:hover .card-content {
+        border-color: var(--accent-cyan);
+      }
+
+      input:checked + .card-content {
+        background: rgba(45, 226, 230, 0.1);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 20px rgba(45, 226, 230, 0.2);
+      }
+
+      .interest-title {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: var(--text);
+      }
+
+      .interest-desc {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+    }
+
+    /* Submit Button */
+    .submit-section {
+      margin-top: 32px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 18px 32px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 2px solid var(--accent-teal);
+      background: transparent;
+      color: var(--accent-teal);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px var(--button-glow);
+    }
+
+    button[type="submit"]:hover {
+      background: rgba(0, 209, 199, 0.1);
+      box-shadow: 0 0 30px var(--button-glow);
+      transform: translateY(-2px);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Messages */
+    .message {
+      margin-top: 24px;
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+
+    .message.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .message.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    /* Footer */
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--surface);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      background: var(--bg);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-card {
+        padding: 32px 24px;
+        border-radius: 16px;
+      }
+
+      .form-header h1 {
+        font-size: 28px;
+      }
+
+      .interest-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--accent-teal);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">OwnYourWeb</div>
+      <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- Sign Up Form -->
+  <section class="signup-section">
+    <div class="container">
+      <div class="form-card">
+        <div class="form-header">
+          <h1>Get Started</h1>
+          <p>Take the first step toward owning your digital presence.</p>
+        </div>
+
+        <form 
+          id="signup-form"
+          action="https://formspree.io/f/YOUR_FORM_ID_HERE"
+          method="POST"
+          novalidate
+        >
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your name"
+              required
+              autocomplete="name"
+            >
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <!-- Website (Optional) -->
+          <div class="form-group">
+            <label for="website">Current Website (Optional)</label>
+            <input
+              type="url"
+              id="website"
+              name="website"
+              placeholder="https://yoursite.com"
+              autocomplete="url"
+            >
+          </div>
+
+          <!-- Interest Level -->
+          <div class="form-group">
+            <label>What interests you? *</label>
+            <div class="interest-options">
+              <!-- Foundation -->
+              <label class="interest-card">
+                <input type="radio" name="interest" value="Foundation" required>
+                <div class="card-content">
+                  <div class="interest-title">Foundation</div>
+                  <div class="interest-desc">$999+ Starter</div>
+                </div>
+              </label>
+
+              <!-- Control -->
+              <label class="interest-card">
+                <input type="radio" name="interest" value="Control">
+                <div class="card-content">
+                  <div class="interest-title">Control</div>
+                  <div class="interest-desc">$750+ Add-on</div>
+                </div>
+              </label>
+
+              <!-- Automation -->
+              <label class="interest-card">
+                <input type="radio" name="interest" value="Automation">
+                <div class="card-content">
+                  <div class="interest-title">Automation</div>
+                  <div class="interest-desc">$1,000+ Add-on</div>
+                </div>
+              </label>
+
+              <!-- Scale -->
+              <label class="interest-card">
+                <input type="radio" name="interest" value="Scale">
+                <div class="card-content">
+                  <div class="interest-title">Scale</div>
+                  <div class="interest-desc">Custom Quote</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message">Tell us about your project</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Brief description of what you're building..."
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="submit-section">
+            <button type="submit" id="submit-btn">
+              <span id="btn-text">Send Inquiry</span>
+            </button>
+          </div>
+
+          <!-- Messages -->
+          <div id="success-message" class="message success">
+            ✓ Thanks! We'll be in touch within 24 hours.
+          </div>
+          <div id="error-message" class="message error">
+            ✕ Something went wrong. Please email us directly.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 OwnYourWeb Systems — Your website, your server, your control</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate
+      const formData = new FormData(form);
+      if (!formData.get('name') || !formData.get('email') || !formData.get('interest')) {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = '✕ Please fill in all required fields.';
+        return;
+      }
+
+      // Show loading
+      submitBtn.disabled = true;
+      btnText.innerHTML = 'Sending<span class="spinner"></span>';
+      successMessage.style.display = 'none';
+      errorMessage.style.display = 'none';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          successMessage.style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        errorMessage.style.display = 'block';
+        console.error('Error:', error);
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Inquiry';
+      }
+    });
+
+    // Interest card click handling
+    document.querySelectorAll('.interest-card input').forEach(input => {
+      input.addEventListener('change', () => {
+        document.querySelectorAll('.interest-card').forEach(card => {
+          card.querySelector('.card-content').style.background = '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
