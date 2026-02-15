@@ -335,6 +335,61 @@
       opacity: 0.5;
     }
 
+    /* Payment Methods */
+    .payment-methods {
+      background: var(--surface);
+      border-top: 1px solid var(--surface);
+      border-bottom: 1px solid var(--surface);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .payment-methods h3 {
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+
+    .payment-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      background: var(--bg);
+      border: 1px solid var(--surface);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    .payment-method:hover {
+      border-color: var(--accent-teal);
+      box-shadow: 0 4px 20px rgba(0, 209, 199, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .payment-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .payment-name {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
     /* How It Works - Stacked Dropdowns Fix */
     .how-it-works {
       text-align: center;
@@ -503,6 +558,15 @@
         white-space: nowrap;
         overflow-x: auto;
         padding: 0 10px;
+      }
+
+      .payment-grid {
+        gap: 16px;
+      }
+
+      .payment-method {
+        padding: 12px 16px;
+        min-width: 120px;
       }
     }
   </style>
@@ -692,6 +756,35 @@
       <div class="buttons">
         <a href="signup.html" class="btn btn-primary">Get Your Website</a>
         <a href="signup.html" class="btn btn-secondary">Email Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Methods -->
+  <section class="payment-methods">
+    <div class="container">
+      <h3>Payment Methods Accepted</h3>
+      <div class="payment-grid">
+        <div class="payment-method">
+          <span class="payment-icon">💳</span>
+          <span class="payment-name">Credit Card</span>
+        </div>
+        <div class="payment-method">
+          <span class="payment-icon">🔵</span>
+          <span class="payment-name">PayPal</span>
+        </div>
+        <div class="payment-method">
+          <span class="payment-icon">💵</span>
+          <span class="payment-name">Cash App</span>
+        </div>
+        <div class="payment-method">
+          <span class="payment-icon">🔷</span>
+          <span class="payment-name">Venmo</span>
+        </div>
+        <div class="payment-method">
+          <span class="payment-icon">🏦</span>
+          <span class="payment-name">Zelle</span>
+        </div>
       </div>
     </div>
   </section>
