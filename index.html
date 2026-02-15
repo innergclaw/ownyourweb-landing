@@ -61,6 +61,31 @@
       text-shadow: 0 0 20px var(--border-glow);
     }
 
+    /* Booking Button */
+    .btn-book {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: var(--accent-teal);
+      color: #000000;
+      border: none;
+    }
+
+    .btn-book:hover {
+      background: rgba(0, 209, 199, 0.8);
+      box-shadow: 0 0 20px var(--button-glow);
+      transform: translateY(-2px);
+    }
+
+    footer .btn-book {
+      margin-top: 16px;
+      display: inline-block;
+    }
+
     /* Section */
     section {
       padding: 100px 0;
@@ -568,6 +593,11 @@
         padding: 12px 16px;
         min-width: 120px;
       }
+
+      .btn-book {
+        padding: 10px 16px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -576,6 +606,7 @@
   <nav>
     <div class="container">
       <div class="logo">OwnYourWeb</div>
+      <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
     </div>
   </nav>
 
@@ -792,6 +823,9 @@
       <p style="margin-top: 12px; color: var(--text-muted); font-size: 14px;">
         Powered by <a href="https://innergclaw.github.io/innerg-intelligence-landing/" target="_blank" style="color: var(--text-muted);">InnerG Intelligence</a>
       </p>
+      <div style="margin-top: 24px;">
+        <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
+      </div>
     </div>
   </footer>
 </body>
