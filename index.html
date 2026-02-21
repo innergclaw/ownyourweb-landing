@@ -610,6 +610,74 @@
         font-size: 12px;
       }
     }
+
+    /* Demo Sites Section */
+    .demo-sites {
+      background: var(--surface);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .demo-card {
+      background: var(--bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--surface);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 16px 48px rgba(45, 226, 230, 0.15);
+    }
+
+    .demo-preview {
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-icon {
+      font-size: 48px;
+    }
+
+    .demo-info {
+      padding: 24px;
+    }
+
+    .demo-info h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .demo-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .demo-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(45, 226, 230, 0.1);
+      color: var(--accent-cyan);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
   </style>
 </head>
 <body>
@@ -617,7 +685,10 @@
   <nav>
     <div class="container">
       <div class="logo">OwnYourWeb</div>
-      <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="#sites" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Sites</a>
+        <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
+      </div>
     </div>
   </nav>
 
@@ -780,6 +851,53 @@
 
       <p class="modules-progression">
         <span style="color: var(--accent-teal);">Ownership</span> → <span style="color: var(--accent-cyan);">Protection</span> → <span style="color: var(--accent-lime);">Systems</span> → <span style="color: var(--accent-amber);">Expansion</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- OwnYourWeb Sites -->
+  <section class="demo-sites" id="sites">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 16px; color: var(--accent-cyan);">OwnYourWeb Sites</h2>
+      <p class="modules-sub" style="margin-bottom: 60px;">See what's possible. Real examples of professional sites built to be owned.</p>
+      
+      <div class="demo-grid">
+        <a href="demos/restaurant.html" class="demo-card">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #2a241e 0%, #d4a574 100%);">
+            <span class="demo-icon">🍽️</span>
+          </div>
+          <div class="demo-info">
+            <h3>Savory Kitchen</h3>
+            <p>Catering & Events</p>
+            <span class="demo-tag">Restaurant</span>
+          </div>
+        </a>
+        
+        <a href="demos/creative.html" class="demo-card">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #14141c 0%, #a855f7 100%);">
+            <span class="demo-icon">◈</span>
+          </div>
+          <div class="demo-info">
+            <h3>Luna Creative</h3>
+            <p>Brand & Visual Identity</p>
+            <span class="demo-tag">Creative</span>
+          </div>
+        </a>
+        
+        <a href="demos/landscaping.html" class="demo-card">
+          <div class="demo-preview" style="background: linear-gradient(135deg, #e8f5ec 0%, #2d8a4e 100%);">
+            <span class="demo-icon">🌿</span>
+          </div>
+          <div class="demo-info">
+            <h3>GreenEdge</h3>
+            <p>Lawn & Landscape</p>
+            <span class="demo-tag">Service</span>
+          </div>
+        </a>
+      </div>
+      
+      <p style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 15px;">
+        Click to explore. Every site is a fully owned, professional web presence.
       </p>
     </div>
   </section>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luna Creative Studio — Brand & Visual Identity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0f;
+      --surface: #14141c;
+      --text: #ffffff;
+      --text-muted: #7a7a8c;
+      --accent: #a855f7;
+      --accent-light: #c084fc;
+      --border: rgba(168, 85, 247, 0.15);
+    }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    nav {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 15, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo span { color: var(--accent); }
+    
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--text); }
+    
+    .btn {
+      padding: 12px 28px;
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: 100px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background: var(--accent-light);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+    }
+    
+    .hero {
+      padding: 140px 0 100px;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+    
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero .subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+    
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .hero-visual {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(168, 85, 247, 0.1) 100%);
+      border-radius: 24px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+    }
+    
+    .hero-visual-inner {
+      text-align: center;
+      padding: 40px;
+    }
+    
+    .hero-visual h3 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+    
+    .hero-visual p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    section { padding: 100px 0; }
+    
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    
+    section h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 48px;
+      letter-spacing: -1px;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .service-card {
+      background: var(--surface);
+      padding: 40px 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    
+    .service-card .icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    
+    .service-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .work-item {
+      background: var(--surface);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .work-item:hover {
+      border-color: var(--accent);
+    }
+    
+    .work-image {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(168, 85, 247, 0.2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    
+    .work-info {
+      padding: 24px;
+    }
+    
+    .work-info h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    
+    .work-info p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+    }
+    
+    .cta-section h2 {
+      margin-bottom: 16px;
+    }
+    
+    .cta-section p {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    .demo-badge {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      background: var(--accent);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 968px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; }
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="demo-badge">← OwnYourWeb Demo</a>
+  
+  <nav>
+    <div class="container">
+      <div class="logo">Luna<span>.</span>Creative</div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn">Start a Project</a>
+    </div>
+  </nav>
+  
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div>
+          <h1>Brands that <span>move</span> people.</h1>
+          <p class="subtitle">We craft visual identities, digital experiences, and creative strategies for brands that want to stand out and connect.</p>
+          <a href="#contact" class="btn">Let's Talk</a>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-visual-inner">
+            <h3>Your Brand Here</h3>
+            <p>Logo • Identity • Website</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="services">
+    <div class="container">
+      <p class="section-label">What We Do</p>
+      <h2>Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">◈</div>
+          <h3>Brand Identity</h3>
+          <p>Logos, color systems, typography, and brand guidelines that tell your story with clarity and impact.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">◇</div>
+          <h3>Web Design</h3>
+          <p>Custom websites that look stunning and convert visitors. Responsive, fast, and built for results.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">◎</div>
+          <h3>Content Strategy</h3>
+          <p>Visual storytelling, social content, and creative direction that builds connection with your audience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="work">
+    <div class="container">
+      <p class="section-label">Selected Work</p>
+      <h2>Recent Projects</h2>
+      <div class="work-grid">
+        <div class="work-item">
+          <div class="work-image">🌿</div>
+          <div class="work-info">
+            <h4>Verde Wellness</h4>
+            <p>Brand identity & website for holistic wellness studio</p>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-image">⚡</div>
+          <div class="work-info">
+            <h4>Circuit Coffee</h4>
+            <p>Visual identity for tech-forward coffee brand</p>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-image">🎨</div>
+          <div class="work-info">
+            <h4>Artisan Collective</h4>
+            <p>E-commerce site for handcrafted goods marketplace</p>
+          </div>
+        </div>
+        <div class="work-item">
+          <div class="work-image">📐</div>
+          <div class="work-info">
+            <h4>Structure Studio</h4>
+            <p>Portfolio site for modern architecture firm</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact" class="cta-section">
+    <div class="container">
+      <p class="section-label">Start a Project</p>
+      <h2>Let's create something together.</h2>
+      <p>Have a project in mind? We'd love to hear about it. Reach out and let's discuss how we can help your brand shine.</p>
+      <a href="mailto:hello@lunacreative.studio" class="btn">hello@lunacreative.studio</a>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Luna Creative Studio</p>
+      <p style="margin-top: 8px; font-size: 12px;">Demo site built by <a href="../index.html" style="color: var(--accent);">OwnYourWeb</a></p>
+    </div>
+  </footer>
+</body>
+</html>
