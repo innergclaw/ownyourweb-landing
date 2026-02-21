@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blush & Bloom Beauty — Skincare, Lashes & Self-Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #fdf9f7;
+      --surface: #ffffff;
+      --text: #2d2624;
+      --text-muted: #7a6f6a;
+      --accent: #d4918a;
+      --accent-dark: #b8756e;
+      --accent-light: #f2d4d1;
+      --gold: #c9a962;
+      --border: #ebe5e1;
+    }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    nav {
+      padding: 20px 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { color: var(--accent-dark); }
+    
+    .btn {
+      padding: 12px 28px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent-dark);
+    }
+    
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .hero {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--accent-light) 100%);
+    }
+    
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    
+    .hero .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 440px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-image {
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+      border-radius: 24px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+    }
+    
+    .hero-badges {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .badge span {
+      color: var(--gold);
+    }
+    
+    section { padding: 80px 0; }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    section .subtitle {
+      color: var(--text-muted);
+      font-size: 17px;
+    }
+    
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    
+    .service-card {
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .service-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(212, 145, 138, 0.15);
+      transform: translateY(-4px);
+    }
+    
+    .service-card .icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .service-card .price {
+      color: var(--accent-dark);
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    /* Products */
+    .products-section {
+      background: var(--surface);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    
+    .product-card {
+      background: var(--bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .product-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    
+    .product-image {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #f8f0ed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-info h4 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    
+    .product-info .size {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    
+    .product-info .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .product-info .price {
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--accent-dark);
+    }
+    
+    .add-to-cart {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .add-to-cart:hover {
+      background: var(--accent-dark);
+    }
+    
+    /* Booking */
+    .booking-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--accent-light) 100%);
+    }
+    
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    
+    .booking-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    
+    .booking-info p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    
+    .booking-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    
+    .booking-features li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    
+    .booking-features li span {
+      color: var(--gold);
+    }
+    
+    .booking-form {
+      background: var(--surface);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    
+    .booking-form h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+    
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      background: var(--bg);
+      transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    .booking-form .btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 15px;
+    }
+    
+    /* Contact */
+    .contact-section {
+      text-align: center;
+    }
+    
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .contact-item {
+      text-align: center;
+    }
+    
+    .contact-item .icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    
+    .contact-item h4 {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .contact-item p {
+      font-weight: 500;
+    }
+    
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      background: var(--surface);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .demo-badge {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 968px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-image { order: -1; max-width: 300px; margin: 0 auto; }
+      .hero .subtitle { margin-left: auto; margin-right: auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-badges { justify-content: center; }
+      .nav-links { display: none; }
+      .booking-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="demo-badge">← OwnYourWeb Demo</a>
+  
+  <nav>
+    <div class="container">
+      <div class="logo">Blush & Bloom</div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#booking">Book Now</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#booking" class="btn">Book Appointment</a>
+    </div>
+  </nav>
+  
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div>
+          <h1>Beauty That Blooms From Within</h1>
+          <p class="subtitle">Premium skincare, lash extensions, and self-care services. Where luxury meets wellness.</p>
+          <div class="hero-buttons">
+            <a href="#booking" class="btn">Book Your Glow</a>
+            <a href="#shop" class="btn btn-outline">Shop Products</a>
+          </div>
+          <div class="hero-badges">
+            <div class="badge"><span>★★★★★</span> 200+ Reviews</div>
+            <div class="badge"><span>◆</span> Clean Beauty</div>
+            <div class="badge"><span>◆</span> Vegan Products</div>
+          </div>
+        </div>
+        <div class="hero-image">🌸</div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Services</span>
+        <h2>Self-Care, Elevated</h2>
+        <p class="subtitle">Professional beauty services tailored to you</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">✨</div>
+          <h3>Lash Extensions</h3>
+          <p>Classic, hybrid, or volume sets customized to your eye shape</p>
+          <span class="price">From $120</span>
+        </div>
+        <div class="service-card">
+          <div class="icon">🧴</div>
+          <h3>Facial Treatments</h3>
+          <p>Deep cleansing, hydration, and anti-aging skincare</p>
+          <span class="price">From $95</span>
+        </div>
+        <div class="service-card">
+          <div class="icon">💄</div>
+          <h3>Makeup Artistry</h3>
+          <p>Bridal, special events, and everyday glam</p>
+          <span class="price">From $85</span>
+        </div>
+        <div class="service-card">
+          <div class="icon">💅</div>
+          <h3>Nail Care</h3>
+          <p>Manicures, pedicures, and gel enhancements</p>
+          <span class="price">From $45</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="shop" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Shop</span>
+        <h2>Curated Products</h2>
+        <p class="subtitle">Professional-grade skincare and beauty essentials</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">🧴</div>
+          <div class="product-info">
+            <h4>Hydrating Face Serum</h4>
+            <p class="size">30ml • All skin types</p>
+            <div class="price-row">
+              <span class="price">$48</span>
+              <button class="add-to-cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">✨</div>
+          <div class="product-info">
+            <h4>Lash Growth Serum</h4>
+            <p class="size">5ml • 3-month supply</p>
+            <div class="price-row">
+              <span class="price">$65</span>
+              <button class="add-to-cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">🌹</div>
+          <div class="product-info">
+            <h4>Rose Petal Toner</h4>
+            <p class="size">200ml • Gentle formula</p>
+            <div class="price-row">
+              <span class="price">$32</span>
+              <button class="add-to-cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">💫</div>
+          <div class="product-info">
+            <h4>Vitamin C Brightener</h4>
+            <p class="size">30ml • Antioxidant-rich</p>
+            <div class="price-row">
+              <span class="price">$55</span>
+              <button class="add-to-cart">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="booking" class="booking-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Book Now</span>
+        <h2>Your Appointment Awaits</h2>
+        <p class="subtitle">Choose your service, pick your time, show up and glow</p>
+      </div>
+      <div class="booking-grid">
+        <div class="booking-info">
+          <h3>Why Book With Us?</h3>
+          <p>We make self-care simple. Book online, show up, and leave feeling radiant.</p>
+          <ul class="booking-features">
+            <li><span>✓</span> Easy online booking — no phone calls needed</li>
+            <li><span>✓</span> Flexible rescheduling policy</li>
+            <li><span>✓</span> Text reminders before appointments</li>
+            <li><span>✓</span> Loyalty rewards for returning clients</li>
+            <li><span>✓</span> First-time client discount — 15% off</li>
+          </ul>
+          <p style="color: var(--accent-dark); font-weight: 500;">Or call us: (215) 555-GLOW</p>
+        </div>
+        <div class="booking-form">
+          <h3>Quick Book</h3>
+          <div class="form-group">
+            <label>Service</label>
+            <select>
+              <option>Select a service...</option>
+              <option>Lash Extensions — From $120</option>
+              <option>Facial Treatment — From $95</option>
+              <option>Makeup Application — From $85</option>
+              <option>Manicure + Pedicure — From $75</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" placeholder="Select date">
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <select>
+                <option>Select time...</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <button class="btn">Book Appointment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Visit Us</span>
+        <h2>Find Your Glow</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="icon">📍</div>
+          <h4>Location</h4>
+          <p>234 Beauty Lane, Philadelphia, PA</p>
+        </div>
+        <div class="contact-item">
+          <div class="icon">📞</div>
+          <h4>Phone</h4>
+          <p>(215) 555-GLOW</p>
+        </div>
+        <div class="contact-item">
+          <div class="icon">🕐</div>
+          <h4>Hours</h4>
+          <p>Tue–Sat: 10am–6pm</p>
+        </div>
+        <div class="contact-item">
+          <div class="icon">✉️</div>
+          <h4>Email</h4>
+          <p>hello@blushandbloom.phl</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="#">𝕏</a>
+        <a href="#">ⓕ</a>
+        <a href="#">ⓘ</a>
+      </div>
+      <p>&copy; 2024 Blush & Bloom Beauty</p>
+      <p style="margin-top: 8px; font-size: 12px;">Demo site built by <a href="../index.html" style="color: var(--accent);">OwnYourWeb</a></p>
+    </div>
+  </footer>
+</body>
+</html>
