@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nydeah Beaute — Premium Hair Extensions | Philadelphia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --surface-light: #252525;
+      --text: #ffffff;
+      --text-muted: #a0a0a0;
+      --accent: #c9a962;
+      --accent-dark: #b8943d;
+      --accent-light: #e8d5a3;
+      --rose: #d4a5a5;
+      --border: #333333;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Demo Banner */
+    .demo-banner {
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      color: #0d0d0d;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .demo-banner span {
+      opacity: 0.8;
+    }
+    
+    /* Navigation */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .nav-cta:hover {
+      background: var(--accent-light);
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, transparent 50%);
+    }
+    
+    .hero .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    
+    .hero-content h1 span {
+      color: var(--accent);
+    }
+    
+    .hero-content p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 16px 32px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-light);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 16px 32px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .hero-image {
+      position: relative;
+    }
+    
+    .hero-image-placeholder {
+      background: var(--surface-light);
+      border-radius: 8px;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+    }
+    
+    .hero-image-placeholder svg {
+      width: 80px;
+      height: 80px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    
+    .hero-image-placeholder span {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    /* Services */
+    .services {
+      padding: 100px 24px;
+      background: var(--surface);
+    }
+    
+    .services .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px 32px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    
+    .service-card .icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    
+    .service-card .icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--bg);
+    }
+    
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    
+    /* Products */
+    .products {
+      padding: 100px 24px;
+    }
+    
+    .products .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .product-card:hover {
+      border-color: var(--accent);
+    }
+    
+    .product-image {
+      aspect-ratio: 1;
+      background: var(--surface-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .product-image svg {
+      width: 48px;
+      height: 48px;
+      color: var(--text-muted);
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-info h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .product-info .price {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    /* About */
+    .about {
+      padding: 100px 24px;
+      background: var(--surface);
+    }
+    
+    .about .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .about-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    
+    .about-content p {
+      color: var(--text-muted);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    
+    .about-image {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .about-image svg {
+      width: 64px;
+      height: 64px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    
+    .about-image span {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    
+    /* Contact */
+    .contact {
+      padding: 100px 24px;
+    }
+    
+    .contact .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .contact h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .contact > .container > p {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 48px;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    
+    .contact-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 24px;
+    }
+    
+    .contact-item svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    
+    .contact-item h4 {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .contact-item p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    
+    .contact-item a:hover {
+      color: var(--accent);
+    }
+    
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 80px 24px;
+      text-align: center;
+    }
+    
+    .cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--bg);
+      margin-bottom: 16px;
+    }
+    
+    .cta p {
+      color: var(--bg);
+      opacity: 0.8;
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+    
+    .cta .btn-primary {
+      background: var(--bg);
+      color: var(--accent);
+    }
+    
+    .cta .btn-primary:hover {
+      background: var(--text);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 60px 24px 24px;
+    }
+    
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    
+    .footer-brand .logo {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    
+    .footer-links h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-bottom p {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    
+    /* Mobile */
+    @media (max-width: 968px) {
+      .nav-links { display: none; }
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-content h1 { font-size: 42px; }
+      .hero-content p { margin: 0 auto 40px; }
+      .hero-buttons { justify-content: center; }
+      .hero-image { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .about .container { grid-template-columns: 1fr; }
+      .contact-info { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    ✨ DEMO PREVIEW — This is what your new site could look like. Built by <span>OwnYourWeb Systems</span>
+  </div>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="logo">NYDEAH BEAUTE</div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Book Consultation</a>
+    </div>
+  </nav>
+  
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Premium Hair Extensions for <span>Every Style</span></h1>
+        <p>Transform your look with luxury hair extensions. 100% human hair, professionally installed. Serving Philadelphia with confidence-boosting beauty.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn-primary">Shop Extensions</a>
+          <a href="#contact" class="btn-secondary">Book Appointment</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-placeholder">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span>Hero Image</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>Professional hair extension services tailored to your unique style and needs</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+          </div>
+          <h3>Tape-In Extensions</h3>
+          <p>Semi-permanent, seamless tape extensions for natural volume and length. Lasts 6-8 weeks.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          </div>
+          <h3>Sew-In Weaves</h3>
+          <p>Traditional sew-in extensions for maximum security and styling versatility.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+          </div>
+          <h3>Custom Color Match</h3>
+          <p>Expert color matching and blending for a flawless, natural appearance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Products -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-header">
+        <h2>Shop Extensions</h2>
+        <p>100% human hair extensions in a variety of textures and lengths</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <div class="product-info">
+            <h4>Body Wave Bundle</h4>
+            <p class="price">$185</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <div class="product-info">
+            <h4>Straight Silk Bundle</h4>
+            <p class="price">$165</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <div class="product-info">
+            <h4>Deep Curly Bundle</h4>
+            <p class="price">$195</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <div class="product-info">
+            <h4>Tape-In Set (20pc)</h4>
+            <p class="price">$225</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-content">
+        <h2>Philadelphia's Premier Hair Extension Specialists</h2>
+        <p>Nydeah Beaute is dedicated to helping you achieve the hair of your dreams. With years of experience and a passion for beauty, we provide premium hair extension services that enhance your natural beauty.</p>
+        <p>Located in North Philadelphia, we serve clients across the Delaware Valley with professional installations, custom color matching, and expert care guidance.</p>
+      </div>
+      <div class="about-image">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <span>203 West Rockland St, Philadelphia</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <p>Ready to transform your look? Contact us for a consultation.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <h4>Location</h4>
+          <p>203 West Rockland St<br>Philadelphia, PA 19120</p>
+        </div>
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+          <h4>Phone</h4>
+          <p><a href="tel:267-257-6143">267-257-6143</a></p>
+        </div>
+        <div class="contact-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          <h4>Email</h4>
+          <p><a href="mailto:info@nydeahbeaute.com">info@nydeahbeaute.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready for Your Transformation?</h2>
+    <p>Book your consultation today and discover your perfect look</p>
+    <a href="https://instagram.com/nydeahbeaute" class="btn-primary">DM Us on Instagram</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">NYDEAH BEAUTE</div>
+          <p>Premium hair extensions and professional installation services in Philadelphia. Your beauty, our passion.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Tape-In Extensions</a></li>
+            <li><a href="#">Sew-In Weaves</a></li>
+            <li><a href="#">Color Matching</a></li>
+            <li><a href="#">Maintenance</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#">All Extensions</a></li>
+            <li><a href="#">Bundles</a></li>
+            <li><a href="#">Closures</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Policies</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nydeah Beaute. Demo by OwnYourWeb Systems.</p>
+        <div class="social-links">
+          <a href="https://instagram.com/nydeahbeaute" aria-label="Instagram">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
