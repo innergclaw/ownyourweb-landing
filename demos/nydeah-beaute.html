@@ -217,7 +217,7 @@
     /* Services */
     .services {
       padding: 100px 24px;
-      background: var(--surface);
+      background: var(--bg);
     }
     
     .services .container {
@@ -235,6 +235,7 @@
       font-size: 42px;
       font-weight: 600;
       margin-bottom: 16px;
+      color: var(--accent);
     }
     
     .section-header p {
@@ -251,23 +252,24 @@
     }
     
     .service-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 16px;
       padding: 40px 32px;
       text-align: center;
       transition: all 0.3s;
     }
     
     .service-card:hover {
-      border-color: var(--accent);
+      border-color: var(--gold);
       transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(201, 169, 98, 0.15);
     }
     
     .service-card .icon {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      width: 72px;
+      height: 72px;
+      background: var(--accent);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -276,21 +278,43 @@
     }
     
     .service-card .icon svg {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       color: white;
     }
     
     .service-card h3 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      color: var(--text);
     }
     
     .service-card p {
       color: var(--text-muted);
       font-size: 15px;
       line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    
+    .service-card .btn-service {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 2px solid var(--gold);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .service-card .btn-service:hover {
+      background: var(--accent-dark);
+      border-color: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201, 169, 98, 0.3);
     }
     
     /* Booking Section */
@@ -316,6 +340,7 @@
       font-size: 42px;
       font-weight: 600;
       margin-bottom: 24px;
+      color: var(--accent);
     }
     
     .booking-content p {
@@ -400,8 +425,6 @@
       justify-content: center;
       padding: 18px;
       font-size: 16px;
-      border-radius: 50px;
-      border: 2px solid var(--gold);
     }
     
     /* About */
@@ -424,6 +447,7 @@
       font-size: 42px;
       font-weight: 600;
       margin-bottom: 24px;
+      color: var(--accent);
     }
     
     .about-content p {
@@ -472,6 +496,7 @@
       font-size: 42px;
       font-weight: 600;
       margin-bottom: 16px;
+      color: var(--accent);
     }
     
     .contact > .container > p {
@@ -684,6 +709,7 @@
           </div>
           <h3>Tape-In Extensions</h3>
           <p>Semi-permanent, seamless tape extensions for natural volume and length. Lasts 6-8 weeks.</p>
+          <a href="https://app.acuityscheduling.com/schedule/dcdbe59d" class="btn-service" target="_blank">Book Now</a>
         </div>
         <div class="service-card">
           <div class="icon">
@@ -691,6 +717,7 @@
           </div>
           <h3>Sew-In Weaves</h3>
           <p>Traditional sew-in extensions for maximum security and styling versatility.</p>
+          <a href="https://app.acuityscheduling.com/schedule/dcdbe59d" class="btn-service" target="_blank">Book Now</a>
         </div>
         <div class="service-card">
           <div class="icon">
@@ -698,6 +725,7 @@
           </div>
           <h3>Custom Color Match</h3>
           <p>Expert color matching and blending for a flawless, natural appearance.</p>
+          <a href="https://app.acuityscheduling.com/schedule/dcdbe59d" class="btn-service" target="_blank">Book Now</a>
         </div>
       </div>
     </div>
