@@ -132,10 +132,11 @@
       margin: 0 auto;
       padding: 80px 24px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr;
+      gap: 60px;
       align-items: center;
       position: relative;
+      text-align: center;
     }
     
     .hero-content h1 {
@@ -156,13 +157,16 @@
       font-size: 18px;
       color: var(--text-muted);
       margin-bottom: 40px;
-      max-width: 480px;
+      max-width: 600px;
       line-height: 1.8;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .hero-buttons {
       display: flex;
       gap: 16px;
+      justify-content: center;
     }
     
     .btn-primary {
@@ -215,6 +219,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      max-width: 500px;
+      margin: 0 auto;
     }
     
     .hero-image::after {
@@ -724,6 +730,10 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
+      <div class="hero-image">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        <span>Your Photo Here</span>
+      </div>
       <div class="hero-content">
         <h1>Elevate Your <span>Look</span></h1>
         <p>Professional hair services tailored to your unique style. From precision cuts to stunning color transformations — experience hair care at its finest.</p>
@@ -734,10 +744,6 @@
           </a>
           <a href="#services" class="btn-secondary">View Services</a>
         </div>
-      </div>
-      <div class="hero-image">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-        <span>Your Photo Here</span>
       </div>
     </div>
   </section>
