@@ -30,6 +30,52 @@
       color: var(--white);
     }
     
+    /* Navigation */
+    .nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      background: linear-gradient(90deg, var(--pink), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .nav-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover {
+      background: var(--teal);
+      color: var(--white);
+    }
+    
     .container {
       max-width: 900px;
       margin: 0 auto;
@@ -351,6 +397,9 @@
     
     /* Mobile */
     @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: 15px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .nav-link { padding: 8px 15px; font-size: 13px; }
       .hiring-text { font-size: 48px; }
       .now-text { font-size: 32px; }
       .company-name { font-size: 28px; }
@@ -363,8 +412,23 @@
 </head>
 <body>
   
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <div class="nav-logo">Allyzworld</div>
+        <div class="nav-links">
+          <a href="#about" class="nav-link">About Us</a>
+          <a href="#positions" class="nav-link">Positions</a>
+          <a href="#requirements" class="nav-link">Requirements</a>
+          <a href="#contact" class="nav-link">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="about">
     <div class="container">
       <div class="now-hiring">
         <div class="now-text">NOW</div>
@@ -384,7 +448,7 @@
   </div>
   
   <!-- Positions -->
-  <section class="container">
+  <section class="container" id="positions">
     <div class="positions">
       <div class="positions-banner">POSITIONS AVAILABLE</div>
       
@@ -407,7 +471,7 @@
   </section>
   
   <!-- Requirements -->
-  <section class="container">
+  <section class="container" id="requirements">
     <div class="requirements">
       <h2 class="requirements-title">📋 Requirements</h2>
       
@@ -430,7 +494,7 @@
   </section>
   
   <!-- Contact -->
-  <section class="container">
+  <section class="container" id="contact">
     <div class="contact">
       <h2 class="contact-title">📞 Get In Touch</h2>
       
