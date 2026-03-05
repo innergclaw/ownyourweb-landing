@@ -1,0 +1,605 @@
+/* ============================================
+   OWNYOURWEB — Wedding Template Style 1
+   Elegant Minimal
+   ============================================ */
+
+:root {
+  --color-primary: #2c2c2c;
+  --color-accent: #b8860b;
+  --color-light: #f8f6f3;
+  --color-white: #ffffff;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-primary);
+  background: var(--color-light);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
+
+.header {
+  background: var(--color-white);
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-primary);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-menu a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  width: 100%;
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+  
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .nav-menu.open {
+    display: flex;
+  }
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+main {
+  margin-top: 70px;
+  min-height: calc(100vh - 200px);
+}
+
+.section {
+  padding: 5rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   HOME / HERO SECTION
+   ============================================ */
+
+.hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-light) 0%, var(--color-white) 100%);
+  padding: 4rem 2rem;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-hashtag {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+}
+
+.hero-names {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-ampersand {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin: 0 0.5rem;
+}
+
+.hero-date {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-location {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.hero-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-number {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  display: block;
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ============================================
+   SCHEDULE SECTION
+   ============================================ */
+
+.event-card {
+  background: var(--color-white);
+  padding: 3rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+}
+
+.event-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  opacity: 0.6;
+}
+
+.event-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-time {
+  color: var(--color-accent);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-venue {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-address {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-small {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   TRAVEL SECTION
+   ============================================ */
+
+.hotels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.hotel-card {
+  background: var(--color-white);
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.hotel-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.hotel-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hotel-address {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.hotel-phone {
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.hotel-note {
+  font-size: 0.8rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   REGISTRY SECTION
+   ============================================ */
+
+.registry-card {
+  background: var(--color-white);
+  padding: 4rem 3rem;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+}
+
+.registry-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  opacity: 0.4;
+}
+
+.registry-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.registry-note {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.registry-group {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   WEDDING PARTY SECTION
+   ============================================ */
+
+.party-intro {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.party-card {
+  background: var(--color-white);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.party-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--color-light);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #ccc;
+}
+
+.party-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.party-role {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+
+.faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-white);
+  margin-bottom: 1rem;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.faq-question {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+}
+
+.faq-answer {
+  color: #666;
+  line-height: 1.8;
+}
+
+/* ============================================
+   RSVP SECTION
+   ============================================ */
+
+.rsvp-form {
+  background: var(--color-white);
+  padding: 3rem;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+}
+
+.rsvp-intro {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  font-family: var(--font-sans);
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-tagline {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.footer-powered {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  opacity: 0.4;
+}
+
+.footer-powered a {
+  color: var(--color-accent);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-names {
+    font-size: 2.5rem;
+  }
+  
+  .hero-countdown {
+    gap: 1rem;
+  }
+  
+  .countdown-number {
+    font-size: 2rem;
+  }
+  
+  .section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[ YOUR NAMES ] | Wedding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">[ NAME ] & [ NAME ]</a>
+      <button class="nav-toggle" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="travel.html">Travel</a></li>
+          <li><a href="registry.html">Registry</a></li>
+          <li><a href="wedding-party.html">Wedding Party</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="rsvp.html">RSVP</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-hashtag">#[ YOUR HASHTAG ]</p>
+      <h1 class="hero-names">
+        <span>[ NAME 1 ]</span>
+        <span class="hero-ampersand">&</span>
+        <span>[ NAME 2 ]</span>
+      </h1>
+      <p class="hero-date">[ MONTH DAY, YEAR ]</p>
+      <p class="hero-location">[ CITY, STATE ]</p>
+      
+      <div class="hero-countdown">
+        <div class="countdown-item">
+          <span class="countdown-number">[ ### ]</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number">[ ## ]</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number">[ ## ]</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+      </div>
+      
+      <a href="rsvp.html" class="btn btn-primary">RSVP</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-tagline">[ YOUR TAGLINE HERE ]</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="travel.html">Travel</a>
+      <a href="registry.html">Registry</a>
+      <a href="wedding-party.html">Wedding Party</a>
+      <a href="faq.html">FAQs</a>
+      <a href="rsvp.html">RSVP</a>
+    </div>
+    <p class="footer-copyright">&copy; 2026 [ YOUR NAMES ]</p>
+    <p class="footer-powered">Powered by <a href="https://innergclaw.github.io/ownyourweb-landing/">OwnYourWeb</a></p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navMenu').classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
