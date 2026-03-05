@@ -157,47 +157,57 @@
     /* Interest Level Cards */
     .interest-options {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: 1fr;
       gap: 12px;
       margin-bottom: 24px;
     }
 
     .interest-card {
-      input {
-        display: none;
-      }
+      display: block;
+    }
 
-      .card-content {
-        padding: 20px 16px;
-        background: var(--bg);
-        border: 2px solid var(--surface);
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-      }
+    .interest-card input {
+      display: none;
+    }
 
-      &:hover .card-content {
-        border-color: var(--accent-cyan);
-      }
+    .card-content {
+      padding: 20px 16px;
+      background: var(--bg);
+      border: 2px solid var(--surface);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      input:checked + .card-content {
-        background: rgba(45, 226, 230, 0.1);
-        border-color: var(--accent-cyan);
-        box-shadow: 0 0 20px rgba(45, 226, 230, 0.2);
-      }
+    .card-content:hover {
+      border-color: var(--accent-cyan);
+    }
 
-      .interest-title {
-        font-weight: 600;
-        font-size: 14px;
-        margin-bottom: 4px;
-        color: var(--text);
-      }
+    .interest-card input:checked + .card-content {
+      background: rgba(45, 226, 230, 0.1);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(45, 226, 230, 0.2);
+    }
 
-      .interest-desc {
-        font-size: 12px;
-        color: var(--text-muted);
-      }
+    .interest-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .interest-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .interest-price {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--accent-teal);
     }
 
     /* Submit Button */
@@ -276,10 +286,6 @@
       .form-header h1 {
         font-size: 28px;
       }
-
-      .interest-options {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* Loading spinner */
@@ -296,7 +302,8 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
     }
   </style>
 </head>
@@ -364,40 +371,52 @@
 
           <!-- Interest Level -->
           <div class="form-group">
-            <label>What interests you? *</label>
+            <label>Which module interests you? *</label>
             <div class="interest-options">
-              <!-- Foundation -->
+              <!-- Ownership -->
               <label class="interest-card">
-                <input type="radio" name="interest" value="Foundation" required>
+                <input type="radio" name="interest" value="Ownership" required>
                 <div class="card-content">
-                  <div class="interest-title">Foundation</div>
-                  <div class="interest-desc">$999+ Starter</div>
+                  <div>
+                    <div class="interest-title">Ownership</div>
+                    <div class="interest-desc">Domain, hosting, website, SSL, docs</div>
+                  </div>
+                  <div class="interest-price">$750</div>
                 </div>
               </label>
 
-              <!-- Control -->
+              <!-- Protection -->
               <label class="interest-card">
-                <input type="radio" name="interest" value="Control">
+                <input type="radio" name="interest" value="Protection" required>
                 <div class="card-content">
-                  <div class="interest-title">Control</div>
-                  <div class="interest-desc">$750+ Add-on</div>
+                  <div>
+                    <div class="interest-title">Protection</div>
+                    <div class="interest-desc">Security, backups, monitoring, email</div>
+                  </div>
+                  <div class="interest-desc">Add-on</div>
                 </div>
               </label>
 
-              <!-- Automation -->
+              <!-- Systems -->
               <label class="interest-card">
-                <input type="radio" name="interest" value="Automation">
+                <input type="radio" name="interest" value="Systems" required>
                 <div class="card-content">
-                  <div class="interest-title">Automation</div>
-                  <div class="interest-desc">$1,000+ Add-on</div>
+                  <div>
+                    <div class="interest-title">Systems</div>
+                    <div class="interest-desc">Automation, CRM, workflows, intake</div>
+                  </div>
+                  <div class="interest-desc">Add-on</div>
                 </div>
               </label>
 
-              <!-- Scale -->
+              <!-- Expansion -->
               <label class="interest-card">
-                <input type="radio" name="interest" value="Scale">
+                <input type="radio" name="interest" value="Expansion" required>
                 <div class="card-content">
-                  <div class="interest-title">Scale</div>
+                  <div>
+                    <div class="interest-title">Expansion</div>
+                    <div class="interest-desc">Multi-site, dashboards, scaling</div>
+                  </div>
                   <div class="interest-desc">Custom Quote</div>
                 </div>
               </label>
@@ -496,15 +515,6 @@
         submitBtn.disabled = false;
         btnText.textContent = 'Send Inquiry';
       }
-    });
-
-    // Interest card click handling
-    document.querySelectorAll('.interest-card input').forEach(input => {
-      input.addEventListener('change', () => {
-        document.querySelectorAll('.interest-card').forEach(card => {
-          card.querySelector('.card-content').style.background = '';
-        });
-      });
     });
   </script>
 </body>
