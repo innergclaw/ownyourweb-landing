@@ -270,6 +270,8 @@
       border: 1px solid var(--surface);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .module-card:hover {
@@ -355,6 +357,139 @@
       background: var(--text-muted);
       color: var(--bg);
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Own More Section */
+    .own-more-section {
+      margin-top: 80px;
+    }
+
+    .own-more-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .own-more-header h3 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 2px;
+    }
+
+    .own-more-header p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-top: 8px;
+    }
+
+    .addon-dropdowns {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .addon-item {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--surface);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .addon-item summary {
+      padding: 24px 28px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .addon-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .addon-item summary:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .addon-item[open] summary {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .addon-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .addon-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .addon-header-text {
+      flex: 1;
+    }
+
+    .addon-header-text h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .addon-header-text p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .addon-expand {
+      font-size: 24px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+    }
+
+    .addon-item[open] .addon-expand {
+      transform: rotate(45deg);
+    }
+
+    .addon-content {
+      padding: 24px 28px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .addon-content ul {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .addon-content li {
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .addon-content li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      font-size: 12px;
+    }
+
+    .addon-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 12px;
     }
 
     .modules-progression {
@@ -743,109 +878,134 @@
       <h2>OwnYourWeb: Complete Control</h2>
       <p class="modules-sub">Simple. Direct. Powerful. No fluff. No hype. Just clarity and security.</p>
 
-      <div class="module-stack">
-        <div class="module-card" style="border-color: var(--accent-teal);">
-          <div class="module-icon">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 8C18.75 8 8 18.75 8 32s10.75 24 24 24 24-10.75 24-24S45.25 8 32 8z" stroke="var(--accent-teal)" stroke-width="2"/>
-              <path d="M32 20v12M32 36v8" stroke="var(--accent-teal)" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="32" cy="44" r="4" fill="var(--accent-teal)"/>
-            </svg>
-          </div>
-          <h3 style="color: var(--accent-teal);">Module 1 — Ownership</h3>
-          <p class="module-title">OwnYourWeb: Ownership</p>
-          <p class="module-position">Grounded. Stable. Clear.</p>
-          <p class="module-position" style="color: var(--accent-teal); font-style: italic;">Feeling: "this is mine."</p>
-          <p style="margin: 16px 0; color: var(--text-muted); font-size: 14px;">This is where it starts. You fully own:</p>
-          <ul class="module-features">
-            <li>your domain</li>
-            <li>your hosting</li>
-            <li>your website files</li>
-            <li>your SSL</li>
-            <li>your documentation</li>
-          </ul>
-          <p class="module-position" style="margin-top: 16px;">No renting. No middleman dependency.</p>
-          <p class="module-price">$750</p>
-          <a href="signup.html?interest=Foundation" class="btn-module">Claim Ownership</a>
+      <!-- Main Ownership Card -->
+      <div class="module-card" style="border-color: var(--accent-teal); box-shadow: 0 0 40px rgba(0, 209, 199, 0.15);">
+        <div class="module-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8C18.75 8 8 18.75 8 32s10.75 24 24 24 24-10.75 24-24S45.25 8 32 8z" stroke="var(--accent-teal)" stroke-width="2"/>
+            <path d="M32 20v12M32 36v8" stroke="var(--accent-teal)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="44" r="4" fill="var(--accent-teal)"/>
+          </svg>
+        </div>
+        <h3 style="color: var(--accent-teal);">Module 1 — Ownership</h3>
+        <p class="module-title">OwnYourWeb: Ownership</p>
+        <p class="module-position">Grounded. Stable. Clear.</p>
+        <p class="module-position" style="color: var(--accent-teal); font-style: italic;">Feeling: "this is mine."</p>
+        <p style="margin: 16px 0; color: var(--text-muted); font-size: 14px;">This is where it starts. You fully own:</p>
+        <ul class="module-features">
+          <li>your domain</li>
+          <li>your hosting</li>
+          <li>your website files</li>
+          <li>your SSL</li>
+          <li>your documentation</li>
+        </ul>
+        <p class="module-position" style="margin-top: 16px;">No renting. No middleman dependency.</p>
+        <p class="module-price">$750</p>
+        <a href="signup.html?interest=Foundation" class="btn-module">Claim Ownership</a>
+      </div>
+
+      <!-- Own More Section -->
+      <div class="own-more-section">
+        <div class="own-more-header">
+          <h3>OWN MORE</h3>
+          <p>Expand your ownership with additional modules</p>
         </div>
 
-        <div class="module-card" style="border-color: var(--accent-cyan);">
-          <div class="module-icon">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 8L12 18v28l20 10 20-10V18L32 8z" stroke="var(--accent-cyan)" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M32 8v28" stroke="var(--accent-cyan)" stroke-width="2"/>
-              <path d="M12 18l20 10 20-10" stroke="var(--accent-cyan)" stroke-width="2" stroke-linejoin="round"/>
-              <circle cx="32" cy="32" r="6" fill="var(--accent-cyan)" fill-opacity="0.3"/>
-              <path d="M32 26v12M26 32h12" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3 style="color: var(--accent-cyan);">Module 2 — Protection</h3>
-          <p class="module-title">OwnYourWeb: Protection</p>
-          <p class="module-position">Secure. Guarded. Stable.</p>
-          <p class="module-position" style="color: var(--accent-cyan); font-style: italic;">Message: "what's built stays built."</p>
-          <p style="margin: 16px 0; color: var(--text-muted); font-size: 14px;">Now that you own it — you protect it:</p>
-          <ul class="module-features">
-            <li>security hardening</li>
-            <li>automated backups</li>
-            <li>uptime monitoring</li>
-            <li>performance tuning</li>
-            <li>business email setup</li>
-            <li>migration support</li>
-          </ul>
-          <p class="module-position" style="margin-top: 16px;">Secure. Guarded. Stable.</p>
-          <p class="module-price">+ $750</p>
-          <a href="signup.html?interest=Control" class="btn-module">Secure My Site</a>
-        </div>
+        <div class="addon-dropdowns">
+          <!-- Protection Module -->
+          <details class="addon-item">
+            <summary>
+              <div class="addon-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32 8L12 18v28l20 10 20-10V18L32 8z" stroke="var(--accent-cyan)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M32 8v28" stroke="var(--accent-cyan)" stroke-width="2"/>
+                  <path d="M12 18l20 10 20-10" stroke="var(--accent-cyan)" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="32" cy="32" r="6" fill="var(--accent-cyan)" fill-opacity="0.3"/>
+                  <path d="M32 26v12M26 32h12" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="addon-header-text">
+                <h4 style="color: var(--accent-cyan);">Module 2 — Protection</h4>
+                <p>Secure. Guarded. Stable.</p>
+              </div>
+              <span class="addon-expand">+</span>
+            </summary>
+            <div class="addon-content">
+              <p class="module-position" style="color: var(--accent-cyan); font-style: italic;">Message: "what's built stays built."</p>
+              <p style="margin-top: 12px;">Now that you own it — you protect it:</p>
+              <ul>
+                <li>security hardening</li>
+                <li>automated backups</li>
+                <li>uptime monitoring</li>
+                <li>performance tuning</li>
+                <li>business email setup</li>
+                <li>migration support</li>
+              </ul>
+              <a href="signup.html?interest=Control" class="btn-module" style="margin-top: 8px;">Add Protection</a>
+            </div>
+          </details>
 
-        <div class="module-card" style="border-color: var(--accent-lime);">
-          <div class="module-icon">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="20" stroke="var(--accent-lime)" stroke-width="2"/>
-              <circle cx="32" cy="32" r="8" stroke="var(--accent-lime)" stroke-width="2"/>
-              <path d="M32 12v6M32 46v6M12 32h6M46 32h6M18 18l4 4M42 42l4 4M18 46l4-4M42 18l4-4" stroke="var(--accent-lime)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3 style="color: var(--accent-lime);">Module 3 — Systems</h3>
-          <p class="module-title">OwnYourWeb: Systems</p>
-          <p class="module-position">Structure and control.</p>
-          <p class="module-position" style="color: var(--accent-lime); font-style: italic;">This is organization and clarity.</p>
-          <p style="margin: 16px 0; color: var(--text-muted); font-size: 14px;">No chaos. No missed leads. No confusion:</p>
-          <ul class="module-features">
-            <li>intake automation</li>
-            <li>form routing</li>
-            <li>content workflows</li>
-            <li>CRM integration</li>
-            <li>recovery systems</li>
-          </ul>
-          <p class="module-position" style="margin-top: 16px;">No chaos. No missed leads. No confusion.</p>
-          <p class="module-price">+ $1,000</p>
-          <a href="signup.html?interest=Automation" class="btn-module">Build My System</a>
-        </div>
+          <!-- Systems Module -->
+          <details class="addon-item">
+            <summary>
+              <div class="addon-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="20" stroke="var(--accent-lime)" stroke-width="2"/>
+                  <circle cx="32" cy="32" r="8" stroke="var(--accent-lime)" stroke-width="2"/>
+                  <path d="M32 12v6M32 46v6M12 32h6M46 32h6M18 18l4 4M42 42l4 4M18 46l4-4M42 18l4-4" stroke="var(--accent-lime)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="addon-header-text">
+                <h4 style="color: var(--accent-lime);">Module 3 — Systems</h4>
+                <p>Structure and control.</p>
+              </div>
+              <span class="addon-expand">+</span>
+            </summary>
+            <div class="addon-content">
+              <p class="module-position" style="color: var(--accent-lime); font-style: italic;">This is organization and clarity.</p>
+              <p style="margin-top: 12px;">No chaos. No missed leads. No confusion:</p>
+              <ul>
+                <li>intake automation</li>
+                <li>form routing</li>
+                <li>content workflows</li>
+                <li>CRM integration</li>
+                <li>recovery systems</li>
+              </ul>
+              <a href="signup.html?interest=Automation" class="btn-module" style="margin-top: 8px;">Add Systems</a>
+            </div>
+          </details>
 
-        <div class="module-card" style="border-color: var(--accent-amber);">
-          <div class="module-icon">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 8c-4 0-8 2-12 4l-4 4 8 8 4-4c2 1 4 2 6 2v-4l4-4-4-4v-4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M8 32c0-4 2-8 4-12l4-4 8-8-4 4c-1 2-2 4-2 6h4l4-4 4 4h4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M32 56c4 0 8-2 12-4l4-4-8-8-4 4c-2-1-4-2-6-2v4l-4 4 4 4v4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M56 32c0 4-2 8-4 12l-4 4-8 8 4-4c1-2 2-4 2-6h-4l-4 4-4-4h-4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
-              <circle cx="32" cy="32" r="6" fill="var(--accent-amber)"/>
-            </svg>
-          </div>
-          <h3 style="color: var(--accent-amber);">Module 4 — Expansion</h3>
-          <p class="module-title">OwnYourWeb: Expansion</p>
-          <p class="module-position">Growth done properly.</p>
-          <p class="module-position" style="color: var(--accent-amber); font-style: italic;">Not scaling recklessly — expanding responsibly.</p>
-          <p style="margin: 16px 0; color: var(--text-muted); font-size: 14px;">This is growth done properly:</p>
-          <ul class="module-features">
-            <li>multi-site setup</li>
-            <li>backend dashboards</li>
-            <li>advanced hosting configuration</li>
-            <li>long-term infrastructure planning</li>
-          </ul>
-          <p class="module-position" style="margin-top: 16px;">Not scaling recklessly — expanding responsibly.</p>
-          <p class="module-price">Custom</p>
-          <a href="signup.html?interest=Scale" class="btn-module">Plan My Expansion</a>
+          <!-- Expansion Module -->
+          <details class="addon-item">
+            <summary>
+              <div class="addon-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32 8c-4 0-8 2-12 4l-4 4 8 8 4-4c2 1 4 2 6 2v-4l4-4-4-4v-4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M8 32c0-4 2-8 4-12l4-4 8-8-4 4c-1 2-2 4-2 6h4l4-4 4 4h4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M32 56c4 0 8-2 12-4l4-4-8-8-4 4c-2-1-4-2-6-2v4l-4 4 4 4v4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M56 32c0 4-2 8-4 12l-4 4-8 8 4-4c1-2 2-4 2-6h-4l-4 4-4-4h-4z" stroke="var(--accent-amber)" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="32" cy="32" r="6" fill="var(--accent-amber)"/>
+                </svg>
+              </div>
+              <div class="addon-header-text">
+                <h4 style="color: var(--accent-amber);">Module 4 — Expansion</h4>
+                <p>Growth done properly.</p>
+              </div>
+              <span class="addon-expand">+</span>
+            </summary>
+            <div class="addon-content">
+              <p class="module-position" style="color: var(--accent-amber); font-style: italic;">Not scaling recklessly — expanding responsibly.</p>
+              <p style="margin-top: 12px;">This is growth done properly:</p>
+              <ul>
+                <li>multi-site setup</li>
+                <li>backend dashboards</li>
+                <li>advanced hosting configuration</li>
+                <li>long-term infrastructure planning</li>
+              </ul>
+              <span class="addon-tag" style="background: rgba(245, 166, 35, 0.1); color: var(--accent-amber);">Custom Quote</span>
+              <a href="signup.html?interest=Scale" class="btn-module" style="margin-top: 8px;">Plan Expansion</a>
+            </div>
+          </details>
         </div>
       </div>
 
