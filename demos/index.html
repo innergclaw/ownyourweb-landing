@@ -3,245 +3,395 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OwnYourWeb — All Demos</title>
-  <link rel="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Demos — OwnYourWeb</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; padding: 4rem 2rem; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
-    .subtitle { color: #888; margin-bottom: 1rem; text-align: center; }
-    
-    <!-- Wedding Section -->
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 3rem 0 2rem;
-      color: var(--accent-cyan);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .templates {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    
-    .template {
-      background: #141414;
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #222;
-      transition: all 0.3s ease;
-    }
-    
-    .template:hover {
-      border-color: var(--accent-cyan);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 209, 199, 0.2);
-    }
-    
-    .template h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .template p {
-      color: #888;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .template a {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      background: var(--accent-cyan);
-      color: #000;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-    
-    .template a:hover {
-      background: rgba(45, 226, 230, 0.15);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Business Section */
-    .section-title.business {
-      margin-top: 4rem;
-      font-size: .5rem;
-      font-weight: 700;
-      color: var(--accent-lime);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    :root {
+      --bg: #0F1115;
+      --surface: #1A1E24;
+      --text: #E8E8E8;
+      --text-muted: #9CA3AF;
+      --accent-teal: #00D1C7;
+      --accent-cyan: #2DE2E6;
+      --accent-lime: #C7F464;
+      --accent-amber: #F5A623;
+      --border-glow: rgba(45, 226, 230, 0.3);
+      --button-glow: rgba(0, 209, 199, 0.4);
     }
-    
-    .business-grid {
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--surface);
+      background: var(--bg);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -1px;
+      color: var(--accent-teal);
+      text-shadow: 0 0 20px var(--border-glow);
+      text-decoration: none;
+    }
+
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 64px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .hero .tagline {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Section */
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .section-header.wedding h2 {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 20px rgba(45, 226, 230, 0.3);
+    }
+
+    .section-header.business h2 {
+      color: var(--accent-lime);
+      text-shadow: 0 0 20px rgba(199, 244, 100, 0.3);
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* Grid */
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      margin-top: 1rem;
+      gap: 24px;
     }
-    
-    .business-card {
-      background: #141414;
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #222;
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--surface);
       transition: all 0.3s ease;
     }
-    
-    .business-card:hover {
-      border-color: var(--accent-lime);
+
+    .card:hover {
+      border-color: var(--accent-cyan);
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(199, 244, 100, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(45, 226, 230, 0.1);
     }
-    
-    .business-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+
+    .card.business:hover {
+      border-color: var(--accent-lime);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(199, 244, 100, 0.1);
     }
-    
-    .business-card p {
-      color: #888;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-    }
-    
-    .business-card a {
+
+    .card-tag {
       display: inline-block;
-      padding: 0.7rem 1.2rem;
-      background: var(--accent-lime);
-      color: #000;
-      text-decoration: none;
+      padding: 4px 10px;
+      background: rgba(45, 226, 230, 0.1);
+      color: var(--accent-cyan);
+      font-size: 11px;
       font-weight: 600;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
     }
-    
-    .business-card a:hover {
-      background: rgba(199, 244, 100, 0.2);
+
+    .card.business .card-tag {
+      background: rgba(199, 244, 100, 0.1);
+      color: var(--accent-lime);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .card-link {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: transparent;
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .card-link:hover {
+      background: rgba(45, 226, 230, 0.1);
+      box-shadow: 0 0 20px rgba(45, 226, 230, 0.2);
+    }
+
+    .card.business .card-link {
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    .card.business .card-link:hover {
+      background: rgba(199, 244, 100, 0.1);
+      box-shadow: 0 0 20px rgba(199, 244, 100, 0.2);
     }
 
     /* Footer */
-    .footer {
-      margin-top: 4rem;
+    footer {
+      padding: 60px 0;
+      border-top: 1px solid var(--surface);
       text-align: center;
-      color: #444;
-      font-size: 0.8rem;
+      margin-top: 40px;
     }
-    
-    .footer a {
-      color: var(--accent-cyan);
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--accent-teal);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 0 40px;
+      }
+      
+      .section {
+        padding: 40px 0;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Wedding Website Templates</h1>
-    <p class="subtitle">Pick your style. We build it.</p>
-    
-    <!-- Wedding Section -->
-    <h2 class="section-title">Wedding Templates</h2>
-    <p class="subtitle">8 styles — minimalist to bold. Pick your vibe.</p>
-    
-    <div class="templates">
-      <div class="template">
-        <h3>Style 1: Elegant Minimal</h3>
-        <p>Clean serif typography, gold accents, cream backgrounds. Timeless and refined.</p>
-        <a href="wedding-style-1/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 2: Modern Dark</h3>
-        <p>Dark backgrounds, gold accents, elegant fonts. Bold and sophisticated.</p>
-        <a href="wedding-style-2/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 3: Romantic Floral</h3>
-        <p>Soft blush tones, organic shapes, romantic typography. Warm and inviting.</p>
-        <a href="wedding-style-3/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 4: Modern Minimalist</h3>
-        <p>Bold typography, high contrast, geometric shapes. Contemporary and clean.</p>
-        <a href="wedding-style-4/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 5: Rustic Garden</h3>
-        <p>Sage greens, botanical accents, natural textures. Organic and earthy.</p>
-        <a href="wedding-style-5/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 6: Boho Desert</h3>
-        <p>Warm terracotta, burnt orange accents, terrazzo patterns. Bohemian and free-spirited.</p>
-        <a href="wedding-style-6/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 7: Elegant Serif</h3>
-        <p>Classic Playfair Display, minimalist layout. Sophisticated and timeless.</p>
-        <a href="wedding-style-7/index.html" class="btn">View Template →</a>
-      </div>
-      
-      <div class="template">
-        <h3>Style 8: Sunflower Summer</h3>
-        <p>Bright sunflower yellow, playful fonts. Warm and joyful summer vibes.</p>
-        <a href="wedding-style-8/index.html" class="btn">View Template →</a>
-      </div>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">OwnYourWeb</a>
+      <a href="index.html" class="back-link">← Back to Home</a>
     </div>
+  </nav>
 
-    <!-- Business Section -->
-    <h2 class="section-title business">Business Demos</h2>
-    <p class="subtitle">Professional sites built for real businesses. Fully owned.</p>
-    
-    <div class="business-grid">
-      <div class="business-card">
-        <h3>Restaurant: Savory Kitchen</h3>
-        <p>Catering & Events</p>
-        <a href="restaurant.html" class="btn">View Demo →</a>
-      </div>
-      
-      <div class="business-card">
-        <h3>Creative: Luna Creative</h3>
-        <p>Brand & Visual Identity — bold and sophisticated.</p>
-        <a href="creative.html" class="btn">View Demo →</a>
-      </div>
-      
-      <div class="business-card">
-        <h3>Landscaping: GreenEdge</h3>
-        <p>Lawn & Landscape — earthy and organic.</p>
-        <a href="landscaping.html" class="btn">View Demo →</a>
-      </div>
-      
-      <div class="business-card">
-        <h3>Beauty: Blush & Bloom</h3>
-        <p>Beauty & Self-Care — warm and inviting.</p>
-        <a href="beauty.html" class="btn">View Demo →</a>
-      </div>
-      
-      <div class="business-card">
-        <h3>Florist: Marie Stems</h3>
-        <p>Philadelphia luxury florist — botanical elegance.</p>
-        <a href="florist.html" class="btn">View Demo →</a>
-      </div>
-
-      <div class="business-card">
-        <h3>Nydeah Beaute</h3>
-        <p>Hair extensions/styling — purple + gold</ professional and elegant.</p>
-        <a href="nydeah-beaute.html" class="btn">View Demo →</a>
-      </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Template Gallery</h1>
+      <p class="tagline">Pick your style. We build it. Fully owned.</p>
     </div>
   </section>
 
-  <p class="footer">powered by <a href="https://innergclaw.github.io/ownyourweb-landing/">OwnYourWeb</a></p>
+  <div class="container">
+    <!-- Wedding Templates -->
+    <section class="section">
+      <div class="section-header wedding">
+        <h2>Wedding Templates</h2>
+        <p>8 styles — minimalist to bold. Pick your vibe.</p>
+      </div>
+      
+      <div class="grid">
+        <div class="card">
+          <span class="card-tag">Style 1</span>
+          <h3>Elegant Minimal</h3>
+          <p>Clean serif typography, gold accents, cream backgrounds. Timeless and refined.</p>
+          <a href="wedding-style-1/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 2</span>
+          <h3>Modern Dark</h3>
+          <p>Dark backgrounds, gold accents, elegant display fonts. Bold and sophisticated.</p>
+          <a href="wedding-style-2/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 3</span>
+          <h3>Romantic Floral</h3>
+          <p>Soft blush tones, organic shapes, romantic typography. Warm and inviting.</p>
+          <a href="wedding-style-3/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 4</span>
+          <h3>Modern Minimalist</h3>
+          <p>Bold typography, high contrast, geometric shapes. Contemporary and clean.</p>
+          <a href="wedding-style-4/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 5</span>
+          <h3>Rustic Garden</h3>
+          <p>Sage greens, botanical accents, natural textures. Organic and earthy.</p>
+          <a href="wedding-style-5/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 6</span>
+          <h3>Boho Desert</h3>
+          <p>Warm terracotta, burnt orange accents, terrazzo patterns. Bohemian and free-spirited.</p>
+          <a href="wedding-style-6/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 7</span>
+          <h3>Elegant Serif</h3>
+          <p>Classic Playfair Display, minimalist layout. Sophisticated and timeless.</p>
+          <a href="wedding-style-7/index.html" class="card-link">View Template →</a>
+        </div>
+        
+        <div class="card">
+          <span class="card-tag">Style 8</span>
+          <h3>Sunflower Summer</h3>
+          <p>Bright sunflower yellow, playful fonts. Warm and joyful summer vibes.</p>
+          <a href="wedding-style-8/index.html" class="card-link">View Template →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Templates -->
+    <section class="section">
+      <div class="section-header business">
+        <h2>Business Templates</h2>
+        <p>Professional sites built for real businesses. Fully owned.</p>
+      </div>
+      
+      <div class="grid">
+        <div class="card business">
+          <span class="card-tag">Restaurant</span>
+          <h3>Savory Kitchen</h3>
+          <p>Catering & Events — warm browns, gold accents, inviting atmosphere.</p>
+          <a href="restaurant.html" class="card-link">View Demo →</a>
+        </div>
+        
+        <div class="card business">
+          <span class="card-tag">Creative</span>
+          <h3>Luna Creative</h3>
+          <p>Brand & Visual Identity — dark purple, modern and bold.</p>
+          <a href="creative.html" class="card-link">View Demo →</a>
+        </div>
+        
+        <div class="card business">
+          <span class="card-tag">Service</span>
+          <h3>GreenEdge</h3>
+          <p>Lawn & Landscape — sage greens, organic and earthy.</p>
+          <a href="landscaping.html" class="card-link">View Demo →</a>
+        </div>
+        
+        <div class="card business">
+          <span class="card-tag">Beauty</span>
+          <h3>Blush & Bloom</h3>
+          <p>Beauty & Self-Care — soft blush, elegant and refined.</p>
+          <a href="beauty.html" class="card-link">View Demo →</a>
+        </div>
+        
+        <div class="card business">
+          <span class="card-tag">Floral</span>
+          <h3>Marie Stems</h3>
+          <p>Philadelphia luxury florist — botanical elegance.</p>
+          <a href="florist.html" class="card-link">View Demo →</a>
+        </div>
+        
+        <div class="card business">
+          <span class="card-tag">Beauty</span>
+          <h3>Nydeah Beaute</h3>
+          <p>Hair extensions & styling — purple & gold, professional.</p>
+          <a href="nydeah-beaute.html" class="card-link">View Demo →</a>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Powered by <a href="https://ownyourweb.xyz">OwnYourWeb</a></p>
+    </div>
+  </footer>
 </body>
 </html>
