@@ -3,76 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OwnYourWeb — Wedding Templates</title>
-  <link rel="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>OwnYourWeb — All Demos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; padding: 4rem 2rem; }
     .container { max-width: 1200px; margin: 0 auto; }
     h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
-    .subtitle { color: #888; margin-bottom: 3rem; text-align: center; }
-    .templates { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-    .template { background: #141414; padding: 2rem; border-radius: 8px; border: 1px solid #222; }
+    .subtitle { color: #888; margin-bottom: 1rem; text-align: center; }
+    .section-title { font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #c9a962; border-bottom: 1px solid #222; padding-bottom: 0.5rem; }
+    .templates { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .template { background: #141414; padding: 1.5rem; border-radius: 8px; border: 1px solid #222; }
     .template:hover { border-color: #c9a962; }
-    .template h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .template p { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .template a { display: inline-block; padding: 0.6rem 1.2rem; background: #c9a962; color: #000; text-decoration: none; font-size: 0.8rem; font-weight: 600; border-radius: 4px; }
+    .template h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .template p { color: #888; font-size: 0.85rem; margin-bottom: 1rem; }
+    .template a { display: inline-block; padding: 0.5rem 1rem; background: #c9a962; color: #000; text-decoration: none; font-size: 0.75rem; font-weight: 600; border-radius: 4px; }
     .template a:hover { background: #d4b87a; }
+    .tag { display: inline-block; padding: 0.2rem 0.5rem; background: #2a2a2a; color: #888; font-size: 0.65rem; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
     .footer { margin-top: 4rem; text-align: center; color: #444; font-size: 0.8rem; }
     .footer a { color: #c9a962; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Wedding Website Templates</h1>
-    <p class="subtitle">OwnYourWeb — Pick your style. We build it.</p>
-    
+    <h1>OwnYourWeb Demos</h1>
+    <p class="subtitle">Pick your style. We build it.</p>
+
+    <!-- Business Demos -->
+    <h2 class="section-title">Business Templates</h2>
     <div class="templates">
       <div class="template">
-        <h3>Style 1: Elegant Minimal</h3>
-        <p>Clean serif typography, gold accents, cream backgrounds. Timeless and refined.</p>
+        <span class="tag">Restaurant</span>
+        <h3>Savory Kitchen</h3>
+        <p>Catering & Events — warm browns, gold accents</p>
+        <a href="restaurant.html">View Demo →</a>
+      </div>
+      
+      <div class="template">
+        <span class="tag">Creative</span>
+        <h3>Luna Creative</h3>
+        <p>Brand & Visual Identity — dark purple, modern</p>
+        <a href="creative.html">View Demo →</a>
+      </div>
+      
+      <div class="template">
+        <span class="tag">Service</span>
+        <h3>GreenEdge</h3>
+        <p>Lawn & Landscape — sage greens, organic</p>
+        <a href="landscaping.html">View Demo →</a>
+      </div>
+      
+      <div class="template">
+        <span class="tag">Beauty</span>
+        <h3>Blush & Bloom</h3>
+        <p>Beauty & Self-Care — soft blush, elegant</p>
+        <a href="beauty.html">View Demo →</a>
+      </div>
+
+      <div class="template">
+        <span class="tag">Floral</span>
+        <h3>Marie Stems</h3>
+        <p>Philadelphia Luxury Florist — botanical luxury</p>
+        <a href="florist.html">View Demo →</a>
+      </div>
+
+      <div class="template">
+        <span class="tag">Beauty</span>
+        <h3>Nydeah Beaute</h3>
+        <p>Hair Extensions & Styling — purple & gold</p>
+        <a href="nydeah-beaute.html">View Demo →</a>
+      </div>
+    </div>
+
+    <!-- Wedding Templates -->
+    <h2 class="section-title">Wedding Templates</h2>
+    <div class="templates">
+      <div class="template">
+        <span class="tag">Style 1</span>
+        <h3>Elegant Minimal</h3>
+        <p>Clean serif, gold accents, cream backgrounds</p>
         <a href="wedding-style-1/index.html">View Template →</a>
       </div>
       
       <div class="template">
-        <h3>Style 2: Modern Dark</h3>
-        <p>Dark backgrounds, gold accents, elegant display fonts. Bold and sophisticated.</p>
+        <span class="tag">Style 2</span>
+        <h3>Modern Dark</h3>
+        <p>Dark backgrounds, gold accents, elegant fonts</p>
         <a href="wedding-style-2/index.html">View Template →</a>
       </div>
       
       <div class="template">
-        <h3>Style 3: Romantic Floral</h3>
-        <p>Soft blush tones, organic shapes, romantic typography. Warm and inviting.</p>
+        <span class="tag">Style 3</span>
+        <h3>Romantic Floral</h3>
+        <p>Soft blush tones, organic shapes, romantic</p>
         <a href="wedding-style-3/index.html">View Template →</a>
       </div>
       
       <div class="template">
-        <h3>Style 4: Modern Minimalist</h3>
-        <p>Bold typography, high contrast, geometric shapes. Contemporary and clean.</p>
+        <span class="tag">Style 4</span>
+        <h3>Modern Minimalist</h3>
+        <p>Bold typography, high contrast, geometric</p>
         <a href="wedding-style-4/index.html">View Template →</a>
       </div>
 
       <div class="template">
-        <h3>Style 5: Rustic Garden</h3>
-        <p>Sage greens, botanical accents, natural textures. Organic and earthy.</p>
+        <span class="tag">Style 5</span>
+        <h3>Rustic Garden</h3>
+        <p>Sage greens, botanical accents, natural</p>
         <a href="wedding-style-5/index.html">View Template →</a>
       </div>
 
       <div class="template">
-        <h3>Style 6: Boho Desert</h3>
-        <p>Warm terracotta, burnt orange accents, terrazzo patterns. Bohemian and free-spirited.</p>
+        <span class="tag">Style 6</span>
+        <h3>Boho Desert</h3>
+        <p>Warm terracotta, burnt orange, terrazzo</p>
         <a href="wedding-style-6/index.html">View Template →</a>
       </div>
 
       <div class="template">
-        <h3>Style 7: Elegant Serif</h3>
-        <p>Classic Playfair Display, minimalist layout. Sophisticated and timeless.</p>
+        <span class="tag">Style 7</span>
+        <h3>Elegant Serif</h3>
+        <p>Classic Playfair Display, minimalist layout</p>
         <a href="wedding-style-7/index.html">View Template →</a>
       </div>
 
       <div class="template">
-        <h3>Style 8: Sunflower Summer</h3>
-        <p>Bright sunflower yellow, playful fonts. Warm and joyful summer vibes.</p>
+        <span class="tag">Style 8</span>
+        <h3>Sunflower Summer</h3>
+        <p>Bright sunflower yellow, playful fonts</p>
         <a href="wedding-style-8/index.html">View Template →</a>
       </div>
     </div>
