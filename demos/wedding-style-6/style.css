@@ -1,0 +1,589 @@
+/* ============================================
+   OWNYOURWEB — Wedding Template Style 6
+   Modern Bold
+   ============================================ */
+
+:root {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #ffffff;
+  --color-text-muted: #a1a1aa;
+  --color-accent: #f43f5e;
+  --color-accent-hover: #fb7185;
+  --font-display: 'Syne', -apple-system, sans-serif;
+  --font-body: 'Syne', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.nav-toggle span {
+  width: 30px;
+  height: 2px;
+  background: var(--color-text);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-menu a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.nav-menu a.active {
+  color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    padding: 2.5rem;
+    gap: 1.5rem;
+  }
+  .nav-menu.open {
+    display: flex;
+  }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 400px;
+  height: 400px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-hashtag {
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 2.5rem;
+}
+
+.hero-names {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-ampersand {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-accent);
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.hero-date {
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-muted);
+}
+
+.hero-location {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  color: var(--color-text-muted);
+}
+
+.hero-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  display: block;
+  color: var(--color-accent);
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+}
+
+.btn {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ============================================
+   SECTION
+   ============================================ */
+
+.section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 3rem;
+}
+
+/* ============================================
+   SCHEDULE
+   ============================================ */
+
+.event-card {
+  background: var(--color-surface);
+  padding: 4rem;
+  text-align: center;
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+.event-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.event-time {
+  color: var(--color-accent);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+}
+
+.event-venue {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-address {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-small {
+  padding: 0.9rem 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   TRAVEL
+   ============================================ */
+
+.hotels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.hotel-card {
+  background: var(--color-surface);
+  padding: 2.5rem;
+  border-radius: 8px;
+}
+
+.hotel-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hotel-address {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.hotel-phone {
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.hotel-note {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.btn-small {
+  padding: 0.9rem 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   REGISTRY
+   ============================================ */
+
+.registry-card {
+  background: var(--color-surface);
+  padding: 4rem 3rem;
+  text-align: center;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.registry-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.registry-note {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.registry-group {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   WEDDING PARTY
+   ============================================ */
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.party-card {
+  background: var(--color-surface);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.party-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-text-muted);
+}
+
+.party-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.party-role {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+
+.faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.faq-question {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.faq-answer {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================
+   RSVP
+   ============================================ */
+
+.rsvp-form {
+  background: var(--color-surface);
+  padding: 3rem;
+  max-width: 450px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.rsvp-intro {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  transition: background 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  background: var(--color-surface);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background: var(--color-surface);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.footer-powered {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.footer-powered a {
+  color: var(--color-accent);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-names {
+    font-size: 3rem;
+  }
+  .hero-countdown {
+    gap: 1.5rem;
+  }
+  .countdown-number {
+    font-size: 2rem;
+  }
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  .header {
+    padding: 1.5rem 1rem;
+  }
+}

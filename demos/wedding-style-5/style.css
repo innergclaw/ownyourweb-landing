@@ -1,0 +1,579 @@
+/* ============================================
+   OWNYOURWEB — Wedding Template Style 5
+   Golden Luxury
+   ============================================ */
+
+:root {
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #8a8a8a;
+  --color-accent: #b8860b;
+  --color-accent-hover: #a67c52;
+  --color-gold: #d4af37;
+  --color-gold-light: #f3e5ab;
+  --font-display: 'Didot', Georgia, serif;
+  --font-body: 'Helvetica Neue', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-menu a {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.nav-menu a.active {
+  color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .nav-menu.open {
+    display: flex;
+  }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-hashtag {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 2rem;
+  font-family: var(--font-display);
+}
+
+.hero-names {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  letter-spacing: 0.03em;
+}
+
+.hero-ampersand {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.hero-date {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  color: var(--color-text-muted);
+}
+
+.hero-location {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: capitalize;
+  margin-bottom: 2.5rem;
+  color: var(--color-text-muted);
+}
+
+.hero-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  display: block;
+  color: var(--color-gold);
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--color-gold);
+  background: transparent;
+  color: var(--color-gold);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+/* ============================================
+   SECTION
+   ============================================ */
+
+.section {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 3rem;
+}
+
+/* ============================================
+   SCHEDULE
+   ============================================ */
+
+.event-card {
+  background: var(--color-surface);
+  padding: 4rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 5px 30px rgba(212,175,55,0.05);
+}
+
+.event-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.event-time {
+  color: var(--color-gold);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.event-venue {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-address {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-small {
+  padding: 0.8rem 1.5rem;
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   TRAVEL
+   ============================================ */
+
+.hotels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.hotel-card {
+  background: var(--color-surface);
+  padding: 2.5rem;
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 5px 20px rgba(212,175,55,0.05);
+}
+
+.hotel-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.hotel-address {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.hotel-phone {
+  color: var(--color-gold);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.hotel-note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   REGISTRY
+   ============================================ */
+
+.registry-card {
+  background: var(--color-surface);
+  padding: 4rem 3rem;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 5px 30px rgba(212,175,55,0.05);
+}
+
+.registry-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.registry-note {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.registry-group {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   WEDDING PARTY
+   ============================================ */
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.party-card {
+  background: var(--color-surface);
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 5px 20px rgba(212,175,55,0.05);
+}
+
+.party-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-gold-light) 100%);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-gold);
+}
+
+.party-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.party-role {
+  color: var(--color-gold);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+
+.faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-left: 3px solid var(--color-gold);
+}
+
+.faq-question {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.faq-answer {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================
+   RSVP
+   ============================================ */
+
+.rsvp-form {
+  background: var(--color-surface);
+  padding: 3rem;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--color-gold-light);
+  box-shadow: 0 5px 30px rgba(212,175,55,0.05);
+}
+
+.rsvp-intro {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  color: var(--color-gold);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-gold-light);
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background: var(--color-surface);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--color-gold-light);
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-gold);
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--color-gold);
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.footer-powered {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.footer-powered a {
+  color: var(--color-gold);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-names {
+    font-size: 3.5rem;
+  }
+  .hero-countdown {
+    gap: 1.5rem;
+  }
+  .countdown-number {
+    font-size: 2rem;
+  }
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  .header {
+    padding: 1rem 1.5rem;
+  }
+}
