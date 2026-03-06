@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allyzworld of Knowledge | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --light-blue: #A8D8EA;
+      --light-green: #B8E6B8;
+      --purple: #D8BFD8;
+      --yellow: #FFE4B5;
+      --orange: #FFA07A;
+      --pink: #FFC0CB;
+      --peach: #FFDAB9;
+      --green: #90EE90;
+      --text-dark: #333333;
+      --white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-green) 50%, var(--purple) 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+    
+    /* Navigation */
+    .nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+    }
+    
+    .logo-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      background: linear-gradient(90deg, #A8D8EA, #D8BFD8, #FFA07A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover {
+      background: var(--light-blue);
+      color: var(--white);
+    }
+    
+    .nav-link.active {
+      background: var(--purple);
+      color: var(--white);
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    
+    .logo-container {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 30px;
+    }
+    
+    .main-logo {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      background: var(--white);
+      padding: 20px;
+    }
+    
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 48px;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #A8D8EA, #B8E6B8, #D8BFD8, #FFE4B5, #FFA07A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-subtitle {
+      font-size: 22px;
+      color: var(--white);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin: 60px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      padding: 35px 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 20px;
+    }
+    
+    .feature-card:nth-child(1) .feature-icon { background: var(--light-blue); }
+    .feature-card:nth-child(2) .feature-icon { background: var(--light-green); }
+    .feature-card:nth-child(3) .feature-icon { background: var(--purple); }
+    .feature-card:nth-child(4) .feature-icon { background: var(--orange); }
+    
+    .feature-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    
+    .feature-desc {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* About Section */
+    .about-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 50px;
+      margin: 40px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .about-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 25px;
+      background: linear-gradient(90deg, var(--light-blue), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .about-text {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 60px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 20px 50px;
+      border-radius: 50px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255, 160, 122, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin: 10px;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 160, 122, 0.5);
+    }
+    
+    .cta-btn.secondary {
+      background: var(--purple);
+      box-shadow: 0 10px 30px rgba(216, 191, 216, 0.4);
+    }
+    
+    .cta-btn.secondary:hover {
+      box-shadow: 0 15px 40px rgba(216, 191, 216, 0.5);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--white);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    
+    .footer a {
+      color: var(--white);
+      text-decoration: underline;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-inner { flex-direction: column; gap: 15px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .hero-title { font-size: 32px; }
+      .hero-subtitle { font-size: 18px; }
+      .main-logo { max-width: 280px; }
+      .about-section { padding: 30px; }
+      .cta-btn { display: block; margin: 10px auto; max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="allyzworld.html" class="nav-logo">
+        <img src="allyzworld-logo.jpg" alt="Allyzworld Logo" class="logo-img">
+        <span class="logo-text">Allyzworld</span>
+      </a>
+      <div class="nav-links">
+        <a href="allyzworld.html" class="nav-link active">Home</a>
+        <a href="allyzworld-hiring.html" class="nav-link">Now Hiring</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="logo-container">
+        <img src="allyzworld-logo.jpg" alt="Allyzworld of Knowledge" class="main-logo">
+      </div>
+      <h1 class="hero-title">Welcome to Allyzworld of Knowledge</h1>
+      <p class="hero-subtitle">Where Learning Meets Love 📚✨</p>
+    </div>
+  </section>
+  
+  <!-- Features -->
+  <section class="container">
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">👶</div>
+        <h3 class="feature-title">Early Learning</h3>
+        <p class="feature-desc">Nurturing environment for children to explore, discover, and grow through play-based learning.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">👩‍🏫</div>
+        <h3 class="feature-title">Caring Teachers</h3>
+        <p class="feature-desc">Experienced educators dedicated to each child's development and individual needs.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Creative Programs</h3>
+        <p class="feature-desc">Engaging curriculum that sparks imagination and builds a strong foundation for learning.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">❤️</div>
+        <h3 class="feature-title">Safe Environment</h3>
+        <p class="feature-desc">Secure, clean, and welcoming space where children feel loved and protected.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="container">
+    <div class="about-section">
+      <h2 class="about-title">About Allyzworld</h2>
+      <p class="about-text">
+        At Allyzworld of Knowledge, we believe every child deserves a nurturing environment where they can flourish. Our dedicated team provides quality early childhood education that prepares children for a lifetime of learning. We celebrate diversity, encourage curiosity, and create a safe space where children can explore their world with confidence.
+      </p>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <a href="allyzworld-hiring.html" class="cta-btn">Join Our Team 🚀</a>
+      <a href="tel:2678072918" class="cta-btn secondary">Schedule a Tour 📅</a>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <p>© 2026 Allyzworld of Knowledge • Building Bright Futures 🌟</p>
+      <p style="margin-top: 10px;">
+        <a href="mailto:info@allyzworldofknowledge.com">info@allyzworldofknowledge.com</a> • 
+        <a href="tel:2678072918">267-807-2918</a>
+      </p>
+    </div>
+  </footer>
+  
+</body>
+</html>

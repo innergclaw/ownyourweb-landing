@@ -10,22 +10,21 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     :root {
-      --teal: #4ECDC4;
-      --teal-dark: #3AB5AD;
-      --pink: #FF6B9D;
-      --pink-dark: #E85A8A;
-      --yellow: #FFE66D;
-      --yellow-dark: #F5D94E;
+      --light-blue: #A8D8EA;
+      --light-green: #B8E6B8;
+      --purple: #D8BFD8;
+      --yellow: #FFE4B5;
+      --orange: #FFA07A;
+      --pink: #FFC0CB;
+      --peach: #FFDAB9;
+      --green: #90EE90;
       --white: #FFFFFF;
-      --blue: #5BA4E4;
-      --purple: #A855F7;
-      --orange: #FF8C42;
-      --green: #4ADE80;
+      --text-dark: #333333;
     }
     
     body {
       font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-green) 50%, var(--purple) 100%);
       min-height: 100vh;
       color: var(--white);
     }
@@ -42,15 +41,31 @@
     }
     
     .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     
     .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+    }
+    
+    .logo-text {
       font-family: 'Fredoka One', cursive;
-      font-size: 22px;
-      background: linear-gradient(90deg, var(--pink), var(--teal));
+      font-size: 20px;
+      background: linear-gradient(90deg, #A8D8EA, #D8BFD8, #FFA07A);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -62,7 +77,7 @@
     }
     
     .nav-link {
-      color: #333;
+      color: var(--text-dark);
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
@@ -72,7 +87,12 @@
     }
     
     .nav-link:hover {
-      background: var(--teal);
+      background: var(--light-blue);
+      color: var(--white);
+    }
+    
+    .nav-link.active {
+      background: var(--orange);
       color: var(--white);
     }
     
@@ -102,11 +122,11 @@
     
     .now-hiring {
       display: inline-block;
-      background: var(--pink);
+      background: var(--orange);
       padding: 20px 60px;
       border-radius: 60px 60px 60px 60px / 40px 40px 40px 40px;
       margin-bottom: 20px;
-      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
+      box-shadow: 0 10px 40px rgba(255, 160, 122, 0.4);
     }
     
     .now-text {
@@ -128,7 +148,7 @@
       font-family: 'Fredoka One', cursive;
       font-size: 42px;
       margin-top: 20px;
-      background: linear-gradient(90deg, #FF6B6B, #FFE66D, #4ADE80, #5BA4E4, #A855F7);
+      background: linear-gradient(90deg, var(--light-blue), var(--light-green), var(--purple), var(--orange));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -147,7 +167,7 @@
       height: 280px;
       margin: 40px auto;
       border-radius: 50%;
-      border: 8px solid var(--teal);
+      border: 8px solid var(--light-blue);
       box-shadow: 0 0 0 6px var(--white), 0 20px 60px rgba(0,0,0,0.2);
       overflow: hidden;
       background: var(--white);
@@ -174,12 +194,12 @@
       border-radius: 30px;
       padding: 40px;
       margin: 40px 0;
-      color: #333;
+      color: var(--text-dark);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
     
     .positions-banner {
-      background: var(--pink);
+      background: var(--purple);
       color: var(--white);
       padding: 15px 40px;
       border-radius: 40px;
@@ -198,7 +218,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      border-left: 5px solid var(--teal);
+      border-left: 5px solid var(--light-green);
       transition: transform 0.3s, box-shadow 0.3s;
     }
     
@@ -210,7 +230,7 @@
     .position-icon {
       width: 60px;
       height: 60px;
-      background: var(--teal);
+      background: var(--light-green);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -222,7 +242,7 @@
     .position-title {
       font-size: 22px;
       font-weight: 800;
-      color: #333;
+      color: var(--text-dark);
     }
     
     .position-subtitle {
@@ -237,15 +257,15 @@
       border-radius: 30px;
       padding: 35px 40px;
       margin: 40px 0;
-      color: #333;
-      box-shadow: 0 15px 40px rgba(255, 230, 109, 0.3);
+      color: var(--text-dark);
+      box-shadow: 0 15px 40px rgba(255, 228, 181, 0.3);
     }
     
     .requirements-title {
       font-family: 'Fredoka One', cursive;
       font-size: 28px;
       margin-bottom: 20px;
-      color: #333;
+      color: var(--text-dark);
       text-align: center;
     }
     
@@ -261,7 +281,7 @@
     .requirement-check {
       width: 32px;
       height: 32px;
-      background: var(--teal);
+      background: var(--light-green);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -273,7 +293,7 @@
     
     .preferred-badge {
       background: var(--pink);
-      color: var(--white);
+      color: var(--text-dark);
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 12px;
@@ -294,7 +314,7 @@
     .contact-title {
       font-family: 'Fredoka One', cursive;
       font-size: 32px;
-      color: #333;
+      color: var(--text-dark);
       margin-bottom: 30px;
     }
     
@@ -330,11 +350,11 @@
     }
     
     .contact-icon.phone {
-      background: var(--teal);
+      background: var(--light-blue);
     }
     
     .contact-icon.email {
-      background: var(--pink);
+      background: var(--purple);
     }
     
     .contact-text {
@@ -351,11 +371,11 @@
     .contact-value {
       font-size: 18px;
       font-weight: 700;
-      color: #333;
+      color: var(--text-dark);
     }
     
     .contact-value a {
-      color: var(--pink);
+      color: var(--orange);
       text-decoration: none;
     }
     
@@ -371,20 +391,20 @@
     
     .cta-btn {
       display: inline-block;
-      background: var(--pink);
+      background: var(--orange);
       color: var(--white);
       padding: 20px 50px;
       border-radius: 50px;
       font-family: 'Fredoka One', cursive;
       font-size: 22px;
       text-decoration: none;
-      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+      box-shadow: 0 10px 30px rgba(255, 160, 122, 0.4);
       transition: transform 0.3s, box-shadow 0.3s;
     }
     
     .cta-btn:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+      box-shadow: 0 15px 40px rgba(255, 160, 122, 0.5);
     }
     
     /* Footer */
@@ -414,15 +434,15 @@
   
   <!-- Navigation -->
   <nav class="nav">
-    <div class="container">
-      <div class="nav-inner">
-        <div class="nav-logo">Allyzworld</div>
-        <div class="nav-links">
-          <a href="#about" class="nav-link">About Us</a>
-          <a href="#positions" class="nav-link">Positions</a>
-          <a href="#requirements" class="nav-link">Requirements</a>
-          <a href="#contact" class="nav-link">Contact Us</a>
-        </div>
+    <div class="nav-inner">
+      <a href="allyzworld.html" class="nav-logo">
+        <img src="allyzworld-logo.jpg" alt="Allyzworld" class="logo-img">
+        <span class="logo-text">Allyzworld</span>
+      </a>
+      <div class="nav-links">
+        <a href="allyzworld.html" class="nav-link">Home</a>
+        <a href="allyzworld-hiring.html" class="nav-link active">Now Hiring</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
