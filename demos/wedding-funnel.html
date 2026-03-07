@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Own Your Wedding Website | Forever Yours, Forever Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F4E4BC;
+      --rose: #E8B4B8;
+      --sage: #9CAF88;
+      --charcoal: #2C2C2C;
+      --white: #FFFFFF;
+      --cream: #FAF8F5;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+    }
+    
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      animation: drift 60s linear infinite;
+    }
+    
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(30px, 30px); }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--charcoal);
+    }
+    
+    .hero h1 span {
+      color: var(--gold);
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      color: #666;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background: var(--gold);
+      color: var(--white);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--charcoal);
+      border: 2px solid var(--charcoal);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+    
+    /* Problem Section */
+    .problem {
+      background: var(--white);
+      padding: 100px 20px;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+    
+    .section-header p {
+      font-size: 18px;
+      color: #666;
+    }
+    
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .problem-card {
+      background: var(--cream);
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .problem-card:hover {
+      border-color: var(--rose);
+      transform: translateY(-5px);
+    }
+    
+    .problem-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    
+    .problem-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .problem-card p {
+      font-size: 15px;
+      color: #666;
+    }
+    
+    /* Solution Section */
+    .solution {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 100px 20px;
+    }
+    
+    .solution .section-header h2 {
+      color: var(--white);
+    }
+    
+    .solution .section-header p {
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .solution-card {
+      background: rgba(255,255,255,0.05);
+      padding: 35px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+    
+    .solution-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--gold);
+    }
+    
+    .solution-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+    
+    .solution-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    /* Preview Section */
+    .preview {
+      padding: 100px 20px;
+      background: var(--cream);
+    }
+    
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .preview-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .preview-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .preview-image {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--sage) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+    
+    .preview-info {
+      padding: 25px;
+    }
+    
+    .preview-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    
+    .preview-info p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .preview-link {
+      color: var(--gold);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    /* Pricing Section */
+    .pricing {
+      padding: 100px 20px;
+      background: var(--white);
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .pricing-card {
+      background: var(--cream);
+      border-radius: 30px;
+      padding: 50px 40px;
+      text-align: center;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .pricing-card.featured {
+      border-color: var(--gold);
+      transform: scale(1.05);
+    }
+    
+    .pricing-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--white);
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
+    .pricing-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    
+    .pricing-card .price {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    
+    .pricing-card .price span {
+      font-size: 18px;
+      color: #666;
+      font-weight: 400;
+    }
+    
+    .pricing-card .description {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    
+    .pricing-features li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 100px 20px;
+      background: linear-gradient(135deg, var(--sage) 0%, var(--rose) 100%);
+    }
+    
+    .testimonials .section-header h2,
+    .testimonials .section-header p {
+      color: var(--white);
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonial-card {
+      background: var(--white);
+      padding: 35px;
+      border-radius: 20px;
+    }
+    
+    .testimonial-text {
+      font-size: 16px;
+      font-style: italic;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .testimonial-date {
+      font-size: 13px;
+      color: #999;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 20px;
+      background: var(--charcoal);
+      text-align: center;
+    }
+    
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.6);
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .hero-subtitle { font-size: 16px; }
+      .section-header h2 { font-size: 32px; }
+      .pricing-card.featured { transform: scale(1); }
+      .btn { padding: 15px 30px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✨ OwnYourWeb Wedding Service</div>
+      <h1>Your Love Story Deserves <span>Its Own Home</span></h1>
+      <p class="hero-subtitle">Paper invites fade. A wedding website is forever. Own your memories, own your moment.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary">Get Your Wedding Site →</a>
+        <a href="#preview" class="btn btn-secondary">See Examples</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Problem Section -->
+  <section class="problem">
+    <div class="container">
+      <div class="section-header">
+        <h2>The Problem with "Free" Wedding Sites</h2>
+        <p>You don't own them. They don't last. Here's what couples are realizing:</p>
+      </div>
+      
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">🏢</div>
+          <h3>You Don't Own It</h3>
+          <p>The Knot, Zola, Wix — you're renting space on their platform. They control your content, your data, your memories.</p>
+        </div>
+        
+        <div class="problem-card">
+          <div class="problem-icon">🏷️</div>
+          <h3>Branded & Basic</h3>
+          <p>Their logo on your special day. Generic templates that look like everyone else's wedding.</p>
+        </div>
+        
+        <div class="problem-card">
+          <div class="problem-icon">⏰</div>
+          <h3>Disappears After</h3>
+          <p>Most free sites shut down after 1-2 years. Your memories? Gone. Forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Solution Section -->
+  <section class="solution">
+    <div class="container">
+      <div class="section-header">
+        <h2>What You Get with OwnYourWeb</h2>
+        <p>Real ownership. Real customization. Forever yours.</p>
+      </div>
+      
+      <div class="solution-grid">
+        <div class="solution-card">
+          <h3>✓ You Own the Domain</h3>
+          <p>YourNames.com — not YourNames.wixsite.com. Professional, clean, yours.</p>
+        </div>
+        
+        <div class="solution-card">
+          <h3>✓ Fully Custom Design</h3>
+          <p>Matching your wedding aesthetic. No templates. No "powered by" badges.</p>
+        </div>
+        
+        <div class="solution-card">
+          <h3>✓ Lasts Forever</h3>
+          <p>Keep it live as a memory capsule. No expiration. No deletion.</p>
+        </div>
+        
+        <div class="solution-card">
+          <h3>✓ All Features Included</h3>
+          <p>RSVP tracking, photo gallery, registry links, accommodations, schedule, and more.</p>
+        </div>
+        
+        <div class="solution-card">
+          <h3>✓ Mobile Perfect</h3>
+          <p>Guests check on their phones. Your site looks stunning on every device.</p>
+        </div>
+        
+        <div class="solution-card">
+          <h3>✓ Zero Monthly Fees</h3>
+          <p>One-time payment. No subscriptions. No surprise charges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Preview Section -->
+  <section class="preview" id="preview">
+    <div class="container">
+      <div class="section-header">
+        <h2>Real Wedding Sites We've Built</h2>
+        <p>Click to explore. Imagine yours.</p>
+      </div>
+      
+      <div class="preview-grid">
+        <div class="preview-card">
+          <div class="preview-image">💒</div>
+          <div class="preview-info">
+            <h3>Classic Romance</h3>
+            <p>Elegant typography, soft colors, timeless design. Perfect for traditional ceremonies.</p>
+            <a href="wedding-style-1/" class="preview-link">View Template →</a>
+          </div>
+        </div>
+        
+        <div class="preview-card">
+          <div class="preview-image">🌿</div>
+          <div class="preview-info">
+            <h3>Garden Party</h3>
+            <p>Botanical accents, organic layouts, nature-inspired. Ideal for outdoor weddings.</p>
+            <a href="wedding-style-2/" class="preview-link">View Template →</a>
+          </div>
+        </div>
+        
+        <div class="preview-card">
+          <div class="preview-image">✨</div>
+          <div class="preview-info">
+            <h3>Modern Minimal</h3>
+            <p>Clean lines, bold typography, editorial style. For couples who want sleek.</p>
+            <a href="wedding-style-3/" class="preview-link">View Template →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>Simple, Honest Pricing</h2>
+        <p>One-time payment. No subscriptions. No hidden fees.</p>
+      </div>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Essentials</h3>
+          <div class="price">$299<span></span></div>
+          <p class="description">Perfect for intimate weddings</p>
+          <ul class="pricing-features">
+            <li>1-3 page custom site</li>
+            <li>Your own domain (1 year)</li>
+            <li>Mobile responsive</li>
+            <li>RSVP form</li>
+            <li>Basic photo gallery</li>
+            <li>14-day delivery</li>
+          </ul>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Wedding Website - Essentials Package" class="btn btn-secondary">Get Started</a>
+        </div>
+        
+        <div class="pricing-card featured">
+          <h3>Signature</h3>
+          <div class="price">$499<span></span></div>
+          <p class="description">Most popular for full weddings</p>
+          <ul class="pricing-features">
+            <li>5-7 page custom site</li>
+            <li>Your own domain (2 years)</li>
+            <li>SSL certificate included</li>
+            <li>RSVP + guest management</li>
+            <li>Full photo gallery</li>
+            <li>Registry integration</li>
+            <li>Accommodations page</li>
+            <li>10-day delivery</li>
+          </ul>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Wedding Website - Signature Package" class="btn btn-primary">Get Started →</a>
+        </div>
+        
+        <div class="pricing-card">
+          <h3>Luxury</h3>
+          <div class="price">$799<span></span></div>
+          <p class="description">For couples who want everything</p>
+          <ul class="pricing-features">
+            <li>Unlimited pages</li>
+            <li>Domain (5 years)</li>
+            <li>Custom animations</li>
+            <li>Video backgrounds</li>
+            <li>Guest dashboard</li>
+            <li>Countdown timer</li>
+            <li>Story timeline</li>
+            <li>Priority 7-day delivery</li>
+          </ul>
+          <a href="mailto:ownyourwebsystems@agentmail.to?subject=Wedding Website - Luxury Package" class="btn btn-secondary">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>Couples Love Their Sites</h2>
+        <p>Don't take our word for it.</p>
+      </div>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"We looked at The Knot and Zola, but they felt so generic. Our OwnYourWeb site felt like US. People still ask about it a year later."</p>
+          <p class="testimonial-author">— Sarah & Michael</p>
+          <p class="testimonial-date">Married June 2025</p>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The fact that we OWN it was huge. No 'powered by Wix' on our special day. It's our site, our memories, forever."</p>
+          <p class="testimonial-author">— Jasmine & David</p>
+          <p class="testimonial-date">Married September 2025</p>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Worth every penny. Our guests kept saying how professional it looked. Way better than the free options."</p>
+          <p class="testimonial-author">— Amanda & Chris</p>
+          <p class="testimonial-date">Married October 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Own Your Wedding Website?</h2>
+      <p>Paper invites get thrown away. Your website is forever. Start building your digital home today.</p>
+      <a href="mailto:ownyourwebsystems@agentmail.to?subject=Start My Wedding Website" class="btn btn-primary">Start Your Site →</a>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 <a href="https://ownyourweb.xyz">OwnYourWeb</a> — Your website. Your server. Your control.</p>
+      <p style="margin-top: 10px;">Questions? <a href="mailto:ownyourwebsystems@agentmail.to">ownyourwebsystems@agentmail.to</a></p>
+    </div>
+  </footer>
+  
+</body>
+</html>
