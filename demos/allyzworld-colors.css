@@ -1,0 +1,24 @@
+/* Allyzworld Brand Colors - Extracted from Logo */
+:root {
+  /* Primary Brand Colors */
+  --light-blue: #A8D8EA;
+  --light-green: #B8E6B8;
+  --purple: #D8BFD8;
+  --yellow: #FFE4B5;
+  --orange: #FFA07A;
+  --pink: #FFC0CB;
+  --peach: #FFDAB9;
+  --green: #90EE90;
+  
+  /* Functional Colors */
+  --primary: #A8D8EA;
+  --primary-dark: #7FC4D8;
+  --secondary: #D8BFD8;
+  --accent: #FFA07A;
+  --highlight: #FFE4B5;
+  --success: #B8E6B8;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --white: #FFFFFF;
+  --bg-gradient: linear-gradient(135deg, #A8D8EA 0%, #B8E6B8 50%, #D8BFD8 100%);
+}

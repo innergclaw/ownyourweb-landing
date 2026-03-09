@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | [Names]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .invite {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .border-frame {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid rgba(201, 168, 108, 0.3);
+            pointer-events: none;
+        }
+
+        .border-frame::before,
+        .border-frame::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #c9a86c;
+        }
+
+        .border-frame::before {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .border-frame::after {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .header-text {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #c9a86c;
+            margin-bottom: 40px;
+        }
+
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .ampersand {
+            font-size: 0.5em;
+            color: #c9a86c;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 50px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: #c9a86c;
+            margin: 0 auto 40px;
+        }
+
+        .details {
+            margin-bottom: 50px;
+        }
+
+        .detail-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #c9a86c;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 25px;
+        }
+
+        .date-large {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 168, 108, 0.1);
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #c9a86c;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .rsvp-btn {
+            display: inline-block;
+            padding: 18px 60px;
+            background: transparent;
+            color: #c9a86c;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 1px solid #c9a86c;
+            transition: all 0.3s ease;
+        }
+
+        .rsvp-btn:hover {
+            background: #c9a86c;
+            color: #0a0a0a;
+        }
+
+        .footer-text {
+            margin-top: 50px;
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        .hashtag {
+            color: #c9a86c;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            .names {
+                font-size: 2.5rem;
+            }
+
+            .countdown {
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .countdown-num {
+                font-size: 1.8rem;
+            }
+
+            .border-frame {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invite">
+        <div class="border-frame"></div>
+
+        <p class="header-text">Together with their families</p>
+
+        <h1 class="names">
+            [Name One]
+            <span class="ampersand">&</span>
+            [Name Two]
+        </h1>
+
+        <p class="tagline">Request the pleasure of your company</p>
+
+        <div class="divider"></div>
+
+        <div class="details">
+            <p class="detail-label">When</p>
+            <p class="detail-value date-large">Saturday, September 15, 2026</p>
+            <p class="detail-value">Four o'clock in the afternoon</p>
+
+            <p class="detail-label">Where</p>
+            <p class="detail-value">The Estate at Fountain Lake</p>
+            <p class="detail-value">Philadelphia, Pennsylvania</p>
+        </div>
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-num" id="days">000</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-num" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-num" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-num" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+
+        <a href="#rsvp" class="rsvp-btn">RSVP</a>
+
+        <p class="footer-text">Dinner and dancing to follow</p>
+        <p class="hashtag">#NamesForever</p>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const weddingDate = new Date('September 15, 2026 16:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            document.getElementById('days').textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(3, '0');
+            document.getElementById('hours').textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>

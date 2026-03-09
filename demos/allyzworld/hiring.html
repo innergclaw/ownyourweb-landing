@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOW HIRING | Allyzworld of Knowledge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --light-blue: #A8D8EA;
+      --light-green: #B8E6B8;
+      --purple: #D8BFD8;
+      --yellow: #FFE4B5;
+      --orange: #FFA07A;
+      --pink: #FFC0CB;
+      --peach: #FFDAB9;
+      --green: #90EE90;
+      --text-dark: #333333;
+      --white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-green) 50%, var(--purple) 100%);
+      min-height: 100vh;
+      color: var(--white);
+    }
+    
+    /* Navigation */
+    .nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      height: 45px;
+      width: auto;
+      border-radius: 8px;
+    }
+    
+    .logo-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      background: linear-gradient(90deg, #A8D8EA, #D8BFD8, #FFA07A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover {
+      background: var(--light-blue);
+      color: var(--white);
+    }
+    
+    .nav-link.active {
+      background: var(--orange);
+      color: var(--white);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    
+    .now-hiring {
+      display: inline-block;
+      background: var(--orange);
+      padding: 20px 60px;
+      border-radius: 60px 60px 60px 60px / 40px 40px 40px 40px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(255, 160, 122, 0.4);
+    }
+    
+    .now-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 48px;
+      color: var(--white);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    }
+    
+    .hiring-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 72px;
+      color: var(--yellow);
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+      line-height: 1;
+    }
+    
+    .company-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 42px;
+      margin-top: 20px;
+      background: linear-gradient(90deg, var(--light-blue), var(--light-green), var(--purple), var(--pink), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+    }
+    
+    .tagline {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-top: 10px;
+      color: var(--white);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    
+    /* Logo Frame */
+    .logo-frame {
+      width: 280px;
+      height: 280px;
+      margin: 40px auto;
+      border-radius: 50%;
+      border: 8px solid var(--light-blue);
+      box-shadow: 0 0 0 6px var(--white), 0 20px 60px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-caption {
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 15px;
+      color: var(--white);
+    }
+    
+    /* Positions */
+    .positions {
+      background: var(--white);
+      border-radius: 30px;
+      padding: 40px;
+      margin: 40px 0;
+      color: #333;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    
+    .positions-banner {
+      background: var(--purple);
+      color: var(--white);
+      padding: 15px 40px;
+      border-radius: 40px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+      display: inline-block;
+    }
+    
+    .position-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 20px;
+      padding: 25px 30px;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-left: 5px solid var(--light-blue);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .position-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .position-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--light-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    
+    .position-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #333;
+    }
+    
+    .position-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+    
+    /* Requirements */
+    .requirements {
+      background: var(--yellow);
+      border-radius: 30px;
+      padding: 35px 40px;
+      margin: 40px 0;
+      color: #333;
+      box-shadow: 0 15px 40px rgba(255, 228, 181, 0.3);
+    }
+    
+    .requirements-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    
+    .requirement-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 0;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    
+    .requirement-check {
+      width: 32px;
+      height: 32px;
+      background: var(--light-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .preferred-badge {
+      background: var(--orange);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-left: 10px;
+    }
+    
+    /* Contact */
+    .contact {
+      background: var(--white);
+      border-radius: 30px;
+      padding: 40px;
+      margin: 40px 0;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    
+    .contact-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 20px;
+      transition: transform 0.3s;
+    }
+    
+    .contact-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .contact-icon.phone {
+      background: var(--light-blue);
+    }
+    
+    .contact-icon.email {
+      background: var(--purple);
+    }
+    
+    .contact-text {
+      text-align: left;
+    }
+    
+    .contact-label {
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .contact-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    .contact-value a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+    
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+    
+    /* CTA Button */
+    .cta-section {
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 20px 50px;
+      border-radius: 50px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255, 160, 122, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 160, 122, 0.5);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      opacity: 0.9;
+      font-size: 14px;
+      color: var(--white);
+    }
+    
+    .footer a {
+      color: var(--white);
+    }
+    
+    /* Mobile */
+    @media (max-width: 600px) {
+      .nav-inner { flex-direction: column; gap: 15px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .nav-link { padding: 8px 12px; font-size: 12px; }
+      .hiring-text { font-size: 48px; }
+      .now-text { font-size: 32px; }
+      .company-name { font-size: 28px; }
+      .logo-frame { width: 200px; height: 200px; }
+      .positions, .requirements, .contact { padding: 25px; margin: 20px 0; }
+      .position-card { flex-direction: column; text-align: center; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="allyzworld-logo.jpg" alt="Allyzworld Logo" class="logo-img">
+        <span class="logo-text">Allyzworld</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="programs.html" class="nav-link">Programs</a>
+        <a href="hiring.html" class="nav-link active">Now Hiring</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero -->
+  <section class="hero" id="about">
+    <div class="container">
+      <div class="now-hiring">
+        <div class="now-text">NOW</div>
+        <div class="hiring-text">HIRING</div>
+      </div>
+      <h1 class="company-name">Allyzworld of Knowledge</h1>
+      <p class="tagline">Where Learning Meets Love 📚✨</p>
+    </div>
+  </section>
+  
+  <!-- Logo Frame -->
+  <div class="container">
+    <div class="logo-frame">
+      <img src="allyzworld-logo.jpg" alt="Allyzworld Team">
+    </div>
+    <p class="image-caption">Join our nurturing team of educators</p>
+  </div>
+  
+  <!-- Positions -->
+  <section class="container" id="positions">
+    <div class="positions">
+      <div class="positions-banner">POSITIONS AVAILABLE</div>
+      
+      <div class="position-card">
+        <div class="position-icon">👩‍🏫</div>
+        <div>
+          <div class="position-title">Lead Teachers</div>
+          <div class="position-subtitle">Guide classroom activities & curriculum</div>
+        </div>
+      </div>
+      
+      <div class="position-card">
+        <div class="position-icon">🤝</div>
+        <div>
+          <div class="position-title">Assistant Teachers</div>
+          <div class="position-subtitle">Support lead teachers & engage with children</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Requirements -->
+  <section class="container" id="requirements">
+    <div class="requirements">
+      <h2 class="requirements-title">📋 Requirements</h2>
+      
+      <div class="requirement-item">
+        <div class="requirement-check">✓</div>
+        <span>At least two years of experience</span>
+      </div>
+      
+      <div class="requirement-item">
+        <div class="requirement-check">✓</div>
+        <span>Must have all clearances</span>
+      </div>
+      
+      <div class="requirement-item">
+        <div class="requirement-check">✓</div>
+        <span>CDA or higher in early childhood education</span>
+        <span class="preferred-badge">PREFERRED</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section class="container" id="contact">
+    <div class="contact">
+      <h2 class="contact-title">📞 Get In Touch</h2>
+      
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon phone">📱</div>
+          <div class="contact-text">
+            <div class="contact-label">Call Us</div>
+            <div class="contact-value">267-807-2918</div>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon email">✉️</div>
+          <div class="contact-text">
+            <div class="contact-label">Email Us</div>
+            <div class="contact-value">
+              <a href="mailto:info@allyzworldofknowledge.com">info@allyzworldofknowledge.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <a href="mailto:info@allyzworldofknowledge.com?subject=Job Application - Allyzworld of Knowledge" class="cta-btn">
+        Apply Now →
+      </a>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Allyzworld of Knowledge • Building Bright Futures 🌟</p>
+      <p style="margin-top: 10px;">
+        <a href="index.html">← Back to Home</a>
+      </p>
+    </div>
+  </footer>
+  
+</body>
+</html>
