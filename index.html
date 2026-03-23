@@ -836,7 +836,7 @@
     <div class="container">
       <div class="logo">OwnYourWeb</div>
       <div style="display: flex; gap: 16px; align-items: center;">
-        <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
+        <a href="#contact" class="btn-book">Email Us</a>
       </div>
     </div>
   </nav>
@@ -847,7 +847,7 @@
       <h1>A Professional Website That Belongs To You.</h1>
       <p class="tagline">Stop running your business from DMs.<br>Professional presence.<br>Organized systems.<br>Built for growth.</p>
       <div class="buttons">
-        <a href="https://cal.com/ownyourwebsystems/15min" class="btn btn-primary" target="_blank">Book Your Call</a>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
         <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
         <a href="https://innergclaw.github.io/innerg-ai-deploy/" class="btn btn-orange" target="_blank">For Non Developers</a>
       </div>
@@ -982,6 +982,49 @@
     </div>
   </section>
 
+  <!-- Contact Form Section -->
+  <section class="contact-section" id="contact" style="background: var(--surface); padding: 80px 0;">
+    <div class="container" style="max-width: 600px;">
+      <h2 style="text-align: center; margin-bottom: 16px;">Get Your Website</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">Tell us about your project. We'll reach out within 24 hours.</p>
+      
+      <form action="https://formspree.io/f/mreaqkdr" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+        <div>
+          <label for="name" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Your Name</label>
+          <input type="text" id="name" name="name" required style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
+        </div>
+        
+        <div>
+          <label for="email" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Email Address</label>
+          <input type="email" id="email" name="email" required style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
+        </div>
+        
+        <div>
+          <label for="business" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Business Name</label>
+          <input type="text" id="business" name="business" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
+        </div>
+        
+        <div>
+          <label for="interest" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">What do you need?</label>
+          <select id="interest" name="interest" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit; cursor: pointer;">
+            <option value="">Select an option</option>
+            <option value="new-website">New website</option>
+            <option value="redesign">Website redesign</option>
+            <option value="automation">Automation & systems</option>
+            <option value="other">Other / Not sure</option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="message" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Tell us about your project</label>
+          <textarea id="message" name="message" rows="4" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+        
+        <button type="submit" style="padding: 16px 32px; background: var(--accent-teal); color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send Message</button>
+      </form>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -990,7 +1033,7 @@
         Powered by <a href="https://innergclaw.github.io/innerg-intelligence-landing/" target="_blank" style="color: var(--text-muted);">InnerG Intelligence</a>
       </p>
       <div style="margin-top: 24px;">
-        <a href="https://cal.com/ownyourwebsystems/15min" class="btn-book" target="_blank">Book a Call</a>
+        <a href="#contact" class="btn-book">Email Us</a>
       </div>
     </div>
   </footer>
