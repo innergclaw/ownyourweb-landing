@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OwnYourWeb Projects Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0b;
+      --surface: #141416;
+      --surface-2: #1a1a1e;
+      --border: #2a2a30;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --teal: #00D1C7;
+      --cyan: #2DE2E6;
+      --lime: #C7F464;
+      --amber: #F5A623;
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --red: #ef4444;
+      --green: #22c55e;
+    }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--teal);
+    }
+    
+    .last-updated {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    .stat-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .stat-number.teal { color: var(--teal); }
+    .stat-number.amber { color: var(--amber); }
+    .stat-number.lime { color: var(--lime); }
+    .stat-number.purple { color: var(--purple); }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Sections */
+    .section {
+      margin-bottom: 40px;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .section-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    /* Project Cards */
+    .project-grid {
+      display: grid;
+      gap: 16px;
+    }
+    
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+    }
+    
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .project-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .project-client {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    .status-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    
+    .status-review {
+      background: rgba(245, 166, 35, 0.15);
+      color: var(--amber);
+    }
+    
+    .status-progress {
+      background: rgba(0, 209, 199, 0.15);
+      color: var(--teal);
+    }
+    
+    .status-complete {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+    }
+    
+    .status-paid {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--purple);
+    }
+    
+    .project-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .detail-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .detail-value {
+      font-size: 14px;
+      color: var(--text);
+    }
+    
+    .detail-value a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+    
+    .detail-value a:hover {
+      text-decoration: underline;
+    }
+    
+    .payment-pending {
+      color: var(--amber);
+    }
+    
+    .payment-paid {
+      color: var(--green);
+    }
+    
+    /* Revenue Section */
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .revenue-grid { grid-template-columns: 1fr; }
+    }
+    
+    .revenue-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .revenue-amount {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .revenue-amount.pending { color: var(--amber); }
+    .revenue-amount.collected { color: var(--green); }
+    .revenue-amount.projected { color: var(--cyan); }
+    
+    /* Stage Legend */
+    .stage-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    
+    .stage-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    .stage-icon {
+      font-size: 14px;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 48px;
+      color: var(--text-muted);
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+    }
+    
+    /* Action Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: var(--teal);
+      color: #000;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: rgba(0, 209, 199, 0.8);
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>⚡ OwnYourWeb Projects</h1>
+        <p class="last-updated">Last updated: 2026-03-16</p>
+      </div>
+      <a href="index.html" class="btn btn-secondary">← Back to Site</a>
+    </header>
+    
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number teal">1</div>
+        <div class="stat-label">Active Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number amber">0</div>
+        <div class="stat-label">In Pipeline</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number lime">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number purple">$290</div>
+        <div class="stat-label">Pending Revenue</div>
+      </div>
+    </div>
+    
+    <!-- Stage Legend -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(0, 209, 199, 0.15);">📊</div>
+        <div class="section-title">Project Stages</div>
+      </div>
+      <div class="stage-legend">
+        <div class="stage-item"><span class="stage-icon">🔍</span> Lead — Initial inquiry</div>
+        <div class="stage-item"><span class="stage-icon">📋</span> In Review — Proposal pending</div>
+        <div class="stage-item"><span class="stage-icon">🚧</span> In Progress — Active dev</div>
+        <div class="stage-item"><span class="stage-icon">✅</span> Complete — Site live</div>
+        <div class="stage-item"><span class="stage-icon">💰</span> Paid — Delivered</div>
+        <div class="stage-item"><span class="stage-icon">🔧</span> Maintenance — Ongoing</div>
+      </div>
+    </div>
+    
+    <!-- Active Projects -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(0, 209, 199, 0.15);">🚧</div>
+        <div class="section-title">Active Projects</div>
+      </div>
+      
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <div class="project-name">Allyz World of Knowledge</div>
+              <div class="project-client">Client: Ashley Long</div>
+            </div>
+            <span class="status-badge status-review">📋 In Review</span>
+          </div>
+          
+          <div class="project-details">
+            <div class="detail-item">
+              <span class="detail-label">Project Type</span>
+              <span class="detail-value">Daycare / Learning Center</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Payment</span>
+              <span class="detail-value payment-pending">$290 — Pending</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Started</span>
+              <span class="detail-value">March 13, 2026</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Live URL</span>
+              <span class="detail-value"><a href="https://innergclaw.github.io/allyz-world-knowledge/" target="_blank">View Site →</a></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Custom Domain</span>
+              <span class="detail-value" style="color: var(--amber);">www.allyzworldofknowledge.com (DNS pending)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">GitHub Repo</span>
+              <span class="detail-value"><a href="https://github.com/innergclaw/allyz-world-knowledge" target="_blank">View Repo →</a></span>
+            </div>
+          </div>
+          
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <span class="detail-label">Notes</span>
+            <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">
+              Full landing page built. Awaiting client review and domain DNS setup.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pipeline -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(245, 166, 35, 0.15);">🔍</div>
+        <div class="section-title">Pipeline / Leads</div>
+      </div>
+      <div class="empty-state">
+        <p>No leads in pipeline</p>
+        <p style="font-size: 13px; margin-top: 8px;">Add new leads to track potential projects</p>
+      </div>
+    </div>
+    
+    <!-- Completed -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(34, 197, 94, 0.15);">✅</div>
+        <div class="section-title">Completed Projects</div>
+      </div>
+      <div class="empty-state">
+        <p>No completed projects yet</p>
+        <p style="font-size: 13px; margin-top: 8px;">Completed projects will appear here</p>
+      </div>
+    </div>
+    
+    <!-- Revenue -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(168, 85, 247, 0.15);">💰</div>
+        <div class="section-title">Revenue Tracking</div>
+      </div>
+      <div class="revenue-grid">
+        <div class="revenue-card">
+          <div class="revenue-amount pending">$290</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="revenue-card">
+          <div class="revenue-amount collected">$0</div>
+          <div class="stat-label">Collected</div>
+        </div>
+        <div class="revenue-card">
+          <div class="revenue-amount projected">$290</div>
+          <div class="stat-label">Total Pipeline</div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

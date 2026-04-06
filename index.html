@@ -1,1015 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OwnYourWeb — Professional Websites That Belong To You</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #0F1115;
-      --surface: #1A1E24;
-      --text: #E8E8E8;
-      --text-muted: #9CA3AF;
-      --accent-teal: #00D1C7;
-      --accent-cyan: #2DE2E6;
-      --accent-lime: #C7F464;
-      --accent-amber: #F5A623;
-      --border-glow: rgba(45, 226, 230, 0.3);
-      --button-glow: rgba(0, 209, 199, 0.4);
-    }
-
-    body {
-      font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Navigation */
-    nav {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--surface);
-      background: var(--bg);
-    }
-
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 24px;
-      letter-spacing: -1px;
-      color: var(--accent-teal);
-      text-shadow: 0 0 20px var(--border-glow);
-    }
-
-    /* Booking Button */
-    .btn-book {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      background: var(--accent-teal);
-      color: #000000;
-      border: none;
-    }
-
-    .btn-book:hover {
-      background: rgba(0, 209, 199, 0.8);
-      box-shadow: 0 0 20px var(--button-glow);
-      transform: translateY(-2px);
-    }
-
-    footer .btn-book {
-      margin-top: 16px;
-      display: inline-block;
-    }
-
-    /* Section */
-    section {
-      padding: 100px 0;
-    }
-
-    section h2 {
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 32px;
-      color: var(--text);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 80px 0 60px;
-      }
-
-      section {
-        padding: 60px 0;
-      }
-
-      .hero .buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    /* Hero */
-    .hero {
-      padding: 140px 0 120px;
-      text-align: center;
-      background: var(--bg);
-    }
-
-    .hero h1 {
-      font-size: clamp(56px, 10vw, 96px);
-      font-weight: 700;
-      letter-spacing: -3px;
-      line-height: 1;
-      margin-bottom: 24px;
-      color: var(--text);
-      text-shadow: 0 0 40px var(--border-glow);
-    }
-
-    .hero .tagline {
-      font-size: 20px;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
-    }
-
-    .hero .buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 16px 32px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      background: transparent;
-    }
-
-    .btn-primary {
-      color: var(--accent-teal);
-      border: 2px solid var(--accent-teal);
-      box-shadow: 0 0 20px var(--button-glow), inset 0 0 0 transparent;
-    }
-
-    .btn-primary:hover {
-      background: rgba(0, 209, 199, 0.1);
-      box-shadow: 0 0 30px var(--button-glow), inset 0 0 0 transparent;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      color: var(--text-muted);
-      border: 2px solid var(--surface);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-      box-shadow: 0 0 20px rgba(45, 226, 230, 0.2);
-    }
-
-    .btn-orange {
-      color: #000000;
-      border: 2px solid var(--accent-amber);
-      background: var(--accent-amber);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .btn-orange:hover {
-      background: rgba(245, 166, 35, 0.8);
-      box-shadow: 0 0 30px rgba(245, 166, 35, 0.4);
-      transform: translateY(-2px);
-    }
-
-    /* Problem */
-    .problem {
-      background: var(--surface);
-      border-top: 1px solid var(--surface);
-      border-bottom: 1px solid var(--surface);
-    }
-
-    .problem h2 {
-      color: var(--accent-lime);
-      text-shadow: 0 0 30px rgba(199, 244, 100, 0.3);
-    }
-
-    .problem .copy {
-      font-size: 20px;
-      line-height: 1.8;
-      max-width: 700px;
-      color: var(--text-muted);
-    }
-
-    /* Solution */
-    .solution {
-      background: var(--bg);
-    }
-
-    .solution h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      color: var(--accent-cyan);
-      text-shadow: 0 0 30px rgba(45, 226, 230, 0.3);
-    }
-
-    .solution ul {
-      list-style: none;
-      max-width: 600px;
-      margin: 0 auto 32px;
-      font-size: 20px;
-      line-height: 1.8;
-    }
-
-    .solution li {
-      padding: 12px 0;
-      padding-left: 32px;
-      position: relative;
-      color: var(--text);
-    }
-
-    .solution li:before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--accent-teal);
-      font-weight: 700;
-      font-size: 20px;
-      text-shadow: 0 0 10px var(--button-glow);
-    }
-
-    /* Modules */
-    .modules {
-      background: var(--bg);
-    }
-
-    .modules h2 {
-      text-align: center;
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-
-    .modules-sub {
-      text-align: center;
-      font-size: 18px;
-      color: var(--text-muted);
-      margin-bottom: 60px;
-    }
-
-    .module-stack {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .module-card {
-      background: var(--surface);
-      padding: 40px 32px;
-      border-radius: 16px;
-      border: 1px solid var(--surface);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .module-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .module-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .module-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 24px;
-    }
-
-    .module-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .module-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
-
-    .module-features {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .module-features li {
-      padding: 8px 0;
-      padding-left: 20px;
-      position: relative;
-      color: var(--text-muted);
-      font-size: 15px;
-    }
-
-    .module-features li:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-    }
-
-    .module-position {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 8px;
-    }
-
-    .module-price {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 20px;
-    }
-
-    .btn-module {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      background: transparent;
-      border: 1px solid var(--text-muted);
-      color: var(--text-muted);
-    }
-
-    .btn-module:hover {
-      background: var(--text-muted);
-      color: var(--bg);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    }
-
-    /* Own More Section */
-    .own-more-section {
-      margin-top: 80px;
-    }
-
-    .own-more-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .own-more-header h3 {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: 2px;
-    }
-
-    .own-more-header p {
-      color: var(--text-muted);
-      font-size: 16px;
-      margin-top: 8px;
-    }
-
-    .addon-dropdowns {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .addon-item {
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--surface);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .addon-item summary {
-      padding: 24px 28px;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      transition: all 0.3s ease;
-    }
-
-    .addon-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .addon-item summary:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .addon-item[open] summary {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .addon-icon {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-    }
-
-    .addon-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .addon-header-text {
-      flex: 1;
-    }
-
-    .addon-header-text h4 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .addon-header-text p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .addon-expand {
-      font-size: 24px;
-      color: var(--text-muted);
-      transition: transform 0.3s ease;
-    }
-
-    .addon-item[open] .addon-expand {
-      transform: rotate(45deg);
-    }
-
-    .addon-content {
-      padding: 24px 28px;
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .addon-content ul {
-      list-style: none;
-      margin: 16px 0;
-    }
-
-    .addon-content li {
-      padding: 6px 0;
-      padding-left: 16px;
-      position: relative;
-    }
-
-    .addon-content li:before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      font-size: 12px;
-    }
-
-    .addon-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 100px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 12px;
-    }
-
-    .modules-progression {
-      text-align: center;
-      margin-top: 60px;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      white-space: nowrap;
-    }
-
-    .modules-progression span {
-      opacity: 0.5;
-    }
-
-    /* Payment Methods */
-    .payment-methods {
-      background: var(--surface);
-      border-top: 1px solid var(--surface);
-      border-bottom: 1px solid var(--surface);
-      padding: 40px 0;
-      text-align: center;
-    }
-
-    .payment-methods h3 {
-      font-size: 18px;
-      color: var(--text);
-      margin-bottom: 32px;
-      font-weight: 600;
-    }
-
-    .payment-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .payment-method {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 24px;
-      background: var(--bg);
-      border: 1px solid var(--surface);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      min-width: 140px;
-      justify-content: center;
-    }
-
-    .payment-method:hover {
-      border-color: var(--accent-teal);
-      box-shadow: 0 4px 20px rgba(0, 209, 199, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .payment-icon {
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .payment-name {
-      color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* How It Works - Stacked Dropdowns Fix */
-    .how-it-works {
-      text-align: center;
-      background: var(--bg);
-    }
-
-    .how-it-works h2 {
-      text-align: center;
-      margin-bottom: 60px;
-      color: var(--text);
-    }
-
-    .steps {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .step {
-      width: 100%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .step .number {
-      width: 56px;
-      height: 56px;
-      background: transparent;
-      color: var(--accent-lime);
-      border: 2px solid var(--accent-lime);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 20px;
-      margin: 0 auto 16px;
-      box-shadow: 0 0 20px rgba(199, 244, 100, 0.3);
-    }
-
-    .step h4 {
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-
-    /* Collapsible Details */
-    .step details {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: left;
-      margin-top: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .step details:hover {
-      border-color: rgba(199, 244, 100, 0.3);
-    }
-
-    .step details[open] {
-      border-color: var(--accent-lime);
-      box-shadow: 0 4px 20px rgba(199, 244, 100, 0.15);
-    }
-
-    .step summary {
-      font-weight: 600;
-      color: var(--accent-lime);
-      cursor: pointer;
-      list-style: none;
-      font-size: 14px;
-      padding: 4px 0;
-    }
-
-    .step summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .step summary::after {
-      content: " +";
-      float: right;
-      font-weight: 700;
-      transition: transform 0.2s ease;
-    }
-
-    .step details[open] summary::after {
-      content: " −";
-      transform: rotate(0deg);
-    }
-
-    .step .detail-content {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 768px) {
-      .steps {
-        gap: 32px;
-      }
-      .step details {
-        margin-top: 12px;
-      }
-    }
-
-    /* Final CTA */
-    .final-cta {
-      text-align: center;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
-    }
-
-    .final-cta h2 {
-      text-align: center;
-      margin-bottom: 16px;
-      color: var(--accent-teal);
-      text-shadow: 0 0 40px var(--button-glow);
-    }
-
-    .final-cta .sub {
-      font-size: 20px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
-
-    .final-cta .buttons {
-      display: flex;
-      justify-content: center;
-    }
-
-    /* Footer */
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--surface);
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
-      background: var(--bg);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 80px 0 60px;
-      }
-
-      section {
-        padding: 60px 0;
-      }
-
-      .hero .buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .modules-progression {
-        font-size: 14px;
-        letter-spacing: 1px;
-        white-space: nowrap;
-        overflow-x: auto;
-        padding: 0 10px;
-      }
-
-      .payment-grid {
-        gap: 16px;
-      }
-
-      .payment-method {
-        padding: 12px 16px;
-        min-width: 120px;
-      }
-
-      .btn-book {
-        padding: 10px 16px;
-        font-size: 12px;
-      }
-    }
-
-    /* Demo Sites Section */
-    .demo-sites {
-      background: var(--surface);
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 32px;
-      margin-top: 48px;
-    }
-
-    .demo-card {
-      background: var(--bg);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--surface);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: block;
-    }
-
-    .demo-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 16px 48px rgba(45, 226, 230, 0.15);
-    }
-
-    .demo-preview {
-      aspect-ratio: 16/10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .demo-icon {
-      font-size: 48px;
-    }
-
-    .demo-info {
-      padding: 24px;
-    }
-
-    .demo-info h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .demo-info p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .demo-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      background: rgba(45, 226, 230, 0.1);
-      color: var(--accent-cyan);
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 100px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwnYourWeb - Professional Websites That Belong To You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0a0a0a;
+            --black-light: #111;
+            --grey: #1a1a1a;
+            --grey-border: #2a2a2a;
+            --blue: #00c8ff;
+            --blue-dim: rgba(0, 200, 255, 0.15);
+            --white: #ffffff;
+            --soft: #ccc;
+            --muted: #888;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--grey-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.6s ease;
+        }
+
+        .nav-logo {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover { background: var(--blue-dim); }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 3rem 1.25rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            background: var(--blue-dim);
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            border-radius: 20px;
+            font-size: 0.6rem;
+            color: var(--blue);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeDown 0.7s ease 0.1s both;
+        }
+
+        .hero h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.6rem;
+            animation: fadeDown 0.7s ease 0.2s both;
+        }
+
+        .hero h1 span { color: var(--blue); }
+
+        .hero p {
+            font-size: 0.85rem;
+            color: var(--soft);
+            max-width: 420px;
+            margin: 0 auto;
+            line-height: 1.5;
+            animation: fadeDown 0.7s ease 0.3s both;
+        }
+
+        /* ===== VALUE PROPS ===== */
+        .value-section {
+            padding: 2.5rem 1.25rem;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            padding: 1.25rem;
+            background: var(--black-light);
+            border: 1px solid var(--grey-border);
+            border-radius: 12px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .value-card.visible { animation: fadeUp 0.5s ease forwards; }
+
+        .value-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+        .value-card h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .value-card p {
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        /* ===== FORM ===== */
+        .form-section {
+            padding: 2.5rem 1.25rem;
+            background: var(--black-light);
+            border-top: 1px solid var(--grey-border);
+        }
+
+        .form-wrap {
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .form-heading {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-heading h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-heading p {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .form-group {
+            margin-bottom: 0.85rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #aaa;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            background: var(--black);
+            border: 1px solid var(--grey-border);
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.08);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: #555; }
+
+        .form-group textarea { resize: vertical; min-height: 70px; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--blue);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.25rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.2);
+        }
+
+        .submit-btn:active { transform: scale(0.98); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .form-note {
+            font-size: 0.62rem;
+            color: #555;
+            text-align: center;
+            margin-top: 0.85rem;
+        }
+
+        /* Success */
+        .message-box {
+            display: none;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: var(--black);
+            border: 1px solid var(--blue);
+            border-radius: 14px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .message-box.show { display: block; animation: fadeUp 0.5s ease; }
+        .signup-form.hide { display: none; }
+        .message-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            padding: 2.5rem 1.25rem;
+            border-top: 1px solid var(--grey-border);
+        }
+
+        .how-label {
+            color: var(--blue);
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 0.35rem;
+        }
+
+        .how-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .step {
+            width: 100%;
+            padding: 1.15rem;
+            background: var(--black-light);
+            border: 1px solid var(--grey-border);
+            border-radius: 12px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .step.visible { animation: stepIn 0.5s ease forwards; }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--blue-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--blue);
+            margin: 0 auto 0.5rem;
+        }
+
+        .step h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .step p {
+            font-size: 0.72rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .step-arrow {
+            color: var(--blue);
+            font-size: 1rem;
+            padding: 0.2rem 0;
+            opacity: 0;
+        }
+
+        .step-arrow.visible { animation: arrowIn 0.3s ease forwards; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            font-size: 0.62rem;
+            color: #555;
+            border-top: 1px solid var(--grey-border);
+        }
+
+        .footer a { color: var(--blue); text-decoration: none; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes stepIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes arrowIn { to { opacity: 1; } }
+
+        /* ===== DESKTOP ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2rem; }
+            .value-grid { grid-template-columns: repeat(3, 1fr); max-width: 700px; }
+            .form-wrap { max-width: 500px; }
+            .steps { flex-direction: row; gap: 1rem; max-width: 700px; }
+            .step { flex: 1; }
+            .step-arrow { display: none; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <div class="logo">OwnYourWeb</div>
-      <div style="display: flex; gap: 16px; align-items: center;">
-        <a href="#contact" class="btn-book">Email Us</a>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>A Professional Website That Belongs To You.</h1>
-      <p class="tagline">Stop running your business from DMs.<br>Professional presence.<br>Organized systems.<br>Built for growth.</p>
-      <div class="buttons">
-        <a href="#contact" class="btn btn-primary">Get Started</a>
-        <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
-      </div>
-    </div>
-  </section>
+    <nav class="nav">
+        <div class="nav-logo">OwnYourWeb</div>
+        <a href="https://innergclaw.github.io/dashboard/" class="nav-link">Dashboard</a>
+    </nav>
 
-  <!-- Problem -->
-  <section class="problem">
-    <div class="container">
-      <h2>Stop running your business from DMs.</h2>
-      <p class="copy">
-        You're building your business on rented platforms.<br>
-        Instagram accounts get locked. Rules change overnight. Your audience is never truly yours.<br>
-        Chaos is the default. Systems are the exception.
-        <br><br>
-        <strong style="color: var(--accent-teal);">Your website should work for you.</strong><br>
-        <strong style="color: var(--accent-teal);">Not against you.</strong>
-      </p>
-    </div>
-  </section>
+    <section class="hero">
+        <div class="hero-badge">Your Website. Your Rules.</div>
+        <h1>Professional Websites That <span>Belong To You</span></h1>
+        <p>Stop renting platforms. Start owning your web presence. Custom-built sites that you actually control.</p>
+    </section>
 
-  <!-- Solution -->
-  <section class="solution">
-    <div class="container">
-      <h2>Your Website. Fully Owned.</h2>
-      <ul>
-        <li>Professional website — 1 to 5 sections of your choice</li>
-        <li>Secure hosting — fully owned by you ( with domain )</li>
-        <li>Business automation email — professional image ( optional )</li>
-        <li>Security — protected and backed up data</li>
-        <li>Documentation — you control everything that flows in</li>
-      </ul>
-      <p style="margin-top: 32px; padding: 24px; background: var(--surface); border-radius: 12px; border: 1px solid var(--accent-amber); box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);">
-        <strong style="color: var(--accent-amber);">A website that actually works for you.</strong><br>
-        <strong style="color: var(--accent-amber);">Built for businesses that want to grow.</strong>
-      </p>
-    </div>
-  </section>
-
-  <!-- Portfolio Showcase -->
-  <section class="showcase" style="background: var(--surface); padding: 80px 0; text-align: center;">
-    <div class="container">
-      <h2 style="margin-bottom: 40px; color: var(--accent-cyan);">Recent Work</h2>
-      <img src="hooked-mockup.jpg" alt="Hooked Seafood - Mobile Landing Page Preview" style="max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">
-      <p style="margin-top: 24px; color: var(--text-muted); font-size: 14px;">Hooked Seafood — Mobile landing page with CashDrop integration</p>
-    </div>
-  </section>
-
-  <!-- How It Works -->
-  <section class="how-it-works" id="how-it-works">
-    <div class="container">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="number">1</div>
-          <h4>Strategy Call</h4>
-          <details>
-            <summary>Expand</summary>
-            <div class="detail-content">
-              We define your goals, audience, and technical needs. This is where we decide what you actually need to own — and what you don't.
+    <section class="value-section">
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="icon">🏠</div>
+                <h3>You Own It</h3>
+                <p>Full ownership of your site, domain, and hosting. No platform lock-in, no surprise fees</p>
             </div>
-          </details>
-        </div>
-        <div class="step">
-          <div class="number">2</div>
-          <h4>System Design</h4>
-          <details>
-            <summary>Expand</summary>
-            <div class="detail-content">
-              We map your site architecture, hosting environment, and automation layers. Everything is planned before a single line is deployed.
+            <div class="value-card">
+                <div class="icon">⚡</div>
+                <h3>Built Fast</h3>
+                <p>Professional sites delivered in days, not weeks. Clean design that works on every device</p>
             </div>
-          </details>
-        </div>
-        <div class="step">
-          <div class="number">3</div>
-          <h4>Build + Deploy</h4>
-          <details>
-            <summary>Expand</summary>
-            <div class="detail-content">
-              Your website is developed, configured, secured, and deployed in a controlled hosting environment. Tested for performance and stability.
+            <div class="value-card">
+                <div class="icon">🔧</div>
+                <h3>Always Yours</h3>
+                <p>We hand you the keys. Your site, your code, your hosting. Make changes whenever you want</p>
             </div>
-          </details>
         </div>
-        <div class="step">
-          <div class="number">4</div>
-          <h4>Ownership Handoff</h4>
-          <details>
-            <summary>Expand</summary>
-            <div class="detail-content">
-              You receive full access, documentation, and control. No lock-in. No dependency. Your system belongs to you.
+    </section>
+
+    <section class="form-section">
+        <div class="form-wrap">
+            <div class="form-heading">
+                <h2>Get Started</h2>
+                <p>Tell us about your project and we'll make it happen</p>
             </div>
-          </details>
+            <div class="signup-form" id="signupForm">
+                <form id="leadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" name="business" placeholder="Your company or project">
+                    </div>
+                    <div class="form-group">
+                        <label>Current Website (optional)</label>
+                        <input type="url" name="website" placeholder="https://yourcurrentsite.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Tell us about your project</label>
+                        <textarea name="message" placeholder="What are you building? What do you need?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Get Started</button>
+                </form>
+                <div class="form-note">We'll respond within 24 hours. No spam, no pressure.</div>
+            </div>
+            <div class="message-box" id="messageBox">
+                <div class="message-icon">✓</div>
+                <h2 id="messageTitle">Submitted</h2>
+                <p id="messageText" style="color: var(--muted); font-size: 0.85rem;"></p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Final CTA -->
-  <section class="final-cta" id="contact">
-    <div class="container">
-      <h2>A Website That Actually Works For You.</h2>
-      <p class="sub">Professional presence. Organized systems. Built for growth.</p>
-      <div class="buttons">
-        <a href="https://cal.com/ownyourwebsystems/15min" class="btn btn-primary" target="_blank">Book Your Call</a>
-        <a href="signup.html" class="btn btn-secondary">Email Us</a>
-      </div>
-    </div>
-  </section>
+    <section class="how-section">
+        <div class="how-label">Simple Process</div>
+        <div class="how-title">How It Works</div>
+        <div class="steps" id="stepsContainer">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Tell Us</h3>
+                <p>Share your vision, business type, and what you need in a website</p>
+            </div>
+            <div class="step-arrow">↓</div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>We Build</h3>
+                <p>Custom design and development tailored to your brand and goals</p>
+            </div>
+            <div class="step-arrow">↓</div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>You Own It</h3>
+                <p>Full ownership of your site, domain, and hosting. No platform lock-in</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contact Form Section -->
-  <section class="contact-section" id="contact" style="background: var(--surface); padding: 80px 0;">
-    <div class="container" style="max-width: 600px;">
-      <h2 style="text-align: center; margin-bottom: 16px;">Get Your Website</h2>
-      <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">Tell us about your project. We'll reach out within 24 hours.</p>
-      
-      <form action="https://formspree.io/f/mreaqkdr" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
-        <div>
-          <label for="name" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Your Name</label>
-          <input type="text" id="name" name="name" required style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
-        </div>
-        
-        <div>
-          <label for="email" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Email Address</label>
-          <input type="email" id="email" name="email" required style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
-        </div>
-        
-        <div>
-          <label for="business" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Business Name</label>
-          <input type="text" id="business" name="business" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit;">
-        </div>
-        
-        <div>
-          <label for="interest" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">What do you need?</label>
-          <select id="interest" name="interest" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit; cursor: pointer;">
-            <option value="">Select an option</option>
-            <option value="new-website">New website</option>
-            <option value="redesign">Website redesign</option>
-            <option value="automation">Automation & systems</option>
-            <option value="other">Other / Not sure</option>
-          </select>
-        </div>
-        
-        <div>
-          <label for="message" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted);">Tell us about your project</label>
-          <textarea id="message" name="message" rows="4" style="width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--surface); border-radius: 8px; color: var(--text); font-size: 16px; font-family: inherit; resize: vertical;"></textarea>
-        </div>
-        
-        <button type="submit" style="padding: 16px 32px; background: var(--accent-teal); color: #000; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Send Message</button>
-      </form>
-    </div>
-  </section>
+    <footer class="footer">
+        <a href="https://nasirr.innergintel.org">Built by Nasirr Mayo</a> · OwnYourWeb Systems · InnerG Intel
+    </footer>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 OwnYourWeb Systems — Professional Websites That Belong To You</p>
-      <p style="margin-top: 12px; color: var(--text-muted); font-size: 14px;">
-        Powered by <a href="https://innergclaw.github.io/innerg-intelligence-landing/" target="_blank" style="color: var(--text-muted);">InnerG Intelligence</a>
-      </p>
-      <div style="margin-top: 24px;">
-        <a href="#contact" class="btn-book">Email Us</a>
-      </div>
-    </div>
-  </footer>
+    <script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = (i * 0.15) + 's';
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.step, .step-arrow, .value-card').forEach(el => observer.observe(el));
+
+        // Form
+        const CONFIG = {
+            formEndpoint: 'https://formspree.io/f/xqedpvon',
+            email: 'ownyourwebsystems@agentmail.to',
+            apiKey: 'am_2bc02a6e70fc084a260fce1128dbc58559b5c0401fc064c0ab883d6e999809ff'
+        };
+
+        const signupForm = document.getElementById('signupForm');
+        const messageBox = document.getElementById('messageBox');
+        const messageTitle = document.getElementById('messageTitle');
+        const messageText = document.getElementById('messageText');
+        const submitBtn = document.getElementById('submitBtn');
+
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const formData = new FormData(signupForm);
+                formData.append('_replyto', CONFIG.email);
+
+                const headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                };
+
+                if (CONFIG.apiKey) {
+                    headers['Authorization'] = 'Basic ' + btoa(CONFIG.apiKey + ':');
+                }
+
+                const response = await fetch(CONFIG.formEndpoint, {
+                    method: 'POST',
+                    headers: headers,
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    signupForm.classList.add('hide');
+                    messageBox.classList.add('show');
+                    messageTitle.textContent = 'Submitted ✓';
+                    messageText.textContent = "We've received your info and will be in touch within 24 hours.";
+                    signupForm.reset();
+                } else {
+                    throw new Error(data.error || 'Submission failed');
+                }
+            } catch (error) {
+                submitBtn.textContent = 'Get Started';
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
 </body>
 </html>
