@@ -10,22 +10,10 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --black: #0a0a0a;
-            --black-light: #111;
-            --grey: #1a1a1a;
-            --grey-border: #2a2a2a;
-            --blue: #00c8ff;
-            --blue-dim: rgba(0, 200, 255, 0.15);
-            --white: #ffffff;
-            --soft: #ccc;
-            --muted: #888;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--black);
-            color: var(--white);
+            background: #ffffff;
+            color: #1a1a1a;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -36,11 +24,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--grey-border);
+            border-bottom: 1px solid #e9ecef;
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             animation: slideDown 0.6s ease;
         }
@@ -48,22 +36,22 @@
         .nav-logo {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--blue);
+            color: #0088cc;
             letter-spacing: -0.5px;
         }
 
         .nav-link {
-            color: var(--blue);
+            color: #0088cc;
             text-decoration: none;
             font-size: 0.75rem;
             font-weight: 600;
-            border: 1px solid rgba(0, 200, 255, 0.3);
+            border: 1px solid rgba(0, 136, 204, 0.3);
             padding: 0.35rem 0.7rem;
             border-radius: 6px;
             transition: all 0.3s;
         }
 
-        .nav-link:hover { background: var(--blue-dim); }
+        .nav-link:hover { background: rgba(0, 136, 204, 0.08); }
 
         /* ===== HERO ===== */
         .hero {
@@ -74,11 +62,11 @@
         .hero-badge {
             display: inline-block;
             padding: 0.3rem 0.7rem;
-            background: var(--blue-dim);
-            border: 1px solid rgba(0, 200, 255, 0.25);
+            background: rgba(0, 136, 204, 0.08);
+            border: 1px solid rgba(0, 136, 204, 0.2);
             border-radius: 20px;
             font-size: 0.6rem;
-            color: var(--blue);
+            color: #0088cc;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -91,14 +79,15 @@
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 0.6rem;
+            color: #1a1a1a;
             animation: fadeDown 0.7s ease 0.2s both;
         }
 
-        .hero h1 span { color: var(--blue); }
+        .hero h1 span { color: #0088cc; }
 
         .hero p {
             font-size: 0.85rem;
-            color: var(--soft);
+            color: #6c757d;
             max-width: 420px;
             margin: 0 auto;
             line-height: 1.5;
@@ -106,9 +95,7 @@
         }
 
         /* ===== VALUE PROPS ===== */
-        .value-section {
-            padding: 2.5rem 1.25rem;
-        }
+        .value-section { padding: 2.5rem 1.25rem; }
 
         .value-grid {
             display: grid;
@@ -120,8 +107,8 @@
 
         .value-card {
             padding: 1.25rem;
-            background: var(--black-light);
-            border: 1px solid var(--grey-border);
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 12px;
             text-align: center;
             opacity: 0;
@@ -131,56 +118,29 @@
         .value-card.visible { animation: fadeUp 0.5s ease forwards; }
 
         .value-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-
-        .value-card h3 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .value-card p {
-            font-size: 0.75rem;
-            color: var(--muted);
-            line-height: 1.4;
-        }
+        .value-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem; color: #1a1a1a; }
+        .value-card p { font-size: 0.75rem; color: #6c757d; line-height: 1.4; }
 
         /* ===== FORM ===== */
         .form-section {
             padding: 2.5rem 1.25rem;
-            background: var(--black-light);
-            border-top: 1px solid var(--grey-border);
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
         }
 
-        .form-wrap {
-            max-width: 440px;
-            margin: 0 auto;
-        }
+        .form-wrap { max-width: 440px; margin: 0 auto; }
 
-        .form-heading {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
+        .form-heading { text-align: center; margin-bottom: 1.5rem; }
+        .form-heading h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; color: #1a1a1a; }
+        .form-heading p { font-size: 0.78rem; color: #6c757d; }
 
-        .form-heading h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .form-heading p {
-            font-size: 0.78rem;
-            color: var(--muted);
-        }
-
-        .form-group {
-            margin-bottom: 0.85rem;
-        }
+        .form-group { margin-bottom: 0.85rem; }
 
         .form-group label {
             display: block;
             font-size: 0.72rem;
             font-weight: 600;
-            color: #aaa;
+            color: #495057;
             margin-bottom: 0.3rem;
         }
 
@@ -188,10 +148,10 @@
         .form-group textarea {
             width: 100%;
             padding: 0.7rem 0.9rem;
-            background: var(--black);
-            border: 1px solid var(--grey-border);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
             border-radius: 10px;
-            color: var(--white);
+            color: #1a1a1a;
             font-size: 0.85rem;
             font-family: 'Inter', sans-serif;
             outline: none;
@@ -200,26 +160,22 @@
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.08);
+            border-color: #0088cc;
+            box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.08);
         }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder { color: #555; }
+        .form-group textarea::placeholder { color: #adb5bd; }
 
         .form-group textarea { resize: vertical; min-height: 70px; }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
         .submit-btn {
             width: 100%;
             padding: 0.8rem;
-            background: var(--blue);
-            color: #000;
+            background: #0088cc;
+            color: #fff;
             border: none;
             border-radius: 10px;
             font-size: 0.88rem;
@@ -230,28 +186,18 @@
             margin-top: 0.25rem;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.2);
-        }
-
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 136, 204, 0.25); }
         .submit-btn:active { transform: scale(0.98); }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        .form-note {
-            font-size: 0.62rem;
-            color: #555;
-            text-align: center;
-            margin-top: 0.85rem;
-        }
+        .form-note { font-size: 0.62rem; color: #adb5bd; text-align: center; margin-top: 0.85rem; }
 
-        /* Success */
         .message-box {
             display: none;
             text-align: center;
             padding: 2.5rem 1.5rem;
-            background: var(--black);
-            border: 1px solid var(--blue);
+            background: #ffffff;
+            border: 1px solid #0088cc;
             border-radius: 14px;
             max-width: 440px;
             margin: 0 auto;
@@ -262,13 +208,10 @@
         .message-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
 
         /* ===== HOW IT WORKS ===== */
-        .how-section {
-            padding: 2.5rem 1.25rem;
-            border-top: 1px solid var(--grey-border);
-        }
+        .how-section { padding: 2.5rem 1.25rem; border-top: 1px solid #e9ecef; }
 
         .how-label {
-            color: var(--blue);
+            color: #0088cc;
             font-size: 0.62rem;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -276,12 +219,7 @@
             margin-bottom: 0.35rem;
         }
 
-        .how-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1.75rem;
-        }
+        .how-title { font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 1.75rem; color: #1a1a1a; }
 
         .steps {
             display: flex;
@@ -295,8 +233,8 @@
         .step {
             width: 100%;
             padding: 1.15rem;
-            background: var(--black-light);
-            border: 1px solid var(--grey-border);
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 12px;
             text-align: center;
             opacity: 0;
@@ -308,36 +246,21 @@
         .step-num {
             width: 32px;
             height: 32px;
-            background: var(--blue-dim);
+            background: rgba(0, 136, 204, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 0.8rem;
-            color: var(--blue);
+            color: #0088cc;
             margin: 0 auto 0.5rem;
         }
 
-        .step h3 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
+        .step h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a1a1a; }
+        .step p { font-size: 0.72rem; color: #6c757d; line-height: 1.4; }
 
-        .step p {
-            font-size: 0.72rem;
-            color: var(--muted);
-            line-height: 1.4;
-        }
-
-        .step-arrow {
-            color: var(--blue);
-            font-size: 1rem;
-            padding: 0.2rem 0;
-            opacity: 0;
-        }
-
+        .step-arrow { color: #0088cc; font-size: 1rem; padding: 0.2rem 0; opacity: 0; }
         .step-arrow.visible { animation: arrowIn 0.3s ease forwards; }
 
         /* ===== FOOTER ===== */
@@ -345,31 +268,17 @@
             padding: 1.5rem 1.25rem;
             text-align: center;
             font-size: 0.62rem;
-            color: #555;
-            border-top: 1px solid var(--grey-border);
+            color: #adb5bd;
+            border-top: 1px solid #e9ecef;
         }
 
-        .footer a { color: var(--blue); text-decoration: none; }
+        .footer a { color: #0088cc; text-decoration: none; }
 
         /* ===== ANIMATIONS ===== */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes stepIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes stepIn { to { opacity: 1; transform: translateY(0); } }
         @keyframes arrowIn { to { opacity: 1; } }
 
         /* ===== DESKTOP ===== */
@@ -454,7 +363,7 @@
             <div class="message-box" id="messageBox">
                 <div class="message-icon">✓</div>
                 <h2 id="messageTitle">Submitted</h2>
-                <p id="messageText" style="color: var(--muted); font-size: 0.85rem;"></p>
+                <p id="messageText" style="color: #6c757d; font-size: 0.85rem;"></p>
             </div>
         </div>
     </section>
@@ -488,7 +397,6 @@
     </footer>
 
     <script>
-        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
@@ -501,7 +409,6 @@
 
         document.querySelectorAll('.step, .step-arrow, .value-card').forEach(el => observer.observe(el));
 
-        // Form
         const CONFIG = {
             formEndpoint: 'https://formspree.io/f/xqedpvon',
             email: 'ownyourwebsystems@agentmail.to',
@@ -518,37 +425,20 @@
             e.preventDefault();
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
-
             try {
                 const formData = new FormData(signupForm);
                 formData.append('_replyto', CONFIG.email);
-
-                const headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
-                };
-
-                if (CONFIG.apiKey) {
-                    headers['Authorization'] = 'Basic ' + btoa(CONFIG.apiKey + ':');
-                }
-
-                const response = await fetch(CONFIG.formEndpoint, {
-                    method: 'POST',
-                    headers: headers,
-                    body: new URLSearchParams(formData).toString()
-                });
-
+                const headers = { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' };
+                if (CONFIG.apiKey) headers['Authorization'] = 'Basic ' + btoa(CONFIG.apiKey + ':');
+                const response = await fetch(CONFIG.formEndpoint, { method: 'POST', headers, body: new URLSearchParams(formData).toString() });
                 const data = await response.json();
-
                 if (data.ok) {
                     signupForm.classList.add('hide');
                     messageBox.classList.add('show');
                     messageTitle.textContent = 'Submitted ✓';
                     messageText.textContent = "We've received your info and will be in touch within 24 hours.";
                     signupForm.reset();
-                } else {
-                    throw new Error(data.error || 'Submission failed');
-                }
+                } else { throw new Error(data.error || 'Submission failed'); }
             } catch (error) {
                 submitBtn.textContent = 'Get Started';
                 submitBtn.disabled = false;
