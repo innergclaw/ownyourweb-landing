@@ -34,12 +34,9 @@
             transition: box-shadow 0.3s;
         }
         .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
-        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-        .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1.45rem; color: var(--primary-dark); letter-spacing: 0.2px; }
-        .nav-logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 12px; position: relative; flex-shrink: 0; }
-        .nav-logo-icon::before, .nav-logo-icon::after { content: ''; position: absolute; background: rgba(255,255,255,0.92); border-radius: 999px; }
-        .nav-logo-icon::before { width: 10px; height: 22px; left: 14px; top: 9px; transform: rotate(-28deg); }
-        .nav-logo-icon::after { width: 10px; height: 22px; right: 14px; top: 9px; transform: rotate(28deg); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 104px; padding: 0.9rem 0; }
+        .nav-logo { display: flex; align-items: center; gap: 0.9rem; font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1.45rem; color: var(--primary-dark); letter-spacing: 0.2px; }
+        .nav-logo img { width: 220px; max-width: min(50vw, 220px); height: auto; display: block; }
         .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
         .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text); transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary); }
@@ -317,7 +314,7 @@
         @media (max-width: 480px) {
             .nav-inner { height: 68px; }
             .nav-logo { font-size: 1rem; }
-            .nav-logo-icon { width: 34px; height: 34px; }
+            .nav-logo img { width: 170px; max-width: 58vw; }
             .hero h1 { font-size: 2.15rem; }
             .hero p { font-size: 1rem; }
             .hero-image-main, .about-image, .special-image { height: 260px; border-radius: 20px; }
@@ -334,9 +331,8 @@
 
     <nav class="navbar" id="navbar">
         <div class="container nav-inner">
-            <a href="#" class="nav-logo">
-                <div class="nav-logo-icon" aria-hidden="true"></div>
-                Little Sprouts
+            <a href="#" class="nav-logo" aria-label="Little Sprouts Learning Center home">
+                <img src="little-sprouts-logo.jpg" alt="Little Sprouts Learning Center logo">
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
