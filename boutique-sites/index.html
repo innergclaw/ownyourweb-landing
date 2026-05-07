@@ -326,6 +326,7 @@
     }
 
     .fallback-bag {
+      display: none;
       position: absolute;
       width: 128px;
       height: 172px;
@@ -888,7 +889,7 @@
           <div class="showcase-ui">
             <div class="showcase-copy">
               <small>Interactive Product Focus</small>
-              <strong id="sceneLabel">Signature Drop</strong>
+              <strong id="sceneLabel">Sneaker Drop</strong>
             </div>
             <div class="scene-buttons" aria-label="Showcase controls">
               <button type="button" data-scene="0">1</button>
@@ -1067,33 +1068,105 @@
     scene.add(group);
 
     const palette = [
-      { name: "Signature Drop", color: 0xc8ff2e, accent: 0xff4f32 },
-      { name: "Limited Capsule", color: 0xf6d8dd, accent: 0xffb000 },
-      { name: "Evening Edit", color: 0x31d8ff, accent: 0x0d0d0d }
+      { name: "Sneaker Drop", color: 0xc8ff2e, accent: 0xff4f32 },
+      { name: "Shirt Collection", color: 0x31d8ff, accent: 0x0d0d0d },
+      { name: "Hair Care Line", color: 0xf6d8dd, accent: 0xffb000 }
     ];
 
     let sceneIndex = 0;
     let targetRotation = 0;
 
-    function makeProduct(x, y, z, scale, color, accent) {
+    function makeSneaker(x, y, z, scale, color, accent) {
       const product = new THREE.Group();
-      const body = new THREE.Mesh(
-        new THREE.BoxGeometry(1.05, 1.38, .42),
-        new THREE.MeshStandardMaterial({ color, roughness: .32, metalness: .22 })
+      const sole = new THREE.Mesh(
+        new THREE.BoxGeometry(1.72, .24, .58),
+        new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .42, metalness: .08 })
       );
-      const band = new THREE.Mesh(
-        new THREE.BoxGeometry(1.12, .18, .46),
+      const upper = new THREE.Mesh(
+        new THREE.BoxGeometry(1.08, .46, .54),
+        new THREE.MeshStandardMaterial({ color, roughness: .34, metalness: .18 })
+      );
+      upper.position.set(-.18, .24, 0);
+      upper.rotation.z = -.18;
+      const heel = new THREE.Mesh(
+        new THREE.BoxGeometry(.42, .72, .54),
         new THREE.MeshStandardMaterial({ color: accent, roughness: .28, metalness: .34 })
       );
-      band.position.y = -.28;
-      const handle = new THREE.Mesh(
-        new THREE.TorusGeometry(.36, .035, 16, 80, Math.PI),
+      heel.position.set(-.72, .36, 0);
+      const toe = new THREE.Mesh(
+        new THREE.CapsuleGeometry(.28, .38, 12, 24),
+        new THREE.MeshStandardMaterial({ color, roughness: .36, metalness: .15 })
+      );
+      toe.rotation.z = Math.PI / 2;
+      toe.position.set(.72, .2, 0);
+      const laceMaterial = new THREE.MeshStandardMaterial({ color: 0x191919, roughness: .45, metalness: .08 });
+      for (let i = 0; i < 4; i += 1) {
+        const lace = new THREE.Mesh(new THREE.BoxGeometry(.34, .035, .04), laceMaterial);
+        lace.position.set(-.16 + i * .14, .52, .28);
+        lace.rotation.z = .32;
+        product.add(lace);
+      }
+      product.add(sole, upper, heel, toe);
+      product.position.set(x, y, z);
+      product.scale.setScalar(scale);
+      return product;
+    }
+
+    function makeShirt(x, y, z, scale, color, accent) {
+      const product = new THREE.Group();
+      const cloth = new THREE.MeshStandardMaterial({ color, roughness: .5, metalness: .05 });
+      const body = new THREE.Mesh(new THREE.BoxGeometry(.98, 1.18, .16), cloth);
+      body.position.y = -.08;
+      const leftSleeve = new THREE.Mesh(new THREE.BoxGeometry(.42, .52, .15), cloth);
+      leftSleeve.position.set(-.62, .26, 0);
+      leftSleeve.rotation.z = -.34;
+      const rightSleeve = leftSleeve.clone();
+      rightSleeve.position.x = .62;
+      rightSleeve.rotation.z = .34;
+      const collar = new THREE.Mesh(
+        new THREE.TorusGeometry(.21, .035, 10, 36, Math.PI),
         new THREE.MeshStandardMaterial({ color: 0x191919, roughness: .35, metalness: .45 })
       );
-      handle.rotation.z = Math.PI;
-      handle.position.y = .78;
-      handle.position.z = .03;
-      product.add(body, band, handle);
+      collar.rotation.x = Math.PI;
+      collar.position.y = .52;
+      const stripe = new THREE.Mesh(
+        new THREE.BoxGeometry(1.04, .16, .18),
+        new THREE.MeshStandardMaterial({ color: accent, roughness: .32, metalness: .18 })
+      );
+      stripe.position.y = -.28;
+      product.add(body, leftSleeve, rightSleeve, collar, stripe);
+      product.position.set(x, y, z);
+      product.scale.setScalar(scale);
+      return product;
+    }
+
+    function makeHairProducts(x, y, z, scale, color, accent) {
+      const product = new THREE.Group();
+      const bottle = new THREE.Mesh(
+        new THREE.CylinderGeometry(.26, .32, 1.22, 32),
+        new THREE.MeshStandardMaterial({ color, roughness: .3, metalness: .18 })
+      );
+      const cap = new THREE.Mesh(
+        new THREE.CylinderGeometry(.2, .2, .18, 32),
+        new THREE.MeshStandardMaterial({ color: 0x191919, roughness: .28, metalness: .38 })
+      );
+      cap.position.y = .7;
+      const labelPlate = new THREE.Mesh(
+        new THREE.BoxGeometry(.56, .36, .025),
+        new THREE.MeshStandardMaterial({ color: accent, roughness: .36, metalness: .2 })
+      );
+      labelPlate.position.set(0, .03, .315);
+      const jar = new THREE.Mesh(
+        new THREE.CylinderGeometry(.38, .42, .42, 36),
+        new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .38, metalness: .12 })
+      );
+      jar.position.set(.58, -.38, .04);
+      const jarTop = new THREE.Mesh(
+        new THREE.CylinderGeometry(.42, .42, .12, 36),
+        new THREE.MeshStandardMaterial({ color: accent, roughness: .28, metalness: .34 })
+      );
+      jarTop.position.set(.58, -.11, .04);
+      product.add(bottle, cap, labelPlate, jar, jarTop);
       product.position.set(x, y, z);
       product.scale.setScalar(scale);
       return product;
@@ -1104,9 +1177,16 @@
       label.textContent = palette[index].name;
       group.clear();
       const item = palette[index];
-      group.add(makeProduct(-1.15, -.18, 0, 1.08, item.color, item.accent));
-      group.add(makeProduct(.95, -.32, -.35, .88, item.accent, item.color));
-      group.add(makeProduct(.18, .38, -.72, .58, 0xffffff, item.color));
+      if (index === 0) {
+        group.add(makeSneaker(-.72, -.18, 0, 1.05, item.color, item.accent));
+        group.add(makeSneaker(.76, -.34, -.42, .82, item.accent, item.color));
+      } else if (index === 1) {
+        group.add(makeShirt(-.72, -.08, 0, 1.12, item.color, item.accent));
+        group.add(makeShirt(.78, -.24, -.42, .9, 0xffffff, item.color));
+      } else {
+        group.add(makeHairProducts(-.58, -.14, 0, 1.08, item.color, item.accent));
+        group.add(makeHairProducts(.72, -.3, -.38, .82, item.accent, item.color));
+      }
       targetRotation += Math.PI * .7;
     }
 
