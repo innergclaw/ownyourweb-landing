@@ -862,11 +862,44 @@
       .topbar-inner {
         min-height: auto;
         padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .brand-text small,
-      .nav {
+      .brand-text small {
         display: none;
+      }
+
+      .nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 0 4px 8px 0;
+        scrollbar-width: none;
+      }
+
+      .nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav a {
+        min-height: 36px;
+        flex: 0 0 auto;
+        border: 2px solid var(--line);
+        background: var(--white);
+        padding: 0 10px;
+        font-size: .74rem;
+        box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .nav .nav-cta {
+        margin-left: 0;
+        background: var(--lime);
+        box-shadow: 3px 3px 0 var(--line);
       }
 
       h1 {
