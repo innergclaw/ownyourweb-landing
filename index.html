@@ -1,449 +1,1211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OwnYourWeb - Professional Websites That Belong To You</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OWNYOURWEB | Websites That Belong To You</title>
+  <meta name="description" content="OWNYOURWEB builds fast, owned websites for businesses, creators, and local brands. Custom sites, launch pages, funnels, and web systems inside the INNERGINTEL ECOSYSTEM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --graphite: #232323;
+      --muted: #686761;
+      --line: #191919;
+      --lime: #c8ff2e;
+      --amber: #ffb000;
+      --coral: #ff4f32;
+      --cyan: #31d8ff;
+      --shadow: 0 12px 0 rgba(13, 13, 13, .18);
+      --soft: 0 18px 60px rgba(13, 13, 13, .16);
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #1a1a1a;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    * { box-sizing: border-box; }
 
-        /* ===== NAV ===== */
-        .nav {
-            padding: 0.9rem 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e9ecef;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            animation: slideDown 0.6s ease;
-        }
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
 
-        .nav-logo {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #0088cc;
-            letter-spacing: -0.5px;
-        }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      overflow-x: hidden;
+    }
 
-        .nav-link {
-            color: #0088cc;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 136, 204, 0.3);
-            padding: 0.35rem 0.7rem;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
+    a { color: inherit; text-decoration: none; }
 
-        .nav-link:hover { background: rgba(0, 136, 204, 0.08); }
+    button,
+    input,
+    textarea,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* ===== HERO ===== */
-        .hero {
-            padding: 3rem 1.25rem 2rem;
-            text-align: center;
-        }
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 0.3rem 0.7rem;
-            background: rgba(0, 136, 204, 0.08);
-            border: 1px solid rgba(0, 136, 204, 0.2);
-            border-radius: 20px;
-            font-size: 0.6rem;
-            color: #0088cc;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            animation: fadeDown 0.7s ease 0.1s both;
-        }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 3px solid var(--line);
+      background: rgba(251, 250, 245, .92);
+      backdrop-filter: blur(14px);
+    }
 
-        .hero h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 0.6rem;
-            color: #1a1a1a;
-            animation: fadeDown 0.7s ease 0.2s both;
-        }
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
 
-        .hero h1 span { color: #0088cc; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 900;
+    }
 
-        .hero p {
-            font-size: 0.85rem;
-            color: #6c757d;
-            max-width: 420px;
-            margin: 0 auto;
-            line-height: 1.5;
-            animation: fadeDown 0.7s ease 0.3s both;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      box-shadow: 5px 5px 0 var(--lime);
+      flex: 0 0 auto;
+    }
 
-        /* ===== VALUE PROPS ===== */
-        .value-section { padding: 2.5rem 1.25rem; }
+    .brand-mark span:nth-child(1) { background: var(--lime); }
+    .brand-mark span:nth-child(2) { background: var(--amber); }
+    .brand-mark span:nth-child(3) { background: var(--coral); }
+    .brand-mark span:nth-child(4) { background: var(--cyan); }
 
-        .value-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+    .brand-text {
+      display: grid;
+      line-height: 1;
+    }
 
-        .value-card {
-            padding: 1.25rem;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+    .brand-text strong {
+      font-size: 1rem;
+      white-space: nowrap;
+    }
 
-        .value-card.visible { animation: fadeUp 0.5s ease forwards; }
+    .brand-text small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
 
-        .value-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .value-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem; color: #1a1a1a; }
-        .value-card p { font-size: 0.75rem; color: #6c757d; line-height: 1.4; }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-        /* ===== FORM ===== */
-        .form-section {
-            padding: 2.5rem 1.25rem;
-            background: #f8f9fa;
-            border-top: 1px solid #e9ecef;
-        }
+    .nav a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      border: 2px solid transparent;
+      padding: 0 10px;
+      font-size: .83rem;
+      font-weight: 800;
+      color: var(--graphite);
+    }
 
-        .form-wrap { max-width: 440px; margin: 0 auto; }
+    .nav a:hover,
+    .nav a:focus-visible {
+      border-color: var(--line);
+      background: var(--white);
+      outline: none;
+    }
 
-        .form-heading { text-align: center; margin-bottom: 1.5rem; }
-        .form-heading h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; color: #1a1a1a; }
-        .form-heading p { font-size: 0.78rem; color: #6c757d; }
+    .nav .nav-cta {
+      border-color: var(--line);
+      background: var(--lime);
+      box-shadow: 4px 4px 0 var(--line);
+      margin-left: 6px;
+      color: var(--ink);
+    }
 
-        .form-group { margin-bottom: 0.85rem; }
+    .hero {
+      overflow: hidden;
+      border-bottom: 3px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(200,255,46,.72) 0 24%, transparent 24% 100%),
+        linear-gradient(315deg, rgba(49,216,255,.26) 0 28%, transparent 28% 100%);
+    }
 
-        .form-group label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 0.3rem;
-        }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+      gap: 34px;
+      align-items: center;
+      padding: 54px 0 38px;
+      min-height: calc(100vh - 74px);
+      max-height: 880px;
+    }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.7rem 0.9rem;
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            color: #1a1a1a;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+    .hero-grid > * { min-width: 0; }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: #0088cc;
-            box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.08);
-        }
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 9px 12px;
+      box-shadow: 6px 6px 0 var(--line);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder { color: #adb5bd; }
+    .eyebrow::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      background: var(--coral);
+      border: 2px solid var(--line);
+    }
 
-        .form-group textarea { resize: vertical; min-height: 70px; }
+    h1,
+    h2,
+    h3 {
+      letter-spacing: 0;
+    }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(4rem, 10vw, 9.6rem);
+      line-height: .82;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
 
-        .submit-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background: #0088cc;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 0.25rem;
-        }
+    .hero-title-kicker {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--line);
+      text-stroke: 2px var(--line);
+    }
 
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 136, 204, 0.25); }
-        .submit-btn:active { transform: scale(0.98); }
-        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .lead {
+      max-width: 620px;
+      margin: 24px 0 0;
+      color: var(--graphite);
+      font-size: clamp(1rem, 1.8vw, 1.24rem);
+      line-height: 1.55;
+      font-weight: 650;
+    }
 
-        .form-note { font-size: 0.62rem; color: #adb5bd; text-align: center; margin-top: 0.85rem; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 30px;
+    }
 
-        .message-box {
-            display: none;
-            text-align: center;
-            padding: 2.5rem 1.5rem;
-            background: #ffffff;
-            border: 1px solid #0088cc;
-            border-radius: 14px;
-            max-width: 440px;
-            margin: 0 auto;
-        }
+    .btn {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 3px solid var(--line);
+      padding: 0 18px;
+      font-size: .95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 7px 7px 0 var(--line);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-        .message-box.show { display: block; animation: fadeUp 0.5s ease; }
-        .signup-form.hide { display: none; }
-        .message-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translate(3px, 3px);
+      box-shadow: 4px 4px 0 var(--line);
+      outline: none;
+    }
 
-        /* ===== HOW IT WORKS ===== */
-        .how-section { padding: 2.5rem 1.25rem; border-top: 1px solid #e9ecef; }
+    .btn.primary {
+      background: var(--ink);
+      color: var(--white);
+    }
 
-        .how-label {
-            color: #0088cc;
-            font-size: 0.62rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 0.35rem;
-        }
+    .btn.secondary {
+      background: var(--white);
+      color: var(--ink);
+    }
 
-        .how-title { font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 1.75rem; color: #1a1a1a; }
+    .value-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 3px solid var(--line);
+      margin-top: 34px;
+      max-width: 740px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
 
-        .steps {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+    .value-strip div {
+      padding: 14px 16px;
+      min-width: 0;
+    }
 
-        .step {
-            width: 100%;
-            padding: 1.15rem;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+    .value-strip div + div {
+      border-left: 3px solid var(--line);
+    }
 
-        .step.visible { animation: stepIn 0.5s ease forwards; }
+    .value-strip b {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
 
-        .step-num {
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 136, 204, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: #0088cc;
-            margin: 0 auto 0.5rem;
-        }
+    .value-strip span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
 
-        .step h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a1a1a; }
-        .step p { font-size: 0.72rem; color: #6c757d; line-height: 1.4; }
+    .site-wall {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
 
-        .step-arrow { color: #0088cc; font-size: 1rem; padding: 0.2rem 0; opacity: 0; }
-        .step-arrow.visible { animation: arrowIn 0.3s ease forwards; }
+    .browser-stack {
+      position: relative;
+      width: min(100%, 500px);
+      height: 560px;
+    }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            padding: 1.5rem 1.25rem;
-            text-align: center;
-            font-size: 0.62rem;
-            color: #adb5bd;
-            border-top: 1px solid #e9ecef;
-        }
+    .browser-card {
+      position: absolute;
+      border: 4px solid var(--line);
+      background: var(--white);
+      box-shadow: 12px 14px 0 rgba(13,13,13,.24);
+      overflow: hidden;
+    }
 
-        .footer a { color: #0088cc; text-decoration: none; }
+    .browser-main {
+      width: 365px;
+      min-height: 430px;
+      top: 42px;
+      right: 30px;
+      transform: rotate(4deg);
+      z-index: 3;
+    }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes stepIn { to { opacity: 1; transform: translateY(0); } }
-        @keyframes arrowIn { to { opacity: 1; } }
+    .browser-secondary {
+      width: 250px;
+      min-height: 310px;
+      left: 8px;
+      top: 120px;
+      transform: rotate(-8deg);
+      z-index: 2;
+    }
 
-        /* ===== DESKTOP ===== */
-        @media (min-width: 768px) {
-            .hero { padding: 4rem 2rem 3rem; }
-            .hero h1 { font-size: 2rem; }
-            .value-grid { grid-template-columns: repeat(3, 1fr); max-width: 700px; }
-            .form-wrap { max-width: 500px; }
-            .steps { flex-direction: row; gap: 1rem; max-width: 700px; }
-            .step { flex: 1; }
-            .step-arrow { display: none; }
-        }
-    </style>
+    .browser-top {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      height: 36px;
+      border-bottom: 3px solid var(--line);
+      background: var(--paper);
+      padding: 0 12px;
+    }
+
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--line);
+      background: var(--coral);
+    }
+
+    .browser-dot:nth-child(2) { background: var(--amber); }
+    .browser-dot:nth-child(3) { background: var(--cyan); }
+
+    .mock-hero {
+      padding: 26px;
+      background:
+        linear-gradient(135deg, var(--lime) 0 38%, transparent 38% 100%),
+        var(--ink);
+      color: var(--white);
+      min-height: 210px;
+    }
+
+    .mock-label {
+      width: fit-content;
+      border: 2px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      padding: 6px 8px;
+      font-size: .65rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .mock-title {
+      font-family: Anton, Impact, sans-serif;
+      font-size: 4.2rem;
+      line-height: .84;
+      text-transform: uppercase;
+    }
+
+    .mock-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .mock-block {
+      min-height: 88px;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 12px;
+    }
+
+    .mock-block strong {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 1.55rem;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .mock-block span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .browser-secondary .mock-hero {
+      min-height: 160px;
+      background:
+        linear-gradient(135deg, var(--coral) 0 44%, transparent 44% 100%),
+        var(--paper);
+      color: var(--ink);
+    }
+
+    .browser-secondary .mock-title {
+      font-size: 2.6rem;
+    }
+
+    .badge {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 128px;
+      height: 128px;
+      right: 0;
+      bottom: 104px;
+      border: 4px solid var(--line);
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 8px 8px 0 var(--line);
+      z-index: 6;
+      transform: rotate(9deg);
+      text-align: center;
+      font-weight: 1000;
+      text-transform: uppercase;
+      line-height: .95;
+      font-size: .92rem;
+    }
+
+    .section {
+      padding: 66px 0;
+      border-bottom: 3px solid var(--line);
+    }
+
+    .section.dark {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .section.amber {
+      background: var(--amber);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(2.4rem, 5.6vw, 5.2rem);
+      line-height: .9;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    .dark .section-head p {
+      color: rgba(255,255,255,.72);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service-card {
+      min-height: 214px;
+      border: 3px solid var(--line);
+      padding: 16px;
+      background: var(--white);
+      box-shadow: 7px 7px 0 var(--line);
+      display: grid;
+      align-content: space-between;
+    }
+
+    .service-card:nth-child(2) { background: var(--lime); }
+    .service-card:nth-child(3) { background: var(--cyan); }
+    .service-card:nth-child(4) { background: #ffe4d9; }
+
+    .service-card small {
+      font-weight: 950;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .service-card h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2rem;
+      line-height: .95;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .demo-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .demo-copy {
+      border: 3px solid var(--white);
+      padding: 26px;
+      display: grid;
+      align-content: space-between;
+      min-height: 430px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+    }
+
+    .demo-copy b {
+      display: block;
+      color: var(--lime);
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: .85;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .demo-copy p {
+      margin: 18px 0 0;
+      max-width: 48ch;
+      color: rgba(255,255,255,.76);
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .demo-image {
+      border: 3px solid var(--white);
+      background: var(--white);
+      min-height: 430px;
+      overflow: hidden;
+      box-shadow: 10px 10px 0 rgba(255,255,255,.22);
+    }
+
+    .demo-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      min-height: 260px;
+      padding: 22px;
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--white);
+      font-weight: 950;
+      margin-bottom: 36px;
+    }
+
+    .step h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2.3rem;
+      line-height: .92;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .step p {
+      margin: 14px 0 0;
+      color: var(--graphite);
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 520px);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .contact-panel,
+    .form-card {
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      font-size: clamp(3rem, 6vw, 6rem);
+    }
+
+    .contact-panel p {
+      max-width: 58ch;
+      margin: 18px 0 0;
+      color: var(--graphite);
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
+      border: 3px solid var(--line);
+      padding: 12px 14px;
+      background: var(--paper);
+      font-size: .85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .form-card {
+      background: var(--ink);
+      color: var(--white);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .form-card h3 {
+      margin: 0 0 16px;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 3rem;
+      line-height: .9;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,.78);
+      font-size: .74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 3px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      min-height: 48px;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 750;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 4px var(--lime);
+    }
+
+    .submit-btn {
+      width: calc(100% - 7px);
+      background: var(--lime);
+      color: var(--ink);
+      margin-top: 4px;
+      box-shadow: 7px 7px 0 var(--white);
+    }
+
+    .submit-btn:disabled {
+      opacity: .7;
+      cursor: wait;
+    }
+
+    .form-note {
+      margin: 16px 0 0;
+      color: rgba(255,255,255,.62);
+      font-size: .78rem;
+      line-height: 1.45;
+      font-weight: 650;
+      text-align: center;
+    }
+
+    .message-box {
+      display: none;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      color: var(--ink);
+      padding: 22px;
+      box-shadow: 7px 7px 0 var(--white);
+    }
+
+    .message-box.show {
+      display: block;
+    }
+
+    .signup-form.hide {
+      display: none;
+    }
+
+    .message-box h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2.6rem;
+      line-height: .9;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .message-box p {
+      margin: 12px 0 0;
+      color: var(--graphite);
+      line-height: 1.5;
+      font-weight: 750;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: var(--white);
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,.7);
+      font-size: .84rem;
+      font-weight: 750;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 1000;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      color: var(--ink);
+      box-shadow: 6px 6px 0 var(--line);
+      font-size: 1.35rem;
+      font-weight: 950;
+      line-height: 1;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .back-top:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-head,
+      .demo-panel,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        max-height: none;
+        padding-top: 34px;
+      }
+
+      .site-wall {
+        min-height: 500px;
+      }
+
+      .browser-stack {
+        height: 500px;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .topbar-inner {
+        min-height: auto;
+        padding: 12px 0;
+      }
+
+      .brand-text small,
+      .nav {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(2.9rem, 15vw, 4rem);
+        max-width: 100%;
+      }
+
+      .hero-title-kicker {
+        -webkit-text-stroke-width: 1px;
+        text-stroke-width: 1px;
+      }
+
+      .hero-actions .btn {
+        width: calc(100% - 8px);
+      }
+
+      .lead {
+        max-width: 34ch;
+      }
+
+      .value-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .value-strip div + div {
+        border-left: 0;
+        border-top: 3px solid var(--line);
+      }
+
+      .site-wall {
+        min-height: 420px;
+        overflow: hidden;
+        margin-top: 26px;
+      }
+
+      .browser-stack {
+        width: min(100%, 350px);
+        height: 420px;
+      }
+
+      .browser-main {
+        width: 248px;
+        right: -4px;
+        top: 36px;
+      }
+
+      .browser-secondary {
+        width: 172px;
+        left: -8px;
+        top: 138px;
+      }
+
+      .mock-title {
+        font-size: 3rem;
+      }
+
+      .browser-secondary .mock-title {
+        font-size: 2rem;
+      }
+
+      .badge {
+        display: none;
+      }
+
+      .service-grid,
+      .steps,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 46px 0;
+      }
+
+      .demo-copy,
+      .demo-image,
+      .step {
+        min-height: 210px;
+      }
+
+      .contact-panel,
+      .form-card {
+        padding: 20px;
+      }
+
+      .back-top {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="#top" aria-label="OWNYOURWEB">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="brand-text">
+            <strong>OWNYOURWEB</strong>
+            <small>part of the INNERGINTEL ECOSYSTEM</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="https://innergclaw.github.io/ownyourweb/products/flyer-templates/">Prompt Pack</a>
+          <a class="nav-cta" href="#start">Start</a>
+        </nav>
+      </div>
+    </header>
 
-    <nav class="nav">
-        <div class="nav-logo">OwnYourWeb</div>
-    </nav>
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <div class="eyebrow">Owned websites for real businesses</div>
+            <h1><span class="hero-title-kicker">Own</span><br>Your<br>Web</h1>
+            <p class="lead">Custom websites, launch pages, funnels, and web systems with the same bold OWNYOURWEB energy as the prompt pack: fast, useful, branded, and built so the business can actually move.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#start">Start A Website</a>
+              <a class="btn secondary" href="#work">See The Style</a>
+            </div>
+            <div class="value-strip" aria-label="Service highlights">
+              <div><b>Fast</b><span>launch-ready builds</span></div>
+              <div><b>Owned</b><span>your site, your system</span></div>
+              <div><b>Clear</b><span>designed to convert</span></div>
+            </div>
+          </div>
 
-    <section class="hero">
-        <div class="hero-badge">Your Website. Your Rules.</div>
-        <h1>Professional Websites That <span>Belong To You</span></h1>
-        <p>Stop renting platforms. Start owning your web presence. Custom-built sites that you actually control.</p>
-    </section>
-
-    <section class="value-section">
-        <div class="value-grid">
-            <div class="value-card">
-                <div class="icon">🏠</div>
-                <h3>You Own It</h3>
-                <p>Full ownership of your site, domain, and hosting. No platform lock-in, no surprise fees</p>
+          <div class="site-wall" aria-label="Website preview artwork">
+            <div class="browser-stack">
+              <article class="browser-card browser-main">
+                <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+                <div class="mock-hero">
+                  <div class="mock-label">Live brand page</div>
+                  <div class="mock-title">Book<br>Buy<br>Call</div>
+                </div>
+                <div class="mock-body">
+                  <div class="mock-block"><strong>Offer</strong><span>clear section</span></div>
+                  <div class="mock-block"><strong>Proof</strong><span>trust builder</span></div>
+                  <div class="mock-block"><strong>CTA</strong><span>easy action</span></div>
+                  <div class="mock-block"><strong>Flow</strong><span>mobile first</span></div>
+                </div>
+              </article>
+              <article class="browser-card browser-secondary" aria-hidden="true">
+                <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+                <div class="mock-hero">
+                  <div class="mock-label">Promo page</div>
+                  <div class="mock-title">Launch<br>Today</div>
+                </div>
+              </article>
+              <div class="badge">No<br>Platform<br>Lock-In</div>
             </div>
-            <div class="value-card">
-                <div class="icon">⚡</div>
-                <h3>Built Fast</h3>
-                <p>Professional sites delivered in days, not weeks. Clean design that works on every device</p>
-            </div>
-            <div class="value-card">
-                <div class="icon">🔧</div>
-                <h3>Always Yours</h3>
-                <p>We hand you the keys. Your site, your code, your hosting. Make changes whenever you want</p>
-            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <section class="form-section">
-        <div class="form-wrap">
-            <div class="form-heading">
-                <h2>Get Started</h2>
-                <p>Tell us about your project and we'll make it happen</p>
-            </div>
+      <section class="section" id="services">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Websites that work like tools.</h2>
+            <p>OWNYOURWEB is for businesses that need a real online home, not another fragile template with no strategy behind it.</p>
+          </div>
+          <div class="service-grid">
+            <article class="service-card">
+              <small>01</small>
+              <h3>Business Sites</h3>
+            </article>
+            <article class="service-card">
+              <small>02</small>
+              <h3>Landing Pages</h3>
+            </article>
+            <article class="service-card">
+              <small>03</small>
+              <h3>Funnels</h3>
+            </article>
+            <article class="service-card">
+              <small>04</small>
+              <h3>Web Systems</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="work">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Built for mobile-first decisions.</h2>
+            <p>People do not study your website. They scan, judge, click, call, and buy. The structure has to make the next move obvious.</p>
+          </div>
+          <div class="demo-panel">
+            <article class="demo-copy">
+              <div>
+                <b>Site<br>Energy</b>
+                <p>The theme now matches the prompt product: bold typography, strong sections, hard borders, confident CTAs, and a brand system that feels direct without feeling generic.</p>
+              </div>
+              <a class="btn secondary" href="#start">Build Mine</a>
+            </article>
+            <figure class="demo-image">
+              <img src="hooked-mockup.jpg" alt="Mobile landing page preview created for Hooked Seafood">
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section amber" id="process">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Simple build process.</h2>
+            <p>We turn your offer into a clean web experience with sections that help people understand, trust, and act.</p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <span class="step-number">1</span>
+              <h3>Tell us</h3>
+              <p>Share the business, offer, audience, current site, and what the website needs to make happen.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">2</span>
+              <h3>We build</h3>
+              <p>Design, copy structure, mobile layout, CTA flow, and launch-ready files come together fast.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">3</span>
+              <h3>You own it</h3>
+              <p>You get a site that can live with your domain, your hosting, your content, and your next move.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="start">
+        <div class="wrap contact">
+          <div class="contact-panel">
+            <div class="eyebrow">Start here</div>
+            <h2>Tell me what you need online.</h2>
+            <p>Send the business basics and the goal. A good website starts with a clear job: get calls, sell a product, book clients, show proof, collect leads, or explain the offer fast.</p>
+            <ul class="contact-list">
+              <li>Business websites</li>
+              <li>Service pages and lead forms</li>
+              <li>Product and offer pages</li>
+              <li>Mobile-first local business builds</li>
+            </ul>
+          </div>
+
+          <aside class="form-card">
             <div class="signup-form" id="signupForm">
-                <form id="leadForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" placeholder="you@example.com" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Business Name</label>
-                        <input type="text" name="business" placeholder="Your company or project">
-                    </div>
-                    <div class="form-group">
-                        <label>Current Website (optional)</label>
-                        <input type="url" name="website" placeholder="https://yourcurrentsite.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Tell us about your project</label>
-                        <textarea name="message" placeholder="What are you building? What do you need?"></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">Get Started</button>
-                </form>
-                <div class="form-note">We'll respond within 24 hours. No spam, no pressure.</div>
+              <h3>Project<br>Request</h3>
+              <form id="leadForm" action="https://formspree.io/f/xqedpvon" method="POST">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Your name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" placeholder="you@example.com" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="business">Business Name</label>
+                  <input id="business" type="text" name="business" placeholder="Your company or project">
+                </div>
+                <div class="form-group">
+                  <label for="website">Current Website</label>
+                  <input id="website" type="url" name="website" placeholder="https://yourcurrentsite.com">
+                </div>
+                <div class="form-group">
+                  <label for="message">Project Notes</label>
+                  <textarea id="message" name="message" placeholder="What are you building? What do you need this site to do?"></textarea>
+                </div>
+                <button type="submit" class="btn submit-btn" id="submitBtn">Send Request</button>
+              </form>
+              <p class="form-note">We will respond within 24 hours. No spam, no pressure.</p>
             </div>
             <div class="message-box" id="messageBox">
-                <div class="message-icon">✓</div>
-                <h2 id="messageTitle">Submitted</h2>
-                <p id="messageText" style="color: #6c757d; font-size: 0.85rem;"></p>
+              <h3 id="messageTitle">Submitted</h3>
+              <p id="messageText">We received your info and will be in touch within 24 hours.</p>
             </div>
+          </aside>
         </div>
-    </section>
-
-    <section class="how-section">
-        <div class="how-label">Simple Process</div>
-        <div class="how-title">How It Works</div>
-        <div class="steps" id="stepsContainer">
-            <div class="step">
-                <div class="step-num">1</div>
-                <h3>Tell Us</h3>
-                <p>Share your vision, business type, and what you need in a website</p>
-            </div>
-            <div class="step-arrow">↓</div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <h3>We Build</h3>
-                <p>Custom design and development tailored to your brand and goals</p>
-            </div>
-            <div class="step-arrow">↓</div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <h3>You Own It</h3>
-                <p>Full ownership of your site, domain, and hosting. No platform lock-in</p>
-            </div>
-        </div>
-    </section>
+      </section>
+    </main>
 
     <footer class="footer">
-        <a href="https://nasirr.innergintel.org">Built by Nasirr Mayo</a> · OwnYourWeb Systems · InnerG Intel
+      <div class="wrap footer-inner">
+        <div><span class="footer-brand">OWNYOURWEB</span> • Part of the INNERGINTEL ECOSYSTEM.</div>
+        <div><a href="https://nasirr.innergintel.org">Built by Nasirr Mayo</a></div>
+      </div>
     </footer>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = (i * 0.15) + 's';
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
+    <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+  </div>
 
-        document.querySelectorAll('.step, .step-arrow, .value-card').forEach(el => observer.observe(el));
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const messageBox = document.getElementById('messageBox');
+    const messageTitle = document.getElementById('messageTitle');
+    const messageText = document.getElementById('messageText');
+    const submitBtn = document.getElementById('submitBtn');
+    const leadForm = document.getElementById('leadForm');
 
-        const CONFIG = {
-            formEndpoint: 'https://formspree.io/f/xqedpvon',
-            email: 'ownyourwebsystems@agentmail.to',
-            apiKey: 'am_2bc02a6e70fc084a260fce1128dbc58559b5c0401fc064c0ab883d6e999809ff'
-        };
+    leadForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
-        const signupForm = document.getElementById('signupForm');
-        const messageBox = document.getElementById('messageBox');
-        const messageTitle = document.getElementById('messageTitle');
-        const messageText = document.getElementById('messageText');
-        const submitBtn = document.getElementById('submitBtn');
-
-        signupForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            try {
-                const formData = new FormData(signupForm);
-                formData.append('_replyto', CONFIG.email);
-                const headers = { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' };
-                if (CONFIG.apiKey) headers['Authorization'] = 'Basic ' + btoa(CONFIG.apiKey + ':');
-                const response = await fetch(CONFIG.formEndpoint, { method: 'POST', headers, body: new URLSearchParams(formData).toString() });
-                const data = await response.json();
-                if (data.ok) {
-                    signupForm.classList.add('hide');
-                    messageBox.classList.add('show');
-                    messageTitle.textContent = 'Submitted ✓';
-                    messageText.textContent = "We've received your info and will be in touch within 24 hours.";
-                    signupForm.reset();
-                } else { throw new Error(data.error || 'Submission failed'); }
-            } catch (error) {
-                submitBtn.textContent = 'Get Started';
-                submitBtn.disabled = false;
-                alert('Something went wrong. Please try again.');
-            }
+      try {
+        const response = await fetch(leadForm.action, {
+          method: 'POST',
+          body: new FormData(leadForm),
+          headers: { 'Accept': 'application/json' }
         });
-    </script>
+
+        if (!response.ok) throw new Error('Submission failed');
+
+        signupForm.classList.add('hide');
+        messageBox.classList.add('show');
+        messageTitle.textContent = 'Submitted';
+        messageText.textContent = 'We received your info and will be in touch within 24 hours.';
+        leadForm.reset();
+      } catch (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Request';
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
 </body>
 </html>
