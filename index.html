@@ -310,6 +310,147 @@
       place-items: center;
     }
 
+    .home-boutique-preview {
+      position: relative;
+      width: min(100%, 500px);
+      min-height: 560px;
+      border: 4px solid var(--line);
+      background: var(--ink);
+      box-shadow: 14px 16px 0 rgba(13,13,13,.24);
+      overflow: hidden;
+    }
+
+    #homeBoutiqueCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+    .preview-products {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255,255,255,.18), transparent 30%),
+        linear-gradient(135deg, rgba(200,255,46,.16), rgba(49,216,255,.12)),
+        var(--ink);
+      overflow: hidden;
+    }
+
+    .preview-products::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border: 3px solid rgba(255,255,255,.14);
+      border-radius: 50%;
+      transform: rotateX(68deg);
+      bottom: 98px;
+    }
+
+    .preview-bag {
+      position: absolute;
+      width: 128px;
+      height: 172px;
+      border: 4px solid var(--line);
+      background: var(--lime);
+      box-shadow: 16px 16px 0 rgba(255,255,255,.16);
+      transform: rotate(-8deg) translateX(-84px);
+    }
+
+    .preview-bag:nth-child(2) {
+      width: 104px;
+      height: 148px;
+      background: var(--coral);
+      transform: rotate(8deg) translate(82px, 34px);
+    }
+
+    .preview-bag:nth-child(3) {
+      width: 80px;
+      height: 112px;
+      background: var(--cyan);
+      transform: rotate(3deg) translate(8px, -92px);
+      box-shadow: 12px 12px 0 rgba(255,255,255,.16);
+    }
+
+    .preview-bag::before {
+      content: "";
+      position: absolute;
+      left: 31px;
+      top: -38px;
+      width: 54px;
+      height: 46px;
+      border: 4px solid var(--line);
+      border-bottom: 0;
+      border-radius: 50px 50px 0 0;
+    }
+
+    .preview-bag::after {
+      content: "";
+      position: absolute;
+      inset: 28px 22px;
+      background: rgba(13,13,13,.88);
+    }
+
+    .preview-ui {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: end;
+      color: var(--white);
+    }
+
+    .preview-copy {
+      border: 3px solid var(--line);
+      background: rgba(251,250,245,.94);
+      color: var(--ink);
+      padding: 14px;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .preview-copy small {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .preview-copy strong {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2rem;
+      line-height: .9;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .preview-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .preview-buttons button {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 950;
+      cursor: pointer;
+    }
+
     .browser-stack {
       position: relative;
       width: min(100%, 500px);
@@ -845,6 +986,10 @@
         min-height: 500px;
       }
 
+      .home-boutique-preview {
+        min-height: 500px;
+      }
+
       .browser-stack {
         height: 500px;
       }
@@ -933,6 +1078,18 @@
         min-height: 420px;
         overflow: hidden;
         margin-top: 26px;
+      }
+
+      .home-boutique-preview {
+        min-height: 430px;
+      }
+
+      .preview-ui {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-buttons {
+        justify-content: flex-end;
       }
 
       .browser-stack {
@@ -1042,30 +1199,26 @@
             </div>
           </div>
 
-          <div class="site-wall" aria-label="Website preview artwork">
-            <div class="browser-stack">
-              <article class="browser-card browser-main">
-                <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
-                <div class="mock-hero">
-                  <div class="mock-label">Live brand page</div>
-                  <div class="mock-title">Book<br>Buy<br>Call</div>
+          <div class="site-wall" aria-label="Boutique website preview animation">
+            <aside class="home-boutique-preview">
+              <div class="preview-products" aria-hidden="true">
+                <div class="preview-bag"></div>
+                <div class="preview-bag"></div>
+                <div class="preview-bag"></div>
+              </div>
+              <canvas id="homeBoutiqueCanvas"></canvas>
+              <div class="preview-ui">
+                <div class="preview-copy">
+                  <small>Luxury boutique preview</small>
+                  <strong id="homeSceneLabel">Signature Drop</strong>
                 </div>
-                <div class="mock-body">
-                  <div class="mock-block"><strong>Offer</strong><span>clear section</span></div>
-                  <div class="mock-block"><strong>Proof</strong><span>trust builder</span></div>
-                  <div class="mock-block"><strong>CTA</strong><span>easy action</span></div>
-                  <div class="mock-block"><strong>Flow</strong><span>mobile first</span></div>
+                <div class="preview-buttons" aria-label="Preview controls">
+                  <button type="button" data-home-scene="0">1</button>
+                  <button type="button" data-home-scene="1">2</button>
+                  <button type="button" data-home-scene="2">3</button>
                 </div>
-              </article>
-              <article class="browser-card browser-secondary" aria-hidden="true">
-                <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
-                <div class="mock-hero">
-                  <div class="mock-label">Promo page</div>
-                  <div class="mock-title">Launch<br>Today</div>
-                </div>
-              </article>
-              <div class="badge">No<br>Platform<br>Lock-In</div>
-            </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -1207,7 +1360,106 @@
     <a class="back-top" href="#top" aria-label="Back to top">↑</a>
   </div>
 
-  <script>
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.164.1/build/three.module.js";
+
+    const homeCanvas = document.getElementById('homeBoutiqueCanvas');
+    const homeLabel = document.getElementById('homeSceneLabel');
+
+    if (homeCanvas && homeLabel) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+      camera.position.set(0, 1.2, 6);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({ canvas: homeCanvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x000000, 0);
+
+      const key = new THREE.DirectionalLight(0xffffff, 3.2);
+      key.position.set(3, 4, 5);
+      scene.add(key);
+      scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+
+      const floor = new THREE.Mesh(
+        new THREE.CylinderGeometry(2.4, 2.4, .12, 80),
+        new THREE.MeshStandardMaterial({ color: 0xfbfaf5, roughness: .48, metalness: .12 })
+      );
+      floor.position.y = -1.3;
+      scene.add(floor);
+
+      const productGroup = new THREE.Group();
+      scene.add(productGroup);
+
+      const palette = [
+        { name: 'Signature Drop', color: 0xc8ff2e, accent: 0xff4f32 },
+        { name: 'Limited Capsule', color: 0xf6d8dd, accent: 0xffb000 },
+        { name: 'Evening Edit', color: 0x31d8ff, accent: 0x0d0d0d }
+      ];
+
+      let targetRotation = 0;
+
+      function makeProduct(x, y, z, scale, color, accent) {
+        const product = new THREE.Group();
+        const body = new THREE.Mesh(
+          new THREE.BoxGeometry(1.05, 1.38, .42),
+          new THREE.MeshStandardMaterial({ color, roughness: .32, metalness: .22 })
+        );
+        const band = new THREE.Mesh(
+          new THREE.BoxGeometry(1.12, .18, .46),
+          new THREE.MeshStandardMaterial({ color: accent, roughness: .28, metalness: .34 })
+        );
+        band.position.y = -.28;
+        const handle = new THREE.Mesh(
+          new THREE.TorusGeometry(.36, .035, 16, 80, Math.PI),
+          new THREE.MeshStandardMaterial({ color: 0x191919, roughness: .35, metalness: .45 })
+        );
+        handle.rotation.z = Math.PI;
+        handle.position.y = .78;
+        handle.position.z = .03;
+        product.add(body, band, handle);
+        product.position.set(x, y, z);
+        product.scale.setScalar(scale);
+        return product;
+      }
+
+      function setHomeScene(index) {
+        homeLabel.textContent = palette[index].name;
+        productGroup.clear();
+        const item = palette[index];
+        productGroup.add(makeProduct(-1.15, -.18, 0, 1.08, item.color, item.accent));
+        productGroup.add(makeProduct(.95, -.32, -.35, .88, item.accent, item.color));
+        productGroup.add(makeProduct(.18, .38, -.72, .58, 0xffffff, item.color));
+        targetRotation += Math.PI * .7;
+      }
+
+      function resizeHomePreview() {
+        const rect = homeCanvas.getBoundingClientRect();
+        renderer.setSize(rect.width, rect.height, false);
+        camera.aspect = rect.width / rect.height;
+        camera.lookAt(0, 0, 0);
+        camera.updateProjectionMatrix();
+      }
+
+      window.addEventListener('resize', resizeHomePreview);
+      document.querySelectorAll('[data-home-scene]').forEach((button) => {
+        button.addEventListener('click', () => setHomeScene(Number(button.dataset.homeScene)));
+      });
+
+      function animateHomePreview(time) {
+        productGroup.rotation.y += (targetRotation + time * .00022 - productGroup.rotation.y) * .035;
+        productGroup.rotation.x = Math.sin(time * .0008) * .08;
+        floor.rotation.y = time * .00018;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateHomePreview);
+      }
+
+      setHomeScene(0);
+      resizeHomePreview();
+      animateHomePreview(0);
+    }
+
     const signupForm = document.getElementById('signupForm');
     const messageBox = document.getElementById('messageBox');
     const messageTitle = document.getElementById('messageTitle');
