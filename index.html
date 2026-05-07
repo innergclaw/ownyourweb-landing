@@ -843,6 +843,13 @@
       text-transform: uppercase;
     }
 
+    .optional {
+      color: var(--lime);
+      font-size: .68rem;
+      font-weight: 950;
+      margin-left: 6px;
+    }
+
     input,
     textarea {
       width: 100%;
@@ -1308,8 +1315,8 @@
                   <input id="business" type="text" name="business" placeholder="Your company or project">
                 </div>
                 <div class="form-group">
-                  <label for="website">Current Website</label>
-                  <input id="website" type="url" name="website" placeholder="https://yourcurrentsite.com">
+                  <label for="website">Current Website <span class="optional">Optional</span></label>
+                  <input id="website" type="url" name="website" placeholder="Leave blank if you do not have one">
                 </div>
                 <div class="form-group">
                   <label for="message">Project Notes</label>
