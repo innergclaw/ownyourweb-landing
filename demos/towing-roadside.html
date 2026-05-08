@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hook'Em Up Towing | Roadside Assistance</title>
+  <meta name="description" content="24/7 towing and roadside assistance for local drivers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #08090b;
+      --road: #121417;
+      --panel: #1c2025;
+      --panel-2: #252a31;
+      --white: #f7f8fa;
+      --muted: #a9b0ba;
+      --line: #353b44;
+      --red: #e20d12;
+      --red-dark: #8d0609;
+      --amber: #ffcc19;
+      --asphalt: #2c3036;
+      --green: #44d36a;
+      --shadow: 0 18px 50px rgba(0,0,0,.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--night);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Roboto Condensed", system-ui, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 74% 8%, rgba(226,13,18,.32), transparent 28%),
+        linear-gradient(115deg, rgba(255,204,25,.07) 0 10%, transparent 10% 100%),
+        var(--night);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .22;
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 14px, rgba(255,255,255,.08) 15px 16px),
+        repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.05) 19px 20px);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.2));
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .alert-bar {
+      background:
+        repeating-linear-gradient(135deg, var(--amber) 0 16px, #111 16px 30px);
+      color: var(--night);
+      border-bottom: 1px solid rgba(255,255,255,.22);
+    }
+
+    .alert-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .86rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .alert-inner span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border: 1px solid rgba(255,204,25,.72);
+      border-radius: 999px;
+      background: rgba(8,9,11,.92);
+      color: var(--amber);
+      padding: 2px 12px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,9,11,.86);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: var(--white);
+      padding: 3px;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .brand strong,
+    h1,
+    h2,
+    h3 {
+      font-family: Oswald, Impact, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .nav a {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: 0 14px;
+      color: rgba(255,255,255,.82);
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.05);
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--white);
+      border-color: rgba(255,204,25,.9);
+      outline: none;
+    }
+
+    .nav .call-mini {
+      background: var(--red);
+      border-color: rgba(255,255,255,.28);
+      color: var(--white);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      background:
+        linear-gradient(180deg, rgba(8,9,11,.1), rgba(8,9,11,.92)),
+        radial-gradient(circle at 18% 20%, rgba(226,13,18,.4), transparent 28%),
+        linear-gradient(120deg, #121417 0%, #08090b 62%, #1b0708 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: -12vw;
+      right: -12vw;
+      bottom: -190px;
+      height: 360px;
+      transform: rotate(-6deg);
+      background:
+        linear-gradient(90deg, transparent 0 47%, rgba(255,204,25,.95) 47% 49%, transparent 49% 51%, rgba(255,204,25,.95) 51% 53%, transparent 53% 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 52px),
+        var(--asphalt);
+      box-shadow: inset 0 24px 54px rgba(0,0,0,.46);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+      gap: 38px;
+      align-items: center;
+      padding: 70px 0 88px;
+      min-height: calc(100vh - 114px);
+    }
+
+    .hero-grid > *,
+    .topbar-inner > *,
+    .dispatch-panel > *,
+    .split > * {
+      min-width: 0;
+    }
+
+    .status-pill {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(68,211,106,.44);
+      border-radius: 999px;
+      background: rgba(68,211,106,.12);
+      color: var(--green);
+      padding: 9px 13px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      max-width: 740px;
+      margin: 0;
+      font-size: clamp(4.6rem, 11vw, 9.8rem);
+      line-height: .82;
+    }
+
+    .outline {
+      color: transparent;
+      -webkit-text-stroke: 1.8px rgba(255,255,255,.86);
+      text-stroke: 1.8px rgba(255,255,255,.86);
+    }
+
+    .lead {
+      max-width: 610px;
+      margin: 24px 0 0;
+      color: rgba(255,255,255,.76);
+      font-size: clamp(1.02rem, 1.7vw, 1.24rem);
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .hero-actions,
+    .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .btn {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 20px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn.call {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn.quote {
+      background: var(--amber);
+      color: #111;
+    }
+
+    .dispatch-panel {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+        rgba(18,20,23,.78);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .dispatch-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .2;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,204,25,.8) 18px 20px, transparent 20px 38px);
+      pointer-events: none;
+    }
+
+    .logo-stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 43%, rgba(255,255,255,.95), rgba(255,255,255,.64) 36%, rgba(255,255,255,.08) 62%),
+        linear-gradient(145deg, rgba(226,13,18,.9), rgba(8,9,11,.9));
+      overflow: hidden;
+    }
+
+    .logo-stage img {
+      width: min(82%, 360px);
+      aspect-ratio: 1;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 24px rgba(0,0,0,.4));
+    }
+
+    .eta-card {
+      position: relative;
+      display: block;
+      gap: 14px;
+      align-items: center;
+      margin-top: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 15px;
+    }
+
+    .eta-card small {
+      display: block;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eta-card strong {
+      display: block;
+      margin-top: 4px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 2.1rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 74px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .section.light {
+      background:
+        linear-gradient(180deg, #f4f5f7, #dfe3e8);
+      color: #101215;
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 450px);
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 5.8rem);
+      line-height: .9;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: inherit;
+      opacity: .84;
+      line-height: 1.58;
+      font-size: 1.04rem;
+      font-weight: 700;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .service-tile {
+      min-height: 220px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 24px;
+      padding: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+        var(--panel);
+      display: grid;
+      align-content: space-between;
+      box-shadow: 0 14px 34px rgba(0,0,0,.2);
+    }
+
+    .light .service-tile {
+      border-color: rgba(16,18,21,.16);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 18px 34px rgba(16,18,21,.1);
+      color: #101215;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--red);
+      color: var(--white);
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 1.65rem;
+    }
+
+    .service-tile h3 {
+      margin: 26px 0 8px;
+      font-size: 2.1rem;
+      line-height: .95;
+    }
+
+    .service-tile p {
+      margin: 0;
+      color: inherit;
+      opacity: .68;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 500px);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .map-panel,
+    .trust-panel,
+    .request-panel {
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 28px;
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .map-panel {
+      min-height: 430px;
+      position: relative;
+      background:
+        linear-gradient(90deg, transparent 0 48%, rgba(255,204,25,.92) 48% 49%, transparent 49% 51%, rgba(255,204,25,.92) 51% 52%, transparent 52% 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 52px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 52px),
+        var(--asphalt);
+    }
+
+    .map-pin {
+      position: absolute;
+      left: 52%;
+      top: 42%;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 16px solid rgba(226,13,18,.18);
+      transform: translate(-50%, -50%);
+    }
+
+    .map-pin::after {
+      content: "DISPATCH";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--white);
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .zone-list {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .zone-list span {
+      border-radius: 14px;
+      background: rgba(8,9,11,.8);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .trust-panel,
+    .request-panel {
+      padding: 24px;
+    }
+
+    .light .trust-panel {
+      background: rgba(255,255,255,.74);
+      border-color: rgba(16,18,21,.16);
+      color: #101215;
+      box-shadow: 0 18px 34px rgba(16,18,21,.1);
+    }
+
+    .light .trust-panel .lead {
+      color: #333943;
+      opacity: 1;
+    }
+
+    .trust-panel h3,
+    .request-panel h3 {
+      margin: 0;
+      font-size: 2.7rem;
+      line-height: .92;
+    }
+
+    .trust-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+    }
+
+    .trust-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .trust-list li::before {
+      content: "";
+      width: 12px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--amber);
+      flex: 0 0 auto;
+    }
+
+    .request-panel {
+      background: var(--red);
+      border-color: rgba(255,255,255,.2);
+      color: var(--white);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255,255,255,.8);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 13px;
+      background: rgba(255,255,255,.94);
+      color: #101215;
+      padding: 11px 13px;
+      font: inherit;
+      font-weight: 700;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 106px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      box-shadow: 0 0 0 4px rgba(255,204,25,.7);
+    }
+
+    .wide { grid-column: 1 / -1; }
+
+    .footer {
+      padding: 32px 0 92px;
+      color: rgba(255,255,255,.64);
+      font-weight: 700;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-callbar {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 40;
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      border-radius: 18px;
+      background: rgba(8,9,11,.84);
+      border: 1px solid rgba(255,255,255,.16);
+      padding: 8px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 46px rgba(0,0,0,.4);
+    }
+
+    .mobile-callbar a {
+      min-height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      font-family: Oswald, Impact, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .mobile-callbar a:first-child {
+      background: var(--red);
+    }
+
+    .mobile-callbar a:last-child {
+      background: var(--amber);
+      color: #101215;
+    }
+
+    @media (max-width: 940px) {
+      .hero-grid,
+      .section-head,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-grid {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 22px, 1160px);
+      }
+
+      .alert-bar {
+        display: none;
+      }
+
+      .topbar-inner {
+        min-height: auto;
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 6px;
+      }
+
+      .nav a {
+        flex: 0 0 auto;
+      }
+
+      .nav .call-mini {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(3.35rem, 17vw, 4.25rem);
+      }
+
+      h2 {
+        font-size: clamp(2.55rem, 13vw, 3.45rem);
+        max-width: 330px;
+      }
+
+      .outline {
+        -webkit-text-stroke-width: 1px;
+        text-stroke-width: 1px;
+      }
+
+      .hero-grid {
+        padding: 40px 0 86px;
+      }
+
+      .lead {
+        max-width: 31ch;
+      }
+
+      .logo-stage {
+        min-height: 320px;
+      }
+
+      .logo-stage img {
+        width: min(68vw, 260px);
+      }
+
+      .eta-card strong {
+        font-size: 1.7rem;
+      }
+
+      .section {
+        padding: 52px 0;
+      }
+
+      .section-head {
+        gap: 16px;
+      }
+
+      .section-head p {
+        max-width: 340px;
+      }
+
+      .service-grid,
+      .zone-list,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .map-panel {
+        min-height: 360px;
+      }
+
+      .mobile-callbar {
+        display: grid;
+        width: min(370px, calc(100% - 20px));
+        right: auto;
+      }
+
+      .mobile-callbar a {
+        font-size: .9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="alert-bar">
+    <div class="wrap alert-inner">
+      <span>24/7 roadside dispatch</span>
+      <span>ETA 20-45 min</span>
+      <span>family owned local service</span>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="https://ownyourweb.xyz">
+        <img src="assets/hookemup-towing-logo.png" alt="">
+        <span>
+          <strong>Hook'Em Up</strong>
+          <small>Towing & roadside</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Demo navigation">
+        <a href="#services">Services</a>
+        <a href="#service-area">Area</a>
+        <a href="#quote">Quote</a>
+        <a href="../index.html">OWNYOURWEB</a>
+        <a class="call-mini" href="tel:+11234567890">Call now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="status-pill">Dispatch online now</div>
+          <h1><span class="outline">Stranded?</span><br>We hook<br>you up.</h1>
+          <p class="lead">Fast towing and roadside help when the road stops cooperating. Call for dispatch, request help, or send your location details for a quick response.</p>
+          <div class="hero-actions">
+            <a class="btn call" href="tel:+11234567890">Call Dispatch</a>
+            <a class="btn quote" href="#quote">Request Help</a>
+          </div>
+        </div>
+
+        <aside class="dispatch-panel" aria-label="Roadside dispatch preview">
+          <div class="logo-stage">
+            <img src="assets/hookemup-towing-logo.png" alt="Hook'Em Up Towing and Roadside Assistance">
+          </div>
+          <div class="eta-card">
+            <div>
+              <small>Average response window</small>
+              <strong>20-45 min</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section light" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Choose the help you need.</h2>
+          <p>Select what happened, call the team, and get help moving. Clear services make it easier to request the right support fast.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-tile">
+            <span class="service-icon">01</span>
+            <div><h3>Towing</h3><p>Local tow requests, breakdowns, accident pickup, and transport.</p></div>
+          </article>
+          <article class="service-tile">
+            <span class="service-icon">02</span>
+            <div><h3>Jump Starts</h3><p>Dead battery support when the car will not turn over.</p></div>
+          </article>
+          <article class="service-tile">
+            <span class="service-icon">03</span>
+            <div><h3>Lockouts</h3><p>Quick lockout help when the keys are stuck inside.</p></div>
+          </article>
+          <article class="service-tile">
+            <span class="service-icon">04</span>
+            <div><h3>Tire Changes</h3><p>Flat tire support so you can get back on the road safely.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="service-area">
+      <div class="wrap split">
+        <div class="map-panel" aria-label="Service area map preview">
+          <span class="map-pin"></span>
+          <div class="zone-list">
+            <span>Philadelphia</span>
+            <span>Suburbs</span>
+            <span>Highways</span>
+          </div>
+        </div>
+        <aside class="trust-panel">
+          <h2>Local help you can reach.</h2>
+          <p class="lead">Know who to call, where the team serves, and what help is available before you waste time searching around.</p>
+          <ul class="trust-list">
+            <li>Family owned local business</li>
+            <li>24/7 roadside availability</li>
+            <li>Clear service area</li>
+            <li>Tap to call from your phone</li>
+            <li>Quote request for non-emergency help</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section light" id="quote">
+      <div class="wrap split">
+        <aside class="trust-panel">
+          <h2>Need roadside help?</h2>
+          <p class="lead">Call now for urgent towing or send the form with your vehicle, service need, and location. The faster the details come in, the faster help can be sent your way.</p>
+          <div class="panel-actions">
+            <a class="btn call" href="tel:+11234567890">Call Now</a>
+            <a class="btn quote" href="#quote">Send Details</a>
+          </div>
+        </aside>
+        <form class="request-panel" action="https://formspree.io/f/mreaqkdr" method="POST">
+          <h3>Roadside Request</h3>
+          <div class="form-grid">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name">
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" placeholder="Best callback number">
+            </div>
+            <div>
+              <label for="service">Service</label>
+              <select id="service" name="service">
+                <option>Towing</option>
+                <option>Jump start</option>
+                <option>Lockout</option>
+                <option>Tire change</option>
+              </select>
+            </div>
+            <div>
+              <label for="location">Location</label>
+              <input id="location" name="location" placeholder="City or cross streets">
+            </div>
+            <div class="wide">
+              <label for="details">Details</label>
+              <textarea id="details" name="details" placeholder="Vehicle type, issue, and where you are."></textarea>
+            </div>
+          </div>
+          <button class="btn quote wide" type="submit">Send Request</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>Hook'Em Up Towing & Roadside Assistance</span>
+      <a href="tel:+11234567890">Call for roadside help</a>
+    </div>
+  </footer>
+
+  <div class="mobile-callbar" aria-label="Mobile emergency actions">
+    <a href="tel:+11234567890">Call Now</a>
+    <a href="#quote">Get Help</a>
+  </div>
+</body>
+</html>

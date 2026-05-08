@@ -124,7 +124,8 @@
       justify-content: flex-end;
     }
 
-    .nav a {
+    .nav a,
+    .demo-sites-toggle {
       min-height: 38px;
       display: inline-flex;
       align-items: center;
@@ -133,13 +134,83 @@
       font-size: .83rem;
       font-weight: 800;
       color: var(--graphite);
+      font-family: inherit;
+      background: transparent;
+      cursor: pointer;
     }
 
     .nav a:hover,
-    .nav a:focus-visible {
+    .nav a:focus-visible,
+    .demo-menu-wrap:hover .demo-sites-toggle,
+    .demo-menu-wrap:focus-within .demo-sites-toggle {
       border-color: var(--line);
       background: var(--white);
       outline: none;
+    }
+
+    .demo-menu-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .demo-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 12px);
+      z-index: 60;
+      width: min(360px, calc(100vw - 28px));
+      display: grid;
+      gap: 10px;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 12px;
+      box-shadow: 8px 8px 0 var(--line);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity .16s ease, transform .16s ease;
+    }
+
+    .demo-menu-wrap:hover .demo-menu,
+    .demo-menu-wrap:focus-within .demo-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .demo-site-card {
+      display: grid;
+      gap: 8px;
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,79,50,.18), transparent 46%),
+        var(--white);
+      padding: 14px;
+      box-shadow: 5px 5px 0 rgba(13,13,13,.2);
+    }
+
+    .demo-site-card small {
+      color: var(--coral);
+      font-size: .72rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .demo-site-card strong {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2rem;
+      line-height: .9;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .demo-site-card span {
+      color: var(--graphite);
+      font-size: .78rem;
+      font-weight: 800;
+      line-height: 1.35;
     }
 
     .nav .nav-cta {
@@ -1039,7 +1110,8 @@
         display: none;
       }
 
-      .nav a {
+      .nav a,
+      .demo-sites-toggle {
         min-height: 36px;
         flex: 0 0 auto;
         border: 2px solid var(--line);
@@ -1047,6 +1119,17 @@
         padding: 0 10px;
         font-size: .74rem;
         box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .demo-menu-wrap {
+        flex: 0 0 auto;
+      }
+
+      .demo-menu {
+        left: 0;
+        right: auto;
+        top: calc(100% + 10px);
+        width: min(330px, calc(100vw - 28px));
       }
 
       .nav .nav-cta {
@@ -1180,7 +1263,17 @@
         </a>
         <nav class="nav" aria-label="Primary navigation">
           <a href="#services">Services</a>
-          <a href="boutique-sites/">Boutique Sites</a>
+          <div class="demo-menu-wrap">
+            <button class="demo-sites-toggle" type="button" aria-haspopup="true">DEMO SITES</button>
+            <div class="demo-menu" role="menu" aria-label="Demo sites">
+              <a class="demo-site-card" href="demos/towing-roadside.html" target="_blank" rel="noopener" role="menuitem">
+                <small>Local Service</small>
+                <strong>Towing & Roadside</strong>
+                <span>24/7 dispatch-style site for emergency calls, service areas, and roadside requests.</span>
+              </a>
+            </div>
+          </div>
+          <a href="boutique-sites/">Boutique</a>
           <a href="#process">Process</a>
           <a href="https://innergclaw.github.io/ownyourweb/products/flyer-templates/">Prompt Pack</a>
           <a class="nav-cta" href="#start">Start</a>
@@ -1197,7 +1290,7 @@
             <p class="lead">Custom websites, launch pages, funnels, and web systems with the same bold OWNYOURWEB energy as the prompt pack: fast, useful, branded, and built so the business can actually move.</p>
             <div class="hero-actions">
               <a class="btn primary" href="#start">Start A Website</a>
-              <a class="btn secondary" href="boutique-sites/">See Boutique Sites</a>
+              <a class="btn secondary" href="demos/towing-roadside.html" target="_blank" rel="noopener">See Demo Site</a>
             </div>
             <div class="value-strip" aria-label="Service highlights">
               <div><b>Fast</b><span>launch-ready builds</span></div>
