@@ -173,13 +173,14 @@
     }
 
     .demo-menu-wrap:hover .demo-menu,
-    .demo-menu-wrap:focus-within .demo-menu {
+    .demo-menu-wrap:focus-within .demo-menu,
+    .demo-menu-wrap.open .demo-menu {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
     }
 
-    .demo-site-card {
+    .demo-menu .demo-site-card {
       display: grid;
       gap: 8px;
       border: 3px solid var(--line);
@@ -188,16 +189,18 @@
         var(--white);
       padding: 14px;
       box-shadow: 5px 5px 0 rgba(13,13,13,.2);
+      min-height: auto;
+      align-items: start;
     }
 
-    .demo-site-card small {
+    .demo-menu .demo-site-card small {
       color: var(--coral);
       font-size: .72rem;
       font-weight: 1000;
       text-transform: uppercase;
     }
 
-    .demo-site-card strong {
+    .demo-menu .demo-site-card strong {
       display: block;
       font-family: Anton, Impact, sans-serif;
       font-size: 2rem;
@@ -206,7 +209,7 @@
       font-weight: 400;
     }
 
-    .demo-site-card span {
+    .demo-menu .demo-site-card span {
       color: var(--graphite);
       font-size: .78rem;
       font-weight: 800;
@@ -1126,10 +1129,11 @@
       }
 
       .demo-menu {
-        left: 0;
+        position: fixed;
+        left: 11px;
         right: auto;
-        top: calc(100% + 10px);
-        width: min(330px, calc(100vw - 28px));
+        top: 116px;
+        width: min(360px, calc(100vw - 22px));
       }
 
       .nav .nav-cta {
@@ -1264,7 +1268,7 @@
         <nav class="nav" aria-label="Primary navigation">
           <a href="#services">Services</a>
           <div class="demo-menu-wrap">
-            <button class="demo-sites-toggle" type="button" aria-haspopup="true">DEMO SITES</button>
+            <button class="demo-sites-toggle" type="button" aria-haspopup="true" aria-expanded="false">DEMO SITES</button>
             <div class="demo-menu" role="menu" aria-label="Demo sites">
               <a class="demo-site-card" href="demos/towing-roadside.html" target="_blank" rel="noopener" role="menuitem">
                 <small>Local Service</small>
@@ -1616,6 +1620,32 @@
       setHomeScene(0);
       resizeHomePreview();
       animateHomePreview(0);
+    }
+
+    const demoMenuWrap = document.querySelector('.demo-menu-wrap');
+    const demoMenuToggle = document.querySelector('.demo-sites-toggle');
+
+    if (demoMenuWrap && demoMenuToggle) {
+      demoMenuToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = demoMenuWrap.classList.toggle('open');
+        demoMenuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!demoMenuWrap.contains(event.target)) {
+          demoMenuWrap.classList.remove('open');
+          demoMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          demoMenuWrap.classList.remove('open');
+          demoMenuToggle.setAttribute('aria-expanded', 'false');
+          demoMenuToggle.focus();
+        }
+      });
     }
 
     const signupForm = document.getElementById('signupForm');
