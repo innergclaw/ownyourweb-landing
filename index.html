@@ -1277,6 +1277,7 @@
               </a>
             </div>
           </div>
+          <a href="agent-store/">Agent Store</a>
           <a href="boutique-sites/">Boutique</a>
           <a href="#process">Process</a>
           <a href="https://innergclaw.github.io/ownyourweb/products/flyer-templates/">Prompt Pack</a>
@@ -1397,32 +1398,42 @@
           <aside class="form-card">
             <div class="signup-form" id="signupForm">
               <h3>Project<br>Request</h3>
-              <form id="leadForm" action="https://formspree.io/f/mreaqkdr" method="POST">
+              <form id="leadForm">
                 <div class="form-row">
                   <div class="form-group">
-                    <label for="name">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Your name" required>
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" type="text" name="customer_first_name" autocomplete="given-name" placeholder="First name" required>
                   </div>
                   <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" type="text" name="customer_last_name" autocomplete="family-name" placeholder="Last name" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" name="email" placeholder="you@example.com" required>
+                    <input id="email" type="email" name="customer_email" autocomplete="email" placeholder="you@example.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="timeline">Timeline</label>
+                    <input id="timeline" type="text" name="timeline" placeholder="Ex: 2 weeks, ASAP, this month">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="business">Business Name</label>
-                  <input id="business" type="text" name="business" placeholder="Your company or project">
+                  <input id="business" type="text" name="business_name" autocomplete="organization" placeholder="Your company or project">
                 </div>
                 <div class="form-group">
                   <label for="website">Current Website <span class="optional">Optional</span></label>
-                  <input id="website" type="text" name="website" placeholder="Leave blank if you do not have one">
+                  <input id="website" type="text" name="current_website" placeholder="Leave blank if you do not have one">
                 </div>
                 <div class="form-group">
                   <label for="message">Project Notes</label>
-                  <textarea id="message" name="message" placeholder="What are you building? What do you need this site to do?"></textarea>
+                  <textarea id="message" name="request" placeholder="What are you building? What do you need this site to do?"></textarea>
                 </div>
                 <button type="submit" class="btn submit-btn" id="submitBtn">Send Request</button>
               </form>
-              <p class="form-note">We will respond within 24 hours. No spam, no pressure.</p>
+              <p class="form-note">Your request goes straight into the OWNYOURWEB build queue and Telegram command center.</p>
             </div>
             <div class="message-box" id="messageBox">
               <h3 id="messageTitle">Submitted</h3>
@@ -1442,6 +1453,66 @@
 
     <a class="back-top" href="#top" aria-label="Back to top">↑</a>
   </div>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const messageBox = document.getElementById('messageBox');
+    const messageTitle = document.getElementById('messageTitle');
+    const messageText = document.getElementById('messageText');
+    const submitBtn = document.getElementById('submitBtn');
+    const leadForm = document.getElementById('leadForm');
+
+    if (leadForm) {
+      leadForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        messageBox.classList.remove('show');
+        const formData = Object.fromEntries(new FormData(leadForm).entries());
+        const payload = {
+          source_page: 'OWNYOURWEB Main Site',
+          customer_first_name: formData.customer_first_name || '',
+          customer_last_name: formData.customer_last_name || '',
+          customer_email: formData.customer_email || '',
+          business_name: formData.business_name || 'OWNYOURWEB Main Site Lead',
+          industry: 'Website / Web System Inquiry',
+          package: 'Local Website System',
+          budget_range: '$1,500 - $3,000',
+          timeline: formData.timeline || '',
+          buyer_agent: formData.customer_email || '',
+          current_website: formData.current_website || '',
+          request: formData.request || '',
+          assets: [
+            formData.current_website ? `Current website: ${formData.current_website}` : '',
+            'Submitted from ownyourweb.xyz main site form'
+          ].filter(Boolean).join('\n')
+        };
+
+        try {
+          const response = await fetch('/api/agent-store/request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await response.json();
+
+          if (!response.ok) throw new Error(data.detail || data.error || 'Submission failed');
+
+          signupForm.classList.add('hide');
+          messageBox.classList.add('show');
+          messageTitle.textContent = 'Packet Created';
+          messageText.textContent = 'Your request is in the OWNYOURWEB build queue. We will review the scope, then send the right next step.';
+          leadForm.reset();
+        } catch (error) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Request';
+          messageBox.classList.add('show');
+          messageTitle.textContent = 'Try Again';
+          messageText.textContent = 'The request did not reach the build queue. Please try again in a moment.';
+        }
+      });
+    }
+  </script>
 
   <script type="module">
     import * as THREE from "https://unpkg.com/three@0.164.1/build/three.module.js";
@@ -1648,38 +1719,6 @@
       });
     }
 
-    const signupForm = document.getElementById('signupForm');
-    const messageBox = document.getElementById('messageBox');
-    const messageTitle = document.getElementById('messageTitle');
-    const messageText = document.getElementById('messageText');
-    const submitBtn = document.getElementById('submitBtn');
-    const leadForm = document.getElementById('leadForm');
-
-    leadForm.addEventListener('submit', async function(event) {
-      event.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      try {
-        const response = await fetch(leadForm.action, {
-          method: 'POST',
-          body: new FormData(leadForm),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (!response.ok) throw new Error('Submission failed');
-
-        signupForm.classList.add('hide');
-        messageBox.classList.add('show');
-        messageTitle.textContent = 'Submitted';
-        messageText.textContent = 'We received your info and will be in touch within 24 hours.';
-        leadForm.reset();
-      } catch (error) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Request';
-        alert('Something went wrong. Please try again.');
-      }
-    });
   </script>
 </body>
 </html>

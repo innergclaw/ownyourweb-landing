@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWNYOURWEB Agent Store Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --muted: #686761;
+      --line: #191919;
+      --lime: #c8ff2e;
+      --amber: #ffb000;
+      --coral: #ff4f32;
+      --cyan: #31d8ff;
+      --shadow: 7px 7px 0 var(--line);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 3px solid var(--line);
+      background: rgba(251,250,245,.94);
+    }
+
+    .top {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(90deg, var(--lime) 0 25%, var(--amber) 25% 50%, var(--coral) 50% 75%, var(--cyan) 75%);
+      box-shadow: 5px 5px 0 var(--lime);
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 0 14px;
+      color: var(--ink);
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: var(--lime);
+    }
+
+    button.coral {
+      background: var(--coral);
+      color: var(--white);
+    }
+
+    main {
+      padding: 46px 0 70px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(3.7rem, 10vw, 8rem);
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 16px 0 24px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .status {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      border: 3px solid var(--line);
+      background: var(--amber);
+      padding: 0 12px;
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, .7fr) minmax(320px, .5fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .request-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .request-card {
+      display: grid;
+      gap: 8px;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 14px;
+      cursor: pointer;
+    }
+
+    .request-card:hover,
+    .request-card.active {
+      background: var(--lime);
+    }
+
+    .request-card strong {
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .request-card span {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    pre {
+      overflow: auto;
+      min-height: 360px;
+      max-height: 640px;
+      margin: 16px 0 0;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--lime);
+      padding: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: .78rem;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .empty {
+      border: 3px dashed var(--line);
+      padding: 18px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    @media (max-width: 840px) {
+      .top,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <a class="brand" href="./"><span class="mark"></span><span>OWNYOURWEB Admin</span></a>
+      <nav class="nav">
+        <a href="./">Agent Store</a>
+        <button class="primary" id="refreshBtn" type="button">Refresh Queue</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Build Queue</h1>
+    <p class="lead">Review agent-store requests, approve checkout, and generate the workspace the build agent will use.</p>
+    <span class="status" id="status">Loading</span>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Requests</h2>
+        <div class="request-list" id="requestList"></div>
+      </div>
+      <aside class="panel">
+        <h2>Packet</h2>
+        <div class="actions">
+          <button class="primary" id="approveBtn" type="button">Approve Checkout</button>
+          <button class="coral" id="projectBtn" type="button">Create Project Workspace</button>
+          <button id="copyBtn" type="button">Copy Packet</button>
+        </div>
+        <pre id="packetOutput">Select a request.</pre>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const requestList = document.getElementById('requestList');
+    const packetOutput = document.getElementById('packetOutput');
+    const statusEl = document.getElementById('status');
+    const approveBtn = document.getElementById('approveBtn');
+    const projectBtn = document.getElementById('projectBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    let selectedId = '';
+    let selectedPacket = null;
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    async function loadRequests() {
+      setStatus('Loading');
+      const response = await fetch('/api/agent-store/requests');
+      const data = await response.json();
+      requestList.innerHTML = '';
+      if (!data.requests?.length) {
+        requestList.innerHTML = '<div class="empty">No requests yet.</div>';
+        packetOutput.textContent = 'Select a request.';
+        setStatus('Empty');
+        return;
+      }
+
+      for (const request of data.requests) {
+        const card = document.createElement('button');
+        card.className = 'request-card';
+        card.type = 'button';
+        card.dataset.id = request.request_id;
+        card.innerHTML = `
+          <strong>${escapeHtml(request.business_name || 'Unnamed Request')}</strong>
+          <span>${escapeHtml([request.customer_first_name, request.customer_last_name].filter(Boolean).join(' ') || 'No customer name')} / ${escapeHtml(request.customer_email || 'No email')}</span>
+          <span>${escapeHtml(request.package || 'No package')} / ${escapeHtml(request.status || 'pending')}</span>
+          <span>${escapeHtml(request.budget_range || 'No budget')} / ${escapeHtml(request.payment_status || 'payment pending')}</span>
+          <span>Notify: ${escapeHtml(request.notification_status || 'not recorded')}</span>
+        `;
+        card.addEventListener('click', () => selectRequest(request.request_id));
+        requestList.append(card);
+      }
+      setStatus(`${data.requests.length} request${data.requests.length === 1 ? '' : 's'}`);
+      if (!selectedId || !data.requests.some((request) => request.request_id === selectedId)) {
+        await selectRequest(data.requests[0].request_id);
+      }
+    }
+
+    async function selectRequest(requestId) {
+      selectedId = requestId;
+      document.querySelectorAll('.request-card').forEach((card) => {
+        card.classList.toggle('active', card.dataset.id === requestId);
+      });
+      const response = await fetch(`/api/agent-store/request?request_id=${encodeURIComponent(requestId)}`);
+      const data = await response.json();
+      selectedPacket = data.packet;
+      packetOutput.textContent = JSON.stringify(data.packet, null, 2);
+      setStatus(`Selected ${data.packet.business_name || requestId}`);
+    }
+
+    async function postAction(path) {
+      if (!selectedId) {
+        setStatus('Select a request first');
+        return;
+      }
+      setStatus('Working');
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ request_id: selectedId })
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setStatus(data.error || 'Action failed');
+        return;
+      }
+      selectedPacket = data.packet;
+      packetOutput.textContent = JSON.stringify(data.packet, null, 2);
+      setStatus(path.includes('create-project') ? 'Project workspace created' : 'Checkout approved');
+      await loadRequests();
+      await selectRequest(selectedId);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    approveBtn.addEventListener('click', () => postAction('/api/agent-store/approve'));
+    projectBtn.addEventListener('click', () => postAction('/api/agent-store/create-project'));
+    refreshBtn.addEventListener('click', loadRequests);
+    copyBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(packetOutput.textContent);
+      setStatus('Packet copied');
+    });
+
+    loadRequests();
+  </script>
+</body>
+</html>

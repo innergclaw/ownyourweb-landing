@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWNYOURWEB Agent Store | Start A Web System Build</title>
+  <meta name="description" content="Start a website, demo site, automation, or web system request through the OWNYOURWEB Agent Store.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --graphite: #232323;
+      --muted: #686761;
+      --line: #191919;
+      --lime: #c8ff2e;
+      --amber: #ffb000;
+      --coral: #ff4f32;
+      --cyan: #31d8ff;
+      --shadow: 0 12px 0 rgba(13, 13, 13, .18);
+      --soft: 0 18px 60px rgba(13, 13, 13, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 3px solid var(--line);
+      background: rgba(251, 250, 245, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      box-shadow: 5px 5px 0 var(--lime);
+      flex: 0 0 auto;
+    }
+
+    .brand-mark span:nth-child(1) { background: var(--lime); }
+    .brand-mark span:nth-child(2) { background: var(--amber); }
+    .brand-mark span:nth-child(3) { background: var(--coral); }
+    .brand-mark span:nth-child(4) { background: var(--cyan); }
+
+    .brand-text {
+      display: grid;
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .brand-text small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      border: 2px solid transparent;
+      padding: 0 10px;
+      color: var(--graphite);
+      font-size: .83rem;
+      font-weight: 800;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      border-color: var(--line);
+      background: var(--white);
+      outline: none;
+    }
+
+    .nav .nav-cta {
+      border-color: var(--line);
+      background: var(--lime);
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .hero {
+      padding: 82px 0 58px;
+      border-bottom: 3px solid var(--line);
+      background:
+        radial-gradient(circle at 80% 12%, rgba(49,216,255,.24), transparent 28%),
+        radial-gradient(circle at 12% 14%, rgba(200,255,46,.28), transparent 24%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .hero-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      width: max-content;
+      max-width: 100%;
+      margin: 0 0 14px;
+      display: inline-flex;
+      align-items: center;
+      border: 3px solid var(--line);
+      background: var(--amber);
+      padding: 8px 12px;
+      color: var(--ink);
+      font-size: .78rem;
+      font-weight: 1000;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      line-height: .88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(4.4rem, 11vw, 9.6rem);
+    }
+
+    h1 span {
+      display: block;
+      color: var(--coral);
+      text-shadow:
+        3px 0 var(--line),
+        -3px 0 var(--line),
+        0 3px var(--line),
+        0 -3px var(--line);
+    }
+
+    h1 .ink-line {
+      color: var(--ink);
+      text-shadow: none;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 20px 0 0;
+      color: var(--graphite);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.55;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      padding: 0 18px;
+      color: var(--ink);
+      font-size: .88rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 5px 5px 0 var(--line);
+      text-align: center;
+    }
+
+    .btn.primary { background: var(--lime); }
+    .btn.secondary { background: var(--white); }
+    .btn.coral { background: var(--coral); color: var(--white); }
+    .btn.cyan { background: var(--cyan); }
+
+    .agent-panel {
+      display: grid;
+      gap: 14px;
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .terminal {
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 16px;
+      min-height: 300px;
+      display: grid;
+      align-content: end;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .bubble {
+      width: fit-content;
+      max-width: 100%;
+      border: 2px solid rgba(251,250,245,.4);
+      padding: 10px 12px;
+      font-size: .9rem;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .bubble.agent { background: rgba(200,255,46,.14); color: var(--lime); }
+    .bubble.user { justify-self: end; background: rgba(49,216,255,.16); color: var(--cyan); }
+    .bubble.store { background: rgba(255,176,0,.16); color: var(--amber); }
+
+    .packet {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .packet div {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 12px;
+      min-height: 92px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .packet b {
+      font-family: Anton, Impact, sans-serif;
+      font-size: 1.8rem;
+      line-height: .9;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .packet span {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 3px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(280px, .42fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-size: clamp(3.2rem, 7vw, 6.8rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--graphite);
+      font-size: 1rem;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .offer-grid,
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .offer-card,
+    .step-card,
+    .explain-card,
+    .intake-card,
+    .output-card {
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .offer-card {
+      display: grid;
+      gap: 18px;
+      padding: 20px;
+      min-height: 360px;
+    }
+
+    .offer-card:nth-child(1) { background: linear-gradient(135deg, rgba(200,255,46,.28), var(--white) 42%); }
+    .offer-card:nth-child(2) { background: linear-gradient(135deg, rgba(49,216,255,.24), var(--white) 42%); }
+    .offer-card:nth-child(3) { background: linear-gradient(135deg, rgba(255,79,50,.22), var(--white) 42%); }
+
+    .offer-card small,
+    .step-card small {
+      color: var(--coral);
+      font-size: .74rem;
+      font-weight: 1000;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .offer-card h3,
+    .step-card h3 {
+      font-size: clamp(2.3rem, 4vw, 3.6rem);
+    }
+
+    .offer-card p,
+    .step-card p,
+    .explain-card p,
+    .output-card p {
+      margin: 0;
+      color: var(--graphite);
+      line-height: 1.5;
+      font-weight: 750;
+    }
+
+    .price {
+      align-self: end;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 3px solid var(--line);
+      padding-top: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .price b {
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2.6rem;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .explain {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .explain .section-head p,
+    .explain h2 {
+      color: var(--paper);
+    }
+
+    .explain-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(320px, .58fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .explain-card {
+      background: var(--paper);
+      color: var(--ink);
+      padding: 24px;
+    }
+
+    .message-flow {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 12px;
+      align-items: start;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 12px;
+    }
+
+    .flow-row b {
+      border: 3px solid var(--line);
+      background: var(--lime);
+      padding: 8px;
+      font-size: .72rem;
+      text-transform: uppercase;
+    }
+
+    .flow-row span {
+      color: var(--graphite);
+      line-height: 1.45;
+      font-weight: 750;
+    }
+
+    .output-card {
+      padding: 22px;
+      background: var(--cyan);
+      color: var(--ink);
+    }
+
+    .output-card pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      margin: 18px 0 0;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--lime);
+      padding: 14px;
+      font-size: .78rem;
+      line-height: 1.4;
+    }
+
+    .steps-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .step-card {
+      min-height: 230px;
+      display: grid;
+      align-content: space-between;
+      gap: 16px;
+      padding: 18px;
+    }
+
+    .intake-card {
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,176,0,.22), transparent 36%),
+        var(--white);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      font-size: .78rem;
+      font-weight: 1000;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    label.full {
+      grid-column: 1 / -1;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 12px;
+      outline: none;
+      font-weight: 750;
+      box-shadow: 4px 4px 0 rgba(13,13,13,.14);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 4px rgba(49,216,255,.22), 4px 4px 0 rgba(13,13,13,.14);
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .form-note {
+      min-height: 44px;
+      display: none;
+      align-items: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      padding: 0 12px;
+      font-size: .85rem;
+      font-weight: 900;
+    }
+
+    .form-note.show {
+      display: inline-flex;
+    }
+
+    .final {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(200,255,46,.3), transparent 26%),
+        radial-gradient(circle at 86% 22%, rgba(255,79,50,.22), transparent 24%),
+        var(--paper);
+    }
+
+    .final-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: center;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 4vw, 38px);
+    }
+
+    .final-card p {
+      max-width: 680px;
+      margin: 14px 0 0;
+      color: rgba(251,250,245,.82);
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    footer {
+      padding: 24px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 920px) {
+      .topbar {
+        position: relative;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        overflow-x: visible;
+      }
+
+      .nav a {
+        min-height: 34px;
+        padding: 0 8px;
+        font-size: .68rem;
+        flex: 0 1 auto;
+      }
+
+      .hero-grid,
+      .section-head,
+      .explain-grid,
+      .final-card {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-grid,
+      .steps-grid,
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(3.4rem, 14vw, 5.5rem);
+      }
+    }
+
+    @media (max-width: 520px) {
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        width: min(100% - 24px, 1180px);
+        max-width: calc(100% - 24px);
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 11vw, 3.25rem);
+      }
+
+      .terminal {
+        min-height: 260px;
+        padding: 12px;
+        max-width: 100%;
+      }
+
+      .bubble {
+        font-size: .78rem;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+        width: 100%;
+        justify-self: stretch;
+      }
+
+      .agent-panel {
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .btn,
+      .form-actions .btn {
+        width: 100%;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .nav a {
+        width: 100%;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 6px;
+        font-size: .6rem;
+        text-align: center;
+        overflow-wrap: anywhere;
+      }
+
+      .hero .wrap,
+      .hero-grid,
+      .hero-grid > div,
+      .lead,
+      .agent-panel {
+        width: min(360px, calc(100vw - 24px)) !important;
+        max-width: min(360px, calc(100vw - 24px)) !important;
+      }
+
+      .packet,
+      .flow-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="../" aria-label="OWNYOURWEB home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-text">
+          <strong>OWNYOURWEB</strong>
+          <small>agent commerce systems</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="../">Home</a>
+        <a href="#offers">Offers</a>
+        <a href="#agent-commerce">Agent Commerce</a>
+        <a href="#intake">Start Request</a>
+        <a class="nav-cta" href="#intake">Build Packet</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">OWNYOURWEB Agent Store</div>
+          <h1><span class="ink-line">Start A Web</span><span class="ink-line">System</span><span>With An</span><span>Agent.</span></h1>
+          <p class="lead">Describe what your business needs, choose the type of web system, and let the OWNYOURWEB agent turn the request into a clean project packet ready for review, pricing, and build action.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#intake">Start A Request</a>
+            <a class="btn secondary" href="#agent-commerce">How Agent Commerce Works</a>
+          </div>
+        </div>
+        <aside class="agent-panel" aria-label="Agent store preview">
+          <div class="terminal">
+            <div class="bubble user">I need a premium website for my food business.</div>
+            <div class="bubble agent">Choose a build type, send assets, confirm budget, then I create the project packet.</div>
+            <div class="bubble store">OWNYOURWEB: request received, scope pending human approval.</div>
+          </div>
+          <div class="packet">
+            <div><b>Brief</b><span>business details</span></div>
+            <div><b>Scope</b><span>offer + timeline</span></div>
+            <div><b>Build</b><span>repo + tasks</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="offers">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Store Catalog</div>
+            <h2>Buy The System, Not Just The Page.</h2>
+          </div>
+          <p>Each offer is designed to become a structured agent request: business goal, assets, content, checkout path, scope, and next build action.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer-card">
+            <small>01 / Fast Launch</small>
+            <h3>Landing Page System</h3>
+            <p>For campaigns, service offers, personal brands, events, quote pages, or one clear conversion goal.</p>
+            <div class="price"><span>Deposit-ready</span><b>$750+</b></div>
+          </article>
+          <article class="offer-card">
+            <small>02 / Business Presence</small>
+            <h3>Local Website System</h3>
+            <p>For restaurants, towing, chefs, barbers, beauty brands, gyms, and service businesses that need trust fast.</p>
+            <div class="price"><span>Premium base</span><b>$1.5K+</b></div>
+          </article>
+          <article class="offer-card">
+            <small>03 / Custom Build</small>
+            <h3>Agent + Automation System</h3>
+            <p>For intake bots, build queues, Telegram updates, forms, dashboards, and operational workflows.</p>
+            <div class="price"><span>Scoped after intake</span><b>$3K+</b></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain" id="agent-commerce">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Agent Commerce</div>
+            <h2>Your Agent Talks To Our Agent.</h2>
+          </div>
+          <p>The store works for regular customers today, and it is structured for a future where buyer agents can request, price, purchase, and track web builds through the OWNYOURWEB agent.</p>
+        </div>
+        <div class="explain-grid">
+          <article class="explain-card">
+            <h3>How The Transaction Starts</h3>
+            <p>A person or their agent submits a web-system request. The OWNYOURWEB agent turns it into structured scope, asks for missing assets, then prepares the project for human approval.</p>
+            <div class="message-flow">
+              <div class="flow-row"><b>Buyer Agent</b><span>“My client needs a local business website with booking and a premium demo.”</span></div>
+              <div class="flow-row"><b>Store Agent</b><span>“Send business info, assets, package choice, timeline, and budget range.”</span></div>
+              <div class="flow-row"><b>Owner Review</b><span>Nasir approves price, scope, timeline, and the build moves into production.</span></div>
+            </div>
+          </article>
+          <aside class="output-card">
+            <h3>Project Packet Output</h3>
+            <p>This is the kind of structured request the store should generate behind the scenes.</p>
+            <pre>{
+  "store_agent": "ownyourweb",
+  "intent": "start_web_system_build",
+  "package": "local_website_system",
+  "business_name": "Dom's Kitchen",
+  "customer_first_name": "Dominique",
+  "customer_last_name": "Owner",
+  "customer_email": "dom@example.com",
+  "industry": "meal_prep_personal_chef",
+  "budget_range": "$1500+",
+  "status": "pending_owner_approval"
+}</pre>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Workflow</div>
+            <h2>From Prompt To Project.</h2>
+          </div>
+          <p>The store keeps the client experience simple while the backend routes requests into Telegram, owner approval, Stripe checkout, and build-ready project packets.</p>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card"><small>Step 01</small><h3>Describe</h3><p>Customer explains the business, offer, and site goal in plain language.</p></article>
+          <article class="step-card"><small>Step 02</small><h3>Package</h3><p>The request is matched to a website, demo, or automation system offer.</p></article>
+          <article class="step-card"><small>Step 03</small><h3>Approve</h3><p>OWNYOURWEB reviews scope, confirms price, and sends the right checkout path.</p></article>
+          <article class="step-card"><small>Step 04</small><h3>Build</h3><p>The project packet becomes files, tasks, repo work, and client updates.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="intake">
+      <div class="wrap">
+        <div class="intake-card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Start Request</div>
+              <h2>Tell The Agent What To Build.</h2>
+            </div>
+            <p>This creates a clean project packet, notifies Telegram, and gives the admin queue the customer details needed to approve a Stripe checkout link.</p>
+          </div>
+          <form id="agentRequestForm">
+            <label>Business Name
+              <input name="business_name" autocomplete="organization" placeholder="Ex: Dom's Kitchen">
+            </label>
+            <label>First Name
+              <input name="customer_first_name" autocomplete="given-name" placeholder="Ex: Dominique">
+            </label>
+            <label>Last Name
+              <input name="customer_last_name" autocomplete="family-name" placeholder="Ex: Carter">
+            </label>
+            <label>Email For Checkout
+              <input name="customer_email" type="email" autocomplete="email" placeholder="client@email.com">
+            </label>
+            <label>Industry
+              <input name="industry" placeholder="Ex: Meal prep, boutique, towing">
+            </label>
+            <label>Build Type
+              <select name="package">
+                <option>Landing Page System</option>
+                <option>Local Website System</option>
+                <option>Boutique / Product Site</option>
+                <option>Agent + Automation System</option>
+                <option>Custom Web System</option>
+              </select>
+            </label>
+            <label>Budget Range
+              <select name="budget_range">
+                <option>$750 - $1,500</option>
+                <option>$1,500 - $3,000</option>
+                <option>$3,000 - $7,500</option>
+                <option>$7,500+</option>
+              </select>
+            </label>
+            <label>Timeline
+              <input name="timeline" placeholder="Ex: 7 days, 2 weeks, this month">
+            </label>
+            <label>Buyer Agent / Contact
+              <input name="buyer_agent" placeholder="Agent handle, email, Telegram, or phone">
+            </label>
+            <label class="full">What Do You Want Built?
+              <textarea name="request" placeholder="Describe the website, pages, features, vibe, references, and what success looks like."></textarea>
+            </label>
+            <label class="full">Assets Available
+              <textarea name="assets" placeholder="Logo, photos, copy, current website, Instagram, brand colors, product list, booking link..."></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Generate Project Packet</button>
+              <button class="btn secondary" type="button" id="copyPacket">Copy Packet</button>
+              <span class="form-note" id="formNote">Packet generated below.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <aside class="output-card">
+          <h3>Generated Packet</h3>
+          <p>Use this as the first bridge into Telegram, OpenClaw, GitHub, Stripe, or your personal review workflow.</p>
+          <pre id="packetOutput">Fill out the request form to generate a project packet.</pre>
+        </aside>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap">
+        <div class="final-card">
+          <div>
+            <div class="eyebrow">Premium Rule</div>
+            <h2>Agents Can Start It. You Approve It.</h2>
+            <p>The store can collect, structure, and route requests, but final pricing and production stays under OWNYOURWEB control. That keeps the brand premium and protects the scope.</p>
+          </div>
+          <a class="btn primary" href="#intake">Start Another Packet</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>OWNYOURWEB Agent Store / INNERGINTEL ECOSYSTEM</footer>
+
+  <script>
+    const form = document.getElementById('agentRequestForm');
+    const output = document.getElementById('packetOutput');
+    const copyPacket = document.getElementById('copyPacket');
+    const formNote = document.getElementById('formNote');
+
+    function buildPayload() {
+      const data = Object.fromEntries(new FormData(form).entries());
+      return {
+        business_name: data.business_name || '',
+        customer_first_name: data.customer_first_name || '',
+        customer_last_name: data.customer_last_name || '',
+        customer_email: data.customer_email || '',
+        industry: data.industry || '',
+        package: data.package || '',
+        budget_range: data.budget_range || '',
+        timeline: data.timeline || '',
+        buyer_agent: data.buyer_agent || '',
+        request: data.request || '',
+        assets: data.assets || ''
+      };
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]');
+      const payload = buildPayload();
+      formNote.classList.add('show');
+      formNote.textContent = 'Creating request packet...';
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch('/api/agent-store/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || data.error || 'Request failed');
+        output.textContent = JSON.stringify(data.packet, null, 2);
+        if (data.packet.checkout_url) {
+          formNote.textContent = 'Packet saved. Stripe checkout created for owner review.';
+        } else {
+          formNote.textContent = 'Packet saved. Stripe checkout not created yet.';
+        }
+      } catch (error) {
+        output.textContent = JSON.stringify({
+          error: error.message,
+          local_payload: payload
+        }, null, 2);
+        formNote.textContent = 'Could not save to backend. Local packet shown below.';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    copyPacket.addEventListener('click', async () => {
+      const text = output.textContent.trim();
+      if (!text || text.startsWith('Fill out')) {
+        formNote.classList.add('show');
+        formNote.textContent = 'Generate a packet first.';
+        return;
+      }
+      await navigator.clipboard.writeText(text);
+      formNote.classList.add('show');
+      formNote.textContent = 'Packet copied.';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dom's Kitchen | Philly Meal Prep & Personal Chef</title>
+  <meta name="description" content="Philly-based comfort food made with love. Meal prep plans, full menus, and cooking support in West Oak Lane.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #16100d;
+      --cream: #fff8ef;
+      --vanilla: #f5e6d2;
+      --blush: #efb9aa;
+      --rose: #d98f82;
+      --cocoa: #3a241d;
+      --sage: #738160;
+      --line: rgba(58, 36, 29, .22);
+      --white: #fffdf8;
+      --shadow: 0 24px 70px rgba(58, 36, 29, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--cream);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(239, 185, 170, .42), transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(115, 129, 96, .18), transparent 24%),
+        linear-gradient(180deg, var(--cream), #f9eddf 56%, #fff7ec);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .25;
+      background-image:
+        linear-gradient(90deg, rgba(58,36,29,.09) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(58,36,29,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), rgba(0,0,0,.08));
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top-note {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      background: var(--cocoa);
+      color: var(--cream);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 248, 239, .84);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--blush);
+      box-shadow: 0 10px 28px rgba(58,36,29,.14);
+    }
+
+    .brand strong,
+    h1,
+    h2,
+    h3 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -.02em;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.18rem;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 4px;
+      color: rgba(22,16,13,.62);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .nav a {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 13px;
+      color: rgba(22,16,13,.72);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      border-color: var(--line);
+      background: var(--white);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .nav .order {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      padding: 0 13px;
+      color: var(--rose);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 18px 0 18px;
+      color: var(--cocoa);
+      font-size: clamp(4rem, 10vw, 8.4rem);
+      line-height: .86;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .lead {
+      max-width: 690px;
+      margin: 0;
+      color: rgba(22,16,13,.72);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.62;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 0 20px;
+      font-size: .84rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .18s ease, box-shadow .18s ease;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: var(--cream);
+      box-shadow: 0 14px 34px rgba(22,16,13,.18);
+    }
+
+    .btn.soft {
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(145deg, rgba(239,185,170,.4), rgba(255,253,248,.92)),
+        var(--white);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(239,185,170,.35);
+    }
+
+    .hero-card::before {
+      width: 180px;
+      height: 180px;
+      right: -50px;
+      top: -60px;
+    }
+
+    .hero-card::after {
+      width: 120px;
+      height: 120px;
+      left: -38px;
+      bottom: 62px;
+      background: rgba(115,129,96,.16);
+    }
+
+    .logo-stage {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid var(--blush);
+      box-shadow: 0 24px 58px rgba(58,36,29,.18);
+    }
+
+    .plate-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .plate-note span {
+      min-height: 78px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.68);
+      color: var(--cocoa);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 76px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(280px, .42fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      color: var(--cocoa);
+      font-size: clamp(2.7rem, 6vw, 5.7rem);
+      line-height: .94;
+    }
+
+    .section-head p,
+    .about-card p {
+      margin: 0;
+      color: rgba(22,16,13,.68);
+      line-height: 1.65;
+      font-weight: 700;
+    }
+
+    .about-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255,255,255,.66);
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 5vw, 42px);
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .plan-card,
+    .menu-card,
+    .service-card,
+    .location-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .plan-card.premium {
+      background:
+        linear-gradient(145deg, rgba(58,36,29,.94), rgba(88,56,45,.92)),
+        var(--cocoa);
+      color: var(--cream);
+    }
+
+    .plan-card h3,
+    .menu-card h3,
+    .service-card h3,
+    .location-card h3 {
+      margin: 0 0 10px;
+      color: var(--cocoa);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .plan-card.premium h3 {
+      color: var(--cream);
+    }
+
+    .plan-card p,
+    .menu-card p,
+    .service-card p,
+    .location-card p {
+      margin: 0 0 20px;
+      color: rgba(22,16,13,.66);
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .plan-card.premium p {
+      color: rgba(255,248,239,.76);
+    }
+
+    .price-list {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .price-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+      font-weight: 900;
+    }
+
+    .plan-card.premium .price-list li {
+      border-color: rgba(255,248,239,.18);
+    }
+
+    .price-list span {
+      color: var(--rose);
+      font-size: 1.12rem;
+    }
+
+    .plan-card.premium .price-list span {
+      color: var(--blush);
+    }
+
+    .save-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      border-radius: 999px;
+      background: rgba(115,129,96,.14);
+      padding: 0 12px;
+      color: var(--sage);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .premium .save-note {
+      background: rgba(239,185,170,.14);
+      color: var(--blush);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background:
+        linear-gradient(145deg, rgba(239,185,170,.28), transparent 52%),
+        rgba(255,255,255,.74);
+    }
+
+    .service-list {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 22px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .service-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      color: rgba(22,16,13,.72);
+      font-weight: 850;
+    }
+
+    .closing {
+      padding: 88px 0;
+      background:
+        linear-gradient(135deg, rgba(239,185,170,.32), rgba(255,255,255,.12)),
+        var(--vanilla);
+    }
+
+    .closing-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 26px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: var(--cocoa);
+      color: var(--cream);
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 5vw, 46px);
+    }
+
+    .closing-card h2 {
+      color: var(--cream);
+    }
+
+    .closing-card p {
+      max-width: 690px;
+      margin: 14px 0 0;
+      color: rgba(255,248,239,.74);
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 26px 0;
+      color: rgba(22,16,13,.58);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        position: relative;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+
+      .nav a {
+        flex: 0 1 auto;
+        min-height: 34px;
+        padding: 0 10px;
+        font-size: .68rem;
+      }
+
+      .hero {
+        padding: 50px 0;
+      }
+
+      .lead,
+      h1 {
+        max-width: 100%;
+      }
+
+      .hero-grid,
+      .section-head,
+      .plans-grid,
+      .split-grid,
+      .closing-card {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(3.3rem, 14vw, 5.2rem);
+      }
+
+      .plate-note {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        width: min(100% - 24px, 1120px);
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 10.5vw, 3.15rem);
+      }
+
+      .lead {
+        font-size: .98rem;
+        line-height: 1.55;
+      }
+
+      .top-note {
+        font-size: .66rem;
+        letter-spacing: .08em;
+      }
+
+      .plan-card,
+      .menu-card,
+      .service-card,
+      .location-card,
+      .about-card {
+        padding: 20px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-note">Made with love, served with soul</div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="Dom's Kitchen home">
+        <img src="assets/domskitchen-logo.jpg" alt="Dom's Kitchen logo">
+        <span>
+          <strong>Dom's Kitchen</strong>
+          <small>Philly comfort food</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#plans">Meal Prep</a>
+        <a href="#service">Cook Service</a>
+        <a href="#location">Location</a>
+        <a class="order" href="#order">Order</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Dom's Kitchen</span>
+          <h1><span>Philly-based</span><span>comfort food</span><span>made with</span><span>love.</span></h1>
+          <p class="lead">Scratch-made meals that feed the soul. From weekly meal prep to private cooking support, Dom's Kitchen brings fresh, flavorful comfort food straight to the people.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#plans">Order Meal Prep</a>
+            <a class="btn soft" href="#service">Inquire For Cook / Prep Service</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Dom's Kitchen brand preview">
+          <div class="logo-stage">
+            <img src="assets/domskitchen-logo.jpg" alt="Dom's Kitchen made with love served with soul">
+          </div>
+          <div class="plate-note">
+            <span>Fresh</span>
+            <span>Flavorful</span>
+            <span>Weekly</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="about-card">
+          <span class="eyebrow">About</span>
+          <h2>Comfort, quality, and consistency.</h2>
+          <p>Dom's Kitchen is a Philly-based food service built around comfort, quality, and consistency. Every meal is prepared with care, giving customers flavorful options that feel homemade, filling, and easy to enjoy throughout the week.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Meal Prep Plans</span>
+            <h2>Fresh meals for the week.</h2>
+          </div>
+          <p>Choose the plan that fits your schedule, taste, and goals. Subscription options are available for customers who want to save weekly.</p>
+        </div>
+        <div class="plans-grid">
+          <article class="plan-card">
+            <h3>Basic Meal Plan</h3>
+            <p>Includes chicken, turkey, and select fish options.</p>
+            <ul class="price-list">
+              <li>6 meals <span>$75</span></li>
+              <li>10 meals <span>$120</span></li>
+              <li>14 meals <span>$160</span></li>
+            </ul>
+            <span class="save-note">Subscriptions save weekly</span>
+          </article>
+
+          <article class="plan-card premium">
+            <h3>Premium Meal Plan</h3>
+            <p>Includes salmon, steak, shrimp, and crab options.</p>
+            <ul class="price-list">
+              <li>6 meals <span>$105</span></li>
+              <li>10 meals <span>$165</span></li>
+              <li>14 meals <span>$225</span></li>
+            </ul>
+            <span class="save-note">Weekly savings + free delivery</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split-grid">
+        <article class="menu-card">
+          <span class="eyebrow">Full Menu + Sides</span>
+          <h3>Want the full menu with available sides?</h3>
+          <p>Customers can request the full details before ordering to build the best meal prep plan for their schedule, taste, and goals.</p>
+          <a class="btn primary" href="#order">Request Full Menu</a>
+        </article>
+
+        <article class="location-card" id="location">
+          <span class="eyebrow">Location</span>
+          <h3>Serving Philadelphia.</h3>
+          <p>Serving the Philadelphia area, with a focus on West Oak Lane and surrounding neighborhoods.</p>
+          <a class="btn soft" href="#order">Ask About Delivery</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="service">
+      <div class="wrap">
+        <article class="service-card">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Cook + Prep Service</span>
+              <h2>Prep support in West Oak Lane.</h2>
+            </div>
+            <p>Dom's Kitchen is also available for prep and cooking service opportunities in the West Oak Lane area. Serious inquiries only.</p>
+          </div>
+          <ul class="service-list">
+            <li>Pay <strong>Weekly</strong></li>
+            <li>Shift availability <strong>12:30pm - 2:30am</strong></li>
+            <li>Inquiry type <strong>Serious only</strong></li>
+          </ul>
+          <a class="btn primary" href="#order">DM For Inquiries</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing" id="order">
+      <div class="wrap">
+        <div class="closing-card">
+          <div>
+            <span class="eyebrow">Ready To Eat Better?</span>
+            <h2>Let Dom's Kitchen handle the cooking.</h2>
+            <p>Order your meal prep today and enjoy fresh comfort food without the stress of planning, shopping, and cooking all week.</p>
+          </div>
+          <a class="btn primary" href="https://instagram.com/" target="_blank" rel="noopener">Order Meal Prep</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dom's Kitchen / Philadelphia / West Oak Lane
+  </footer>
+</body>
+</html>

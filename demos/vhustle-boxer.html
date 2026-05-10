@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V Hustle | Boxer Landing Page</title>
+  <meta name="description" content="Official-style boxer landing page for V Hustle with fight updates, sponsorship packages, and media.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #050403;
+      --charcoal: #11100e;
+      --panel: #191613;
+      --cream: #fff5df;
+      --muted: #c9b99b;
+      --orange: #ef7800;
+      --orange-2: #ff9a16;
+      --red: #c31414;
+      --line: rgba(255, 245, 223, .18);
+      --shadow: 0 26px 80px rgba(0, 0, 0, .45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--black);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 22% 12%, rgba(239, 120, 0, .32), transparent 28%),
+        radial-gradient(circle at 82% 22%, rgba(195, 20, 20, .22), transparent 24%),
+        linear-gradient(145deg, #050403 0%, #11100e 46%, #1d1005 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .18;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.18));
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .fight-tape {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+      background: var(--orange);
+    }
+
+    .fight-tape span {
+      display: inline-flex;
+      min-width: max-content;
+      margin-left: 22px;
+      padding: 6px 14px;
+      background: transparent;
+      border: 0;
+      color: #080604;
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 4, 3, .82);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 54px;
+      height: 54px;
+      overflow: hidden;
+      border: 2px solid var(--orange);
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 39%;
+      transform: scale(1.72);
+    }
+
+    .brand strong,
+    h1,
+    h2,
+    h3,
+    .stat strong {
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .nav a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      padding: 0 13px;
+      color: rgba(255,245,223,.84);
+      font-size: .77rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.04);
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      outline: none;
+      border-color: var(--orange);
+      color: var(--cream);
+    }
+
+    .nav .solid {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #080604;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      content: "VHUSTLE";
+      position: absolute;
+      left: 50%;
+      top: 44px;
+      transform: translateX(-50%);
+      color: rgba(255,245,223,.035);
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(8rem, 21vw, 20rem);
+      line-height: .8;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, .78fr);
+      gap: 42px;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+      padding: 74px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 38px;
+      border: 1px solid rgba(239,120,0,.72);
+      background: rgba(239,120,0,.1);
+      padding: 0 13px;
+      color: var(--orange-2);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 20px 0 18px;
+      font-size: clamp(4.6rem, 11vw, 10.2rem);
+      line-height: .78;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--orange);
+      text-shadow: 0 0 36px rgba(239, 120, 0, .28);
+    }
+
+    h1 .cream {
+      color: var(--cream);
+      text-shadow: none;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 0;
+      color: rgba(255,245,223,.82);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--cream);
+      padding: 0 20px;
+      color: var(--cream);
+      font-size: .86rem;
+      font-weight: 950;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      box-shadow: 7px 7px 0 rgba(255,245,223,.12);
+    }
+
+    .btn.primary {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #080604;
+      box-shadow: 7px 7px 0 rgba(239,120,0,.25);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 24%;
+      filter: contrast(1.05) saturate(1.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      min-height: 106px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--orange);
+      font-size: 2.1rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 82px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(260px, .42fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 5.6rem);
+      line-height: .9;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: rgba(255,245,223,.78);
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      min-height: 214px;
+      display: grid;
+      align-content: space-between;
+      gap: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(239,120,0,.16), transparent 44%),
+        rgba(255,255,255,.045);
+    }
+
+    .feature small {
+      color: var(--orange-2);
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .feature h3 {
+      margin: 0;
+      font-size: 2.2rem;
+      line-height: .98;
+    }
+
+    .feature p {
+      margin: 0;
+      color: rgba(255,245,223,.72);
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .media-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .media-card.wide {
+      grid-column: span 2;
+    }
+
+    .media-card.wide img {
+      aspect-ratio: 8 / 5;
+      object-position: center 18%;
+    }
+
+    .media-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 17px;
+      border-top: 1px solid var(--line);
+    }
+
+    .media-caption strong {
+      font-size: .85rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .media-caption span {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .sponsor {
+      background:
+        linear-gradient(135deg, rgba(239,120,0,.18), transparent 45%),
+        var(--charcoal);
+    }
+
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, .8fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .poster {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #090807;
+      box-shadow: var(--shadow);
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .package-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .package {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: rgba(5,4,3,.52);
+    }
+
+    .package strong {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    .package p {
+      margin: 8px 0 0;
+      color: rgba(255,245,223,.72);
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .price {
+      min-width: 104px;
+      display: grid;
+      place-items: center;
+      padding: 16px 14px;
+      border: 2px solid var(--orange);
+      color: var(--orange-2);
+      font-family: Anton, Impact, sans-serif;
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .final-cta {
+      padding: 92px 0;
+      background:
+        linear-gradient(90deg, rgba(239,120,0,.2), transparent 52%),
+        var(--black);
+    }
+
+    .cta-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(135deg, rgba(239,120,0,.14) 0 12px, transparent 12px 26px),
+        rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      max-width: 760px;
+    }
+
+    .cta-box p {
+      max-width: 680px;
+      margin: 14px 0 0;
+      color: rgba(255,245,223,.78);
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        position: relative;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+      }
+
+      .nav a {
+        flex: 0 0 auto;
+      }
+
+      .hero-grid,
+      .section-head,
+      .sponsor-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        padding: 54px 0 42px;
+      }
+
+      h1 {
+        font-size: clamp(2.95rem, 13vw, 5.8rem);
+        max-width: 100%;
+      }
+
+      .stats,
+      .feature-grid,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .media-card.wide {
+        grid-column: auto;
+      }
+
+      .media-card.wide img {
+        aspect-ratio: 4 / 5;
+      }
+
+      .package {
+        grid-template-columns: 1fr;
+      }
+
+      .price {
+        width: max-content;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .fight-tape span {
+        font-size: .66rem;
+      }
+
+      .hero-card::before {
+        left: 22px;
+        top: 22px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .feature,
+      .package,
+      .cta-box {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="fight-tape">
+    <span>V Hustle</span>
+    <span>The Messiah</span>
+    <span>Philadelphia Fight Brand</span>
+    <span>Sponsorships Open</span>
+  </div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="V Hustle home">
+        <span class="brand-mark"><img src="assets/vhustle/vee.jpg" alt=""></span>
+        <span>
+          <strong>V Hustle</strong>
+          <small>The Messiah</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#story">Story</a>
+        <a href="#media">Media</a>
+        <a href="#sponsor">Sponsor</a>
+        <a class="solid" href="#contact">Book / Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Official Fight Presence</span>
+          <h1><span class="cream">Built For The</span><span>Next Bell.</span></h1>
+          <p class="hero-copy">A focused home base for fight updates, sponsor visibility, event promotion, behind-the-scenes content, and direct booking conversations.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#sponsor">View Sponsor Packages</a>
+            <a class="btn" href="#media">Watch The Movement</a>
+          </div>
+          <div class="stats" aria-label="Boxer highlights">
+            <div class="stat"><strong>PHL</strong><span>Fight market</span></div>
+            <div class="stat"><strong>24/7</strong><span>Training mindset</span></div>
+            <div class="stat"><strong>LIVE</strong><span>Sponsor slots</span></div>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Behind the scenes preview">
+          <img src="assets/vhustle/vee4.jpg" alt="V Hustle behind the scenes boxing content">
+        </aside>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">The Brand</span>
+            <h2>Pressure, Presence, Promotion.</h2>
+          </div>
+          <p>Every fighter needs more than a profile link. The page should make the boxer look official, make sponsors understand the value, and make fans know where to follow the next move.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <small>01</small>
+            <div>
+              <h3>Fight Identity</h3>
+              <p>Bold visuals, strong nickname placement, and a clean destination for the fighter’s public image.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <small>02</small>
+            <div>
+              <h3>Sponsor Value</h3>
+              <p>Clear packages for shorts logos, story posts, main page collaborations, and brand visibility.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <small>03</small>
+            <div>
+              <h3>Fan Motion</h3>
+              <p>Promote fight nights, behind-the-scenes videos, ticket updates, training clips, and upcoming announcements.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="media">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Media Wall</span>
+            <h2>Proof In Public.</h2>
+          </div>
+          <p>Use the page as a clean hub for social proof, upcoming events, sponsor posts, and highlight content without making people dig through a feed.</p>
+        </div>
+        <div class="media-grid">
+          <article class="media-card">
+            <img src="assets/vhustle/vee2.jpg" alt="V Hustle sponsorship package post">
+            <div class="media-caption"><strong>Sponsor Packages</strong><span>Brand placement</span></div>
+          </article>
+          <article class="media-card wide">
+            <img src="assets/vhustle/vee3.jpg" alt="Father's Day Brawl fight flyer">
+            <div class="media-caption"><strong>Fight Night</strong><span>Event promotion</span></div>
+          </article>
+          <article class="media-card">
+            <img src="assets/vhustle/vee4.jpg" alt="Behind the scenes boxing content">
+            <div class="media-caption"><strong>Behind The Scenes</strong><span>Personality</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sponsor" id="sponsor">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Sponsor Menu</span>
+            <h2>Put Your Brand In The Fight.</h2>
+          </div>
+          <p>Simple sponsor options make it easier for businesses to say yes, understand what they receive, and contact the team fast.</p>
+        </div>
+        <div class="sponsor-grid">
+          <div class="poster">
+            <img src="assets/vhustle/vee2.jpg" alt="V Hustle sponsor package flyer">
+          </div>
+          <div class="package-list">
+            <article class="package">
+              <div>
+                <strong>Logo On Shorts</strong>
+                <p>Brand placement on fight shorts for visibility during event media and photo content.</p>
+              </div>
+              <span class="price">$500</span>
+            </article>
+            <article class="package">
+              <div>
+                <strong>Shorts + Story Posts</strong>
+                <p>Logo placement plus recurring story visibility during the campaign window.</p>
+              </div>
+              <span class="price">$400</span>
+            </article>
+            <article class="package">
+              <div>
+                <strong>Main Page Collab</strong>
+                <p>Logo placement, story posts, and a main page collaboration for stronger reach.</p>
+              </div>
+              <span class="price">$1000</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="contact">
+      <div class="wrap">
+        <div class="cta-box">
+          <div>
+            <span class="eyebrow">Business Inquiries</span>
+            <h2>Sponsor The Movement.</h2>
+            <p>For sponsorships, collaborations, appearances, fight-night promotion, and booking opportunities, send a direct message and lock in the next move.</p>
+          </div>
+          <a class="btn primary" href="https://instagram.com/vhustle" target="_blank" rel="noopener">DM @VHUSTLE</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    V Hustle / The Messiah / Philadelphia
+  </footer>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+data/agent-store-requests/*.json
+data/agent-store-requests/*.md
+data/agent-store-projects/
