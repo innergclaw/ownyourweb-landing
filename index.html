@@ -798,6 +798,7 @@
       padding: 18px;
       display: grid;
       align-content: space-between;
+      gap: 14px;
     }
 
     .shopnas-card::before,
@@ -845,13 +846,49 @@
 
     .shopnas-card strong {
       display: block;
-      margin-top: 64px;
+      margin-top: 28px;
       font-family: Anton, Impact, sans-serif;
-      font-size: clamp(3rem, 6.8vw, 5.8rem);
+      font-size: clamp(2.6rem, 5.4vw, 4.7rem);
       font-weight: 400;
       line-height: .86;
       text-transform: uppercase;
       text-shadow: 5px 5px 0 var(--line);
+    }
+
+    .shopnas-proof-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .shopnas-proof-grid a {
+      position: relative;
+      display: block;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border: 3px solid var(--white);
+      background: var(--ink);
+      box-shadow: 5px 5px 0 rgba(0,0,0,.45);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .shopnas-proof-grid a:nth-child(1) { transform: rotate(-3deg); }
+    .shopnas-proof-grid a:nth-child(2) { transform: translateY(16px) rotate(2deg); }
+    .shopnas-proof-grid a:nth-child(3) { transform: rotate(-1deg); }
+
+    .shopnas-proof-grid a:hover {
+      transform: translate(3px, 3px) rotate(0deg);
+      box-shadow: 2px 2px 0 rgba(0,0,0,.5);
+    }
+
+    .shopnas-proof-grid img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .shopnas-card-bottom {
@@ -1361,11 +1398,17 @@
       }
 
       .shopnas-card {
-        min-height: 320px;
+        min-height: 430px;
       }
 
       .shopnas-card strong {
-        margin-top: 48px;
+        margin-top: 30px;
+      }
+
+      .shopnas-proof-grid {
+        grid-template-columns: repeat(3, minmax(92px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 18px;
       }
 
       .shopnas-actions .btn {
@@ -1511,7 +1554,18 @@
           <aside class="shopnas-card" aria-label="SHOPNASGRAPHICS brand preview">
             <div class="shopnas-card-top">
               <small>Logo • Brand • Visuals</small>
-              <strong>Shop<br>Nas<br>GFX</strong>
+              <strong>Selected<br>Logo<br>Work</strong>
+              <div class="shopnas-proof-grid" aria-label="Selected SHOPNASGRAPHICS portfolio logos">
+                <a href="https://www.behance.net/gallery/159824351/Logo-Designs-By-NasGfx-Part-1-" target="_blank" rel="noopener">
+                  <img src="assets/shopnasgraphics/behance-logo-01.webp" alt="T Vision logo design by SHOPNASGRAPHICS" loading="lazy">
+                </a>
+                <a href="https://www.behance.net/gallery/159824351/Logo-Designs-By-NasGfx-Part-1-" target="_blank" rel="noopener">
+                  <img src="assets/shopnasgraphics/behance-logo-02.webp" alt="AM Productions logo design by SHOPNASGRAPHICS" loading="lazy">
+                </a>
+                <a href="https://www.behance.net/gallery/159824351/Logo-Designs-By-NasGfx-Part-1-" target="_blank" rel="noopener">
+                  <img src="assets/shopnasgraphics/behance-logo-03.webp" alt="Keems Car Drip logo design by SHOPNASGRAPHICS" loading="lazy">
+                </a>
+              </div>
             </div>
             <div class="shopnas-card-bottom">
               <span>Identity</span>
