@@ -1454,6 +1454,7 @@
     <a class="back-top" href="#top" aria-label="Back to top">↑</a>
   </div>
 
+  <script src="/api-config.js"></script>
   <script>
     const signupForm = document.getElementById('signupForm');
     const messageBox = document.getElementById('messageBox');
@@ -1461,6 +1462,7 @@
     const messageText = document.getElementById('messageText');
     const submitBtn = document.getElementById('submitBtn');
     const leadForm = document.getElementById('leadForm');
+    const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
 
     if (leadForm) {
       leadForm.addEventListener('submit', async function(event) {
@@ -1489,12 +1491,13 @@
         };
 
         try {
-          const response = await fetch('/api/agent-store/request', {
+          const apiUrl = `${AGENT_API_BASE}/api/agent-store/request`;
+          const response = await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
-          const data = await response.json();
+          const data = await response.json().catch(() => ({}));
 
           if (!response.ok) throw new Error(data.detail || data.error || 'Submission failed');
 
@@ -1508,7 +1511,8 @@
           submitBtn.textContent = 'Send Request';
           messageBox.classList.add('show');
           messageTitle.textContent = 'Try Again';
-          messageText.textContent = 'The request did not reach the build queue. Please try again in a moment.';
+          messageText.textContent = 'The request did not reach the OWNYOURWEB build queue. Please call or message us directly while we reconnect the live intake system.';
+          console.error('OWNYOURWEB form submission failed:', error);
         }
       });
     }

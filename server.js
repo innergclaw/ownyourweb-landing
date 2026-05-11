@@ -49,9 +49,18 @@ async function loadDotEnv(filePath) {
 function sendJson(res, status, data) {
   res.writeHead(status, {
     "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store"
+    "Cache-Control": "no-store",
+    ...corsHeaders()
   });
   res.end(JSON.stringify(data, null, 2));
+}
+
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": process.env.CORS_ALLOW_ORIGIN || "*",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
 }
 
 async function readJson(req) {
@@ -517,13 +526,19 @@ async function handleStatic(req, res) {
     "Content-Type": type,
     "Cache-Control": "no-store, no-cache, must-revalidate",
     "Pragma": "no-cache",
-    "Expires": "0"
+    "Expires": "0",
+    ...corsHeaders()
   });
   createReadStream(filePath).pipe(res);
 }
 
 const server = createServer(async (req, res) => {
   try {
+    if (req.method === "OPTIONS") {
+      res.writeHead(204, corsHeaders());
+      res.end();
+      return;
+    }
     if (req.method === "POST" && req.url?.startsWith("/api/agent-store/request")) {
       await handleAgentRequest(req, res);
       return;
