@@ -1463,6 +1463,7 @@
     const submitBtn = document.getElementById('submitBtn');
     const leadForm = document.getElementById('leadForm');
     const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
+    const INTAKE_ENDPOINT = window.OWNYOURWEB_INTAKE_ENDPOINT || '';
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvylgop';
 
     if (leadForm) {
@@ -1492,10 +1493,11 @@
         };
 
         try {
-          const isAgentApi = Boolean(AGENT_API_BASE);
-          const response = await fetch(isAgentApi ? `${AGENT_API_BASE}/api/agent-store/request` : FORMSPREE_ENDPOINT, {
+          const endpoint = INTAKE_ENDPOINT || (AGENT_API_BASE ? `${AGENT_API_BASE}/api/agent-store/request` : FORMSPREE_ENDPOINT);
+          const isJsonApi = Boolean(INTAKE_ENDPOINT || AGENT_API_BASE);
+          const response = await fetch(endpoint, {
             method: 'POST',
-            headers: isAgentApi
+            headers: isJsonApi
               ? { 'Content-Type': 'application/json' }
               : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(payload)

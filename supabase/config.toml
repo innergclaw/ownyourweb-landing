@@ -1,0 +1,4 @@
+project_id = ""
+
+[functions.ownyourweb-intake]
+verify_jwt = false
