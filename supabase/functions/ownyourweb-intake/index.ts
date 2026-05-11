@@ -146,14 +146,10 @@ async function savePacket(packet: ProjectPacket) {
 
 async function sendTelegram(packet: ProjectPacket) {
   const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
-  const chatIds = (Deno.env.get("TELEGRAM_CHAT_IDS") || Deno.env.get("TELEGRAM_CHAT_ID") || "")
-    .split(",")
-    .map((chatId) => chatId.trim())
-    .filter(Boolean);
   const topicChatId = Deno.env.get("TELEGRAM_AGENT_STORE_TOPIC_CHAT_ID");
   const topicThreadId = Deno.env.get("TELEGRAM_AGENT_STORE_TOPIC_THREAD_ID");
 
-  const destinations = chatIds.map((chatId) => ({ chatId, messageThreadId: "" }));
+  const destinations = [];
   if (topicChatId && topicThreadId) {
     destinations.push({ chatId: topicChatId, messageThreadId: topicThreadId });
   }

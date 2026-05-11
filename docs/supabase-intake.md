@@ -17,7 +17,7 @@ The live static site can stay on GitHub Pages while the form posts to a Supabase
 2. The form posts JSON to the `ownyourweb-intake` Edge Function.
 3. The function validates the payload.
 4. The packet is saved to `public.project_requests`.
-5. Telegram notifications are sent to the configured channel/group/topic with `ACCEPT` and `DECLINE` inline review buttons.
+5. Telegram notifications are sent to the configured Agent Store topic with `ACCEPT` and `DECLINE` inline review buttons.
 6. Later, Stripe approval/payment creation can be added to this same function or a second admin function.
 
 ## Required Supabase Secrets
@@ -26,7 +26,6 @@ Set these in Supabase Edge Function secrets:
 
 ```bash
 TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_IDS=-100...,-100...
 TELEGRAM_AGENT_STORE_TOPIC_CHAT_ID=-100...
 TELEGRAM_AGENT_STORE_TOPIC_THREAD_ID=3
 CORS_ALLOW_ORIGIN=https://ownyourweb.xyz
@@ -82,3 +81,4 @@ curl -X POST "https://PROJECT_REF.supabase.co/functions/v1/ownyourweb-intake" \
 - `2026-05-11`: Telegram notifications confirmed for the configured group, channel, and Agent Store topic.
 - `2026-05-11`: `ownyourweb.xyz` public config updated to the live Supabase endpoint.
 - `2026-05-11`: Telegram notifications updated with `ACCEPT` and `DECLINE` inline buttons that open the Agent Store admin review links.
+- `2026-05-11`: Telegram routing simplified to the single Agent Store topic group.
