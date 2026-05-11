@@ -111,6 +111,14 @@ function customerName(packet: ProjectPacket) {
   return [packet.customer_first_name, packet.customer_last_name].filter(Boolean).join(" ").trim();
 }
 
+function adminActionUrl(packet: ProjectPacket, action: "accept" | "decline") {
+  const params = new URLSearchParams({
+    request_id: packet.request_id,
+    action,
+  });
+  return `https://ownyourweb.xyz/agent-store/admin.html?${params.toString()}`;
+}
+
 async function savePacket(packet: ProjectPacket) {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -174,6 +182,15 @@ async function sendTelegram(packet: ProjectPacket) {
     `Request ID: ${packet.request_id}`,
   ].join("\n");
 
+  const replyMarkup = {
+    inline_keyboard: [
+      [
+        { text: "ACCEPT", url: adminActionUrl(packet, "accept") },
+        { text: "DECLINE", url: adminActionUrl(packet, "decline") },
+      ],
+    ],
+  };
+
   const results = [];
   for (const destination of destinations) {
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -184,6 +201,7 @@ async function sendTelegram(packet: ProjectPacket) {
         ...(destination.messageThreadId ? { message_thread_id: Number(destination.messageThreadId) } : {}),
         text: message,
         disable_web_page_preview: true,
+        reply_markup: replyMarkup,
       }),
     });
     const data = await response.json().catch(() => ({}));
@@ -231,11 +249,12 @@ Deno.serve(async (req) => {
 
   const database = await savePacket(packet);
   const telegram = await sendTelegram(packet);
+  const intakeOk = Boolean(database.ok) && (telegram.ok || telegram.status === "telegram_partially_sent");
 
   return jsonResponse({
-    ok: telegram.ok,
+    ok: intakeOk,
     packet,
     database,
     telegram,
-  }, telegram.ok ? 200 : 502);
+  }, intakeOk ? 200 : 502);
 });
