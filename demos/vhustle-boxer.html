@@ -121,12 +121,16 @@
       background: #fff;
     }
 
-    .brand-mark img {
+    .brand-mark::before {
+      content: "VH";
+      display: grid;
+      place-items: center;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 39%;
-      transform: scale(1.72);
+      color: #080604;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 1.42rem;
+      line-height: 1;
     }
 
     .brand strong,
@@ -213,7 +217,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.04fr) minmax(320px, .78fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 42px;
       align-items: center;
       min-height: calc(100vh - 120px);
@@ -289,22 +293,6 @@
       border-color: var(--orange);
       color: #080604;
       box-shadow: 7px 7px 0 rgba(239,120,0,.25);
-    }
-
-    .hero-card {
-      position: relative;
-      padding: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card img {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 24%;
-      filter: contrast(1.05) saturate(1.08);
     }
 
     .stats {
@@ -402,57 +390,6 @@
       font-weight: 700;
     }
 
-    .media-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-    }
-
-    .media-card {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-    }
-
-    .media-card img {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .media-card.wide {
-      grid-column: span 2;
-    }
-
-    .media-card.wide img {
-      aspect-ratio: 8 / 5;
-      object-position: center 18%;
-    }
-
-    .media-caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 17px;
-      border-top: 1px solid var(--line);
-    }
-
-    .media-caption strong {
-      font-size: .85rem;
-      font-weight: 950;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .media-caption span {
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 800;
-      text-align: right;
-    }
-
     .sponsor {
       background:
         linear-gradient(135deg, rgba(239,120,0,.18), transparent 45%),
@@ -464,21 +401,6 @@
       grid-template-columns: minmax(320px, .8fr) minmax(0, 1fr);
       gap: 22px;
       align-items: stretch;
-    }
-
-    .poster {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: #090807;
-      box-shadow: var(--shadow);
-    }
-
-    .poster img {
-      width: 100%;
-      height: 100%;
-      min-height: 520px;
-      object-fit: cover;
-      object-position: center top;
     }
 
     .package-list {
@@ -565,6 +487,37 @@
       text-transform: uppercase;
     }
 
+    .video-gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 44px 0;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(239,120,0,.26), transparent 35%),
+        linear-gradient(180deg, #050403 0%, #130d08 100%);
+    }
+
+    .video-panel {
+      width: min(760px, calc(100% - 28px));
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+    }
+
+    .video-panel video {
+      width: 100%;
+      max-height: 78vh;
+      display: block;
+      border: 2px solid var(--orange);
+      background: #000;
+      box-shadow: var(--shadow);
+    }
+
+    .video-panel .btn {
+      min-width: min(100%, 320px);
+    }
+
     @media (max-width: 860px) {
       .topbar {
         position: relative;
@@ -605,17 +558,8 @@
       }
 
       .stats,
-      .feature-grid,
-      .media-grid {
+      .feature-grid {
         grid-template-columns: 1fr;
-      }
-
-      .media-card.wide {
-        grid-column: auto;
-      }
-
-      .media-card.wide img {
-        aspect-ratio: 4 / 5;
       }
 
       .package {
@@ -636,11 +580,6 @@
         font-size: .66rem;
       }
 
-      .hero-card::before {
-        left: 22px;
-        top: 22px;
-      }
-
       .btn {
         width: 100%;
       }
@@ -650,10 +589,21 @@
       .cta-box {
         padding: 18px;
       }
+
+      .video-gate {
+        padding: 22px 0;
+      }
     }
   </style>
 </head>
 <body>
+  <section class="video-gate" aria-label="V Hustle intro video">
+    <div class="video-panel">
+      <video src="assets/vhustle/intro.mp4" controls autoplay muted playsinline preload="metadata"></video>
+      <a class="btn primary" href="#boxer">Go To Boxer</a>
+    </div>
+  </section>
+
   <div class="fight-tape">
     <span>V Hustle</span>
     <span>The Messiah</span>
@@ -663,8 +613,8 @@
 
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="#top" aria-label="V Hustle home">
-        <span class="brand-mark"><img src="assets/vhustle/vee.jpg" alt=""></span>
+      <a class="brand" href="#boxer" aria-label="V Hustle home">
+        <span class="brand-mark" aria-hidden="true"></span>
         <span>
           <strong>V Hustle</strong>
           <small>The Messiah</small>
@@ -679,7 +629,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="boxer">
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
@@ -696,9 +646,6 @@
             <div class="stat"><strong>LIVE</strong><span>Sponsor slots</span></div>
           </div>
         </div>
-        <aside class="hero-card" aria-label="Behind the scenes preview">
-          <img src="assets/vhustle/vee4.jpg" alt="V Hustle behind the scenes boxing content">
-        </aside>
       </div>
     </section>
 
@@ -746,20 +693,6 @@
           </div>
           <p>Use the page as a clean hub for social proof, upcoming events, sponsor posts, and highlight content without making people dig through a feed.</p>
         </div>
-        <div class="media-grid">
-          <article class="media-card">
-            <img src="assets/vhustle/vee2.jpg" alt="V Hustle sponsorship package post">
-            <div class="media-caption"><strong>Sponsor Packages</strong><span>Brand placement</span></div>
-          </article>
-          <article class="media-card wide">
-            <img src="assets/vhustle/vee3.jpg" alt="Father's Day Brawl fight flyer">
-            <div class="media-caption"><strong>Fight Night</strong><span>Event promotion</span></div>
-          </article>
-          <article class="media-card">
-            <img src="assets/vhustle/vee4.jpg" alt="Behind the scenes boxing content">
-            <div class="media-caption"><strong>Behind The Scenes</strong><span>Personality</span></div>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -773,9 +706,6 @@
           <p>Simple sponsor options make it easier for businesses to say yes, understand what they receive, and contact the team fast.</p>
         </div>
         <div class="sponsor-grid">
-          <div class="poster">
-            <img src="assets/vhustle/vee2.jpg" alt="V Hustle sponsor package flyer">
-          </div>
           <div class="package-list">
             <article class="package">
               <div>
