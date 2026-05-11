@@ -1463,6 +1463,7 @@
     const submitBtn = document.getElementById('submitBtn');
     const leadForm = document.getElementById('leadForm');
     const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvylgop';
 
     if (leadForm) {
       leadForm.addEventListener('submit', async function(event) {
@@ -1491,10 +1492,12 @@
         };
 
         try {
-          const apiUrl = `${AGENT_API_BASE}/api/agent-store/request`;
-          const response = await fetch(apiUrl, {
+          const isAgentApi = Boolean(AGENT_API_BASE);
+          const response = await fetch(isAgentApi ? `${AGENT_API_BASE}/api/agent-store/request` : FORMSPREE_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: isAgentApi
+              ? { 'Content-Type': 'application/json' }
+              : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(payload)
           });
           const data = await response.json().catch(() => ({}));
