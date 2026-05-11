@@ -3,6 +3,14 @@
 Supabase is the official backend lane for OWNYOURWEB project requests.
 The live static site can stay on GitHub Pages while the form posts to a Supabase Edge Function.
 
+## Live Setup
+
+- Supabase project: `ownyourweb-systems`
+- Project ref: `zkyhhoxcrjkhywblzehr`
+- Edge Function: `ownyourweb-intake`
+- Live endpoint: `https://zkyhhoxcrjkhywblzehr.supabase.co/functions/v1/ownyourweb-intake`
+- Public site config: `api-config.js`
+
 ## Flow
 
 1. Visitor submits the form on `ownyourweb.xyz`.
@@ -18,7 +26,7 @@ Set these in Supabase Edge Function secrets:
 
 ```bash
 TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_IDS=-100..., -100...
+TELEGRAM_CHAT_IDS=-100...,-100...
 TELEGRAM_AGENT_STORE_TOPIC_CHAT_ID=-100...
 TELEGRAM_AGENT_STORE_TOPIC_THREAD_ID=3
 CORS_ALLOW_ORIGIN=https://ownyourweb.xyz
@@ -43,6 +51,12 @@ SUPABASE_SERVICE_ROLE_KEY
 window.OWNYOURWEB_INTAKE_ENDPOINT = "https://PROJECT_REF.supabase.co/functions/v1/ownyourweb-intake";
 ```
 
+For the current live project, `api-config.js` already points to:
+
+```js
+window.OWNYOURWEB_INTAKE_ENDPOINT = "https://zkyhhoxcrjkhywblzehr.supabase.co/functions/v1/ownyourweb-intake";
+```
+
 ## Test
 
 ```bash
@@ -58,3 +72,12 @@ curl -X POST "https://PROJECT_REF.supabase.co/functions/v1/ownyourweb-intake" \
     "request": "Testing Supabase intake to Telegram."
   }'
 ```
+
+## Verification Log
+
+- `2026-05-11`: Database migration applied.
+- `2026-05-11`: Edge Function deployed with JWT verification disabled.
+- `2026-05-11`: Edge Function secrets configured.
+- `2026-05-11`: Test packet inserted into `public.project_requests`.
+- `2026-05-11`: Telegram notifications confirmed for the configured group, channel, and Agent Store topic.
+- `2026-05-11`: `ownyourweb.xyz` public config updated to the live Supabase endpoint.
