@@ -748,6 +748,128 @@
       text-transform: uppercase;
     }
 
+    .shopnas-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .shopnas-copy {
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(200,255,46,.58) 0 28%, transparent 28% 100%),
+        var(--white);
+      padding: clamp(24px, 4vw, 42px);
+      box-shadow: 9px 9px 0 var(--line);
+    }
+
+    .shopnas-copy h2 {
+      max-width: 700px;
+    }
+
+    .shopnas-copy p {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--graphite);
+      font-size: 1.02rem;
+      font-weight: 750;
+      line-height: 1.62;
+    }
+
+    .shopnas-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .shopnas-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      border: 3px solid var(--line);
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255,176,0,.95), transparent 24%),
+        radial-gradient(circle at 78% 74%, rgba(255,79,50,.88), transparent 27%),
+        linear-gradient(145deg, var(--ink), #2b2b2b);
+      color: var(--white);
+      box-shadow: 9px 9px 0 rgba(13,13,13,.34);
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .shopnas-card::before,
+    .shopnas-card::after {
+      content: "";
+      position: absolute;
+      border: 3px solid var(--white);
+      opacity: .92;
+      transform: rotate(-7deg);
+    }
+
+    .shopnas-card::before {
+      width: 62%;
+      height: 42%;
+      left: 28px;
+      top: 58px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .shopnas-card::after {
+      width: 54%;
+      height: 34%;
+      right: 20px;
+      bottom: 70px;
+      background: rgba(200,255,46,.14);
+      transform: rotate(8deg);
+    }
+
+    .shopnas-card-top,
+    .shopnas-card-bottom {
+      position: relative;
+      z-index: 1;
+    }
+
+    .shopnas-card small {
+      display: inline-flex;
+      border: 2px solid var(--white);
+      background: var(--lime);
+      color: var(--ink);
+      padding: 8px 10px;
+      font-size: .72rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .shopnas-card strong {
+      display: block;
+      margin-top: 64px;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(3rem, 6.8vw, 5.8rem);
+      font-weight: 400;
+      line-height: .86;
+      text-transform: uppercase;
+      text-shadow: 5px 5px 0 var(--line);
+    }
+
+    .shopnas-card-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .shopnas-card-bottom span {
+      border: 2px solid rgba(255,255,255,.9);
+      background: rgba(255,255,255,.1);
+      padding: 10px 8px;
+      text-align: center;
+      font-size: .74rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
     .demo-panel {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
@@ -1054,6 +1176,7 @@
       .hero-grid,
       .section-head,
       .demo-panel,
+      .shopnas-panel,
       .contact {
         grid-template-columns: 1fr;
       }
@@ -1228,8 +1351,25 @@
 
       .demo-copy,
       .demo-image,
+      .shopnas-card,
       .step {
         min-height: 210px;
+      }
+
+      .shopnas-copy {
+        padding: 20px;
+      }
+
+      .shopnas-card {
+        min-height: 320px;
+      }
+
+      .shopnas-card strong {
+        margin-top: 48px;
+      }
+
+      .shopnas-actions .btn {
+        width: calc(100% - 8px);
       }
 
       .contact-panel,
@@ -1279,6 +1419,7 @@
           </div>
           <a href="agent-store/">Agent Store</a>
           <a href="boutique-sites/">Boutique</a>
+          <a href="#shopnasgraphics">SHOPNASGRAPHICS</a>
           <a href="#process">Process</a>
           <a href="https://innergclaw.github.io/ownyourweb/products/flyer-templates/">Prompt Pack</a>
           <a class="nav-cta" href="#start">Start</a>
@@ -1352,6 +1493,32 @@
               <h3>Web Systems</h3>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="section" id="shopnasgraphics">
+        <div class="wrap shopnas-panel">
+          <div class="shopnas-copy">
+            <div class="eyebrow">Design support inside the ecosystem</div>
+            <h2>Need the brand before the website?</h2>
+            <p>SHOPNASGRAPHICS handles logos, visual identity, promo graphics, and brand direction for businesses that need to look official before they launch online.</p>
+            <p>Bring the idea, name, industry, colors, and references. We turn it into design assets that can plug straight into your OWNYOURWEB site, offer page, flyer, or social campaign.</p>
+            <div class="shopnas-actions">
+              <a class="btn primary" href="https://shopnasgfx.com/" target="_blank" rel="noopener">Visit SHOPNASGRAPHICS</a>
+              <a class="btn secondary" href="https://shopnasgfx.com/#contact" target="_blank" rel="noopener">Start A Design Request</a>
+            </div>
+          </div>
+          <aside class="shopnas-card" aria-label="SHOPNASGRAPHICS brand preview">
+            <div class="shopnas-card-top">
+              <small>Logo • Brand • Visuals</small>
+              <strong>Shop<br>Nas<br>GFX</strong>
+            </div>
+            <div class="shopnas-card-bottom">
+              <span>Identity</span>
+              <span>Promo</span>
+              <span>Launch</span>
+            </div>
+          </aside>
         </div>
       </section>
 
