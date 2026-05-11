@@ -121,16 +121,12 @@
       background: #fff;
     }
 
-    .brand-mark::before {
-      content: "VH";
-      display: grid;
-      place-items: center;
+    .brand-mark img {
       width: 100%;
       height: 100%;
-      color: #080604;
-      font-family: Anton, Impact, sans-serif;
-      font-size: 1.42rem;
-      line-height: 1;
+      object-fit: cover;
+      object-position: center 39%;
+      transform: scale(1.72);
     }
 
     .brand strong,
@@ -614,7 +610,7 @@
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="#boxer" aria-label="V Hustle home">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-mark"><img src="assets/vhustle/vee.jpg" alt=""></span>
         <span>
           <strong>V Hustle</strong>
           <small>The Messiah</small>
