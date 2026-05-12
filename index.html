@@ -200,6 +200,31 @@
       text-transform: uppercase;
     }
 
+    .demo-card-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .demo-status {
+      flex: 0 0 auto;
+      border: 2px solid var(--line);
+      background: var(--lime);
+      padding: 5px 7px;
+      color: var(--ink);
+      font-size: .66rem;
+      font-weight: 1000;
+      line-height: 1;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    .demo-status.sold {
+      background: var(--coral);
+      color: var(--white);
+    }
+
     .demo-menu .demo-site-card strong {
       display: block;
       font-family: Anton, Impact, sans-serif;
@@ -1454,12 +1479,18 @@
             <button class="demo-sites-toggle" type="button" aria-haspopup="true" aria-expanded="false">Purchase Demo Sites</button>
             <div class="demo-menu" role="menu" aria-label="Demo sites">
               <a class="demo-site-card" href="demos/towing-roadside.html" target="_blank" rel="noopener" role="menuitem">
-                <small>Local Service</small>
+                <div class="demo-card-topline">
+                  <small>Local Service</small>
+                  <em class="demo-status">For Sale</em>
+                </div>
                 <strong>Towing & Roadside</strong>
                 <span>24/7 dispatch-style site for emergency calls, service areas, and roadside requests.</span>
               </a>
               <a class="demo-site-card" href="https://www.allyzworldofknowledge.com/" target="_blank" rel="noopener" role="menuitem">
-                <small>Childcare Center</small>
+                <div class="demo-card-topline">
+                  <small>Childcare Center</small>
+                  <em class="demo-status sold">Sold</em>
+                </div>
                 <strong>Allyz World</strong>
                 <span>Bright early learning site for programs, parent confidence, enrollment, and family trust.</span>
               </a>
