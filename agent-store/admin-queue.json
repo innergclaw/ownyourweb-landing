@@ -1,0 +1,35 @@
+{
+  "requests": [
+    {
+      "store_agent": "ownyourweb",
+      "intent": "approve_shopnasgraphics_design_pack",
+      "request_id": "2026-05-13T19-51-29-000Z-scarleezy-name-your-price",
+      "created_at": "2026-05-13T19:51:29.000Z",
+      "business_name": "Scarleezy",
+      "customer_first_name": "Scarleezy",
+      "customer_last_name": "",
+      "customer_email": "",
+      "industry": "Logo / Brand Identity",
+      "package": "ShopNasGraphics Name Your Price Pack",
+      "budget_range": "Name your price",
+      "timeline": "Awaiting owner review",
+      "buyer_agent_or_contact": "Scarleezy",
+      "request": "First customer from the ShopNasGraphics Name Your Price promotion. Review the submitted pack request, confirm the offer, and approve next steps.",
+      "assets_available": "Submitted through the ShopNasGraphics Name Your Price promo. Check the ShopNasGraphics inbox/form source for any attached files or extra notes.",
+      "current_website": "https://shopnasgfx.com/",
+      "source_page": "ShopNasGraphics Name Your Price Promotion",
+      "admin_lane": "shopnasgraphics",
+      "pack_type": "design_pack",
+      "status": "pending_owner_approval",
+      "next_steps": [
+        "Review Scarleezy's requested pack and price",
+        "Confirm scope and deposit/payment instructions",
+        "Approve the design pack for fulfillment",
+        "Create or assign the customer workspace",
+        "Send the first proof or next-step message"
+      ],
+      "payment_status": "pending_owner_approval",
+      "notification_status": "manual_import"
+    }
+  ]
+}

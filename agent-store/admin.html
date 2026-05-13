@@ -191,6 +191,27 @@
       text-transform: uppercase;
     }
 
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      width: fit-content;
+      border: 2px solid var(--line);
+      background: var(--white);
+      padding: 4px 7px;
+      color: var(--ink);
+      font-size: .68rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .pill.shopnasgraphics {
+      background: var(--cyan);
+    }
+
     pre {
       overflow: auto;
       min-height: 360px;
@@ -247,7 +268,7 @@
 
   <main class="wrap">
     <h1>Build Queue</h1>
-    <p class="lead">Review agent-store requests, approve checkout, and generate the workspace the build agent will use.</p>
+    <p class="lead">Review web-system requests and ShopNasGraphics design packs, approve checkout, and generate the workspace the build agent will use.</p>
     <span class="status" id="status">Loading</span>
 
     <section class="grid">
@@ -278,6 +299,8 @@
 
     let selectedId = '';
     let selectedPacket = null;
+    let apiAvailable = true;
+    let staticRequests = [];
 
     function setStatus(text) {
       statusEl.textContent = text;
@@ -285,8 +308,7 @@
 
     async function loadRequests() {
       setStatus('Loading');
-      const response = await fetch('/api/agent-store/requests');
-      const data = await response.json();
+      const data = await fetchRequestQueue();
       requestList.innerHTML = '';
       if (!data.requests?.length) {
         requestList.innerHTML = '<div class="empty">No requests yet.</div>';
@@ -300,17 +322,24 @@
         card.className = 'request-card';
         card.type = 'button';
         card.dataset.id = request.request_id;
+        const lane = request.admin_lane || request.store_agent || 'ownyourweb';
+        const laneClass = lane === 'shopnasgraphics' ? 'shopnasgraphics' : '';
         card.innerHTML = `
+          <div class="pill-row">
+            <b class="pill ${laneClass}">${escapeHtml(formatLane(lane))}</b>
+            <b class="pill">${escapeHtml(request.pack_type || request.intent || 'build request')}</b>
+          </div>
           <strong>${escapeHtml(request.business_name || 'Unnamed Request')}</strong>
           <span>${escapeHtml([request.customer_first_name, request.customer_last_name].filter(Boolean).join(' ') || 'No customer name')} / ${escapeHtml(request.customer_email || 'No email')}</span>
           <span>${escapeHtml(request.package || 'No package')} / ${escapeHtml(request.status || 'pending')}</span>
           <span>${escapeHtml(request.budget_range || 'No budget')} / ${escapeHtml(request.payment_status || 'payment pending')}</span>
+          <span>Source: ${escapeHtml(request.source_page || 'not recorded')}</span>
           <span>Notify: ${escapeHtml(request.notification_status || 'not recorded')}</span>
         `;
         card.addEventListener('click', () => selectRequest(request.request_id));
         requestList.append(card);
       }
-      setStatus(`${data.requests.length} request${data.requests.length === 1 ? '' : 's'}`);
+      setStatus(`${data.requests.length} request${data.requests.length === 1 ? '' : 's'}${apiAvailable ? '' : ' / static queue'}`);
       if (!selectedId || !data.requests.some((request) => request.request_id === selectedId)) {
         await selectRequest(data.requests[0].request_id);
       }
@@ -321,16 +350,19 @@
       document.querySelectorAll('.request-card').forEach((card) => {
         card.classList.toggle('active', card.dataset.id === requestId);
       });
-      const response = await fetch(`/api/agent-store/request?request_id=${encodeURIComponent(requestId)}`);
-      const data = await response.json();
-      selectedPacket = data.packet;
-      packetOutput.textContent = JSON.stringify(data.packet, null, 2);
-      setStatus(`Selected ${data.packet.business_name || requestId}`);
+      const packet = await fetchPacket(requestId);
+      selectedPacket = packet;
+      packetOutput.textContent = JSON.stringify(packet, null, 2);
+      setStatus(`Selected ${packet.business_name || requestId}${apiAvailable ? '' : ' / view only'}`);
     }
 
     async function postAction(path) {
       if (!selectedId) {
         setStatus('Select a request first');
+        return;
+      }
+      if (!apiAvailable) {
+        setStatus('Backend required for approvals');
         return;
       }
       setStatus('Working');
@@ -349,6 +381,37 @@
       setStatus(path.includes('create-project') ? 'Project workspace created' : 'Checkout approved');
       await loadRequests();
       await selectRequest(selectedId);
+    }
+
+    async function fetchRequestQueue() {
+      try {
+        const response = await fetch('/api/agent-store/requests', { cache: 'no-store' });
+        if (!response.ok) throw new Error('API unavailable');
+        const data = await response.json();
+        apiAvailable = true;
+        return data;
+      } catch (error) {
+        const response = await fetch('./admin-queue.json', { cache: 'no-store' });
+        const data = await response.json();
+        apiAvailable = false;
+        staticRequests = data.requests || [];
+        return { requests: staticRequests };
+      }
+    }
+
+    async function fetchPacket(requestId) {
+      if (!apiAvailable) {
+        return staticRequests.find((request) => request.request_id === requestId) || { request_id: requestId };
+      }
+      const response = await fetch(`/api/agent-store/request?request_id=${encodeURIComponent(requestId)}`, { cache: 'no-store' });
+      const data = await response.json();
+      return data.packet;
+    }
+
+    function formatLane(value) {
+      if (value === 'shopnasgraphics') return 'ShopNasGraphics';
+      if (value === 'ownyourweb') return 'OwnYourWeb';
+      return value;
     }
 
     function escapeHtml(value) {

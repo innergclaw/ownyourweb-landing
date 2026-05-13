@@ -146,9 +146,13 @@ async function listPackets() {
     packets.push({
       request_id: packet.request_id,
       created_at: packet.created_at,
+      store_agent: packet.store_agent,
+      intent: packet.intent,
       business_name: packet.business_name,
       industry: packet.industry,
       package: packet.package,
+      admin_lane: packet.admin_lane,
+      pack_type: packet.pack_type,
       budget_range: packet.budget_range,
       timeline: packet.timeline,
       customer_first_name: packet.customer_first_name,
