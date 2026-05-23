@@ -358,7 +358,6 @@
       <a class="brand" href="./"><span class="mark"></span><span>OWNYOURWEB Projects</span></a>
       <nav class="nav">
         <a href="./">Store</a>
-        <a href="./admin.html">Admin</a>
         <a class="primary" href="./project-dashboard.html">Project Dashboard</a>
         <button id="refreshBtn" type="button">Refresh</button>
       </nav>
@@ -502,7 +501,6 @@
             <h2>Packet</h2>
             <div class="actions">
               <button type="button" id="copyPacketBtn">Copy Packet</button>
-              <a class="pill lime" href="./admin.html?request_id=${encodeURIComponent(packet.request_id || '')}">Open Admin</a>
             </div>
             <pre id="packetOutput">${escapeHtml(JSON.stringify(packet, null, 2))}</pre>
           </section>

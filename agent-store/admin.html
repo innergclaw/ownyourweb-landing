@@ -34,6 +34,10 @@
       background-size: 32px 32px;
     }
 
+    body[data-locked="true"] main {
+      display: none;
+    }
+
     a { color: inherit; text-decoration: none; }
 
     .wrap {
@@ -241,6 +245,48 @@
       font-weight: 900;
     }
 
+    .lock-screen {
+      width: min(540px, calc(100% - 32px));
+      margin: 54px auto;
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .lock-screen h1 {
+      font-size: clamp(3rem, 8vw, 5.8rem);
+    }
+
+    .lock-screen label {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .lock-screen input {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 8px;
+      border: 3px solid var(--line);
+      padding: 0 12px;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 900;
+    }
+
+    .lock-screen .error {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--coral);
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
     @media (max-width: 840px) {
       .top,
       .grid {
@@ -255,7 +301,7 @@
     }
   </style>
 </head>
-<body>
+<body data-locked="true">
   <header>
     <div class="wrap top">
       <a class="brand" href="./"><span class="mark"></span><span>OWNYOURWEB Admin</span></a>
@@ -291,6 +337,8 @@
 
   <script src="/api-config.js"></script>
   <script>
+    const ADMIN_PASSWORD_HASH = '6d1a2e333673d5ffefc7c90b63e6792e61d1b250741faaf378d3052ee8347647';
+    const ADMIN_AUTH_KEY = 'ownyourweb-admin-authenticated';
     const requestList = document.getElementById('requestList');
     const packetOutput = document.getElementById('packetOutput');
     const statusEl = document.getElementById('status');
@@ -304,6 +352,53 @@
     let apiAvailable = true;
     let staticRequests = [];
     const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
+
+    async function sha256Hex(value) {
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+      return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    function showLockScreen() {
+      const lock = document.createElement('section');
+      lock.className = 'lock-screen';
+      lock.innerHTML = `
+        <h1>Admin Locked</h1>
+        <p class="lead">Enter the owner password to view the build queue.</p>
+        <form id="adminLockForm">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" type="password" autocomplete="current-password" autofocus>
+          <p class="error" id="lockError"></p>
+          <div class="actions">
+            <button class="primary" type="submit">Unlock Admin</button>
+          </div>
+        </form>
+      `;
+      document.body.append(lock);
+      document.getElementById('adminLockForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const input = document.getElementById('adminPassword');
+        const error = document.getElementById('lockError');
+        if (await sha256Hex(input.value) !== ADMIN_PASSWORD_HASH) {
+          error.textContent = 'Wrong password';
+          input.value = '';
+          input.focus();
+          return;
+        }
+        sessionStorage.setItem(ADMIN_AUTH_KEY, 'true');
+        lock.remove();
+        document.body.dataset.locked = 'false';
+        loadRequests();
+      });
+    }
+
+    function requireAdminAccess() {
+      if (sessionStorage.getItem(ADMIN_AUTH_KEY) === 'true') {
+        document.body.dataset.locked = 'false';
+        loadRequests();
+        return;
+      }
+      showLockScreen();
+    }
 
     function setStatus(text) {
       statusEl.textContent = text;
@@ -442,7 +537,7 @@
       setStatus('Packet copied');
     });
 
-    loadRequests();
+    requireAdminAccess();
   </script>
 </body>
 </html>
