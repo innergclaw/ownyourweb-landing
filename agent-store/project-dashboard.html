@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWNYOURWEB Project Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --muted: #686761;
+      --line: #191919;
+      --lime: #c8ff2e;
+      --amber: #ffb000;
+      --coral: #ff4f32;
+      --cyan: #31d8ff;
+      --green: #0f9f68;
+      --shadow: 7px 7px 0 var(--line);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 3px solid var(--line);
+      background: rgba(251,250,245,.94);
+    }
+
+    .top {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(90deg, var(--lime) 0 25%, var(--amber) 25% 50%, var(--coral) 50% 75%, var(--cyan) 75%);
+      box-shadow: 5px 5px 0 var(--lime);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .nav a,
+    button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 0 14px;
+      color: var(--ink);
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+      cursor: pointer;
+    }
+
+    button.primary,
+    .nav a.primary {
+      background: var(--lime);
+    }
+
+    main {
+      padding: 42px 0 70px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 900px;
+      font-size: clamp(3.4rem, 9vw, 7.8rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    h3 {
+      font-size: 1.65rem;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 14px 0 24px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .status-row,
+    .actions,
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .status-row {
+      margin-bottom: 22px;
+    }
+
+    .pill {
+      width: fit-content;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 7px 10px;
+      color: var(--ink);
+      font-size: .72rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    .pill.lime { background: var(--lime); }
+    .pill.amber { background: var(--amber); }
+    .pill.coral { background: var(--coral); color: var(--white); }
+    .pill.cyan { background: var(--cyan); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, .74fr) minmax(320px, .46fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel,
+    .card {
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .metric {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 13px;
+      min-height: 104px;
+    }
+
+    .metric span,
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1rem;
+      font-weight: 950;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+
+    .scope {
+      margin: 16px 0 0;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--white);
+      padding: 16px;
+      line-height: 1.55;
+      font-weight: 800;
+      white-space: pre-wrap;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 10px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .steps b {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      font-size: .72rem;
+    }
+
+    .client-card {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .client-card strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 950;
+      overflow-wrap: anywhere;
+    }
+
+    .field {
+      border-top: 3px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .field p {
+      margin: 6px 0 0;
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      margin-top: 16px;
+      border: 3px solid var(--line);
+      background: var(--paper);
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px;
+      border-bottom: 3px solid var(--line);
+      font-weight: 900;
+    }
+
+    .stage:last-child { border-bottom: 0; }
+
+    .stage span {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    pre {
+      overflow: auto;
+      max-height: 420px;
+      margin: 16px 0 0;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--lime);
+      padding: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: .78rem;
+      line-height: 1.45;
+    }
+
+    .empty {
+      border: 3px dashed var(--line);
+      padding: 18px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    @media (max-width: 900px) {
+      .top,
+      .grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <a class="brand" href="./"><span class="mark"></span><span>OWNYOURWEB Projects</span></a>
+      <nav class="nav">
+        <a href="./">Store</a>
+        <a href="./admin.html">Admin</a>
+        <a class="primary" href="./project-dashboard.html">Project Dashboard</a>
+        <button id="refreshBtn" type="button">Refresh</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1 id="title">Project Dashboard</h1>
+    <p class="lead" id="summary">Loading the newest Agent Store client packet.</p>
+    <div class="status-row" id="statusPills"></div>
+
+    <section class="grid" id="dashboard">
+      <div class="empty">Loading dashboard.</div>
+    </section>
+  </main>
+
+  <script>
+    const title = document.getElementById('title');
+    const summary = document.getElementById('summary');
+    const statusPills = document.getElementById('statusPills');
+    const dashboard = document.getElementById('dashboard');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    async function fetchQueue() {
+      try {
+        const response = await fetch('/api/agent-store/requests', { cache: 'no-store' });
+        if (!response.ok) throw new Error('API unavailable');
+        const data = await response.json();
+        return { requests: data.requests || [], source: 'live api' };
+      } catch (error) {
+        const response = await fetch('./admin-queue.json', { cache: 'no-store' });
+        const data = await response.json();
+        return { requests: data.requests || [], source: 'static queue' };
+      }
+    }
+
+    async function loadDashboard() {
+      dashboard.innerHTML = '<div class="empty">Loading dashboard.</div>';
+      const { requests, source } = await fetchQueue();
+      const targetId = new URLSearchParams(window.location.search).get('request_id');
+      const sorted = [...requests].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+      const selected = targetId
+        ? sorted.find((request) => request.request_id === targetId) || sorted[0]
+        : sorted[0];
+
+      if (!selected) {
+        title.textContent = 'No Client Yet';
+        summary.textContent = 'The queue is empty.';
+        statusPills.innerHTML = '<span class="pill coral">Empty</span>';
+        dashboard.innerHTML = '<div class="empty">No project packet found.</div>';
+        return;
+      }
+
+      const packet = await fetchPacket(selected, source);
+      renderDashboard(packet, source);
+    }
+
+    async function fetchPacket(selected, source) {
+      if (source !== 'live api' || !selected.request_id) return selected;
+      try {
+        const response = await fetch(`/api/agent-store/request?request_id=${encodeURIComponent(selected.request_id)}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Packet unavailable');
+        const data = await response.json();
+        return data.packet || selected;
+      } catch (error) {
+        return selected;
+      }
+    }
+
+    function renderDashboard(packet, source) {
+      const clientName = [packet.customer_first_name, packet.customer_last_name].filter(Boolean).join(' ') || packet.business_name || 'Newest Client';
+      const isDesignPack = packet.admin_lane === 'shopnasgraphics' || packet.pack_type === 'design_pack';
+      const nextSteps = Array.isArray(packet.next_steps) && packet.next_steps.length
+        ? packet.next_steps
+        : ['Review scope', 'Confirm price and deposit', 'Create project workspace', 'Send first preview'];
+
+      title.textContent = packet.business_name || 'Newest Client';
+      summary.textContent = `${clientName} / ${packet.package || 'Project request'} / ${packet.source_page || 'Agent Store'}`;
+      statusPills.innerHTML = `
+        <span class="pill lime">${escapeHtml(packet.status || 'pending')}</span>
+        <span class="pill amber">${escapeHtml(packet.payment_status || 'payment pending')}</span>
+        <span class="pill cyan">${escapeHtml(source)}</span>
+        ${isDesignPack ? '<span class="pill coral">Design Pack</span>' : ''}
+      `;
+
+      dashboard.innerHTML = `
+        <div class="stack">
+          <section class="panel">
+            <h2>Snapshot</h2>
+            <div class="metric-grid">
+              ${metric('Client', clientName)}
+              ${metric('Budget', packet.budget_range || 'Not set')}
+              ${metric('Timeline', packet.timeline || 'Not set')}
+              ${metric('Package', packet.package || 'Not set')}
+              ${metric('Industry', packet.industry || 'Not set')}
+              ${metric('Source', packet.source_page || 'Not recorded')}
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2>Scope</h2>
+            <div class="scope">${escapeHtml(packet.request || 'No request notes provided.')}</div>
+          </section>
+
+          <section class="panel">
+            <h2>Next Actions</h2>
+            <ol class="steps">
+              ${nextSteps.map((step, index) => `<li><b>${index + 1}</b><span>${escapeHtml(step)}</span></li>`).join('')}
+            </ol>
+          </section>
+
+          <section class="panel">
+            <h2>Timeline</h2>
+            <div class="timeline">
+              ${stage('Received', formatDate(packet.created_at))}
+              ${stage('Owner Review', packet.status === 'pending_owner_approval' ? 'Active now' : 'Completed or moved forward')}
+              ${stage('Payment', packet.payment_status || 'Pending owner approval')}
+              ${stage('Workspace', packet.project_folder ? 'Created' : 'Not created yet')}
+            </div>
+          </section>
+        </div>
+
+        <aside class="stack">
+          <section class="panel client-card">
+            <h2>Client</h2>
+            ${field('Name', clientName)}
+            ${field('Email', packet.customer_email || 'Not provided')}
+            ${field('Buyer / Contact', packet.buyer_agent_or_contact || 'Not provided')}
+            ${field('Website', packet.current_website ? link(packet.current_website) : 'Not provided', Boolean(packet.current_website))}
+            ${field('Request ID', packet.request_id || 'Not recorded')}
+          </section>
+
+          <section class="panel client-card">
+            <h2>Assets</h2>
+            ${field('Available', packet.assets_available || 'Not recorded')}
+            ${field('Notification', packet.notification_status || 'Not recorded')}
+            ${field('Workspace', packet.project_folder || 'Not created')}
+          </section>
+
+          <section class="panel">
+            <h2>Packet</h2>
+            <div class="actions">
+              <button type="button" id="copyPacketBtn">Copy Packet</button>
+              <a class="pill lime" href="./admin.html?request_id=${encodeURIComponent(packet.request_id || '')}">Open Admin</a>
+            </div>
+            <pre id="packetOutput">${escapeHtml(JSON.stringify(packet, null, 2))}</pre>
+          </section>
+        </aside>
+      `;
+
+      document.getElementById('copyPacketBtn')?.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(JSON.stringify(packet, null, 2));
+        document.getElementById('copyPacketBtn').textContent = 'Copied';
+      });
+    }
+
+    function metric(label, value) {
+      return `<div class="metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+    }
+
+    function field(label, value, trusted = false) {
+      return `<div class="field"><span class="label">${escapeHtml(label)}</span><p>${trusted ? value : escapeHtml(value)}</p></div>`;
+    }
+
+    function stage(label, value) {
+      return `<div class="stage"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
+    }
+
+    function link(url) {
+      const safeUrl = escapeHtml(url);
+      return `<a href="${safeUrl}" target="_blank" rel="noreferrer">${safeUrl}</a>`;
+    }
+
+    function formatDate(value) {
+      if (!value) return 'Not recorded';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    refreshBtn.addEventListener('click', loadDashboard);
+    loadDashboard();
+  </script>
+</body>
+</html>
