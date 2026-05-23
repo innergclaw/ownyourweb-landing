@@ -288,6 +288,7 @@
     </section>
   </main>
 
+  <script src="/api-config.js"></script>
   <script>
     const requestList = document.getElementById('requestList');
     const packetOutput = document.getElementById('packetOutput');
@@ -297,10 +298,11 @@
     const copyBtn = document.getElementById('copyBtn');
     const refreshBtn = document.getElementById('refreshBtn');
 
-    let selectedId = '';
+    let selectedId = new URLSearchParams(window.location.search).get('request_id') || '';
     let selectedPacket = null;
     let apiAvailable = true;
     let staticRequests = [];
+    const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
 
     function setStatus(text) {
       statusEl.textContent = text;
@@ -341,8 +343,9 @@
       }
       setStatus(`${data.requests.length} request${data.requests.length === 1 ? '' : 's'}${apiAvailable ? '' : ' / static queue'}`);
       if (!selectedId || !data.requests.some((request) => request.request_id === selectedId)) {
-        await selectRequest(data.requests[0].request_id);
+        selectedId = data.requests[0].request_id;
       }
+      await selectRequest(selectedId);
     }
 
     async function selectRequest(requestId) {
@@ -385,13 +388,14 @@
 
     async function fetchRequestQueue() {
       try {
-        const response = await fetch('/api/agent-store/requests', { cache: 'no-store' });
+        if (!AGENT_API_BASE) throw new Error('API unavailable');
+        const response = await fetch(`${AGENT_API_BASE}/api/agent-store/requests`, { cache: 'no-store' });
         if (!response.ok) throw new Error('API unavailable');
         const data = await response.json();
         apiAvailable = true;
         return data;
       } catch (error) {
-        const response = await fetch('./admin-queue.json', { cache: 'no-store' });
+        const response = await fetch(`./admin-queue.json?ts=${Date.now()}`, { cache: 'no-store' });
         const data = await response.json();
         apiAvailable = false;
         staticRequests = data.requests || [];
@@ -403,7 +407,13 @@
       if (!apiAvailable) {
         return staticRequests.find((request) => request.request_id === requestId) || { request_id: requestId };
       }
-      const response = await fetch(`/api/agent-store/request?request_id=${encodeURIComponent(requestId)}`, { cache: 'no-store' });
+      if (!AGENT_API_BASE) {
+        return staticRequests.find((request) => request.request_id === requestId) || { request_id: requestId };
+      }
+      const response = await fetch(`${AGENT_API_BASE}/api/agent-store/request?request_id=${encodeURIComponent(requestId)}`, { cache: 'no-store' });
+      if (!response.ok) {
+        return staticRequests.find((request) => request.request_id === requestId) || { request_id: requestId };
+      }
       const data = await response.json();
       return data.packet;
     }
@@ -423,8 +433,8 @@
         .replaceAll("'", '&#039;');
     }
 
-    approveBtn.addEventListener('click', () => postAction('/api/agent-store/approve'));
-    projectBtn.addEventListener('click', () => postAction('/api/agent-store/create-project'));
+    approveBtn.addEventListener('click', () => postAction(`${AGENT_API_BASE}/api/agent-store/approve`));
+    projectBtn.addEventListener('click', () => postAction(`${AGENT_API_BASE}/api/agent-store/create-project`));
     refreshBtn.addEventListener('click', loadRequests);
     copyBtn.addEventListener('click', async () => {
       await navigator.clipboard.writeText(packetOutput.textContent);

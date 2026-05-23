@@ -948,15 +948,19 @@
 
   <footer>OWNYOURWEB Agent Store / INNERGINTEL ECOSYSTEM</footer>
 
+  <script src="/api-config.js"></script>
   <script>
     const form = document.getElementById('agentRequestForm');
     const output = document.getElementById('packetOutput');
     const copyPacket = document.getElementById('copyPacket');
     const formNote = document.getElementById('formNote');
+    const AGENT_API_BASE = (window.OWNYOURWEB_AGENT_API_BASE || '').replace(/\/$/, '');
+    const INTAKE_ENDPOINT = window.OWNYOURWEB_INTAKE_ENDPOINT || '';
 
     function buildPayload() {
       const data = Object.fromEntries(new FormData(form).entries());
       return {
+        source_page: 'OWNYOURWEB Agent Store',
         business_name: data.business_name || '',
         customer_first_name: data.customer_first_name || '',
         customer_last_name: data.customer_last_name || '',
@@ -980,7 +984,8 @@
       submitButton.disabled = true;
 
       try {
-        const response = await fetch('/api/agent-store/request', {
+        const endpoint = INTAKE_ENDPOINT || (AGENT_API_BASE ? `${AGENT_API_BASE}/api/agent-store/request` : '/api/agent-store/request');
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
