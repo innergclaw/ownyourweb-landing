@@ -12,7 +12,7 @@
       "industry": "Website + Logo Package",
       "package": "Website + Logo Package",
       "budget_range": "$300 approved",
-      "timeline": "Begin after payment",
+      "timeline": "Logo design base + initial previews now in progress",
       "buyer_agent_or_contact": "Torrance / darealtorr@icloud.com",
       "request": "Build a website and logo package for Omni Global Solutions LLC. Logo direction: “Omni” in nice writing, “Global” with the O being a globe. This lead came through the ShopNasGraphics Name Your Price form and has been approved into an OwnYourWeb project packet.",
       "assets_available": "Logo direction provided: Omni nice writing, Global with the O being a globe. Additional website copy, brand colors, service details, and contact info still need to be collected from the client.",
@@ -20,15 +20,17 @@
       "source_page": "ShopNasGraphics Name Your Price Form",
       "admin_lane": "ownyourweb",
       "pack_type": "web_system",
-      "status": "project_workspace_created",
+      "status": "logo_design_in_progress",
       "next_steps": [
-        "Send the $300 payment link to Torrance",
-        "Confirm payment and collect any missing brand details",
-        "Collect website copy, services, and preferred colors",
-        "Draft logo concept and homepage structure",
-        "Build first website demo and send preview"
+        "Start logo design base for Omni Global Solutions LLC",
+        "Create initial logo preview options",
+        "Send first logo previews to Torrance for direction",
+        "Collect website copy, services, preferred colors, and contact info",
+        "Draft homepage structure after logo direction is approved"
       ],
-      "payment_status": "payment_link_created_pending_send",
+      "payment_status": "payment_received",
+      "payment_received_at": "2026-05-23T03:07:38Z",
+      "project_update": "Payment sent and received. Next active phase is logo design base and initial previews.",
       "notification_status": "manual_import",
       "checkout_url": "https://buy.stripe.com/28E8wRfwHcSB9dk41Jao811",
       "project_folder": "/Users/ngvisions/.hermes/workspace/projects/ownyourweb/data/agent-store-projects/2026-05-23T01-36-11-282Z-name-your-price-name-your-price-logo-offer-torrance"
