@@ -44,7 +44,6 @@
 
     .topbar,
     .panel,
-    .logo-stage,
     .tile,
     .note,
     .step {
@@ -104,7 +103,7 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(330px, .7fr);
+      grid-template-columns: 1fr;
       gap: 22px;
       margin-top: 24px;
       align-items: stretch;
@@ -141,7 +140,7 @@
 
     .pill-row,
     .meta-grid,
-    .suite-grid,
+    .preview-grid,
     .progress {
       display: grid;
       gap: 12px;
@@ -183,82 +182,15 @@
       overflow-wrap: anywhere;
     }
 
-    .logo-panel {
-      display: grid;
-      gap: 14px;
-    }
-
-    .logo-stage {
-      min-height: 420px;
-      padding: 22px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg, var(--ink) 0 54%, #25242b 54% 100%);
-      color: var(--white);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .logo-stage::before {
-      content: "BRINX";
-      position: absolute;
-      inset: auto 0 18px;
-      color: rgba(255,255,255,.06);
-      font-family: Impact, sans-serif;
-      font-size: 9rem;
-      text-align: center;
-      letter-spacing: .08em;
-    }
-
-    .logo-lockup {
-      position: relative;
-      display: grid;
-      justify-items: center;
-      gap: 12px;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .emblem {
-      width: 132px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border: 5px solid var(--white);
-      background: var(--lime);
-      color: var(--ink);
-      box-shadow: 8px 8px 0 var(--pink);
-      transform: rotate(-4deg);
-      font-family: Impact, sans-serif;
-      font-size: 5rem;
-      line-height: 1;
-    }
-
-    .wordmark {
-      display: grid;
-      gap: 3px;
-      font-family: Impact, sans-serif;
-      text-transform: uppercase;
-    }
-
-    .wordmark .main {
-      font-size: clamp(3.2rem, 8vw, 5.8rem);
-      line-height: .82;
-      text-shadow: 5px 5px 0 var(--pink);
-    }
-
-    .wordmark .sub {
-      color: var(--cyan);
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      letter-spacing: .18em;
-    }
-
     .section {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 22px;
       margin-top: 22px;
+    }
+
+    .preview-section {
+      grid-template-columns: 1fr;
     }
 
     .list {
@@ -304,25 +236,45 @@
       font-weight: 950;
     }
 
-    .suite-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .preview-panel {
+      grid-column: 1 / -1;
+    }
+
+    .preview-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       margin-top: 16px;
     }
 
-    .suite-card {
-      min-height: 136px;
+    .preview-card {
+      margin: 0;
       display: grid;
-      align-content: space-between;
-      gap: 20px;
+      gap: 12px;
       border: 3px solid var(--line);
-      padding: 16px;
+      background: var(--ink);
+      color: var(--white);
+      padding: 10px;
       font-weight: 950;
     }
 
-    .suite-card:nth-child(1) { background: var(--lime); }
-    .suite-card:nth-child(2) { background: var(--pink); color: var(--white); }
-    .suite-card:nth-child(3) { background: var(--amber); }
-    .suite-card:nth-child(4) { background: var(--cyan); }
+    .preview-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      display: block;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .preview-card span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 34px;
+      padding: 0 4px 2px;
+      font-size: .82rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
 
     .progress { margin-top: 18px; }
 
@@ -356,7 +308,7 @@
       .hero,
       .section,
       .meta-grid,
-      .suite-grid {
+      .preview-grid {
         grid-template-columns: 1fr;
       }
 
@@ -364,8 +316,6 @@
         align-items: flex-start;
         flex-direction: column;
       }
-
-      .logo-stage { min-height: 360px; }
     }
   </style>
 </head>
@@ -399,21 +349,9 @@
           </div>
         </article>
 
-        <aside class="logo-panel">
-          <div class="logo-stage">
-            <div class="logo-lockup">
-              <div class="emblem">B</div>
-              <div class="wordmark">
-                <span class="main">Brinx</span>
-                <span class="sub">Entertainment</span>
-              </div>
-              <span class="tag lime">Previews Next</span>
-            </div>
-          </div>
-        </aside>
       </section>
 
-      <section class="section">
+      <section class="section preview-section">
         <article class="panel">
           <h2>Rush Scope</h2>
           <div class="list">
@@ -424,13 +362,22 @@
           </div>
         </article>
 
-        <article class="panel">
-          <h2>Suite Preview</h2>
-          <div class="suite-grid">
-            <div class="suite-card"><span>Primary Logo</span><strong>Full wordmark</strong></div>
-            <div class="suite-card"><span>Alternate</span><strong>Stacked lockup</strong></div>
-            <div class="suite-card"><span>Icon</span><strong>B emblem</strong></div>
-            <div class="suite-card"><span>Social</span><strong>Avatar mark</strong></div>
+        <article class="panel preview-panel">
+          <span class="tag cyan">Client Review</span>
+          <h2>Initial Preview Options</h2>
+          <div class="preview-grid">
+            <figure class="preview-card">
+              <img src="assets/brinx/brinx-preview-01.jpg" alt="Brinx logo preview option 1 with script wordmark and BF monogram in gold on black" />
+              <span>Option 01 <b>Script lockup</b></span>
+            </figure>
+            <figure class="preview-card">
+              <img src="assets/brinx/brinx-preview-02.jpg" alt="Brinx logo preview option 2 with spaced serif wordmark and BF monogram in gold on black" />
+              <span>Option 02 <b>Serif lockup</b></span>
+            </figure>
+            <figure class="preview-card">
+              <img src="assets/brinx/brinx-preview-03.jpg" alt="Brinx logo preview option 3 with modern rounded B mark and bold wordmark in gold on black" />
+              <span>Option 03 <b>Modern mark</b></span>
+            </figure>
           </div>
         </article>
       </section>
