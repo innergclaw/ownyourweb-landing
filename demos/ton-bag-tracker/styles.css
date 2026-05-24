@@ -169,15 +169,52 @@ button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line
   margin-top: 18px;
 }
 
-.tradingview-widget-container {
-  min-height: 360px;
-  border: 3px solid var(--line);
-  background: #fff;
-  overflow: hidden;
+.quote-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(260px, .7fr);
+  gap: 14px;
 }
 
-.tradingview-widget-container__widget {
-  min-height: 360px;
+.quote-card,
+.quote-result {
+  border: 3px solid var(--line);
+  background: var(--paper);
+  padding: 14px;
+}
+
+.quote-card {
+  display: grid;
+  gap: 10px;
+}
+
+.quote-card label,
+.quote-result span {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 950;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.quote-result strong {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.quote-result p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.dex-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .metric {
@@ -291,6 +328,8 @@ td small { display: block; color: var(--muted); font-weight: 800; line-height: 1
 @media (max-width: 920px) {
   .hero,
   .metrics,
+  .quote-grid,
+  .dex-grid,
   .dashboard-grid {
     grid-template-columns: 1fr;
   }

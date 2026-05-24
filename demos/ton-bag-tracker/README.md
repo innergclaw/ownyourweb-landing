@@ -9,8 +9,8 @@ Telegram-ready public TON blockchain intelligence mini app.
 - Pulls native TON, jettons, estimated USD values, and risk tags from TonAPI.
 - Shows recent transaction flow with explorer links.
 - Grades wallets as retail, mid, large, or whale based on TON balance / tracked value.
-- Embeds a free TradingView TON market graphic.
-- Links out to free DeFi systems such as DeFiLlama, STON.fi, DeDust, Tonviewer, Tonscan whales, and exchange-wallet lists.
+- Quotes TON to USDt through chop's TON DEX router, with a TonAPI spot-price fallback.
+- Links out to free DeFi systems such as chop, DeFiLlama, STON.fi, DeDust, Tonviewer, Tonscan whales, and exchange-wallet lists.
 
 ## Telegram setup
 

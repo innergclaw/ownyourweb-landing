@@ -54,37 +54,27 @@
     <section class="market-panel panel">
       <div class="panel-head">
         <div>
-          <p class="eyebrow">Market Graphic</p>
-          <h2>TON price chart</h2>
+          <p class="eyebrow">Best Price Router</p>
+          <h2>TON swap quote</h2>
         </div>
-        <span class="chip">TradingView</span>
+        <span class="chip">chop + TonAPI</span>
       </div>
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-        {
-          "symbols": [["TON / USDT", "OKX:TONUSDT|1D"], ["BTC / USDT", "BINANCE:BTCUSDT|1D"], ["ETH / USDT", "BINANCE:ETHUSDT|1D"]],
-          "chartOnly": false,
-          "width": "100%",
-          "height": 360,
-          "locale": "en",
-          "colorTheme": "light",
-          "autosize": true,
-          "showVolume": true,
-          "showMA": false,
-          "hideDateRanges": false,
-          "hideMarketStatus": false,
-          "hideSymbolLogo": false,
-          "scalePosition": "right",
-          "scaleMode": "Normal",
-          "fontFamily": "Inter, sans-serif",
-          "fontSize": "12",
-          "noTimeScale": false,
-          "valuesTracking": "1",
-          "changeMode": "price-and-percent"
-        }
-        </script>
+      <div class="quote-grid">
+        <form class="quote-card" id="quoteForm">
+          <label for="quoteAmount">TON amount</label>
+          <div class="wallet-row">
+            <input id="quoteAmount" inputmode="decimal" value="10" />
+            <button type="submit">Quote</button>
+          </div>
+          <p class="status" id="quoteStatus">Quote TON to USDt across TON DEX liquidity.</p>
+        </form>
+        <article class="quote-result">
+          <span>Best expected output</span>
+          <strong id="bestQuote">-</strong>
+          <p id="quoteMeta">No quote loaded yet.</p>
+        </article>
       </div>
+      <div id="dexQuotes" class="dex-grid"></div>
     </section>
 
     <section class="dashboard-grid">

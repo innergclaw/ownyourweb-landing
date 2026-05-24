@@ -1,4 +1,6 @@
 const TON_API = "https://tonapi.io/v2";
+const CHOP_API = "https://chop.ag/api/v1/quote";
+const USDT_MASTER = "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs";
 const SAMPLE_WHALE = "EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c";
 const tg = window.Telegram?.WebApp;
 
@@ -14,6 +16,12 @@ const defiTools = [
     text: "Download free CSV datasets for yields, protocol TVL, stablecoins, volume, fees, and chain data.",
     url: "https://defillama.com/downloads",
     tag: "CSV data",
+  },
+  {
+    title: "chop",
+    text: "TON-native route aggregator for checking best swap output before touching a DEX directly.",
+    url: "https://www.chop.ag/",
+    tag: "Best price",
   },
   {
     title: "STON.fi",
@@ -63,6 +71,12 @@ const els = {
   transactions: document.querySelector("#transactionList"),
   defi: document.querySelector("#defiList"),
   telegramNote: document.querySelector("#telegramNote"),
+  quoteForm: document.querySelector("#quoteForm"),
+  quoteAmount: document.querySelector("#quoteAmount"),
+  quoteStatus: document.querySelector("#quoteStatus"),
+  bestQuote: document.querySelector("#bestQuote"),
+  quoteMeta: document.querySelector("#quoteMeta"),
+  dexQuotes: document.querySelector("#dexQuotes"),
 };
 
 let lastReport = null;
@@ -123,6 +137,15 @@ function tokenUnits(rawBalance, decimals) {
   return Number(rawBalance || 0) / 10 ** Number(decimals || 0);
 }
 
+function rawTon(amount) {
+  const value = Math.max(0, Number(amount || 0));
+  return String(Math.round(value * 1e9));
+}
+
+function fromRaw(value, decimals = 6) {
+  return Number(value || 0) / 10 ** Number(decimals || 0);
+}
+
 function parseTonDiff(value) {
   if (typeof value === "number") return value / 100;
   return Number(String(value || "0").replace("−", "-").replace("%", "").replace("+", "")) / 100;
@@ -149,6 +172,82 @@ async function fetchJson(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Request failed: ${response.status}`);
   return response.json();
+}
+
+async function getTonRate() {
+  const rates = await fetchJson(`${TON_API}/rates?tokens=ton&currencies=usd`);
+  return Number(rates.rates?.TON?.prices?.USD || 0);
+}
+
+async function getBestTonQuote(amountTon = "10") {
+  const response = await fetch(CHOP_API, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      assetIn: "TON",
+      assetOut: USDT_MASTER,
+      amountIn: rawTon(amountTon),
+      slippageBps: 50,
+    }),
+  });
+
+  if (!response.ok) throw new Error(`chop quote unavailable: ${response.status}`);
+  return response.json();
+}
+
+function pickQuoteOutput(quote) {
+  const best = quote?.bestRoute || quote?.route || quote?.best || quote;
+  const rawOut = best?.expectedOut || best?.amountOut || best?.outputAmount || best?.outAmount;
+  return fromRaw(rawOut, 6);
+}
+
+function renderQuoteCards(quote, amountTon) {
+  const cards = [];
+  const quoteRows = Array.isArray(quote?.quotes) ? quote.quotes : [];
+
+  for (const row of quoteRows.slice(0, 3)) {
+    const label = row.dex || row.provider || row.name || "Route";
+    const output = fromRaw(row.amountOut || row.expectedOut || row.outputAmount, 6);
+    cards.push(`
+      <div class="cardlet">
+        <header><strong>${label}</strong><span class="badge good">quote</span></header>
+        <p>${output ? money(output) : "Output pending"} for ${amountTon} TON.</p>
+      </div>
+    `);
+  }
+
+  if (!cards.length) {
+    cards.push(
+      `<div class="cardlet"><header><strong>chop</strong><span class="badge violet">router</span></header><p><a href="https://www.chop.ag/" target="_blank" rel="noreferrer">Open chop</a> for live route comparison.</p></div>`,
+      `<div class="cardlet"><header><strong>STON.fi</strong><span class="badge info">DEX</span></header><p><a href="https://ston.fi/" target="_blank" rel="noreferrer">Open STON.fi</a> to inspect TON pools and swaps.</p></div>`,
+      `<div class="cardlet"><header><strong>DeDust</strong><span class="badge info">DEX</span></header><p><a href="https://dedust.io/" target="_blank" rel="noreferrer">Open DeDust</a> to compare liquidity manually.</p></div>`,
+    );
+  }
+
+  els.dexQuotes.innerHTML = cards.join("");
+}
+
+async function refreshBestQuote() {
+  const amountTon = els.quoteAmount.value.trim() || "10";
+  els.quoteStatus.textContent = "Checking TON route pricing...";
+
+  try {
+    const quote = await getBestTonQuote(amountTon);
+    const output = pickQuoteOutput(quote);
+    els.bestQuote.textContent = output ? money(output) : "Route found";
+    els.quoteMeta.textContent = output
+      ? `${amountTon} TON quoted through chop routing. Open the router before trading for final slippage.`
+      : "chop returned a route, but no normalized USDt output field was found.";
+    els.quoteStatus.textContent = "Live route quote loaded.";
+    renderQuoteCards(quote, amountTon);
+  } catch (error) {
+    const spot = await getTonRate();
+    const fallbackValue = Number(amountTon || 0) * spot;
+    els.bestQuote.textContent = money(fallbackValue);
+    els.quoteMeta.textContent = `TonAPI spot fallback at ${money(spot)} per TON. chop did not answer, so verify execution price before trading.`;
+    els.quoteStatus.textContent = "Router unavailable in-browser; using TonAPI spot fallback.";
+    renderQuoteCards(null, amountTon);
+  }
 }
 
 async function getTransactions(address) {
@@ -389,5 +488,14 @@ els.copySummary.addEventListener("click", async () => {
   await copyCurrentSummary();
 });
 
+els.quoteForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await refreshBestQuote();
+});
+
 initTelegram();
 clearReport();
+refreshBestQuote().catch(() => {
+  els.quoteStatus.textContent = "Quote tools are warming up. Try the Quote button.";
+  renderQuoteCards(null, els.quoteAmount.value || "10");
+});
