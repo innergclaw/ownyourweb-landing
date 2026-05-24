@@ -276,31 +276,74 @@
       text-transform: uppercase;
     }
 
-    .progress { margin-top: 18px; }
-
-    .progress-row {
+    .order-tracker {
+      position: relative;
       display: grid;
-      gap: 8px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+      padding-top: 4px;
+    }
+
+    .order-tracker::before {
+      content: "";
+      position: absolute;
+      top: 29px;
+      left: 11%;
+      right: 11%;
+      height: 4px;
+      background: var(--line);
+      z-index: 0;
+    }
+
+    .status-step {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      text-align: center;
       font-weight: 950;
     }
 
-    .progress-row header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
+    .status-icon {
+      width: 54px;
+      height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid var(--line);
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--line);
+      font-size: 1.45rem;
+      line-height: 1;
+      box-shadow: 4px 4px 0 var(--line);
     }
 
-    .bar {
-      height: 14px;
-      border: 3px solid var(--line);
-      background: var(--white);
-      overflow: hidden;
-    }
-
-    .bar span {
+    .status-step strong {
       display: block;
-      height: 100%;
-      background: linear-gradient(90deg, var(--lime), var(--pink), var(--cyan));
+      font-size: 1rem;
+      line-height: 1.15;
+    }
+
+    .status-step span:not(.status-icon) {
+      display: block;
+      max-width: 210px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.35;
+      font-weight: 850;
+    }
+
+    .complete-card {
+      margin-top: 18px;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 900;
+      line-height: 1.45;
     }
 
     @media (max-width: 900px) {
@@ -308,13 +351,34 @@
       .hero,
       .section,
       .meta-grid,
-      .preview-grid {
+      .preview-grid,
+      .order-tracker {
         grid-template-columns: 1fr;
       }
 
       .topbar {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .order-tracker::before {
+        top: 27px;
+        bottom: 27px;
+        left: 27px;
+        right: auto;
+        width: 4px;
+        height: auto;
+      }
+
+      .status-step {
+        min-height: 78px;
+        grid-template-columns: 54px minmax(0, 1fr);
+        justify-items: start;
+        text-align: left;
+      }
+
+      .status-step span:not(.status-icon) {
+        max-width: none;
       }
     }
   </style>
@@ -323,23 +387,23 @@
   <div class="shell">
     <header class="topbar">
       <a class="brand" href="https://ownyourweb.xyz/"><span class="mark"></span><span>ShopNasGraphics / OwnYourWeb</span></a>
-      <span class="tag lime">Rush Weekend Service</span>
+      <span class="tag lime">Order Completed</span>
     </header>
 
     <main>
       <section class="hero">
         <article class="panel">
           <span class="tag pink">Client Packet / Logo Suite</span>
-          <h1>Brinx Entertainment previews are next.</h1>
+          <h1>Brinx Entertainment order is complete.</h1>
           <p class="lede">
-            Jazmine Flamer's $200 Logo Suite Package with rush weekend service is paid and the logo direction is confirmed. The next active step is preparing initial preview options for review.
+            Jazmine Flamer's $200 Logo Suite Package with rush weekend service is fully complete, approved, and the final logo files have been sent out.
           </p>
 
           <div class="pill-row">
             <span class="pill lime">Payment Received</span>
-            <span class="pill lime">Direction Confirmed</span>
+            <span class="pill lime">Approved</span>
             <span class="pill amber">$200 Approved</span>
-            <span class="pill cyan">Logo Suite Package</span>
+            <span class="pill cyan">Files Sent</span>
           </div>
 
           <div class="meta-grid">
@@ -353,13 +417,27 @@
 
       <section class="section preview-section">
         <article class="panel">
-          <h2>Rush Scope</h2>
-          <div class="list">
-            <div class="step"><b>1</b><span>Payment received for the $200 Logo Suite Package with rush weekend service.</span></div>
-            <div class="step"><b>2</b><span>Logo direction confirmed for a bold, memorable Brinx Entertainment identity.</span></div>
-            <div class="step"><b>3</b><span>Prepare initial logo preview options for the rush weekend review window.</span></div>
-            <div class="step"><b>4</b><span>Package the selected direction into a logo suite with primary, alternate, icon, and social avatar versions.</span></div>
+          <span class="tag lime">Completed Tracker</span>
+          <h2>Order Status</h2>
+          <div class="order-tracker" aria-label="Order status tracker showing all steps completed">
+            <div class="status-step">
+              <span class="status-icon">✓</span>
+              <div><strong>Requirements submitted</strong><span>Client details, package, and direction received.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">✓</span>
+              <div><strong>In progress</strong><span>Logo concepts, refinements, and suite build completed.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">✓</span>
+              <div><strong>Review delivery</strong><span>Final review approved by the client.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">♛</span>
+              <div><strong>Order completed</strong><span>Approved logo files sent out.</span></div>
+            </div>
           </div>
+          <div class="complete-card">Final status: Brinx Entertainment logo suite is complete, approved, and delivered.</div>
         </article>
 
         <article class="panel preview-panel">
@@ -388,21 +466,21 @@
 
       <section class="section">
         <article class="panel">
-          <h2>Progress</h2>
-          <div class="progress">
-            <div class="progress-row"><header><span>Packet created</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
-            <div class="progress-row"><header><span>Payment confirmed</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
-            <div class="progress-row"><header><span>Logo direction confirmed</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
-            <div class="progress-row"><header><span>Initial previews for review</span><span>60%</span></header><div class="bar"><span style="width:60%"></span></div></div>
+          <h2>Delivery Summary</h2>
+          <div class="list">
+            <div class="step"><b>1</b><span>Payment received for the $200 Logo Suite Package with rush weekend service.</span></div>
+            <div class="step"><b>2</b><span>Logo direction confirmed and preview options prepared for review.</span></div>
+            <div class="step"><b>3</b><span>Client approved the final direction.</span></div>
+            <div class="step"><b>4</b><span>Final logo suite files sent out for Brinx Entertainment.</span></div>
           </div>
         </article>
 
         <article class="panel">
-          <h2>Notes For Review</h2>
+          <h2>Final Notes</h2>
           <div class="list">
-            <div class="note"><strong>Current purpose</strong>This page is a progress/demo packet for the rush logo suite, not the final brand file.</div>
-            <div class="note"><strong>Confirmed</strong>Payment is received and the logo direction is locked enough to move into previews.</div>
-            <div class="note"><strong>Delivery target</strong>Provide initial logo previews for review, then refine the selected direction into the full logo suite.</div>
+            <div class="note"><strong>Current purpose</strong>This page is now a completed order tracker for the Brinx Entertainment rush logo suite.</div>
+            <div class="note"><strong>Confirmed</strong>Payment received, logo approved, and final files sent out.</div>
+            <div class="note"><strong>Next action</strong>No active design step remains unless the client requests a new add-on, revision, or file resend.</div>
           </div>
         </article>
       </section>
