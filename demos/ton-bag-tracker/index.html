@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TON Bag Tracker</title>
+  <meta name="description" content="Track a TON wallet, jettons, meme exposure, recovery targets, and allocation drift." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">TON Wallet Intelligence</p>
+        <h1>Bag tracker for TON wallets.</h1>
+        <p class="lede">Paste a public TON wallet to pull live TON and jetton balances, flag risky tokens, check recovery targets, and see how close the bag is to a HYPE/NEAR/TON/meme allocation plan.</p>
+        <p class="telegram-note" id="telegramNote">Web mode. Open inside Telegram to use native app buttons and haptics.</p>
+      </div>
+
+      <form class="wallet-card" id="walletForm">
+        <label for="walletInput">TON wallet address</label>
+        <div class="wallet-row">
+          <input id="walletInput" name="wallet" autocomplete="off" spellcheck="false" value="UQBffr75eQax7lrOSfZqIjWUY0ZIg8JyG5if7NBrZ_r7CTnP" />
+          <button type="submit" aria-label="Refresh wallet data">↻</button>
+        </div>
+        <div class="quick-row">
+          <button type="button" id="loadDemo">Load tracked wallet</button>
+          <button type="button" id="copySummary">Copy summary</button>
+        </div>
+        <p class="status" id="statusText">Ready to scan.</p>
+      </form>
+    </section>
+
+    <section class="metrics">
+      <article class="metric">
+        <span>Total tracked value</span>
+        <strong id="totalValue">$0.00</strong>
+      </article>
+      <article class="metric">
+        <span>TON value</span>
+        <strong id="tonValue">$0.00</strong>
+      </article>
+      <article class="metric">
+        <span>Meme bucket</span>
+        <strong id="memeValue">$0.00</strong>
+      </article>
+      <article class="metric">
+        <span>Risk flags</span>
+        <strong id="riskCount">0</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="panel holdings-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Live Wallet</p>
+            <h2>Holdings</h2>
+          </div>
+          <span id="asOf" class="chip">Not loaded</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Value</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody id="holdingsBody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Targets</p>
+            <h2>Recovery Watch</h2>
+          </div>
+        </div>
+        <div id="recoveryList" class="stack"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Allocation</p>
+            <h2>Target Split</h2>
+          </div>
+        </div>
+        <div id="allocationList" class="stack"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Alerts</p>
+            <h2>Action Queue</h2>
+          </div>
+        </div>
+        <div id="actionList" class="stack"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
