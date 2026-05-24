@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TON Bag Tracker</title>
-  <meta name="description" content="Track a TON wallet, jettons, meme exposure, recovery targets, and allocation drift." />
+  <title>TON Chain Radar</title>
+  <meta name="description" content="Search public TON wallets, inspect holdings, whale score, transactions, and DeFi research tools." />
   <link rel="stylesheet" href="styles.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -12,38 +12,38 @@
   <main class="app-shell">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">TON Wallet Intelligence</p>
-        <h1>Bag tracker for TON wallets.</h1>
-        <p class="lede">Paste a public TON wallet to pull live TON and jetton balances, flag risky tokens, check recovery targets, and see how close the bag is to a HYPE/NEAR/TON/meme allocation plan.</p>
+        <p class="eyebrow">TON Chain Radar</p>
+        <h1>Search wallets. Watch whales.</h1>
+        <p class="lede">A public TON blockchain intelligence tool for scanning wallets, recent transactions, jettons, whale-grade holdings, explorer links, market charts, and free DeFi research systems.</p>
         <p class="telegram-note" id="telegramNote">Web mode. Open inside Telegram to use native app buttons and haptics.</p>
       </div>
 
       <form class="wallet-card" id="walletForm">
-        <label for="walletInput">TON wallet address</label>
+        <label for="walletInput">Public TON wallet address</label>
         <div class="wallet-row">
-          <input id="walletInput" name="wallet" autocomplete="off" spellcheck="false" value="UQBffr75eQax7lrOSfZqIjWUY0ZIg8JyG5if7NBrZ_r7CTnP" />
-          <button type="submit" aria-label="Refresh wallet data">↻</button>
+          <input id="walletInput" name="wallet" autocomplete="off" spellcheck="false" placeholder="Paste any TON wallet address..." />
+          <button type="submit" aria-label="Search wallet">⌕</button>
         </div>
         <div class="quick-row">
-          <button type="button" id="loadDemo">Load tracked wallet</button>
-          <button type="button" id="copySummary">Copy summary</button>
+          <button type="button" id="sampleWhale">Sample wallet</button>
+          <button type="button" id="copySummary">Copy report</button>
         </div>
-        <p class="status" id="statusText">Ready to scan.</p>
+        <p class="status" id="statusText">Paste a public wallet to start. No personal wallet is loaded by default.</p>
       </form>
     </section>
 
     <section class="metrics">
       <article class="metric">
-        <span>Total tracked value</span>
+        <span>Wallet value</span>
         <strong id="totalValue">$0.00</strong>
       </article>
       <article class="metric">
-        <span>TON value</span>
-        <strong id="tonValue">$0.00</strong>
+        <span>TON balance</span>
+        <strong id="tonValue">0 TON</strong>
       </article>
       <article class="metric">
-        <span>Meme bucket</span>
-        <strong id="memeValue">$0.00</strong>
+        <span>Whale grade</span>
+        <strong id="whaleGrade">-</strong>
       </article>
       <article class="metric">
         <span>Risk flags</span>
@@ -51,11 +51,47 @@
       </article>
     </section>
 
+    <section class="market-panel panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Market Graphic</p>
+          <h2>TON price chart</h2>
+        </div>
+        <span class="chip">TradingView</span>
+      </div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {
+          "symbols": [["TON / USDT", "OKX:TONUSDT|1D"], ["BTC / USDT", "BINANCE:BTCUSDT|1D"], ["ETH / USDT", "BINANCE:ETHUSDT|1D"]],
+          "chartOnly": false,
+          "width": "100%",
+          "height": 360,
+          "locale": "en",
+          "colorTheme": "light",
+          "autosize": true,
+          "showVolume": true,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "Inter, sans-serif",
+          "fontSize": "12",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent"
+        }
+        </script>
+      </div>
+    </section>
+
     <section class="dashboard-grid">
       <article class="panel holdings-panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Live Wallet</p>
+            <p class="eyebrow">Wallet Scan</p>
             <h2>Holdings</h2>
           </div>
           <span id="asOf" class="chip">Not loaded</span>
@@ -79,31 +115,31 @@
       <article class="panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Targets</p>
-            <h2>Recovery Watch</h2>
+            <p class="eyebrow">Whale Lens</p>
+            <h2>Wallet Grade</h2>
           </div>
         </div>
-        <div id="recoveryList" class="stack"></div>
+        <div id="whaleList" class="stack"></div>
       </article>
 
       <article class="panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Allocation</p>
-            <h2>Target Split</h2>
+            <p class="eyebrow">Transactions</p>
+            <h2>Recent Flow</h2>
           </div>
         </div>
-        <div id="allocationList" class="stack"></div>
+        <div id="transactionList" class="stack"></div>
       </article>
 
       <article class="panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Alerts</p>
-            <h2>Action Queue</h2>
+            <p class="eyebrow">Free Systems</p>
+            <h2>DeFi Tools</h2>
           </div>
         </div>
-        <div id="actionList" class="stack"></div>
+        <div id="defiList" class="stack"></div>
       </article>
     </section>
   </main>

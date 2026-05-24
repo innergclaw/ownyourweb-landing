@@ -32,6 +32,7 @@ body.telegram {
 }
 
 button, input { font: inherit; }
+a { color: inherit; font-weight: 950; }
 
 .app-shell {
   width: min(1180px, calc(100% - 28px));
@@ -162,6 +163,21 @@ button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-top: 18px;
+}
+
+.market-panel {
+  margin-top: 18px;
+}
+
+.tradingview-widget-container {
+  min-height: 360px;
+  border: 3px solid var(--line);
+  background: #fff;
+  overflow: hidden;
+}
+
+.tradingview-widget-container__widget {
+  min-height: 360px;
 }
 
 .metric {

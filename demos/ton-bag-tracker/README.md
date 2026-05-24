@@ -1,36 +1,23 @@
-# TON Bag Tracker
+# TON Chain Radar
 
-A static MVP for tracking TON wallets and jettons.
+Telegram-ready public TON blockchain intelligence mini app.
 
 ## What it does
 
-- Loads the user's latest local bag summary as a demo.
-- Scans any public TON wallet with TonAPI.
-- Shows TON and jetton quantities, prices, values, and risk signals.
-- Tracks Yoda, strawberry, and UTYA recovery targets.
-- Compares portfolio buckets against the working target split:
-  - HYPE 50%
-  - NEAR 25%
-  - TON 15%
-  - TON memes 10%
+- Starts blank: no personal wallet is loaded by default.
+- Lets users paste any public TON wallet address.
+- Pulls native TON, jettons, estimated USD values, and risk tags from TonAPI.
+- Shows recent transaction flow with explorer links.
+- Grades wallets as retail, mid, large, or whale based on TON balance / tracked value.
+- Embeds a free TradingView TON market graphic.
+- Links out to free DeFi systems such as DeFiLlama, STON.fi, DeDust, Tonviewer, Tonscan whales, and exchange-wallet lists.
 
-## Run locally
+## Telegram setup
 
-From the workspace root:
-
-```bash
-python3 -m http.server 4173
-```
-
-Open:
+Set this as the bot Mini App URL in BotFather:
 
 ```text
-http://127.0.0.1:4173/ton-bag-tracker/
+https://ownyourweb.xyz/demos/ton-bag-tracker/
 ```
 
-## Next build steps
-
-- Add TON Connect wallet login.
-- Add Telegram bot alerts for recovery target hits and high-risk token changes.
-- Add Supabase user accounts and saved watchlists.
-- Add manual buy entries and cost basis per token.
+The app uses Telegram's `telegram-web-app.js` bridge for native Telegram main-button behavior, haptics, theme support, and auto-expand.

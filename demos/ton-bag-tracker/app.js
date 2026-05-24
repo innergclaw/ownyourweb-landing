@@ -1,39 +1,71 @@
-const DEFAULT_WALLET = "UQBffr75eQax7lrOSfZqIjWUY0ZIg8JyG5if7NBrZ_r7CTnP";
 const TON_API = "https://tonapi.io/v2";
+const SAMPLE_WHALE = "EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c";
 const tg = window.Telegram?.WebApp;
 
-const recoveryBaselines = {
-  Yoda: { label: "Baby Yoda", price: 0.00268, drawdown: 0.4804 },
-  strawberry: { label: "sweety strawberry", price: 0.00147, drawdown: 0.2557 },
-  UTYA: { label: "Utya", price: 0.0312, drawdown: 0.1472 },
-};
-
-const targetSplit = [
-  { key: "HYPE", label: "HYPE", pct: 0.5, tickers: ["HYPE", "HYPE-BUY", "HYPE-LOCKED"] },
-  { key: "NEAR", label: "NEAR", pct: 0.25, tickers: ["NEAR"] },
-  { key: "TON", label: "TON", pct: 0.15, tickers: ["TON", "TON-BUY"] },
-  { key: "MEMES", label: "TON memes", pct: 0.1, tickers: ["Yoda", "strawberry", "UTYA"] },
+const defiTools = [
+  {
+    title: "DeFiLlama",
+    text: "Free DeFi dashboards for TVL, chains, yields, stablecoins, fees, bridges, and DEX volume.",
+    url: "https://defillama.com/",
+    tag: "TVL / Yields",
+  },
+  {
+    title: "DeFiLlama Downloads",
+    text: "Download free CSV datasets for yields, protocol TVL, stablecoins, volume, fees, and chain data.",
+    url: "https://defillama.com/downloads",
+    tag: "CSV data",
+  },
+  {
+    title: "STON.fi",
+    text: "TON-native DEX to inspect swaps, pools, and liquidity routes.",
+    url: "https://ston.fi/",
+    tag: "TON DEX",
+  },
+  {
+    title: "DeDust",
+    text: "TON DeFi exchange for checking token pools, liquidity, and swap conditions.",
+    url: "https://dedust.io/",
+    tag: "TON DEX",
+  },
+  {
+    title: "Tonviewer",
+    text: "Explorer links for wallet transactions, jettons, NFTs, and contract activity.",
+    url: "https://tonviewer.com/",
+    tag: "Explorer",
+  },
+  {
+    title: "TON Whales",
+    text: "A public rich-list style view for discovering large TON holders before pasting addresses here.",
+    url: "https://tonscan.org/whales",
+    tag: "Whales",
+  },
+  {
+    title: "Exchange Wallets",
+    text: "Tonviewer exchange-address list for watching hot wallets and potential exchange flow.",
+    url: "https://tonviewer.com/addresses?section=exchanges",
+    tag: "Flow",
+  },
 ];
 
 const els = {
   form: document.querySelector("#walletForm"),
   input: document.querySelector("#walletInput"),
   status: document.querySelector("#statusText"),
-  loadDemo: document.querySelector("#loadDemo"),
+  sampleWhale: document.querySelector("#sampleWhale"),
   copySummary: document.querySelector("#copySummary"),
   total: document.querySelector("#totalValue"),
   ton: document.querySelector("#tonValue"),
-  meme: document.querySelector("#memeValue"),
+  whaleGrade: document.querySelector("#whaleGrade"),
   risk: document.querySelector("#riskCount"),
   asOf: document.querySelector("#asOf"),
   holdings: document.querySelector("#holdingsBody"),
-  recovery: document.querySelector("#recoveryList"),
-  allocation: document.querySelector("#allocationList"),
-  actions: document.querySelector("#actionList"),
+  whale: document.querySelector("#whaleList"),
+  transactions: document.querySelector("#transactionList"),
+  defi: document.querySelector("#defiList"),
   telegramNote: document.querySelector("#telegramNote"),
 };
 
-let lastBag = null;
+let lastReport = null;
 
 function initTelegram() {
   if (!tg) return;
@@ -42,20 +74,19 @@ function initTelegram() {
   tg.expand();
   tg.setHeaderColor(tg.themeParams?.bg_color || "#f6f2e8");
   tg.setBackgroundColor(tg.themeParams?.bg_color || "#f6f2e8");
+
+  const user = tg.initDataUnsafe?.user;
   if (els.telegramNote) {
-    const user = tg.initDataUnsafe?.user;
     els.telegramNote.textContent = user?.first_name
-      ? `Telegram mode: tracking for ${user.first_name}.`
+      ? `Telegram mode active for ${user.first_name}.`
       : "Telegram mode active.";
   }
 
-  tg.MainButton.setText("Refresh Bag");
+  tg.MainButton.setText("Search Wallet");
   tg.MainButton.show();
   tg.MainButton.onClick(() => {
     tg.HapticFeedback?.impactOccurred("light");
-    refreshWallet(els.input.value.trim() || DEFAULT_WALLET).catch((error) => {
-      els.status.textContent = error instanceof Error ? error.message : "Wallet scan failed.";
-    });
+    searchWallet(els.input.value.trim()).catch(showError);
   });
 
   if (tg.SecondaryButton) {
@@ -83,8 +114,9 @@ function compact(value) {
   });
 }
 
-function percent(value) {
-  return `${Number(value || 0).toFixed(1)}%`;
+function shortAddress(value) {
+  if (!value) return "unknown";
+  return `${value.slice(0, 6)}...${value.slice(-6)}`;
 }
 
 function tokenUnits(rawBalance, decimals) {
@@ -100,27 +132,49 @@ function signalFor(token) {
   const note = `${token.verification || ""} ${token.score ?? ""}`.toLowerCase();
   if (token.price <= 0 || token.verification === "blacklist") return { text: "exclude", tone: "bad" };
   if (token.ticker === "TON") return { text: "core", tone: "good" };
-  if (token.score >= 50) return { text: "watch", tone: "info" };
-  if (note.includes("whitelist")) return { text: "high risk", tone: "warn" };
+  if (token.score >= 50) return { text: "verified", tone: "info" };
+  if (note.includes("whitelist")) return { text: "thin risk", tone: "warn" };
   return { text: "unknown", tone: "bad" };
 }
 
+function whaleGrade(tonQty, totalValue) {
+  if (tonQty >= 1_000_000 || totalValue >= 2_000_000) return { grade: "Whale", tone: "violet", text: "Large enough to watch for market-moving behavior." };
+  if (tonQty >= 100_000 || totalValue >= 200_000) return { grade: "Large", tone: "info", text: "Large holder. Watch transfer timing and exchange flow." };
+  if (tonQty >= 10_000 || totalValue >= 25_000) return { grade: "Mid", tone: "warn", text: "Meaningful wallet. Useful for behavior tracking." };
+  if (tonQty > 0 || totalValue > 0) return { grade: "Retail", tone: "good", text: "Small wallet. Useful for token composition, less useful for whale signals." };
+  return { grade: "Empty", tone: "bad", text: "No tracked value found." };
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+  return response.json();
+}
+
+async function getTransactions(address) {
+  try {
+    const json = await fetchJson(`${TON_API}/blockchain/accounts/${encodeURIComponent(address)}/transactions?limit=8`);
+    return (json.transactions || []).map((tx) => ({
+      hash: tx.hash,
+      time: tx.utime ? new Date(tx.utime * 1000).toLocaleString("en-US", { dateStyle: "short", timeStyle: "short" }) : "unknown time",
+      fee: Number(tx.total_fees || 0) / 1e9,
+      link: tx.hash ? `https://tonviewer.com/transaction/${tx.hash}` : `https://tonviewer.com/${address}`,
+      type: tx.in_msg?.source ? "inbound" : tx.out_msgs?.length ? "outbound" : "contract",
+    }));
+  } catch {
+    return [];
+  }
+}
+
 async function getTonWallet(address) {
-  const [accountRes, jettonsRes, ratesRes] = await Promise.all([
-    fetch(`${TON_API}/accounts/${encodeURIComponent(address)}`),
-    fetch(`${TON_API}/accounts/${encodeURIComponent(address)}/jettons?currencies=usd`),
-    fetch(`${TON_API}/rates?tokens=ton&currencies=usd`),
+  const [account, jettons, rates, transactions] = await Promise.all([
+    fetchJson(`${TON_API}/accounts/${encodeURIComponent(address)}`),
+    fetchJson(`${TON_API}/accounts/${encodeURIComponent(address)}/jettons?currencies=usd`),
+    fetchJson(`${TON_API}/rates?tokens=ton&currencies=usd`),
+    getTransactions(address),
   ]);
 
-  if (!accountRes.ok || !jettonsRes.ok || !ratesRes.ok) {
-    throw new Error("TonAPI did not return wallet data. Check the address and try again.");
-  }
-
-  const account = await accountRes.json();
-  const jettons = await jettonsRes.json();
-  const rates = await ratesRes.json();
   const tonRate = rates.rates?.TON;
-
   const native = {
     asset: "Toncoin",
     ticker: "TON",
@@ -157,54 +211,25 @@ async function getTonWallet(address) {
     asOf: new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }),
     wallet: address,
     crypto: [native, ...jettonRows],
+    transactions,
   };
-}
-
-async function loadDemoBag() {
-  const response = await fetch("../outputs/holdings_tracker/latest_summary.json", { cache: "no-store" });
-  if (!response.ok) throw new Error("Could not load local demo summary.");
-  const summary = await response.json();
-  return {
-    asOf: summary.asOf,
-    wallet: DEFAULT_WALLET,
-    crypto: summary.crypto.map((item) => ({
-      asset: item.asset,
-      ticker: item.ticker,
-      quantity: item.quantity,
-      price: item.price,
-      value: item.value,
-      verification: item.note?.includes("blacklist") ? "blacklist" : item.note?.includes("whitelist") ? "whitelist" : item.ticker === "TON" ? "core" : "manual",
-      score: item.note?.match(/score (\d+)/)?.[1] ? Number(item.note.match(/score (\d+)/)[1]) : item.ticker === "TON" ? 100 : 0,
-      address: item.note || "",
-    })),
-  };
-}
-
-async function copyCurrentSummary() {
-  if (!lastBag) return;
-  const total = lastBag.crypto.reduce((sum, token) => sum + Number(token.value || 0), 0);
-  const lines = [
-    `TON Bag Tracker - ${lastBag.asOf}`,
-    `Tracked value: ${money(total)}`,
-    ...lastBag.crypto.slice(0, 8).map((token) => `${token.ticker}: ${compact(token.quantity)} = ${money(token.value)}`),
-  ];
-  await navigator.clipboard.writeText(lines.join("\n"));
-  els.status.textContent = "Summary copied.";
-}
-
-function groupValue(tokens, tickers) {
-  return tokens
-    .filter((token) => tickers.includes(token.ticker))
-    .reduce((sum, token) => sum + Number(token.value || 0), 0);
 }
 
 function renderHoldings(tokens) {
+  if (!tokens.length) {
+    els.holdings.innerHTML = `<tr><td colspan="5">Search a wallet to load holdings.</td></tr>`;
+    return;
+  }
+
   els.holdings.innerHTML = tokens
     .map((token) => {
       const signal = signalFor(token);
+      const explorer = token.address && token.address !== "native TON"
+        ? `<a href="https://tonviewer.com/${token.address}" target="_blank" rel="noreferrer">explorer</a>`
+        : `<a href="https://tonviewer.com/" target="_blank" rel="noreferrer">explorer</a>`;
       return `
         <tr>
-          <td class="token-name"><strong>${token.asset}</strong><small>${token.ticker}</small></td>
+          <td class="token-name"><strong>${token.asset}</strong><small>${token.ticker} · ${explorer}</small></td>
           <td class="number">${compact(token.quantity)}</td>
           <td class="number">${money(token.price)}</td>
           <td class="number">${money(token.value)}</td>
@@ -215,117 +240,148 @@ function renderHoldings(tokens) {
     .join("");
 }
 
-function renderRecovery(tokens) {
-  const cards = Object.entries(recoveryBaselines).map(([ticker, baseline]) => {
-    const token = tokens.find((item) => item.ticker === ticker);
-    if (!token) {
-      return `<div class="cardlet"><header><strong>${baseline.label}</strong><span class="badge bad">missing</span></header><p>Not found in this wallet scan.</p></div>`;
-    }
+function renderWhale(report) {
+  const total = report.crypto.reduce((sum, token) => sum + Number(token.value || 0), 0);
+  const ton = report.crypto.find((token) => token.ticker === "TON");
+  const grade = whaleGrade(ton?.quantity || 0, total);
+  const riskCount = report.crypto.filter((token) => ["bad", "warn"].includes(signalFor(token).tone)).length;
+  const tonPct = total > 0 ? ((ton?.value || 0) / total) * 100 : 0;
+  const explorer = `https://tonviewer.com/${report.wallet}`;
 
-    const target = baseline.price / (1 - baseline.drawdown);
-    const needed = target > 0 && token.price > 0 ? (target / token.price - 1) * 100 : 0;
-    const progress = Math.min(100, (token.price / target) * 100);
-    const hit = token.price >= target;
-    return `
+  els.whale.innerHTML = `
+    <div class="cardlet">
+      <header><strong>${grade.grade}</strong><span class="badge ${grade.tone}">grade</span></header>
+      <p>${grade.text}</p>
+    </div>
+    <div class="cardlet">
+      <header><strong>TON concentration</strong><span class="badge info">${tonPct.toFixed(1)}%</span></header>
+      <p>${compact(ton?.quantity || 0)} TON is currently ${money(ton?.value || 0)} of this wallet.</p>
+    </div>
+    <div class="cardlet">
+      <header><strong>Explorer</strong><span class="badge good">open</span></header>
+      <p><a href="${explorer}" target="_blank" rel="noreferrer">${shortAddress(report.wallet)} on Tonviewer</a></p>
+    </div>
+    <div class="cardlet">
+      <header><strong>Risk flags</strong><span class="badge ${riskCount ? "warn" : "good"}">${riskCount}</span></header>
+      <p>Flags include no-price, blacklist, unknown, or thin-risk jettons.</p>
+    </div>
+  `;
+}
+
+function renderTransactions(report) {
+  if (!report.transactions.length) {
+    els.transactions.innerHTML = `<div class="cardlet"><header><strong>No recent flow</strong><span class="badge warn">empty</span></header><p>TonAPI did not return recent transactions for this wallet. Use the explorer link for deeper review.</p></div>`;
+    return;
+  }
+
+  els.transactions.innerHTML = report.transactions
+    .map((tx) => `
       <div class="cardlet">
-        <header><strong>${token.ticker}</strong><span class="badge ${hit ? "good" : "warn"}">${hit ? "recovered" : `${percent(needed)} left`}</span></header>
-        <p>${money(token.value)} at ${money(token.price)}. Recovery target: ${money(target)}.</p>
-        <div class="bar"><span style="width:${progress}%"></span></div>
+        <header><strong>${tx.type}</strong><span class="badge info">${money(tx.fee)} fee</span></header>
+        <p>${tx.time} · <a href="${tx.link}" target="_blank" rel="noreferrer">${shortAddress(tx.hash || "")}</a></p>
       </div>
-    `;
-  });
-  els.recovery.innerHTML = cards.join("");
-}
-
-function renderAllocation(tokens) {
-  const total = tokens.reduce((sum, token) => sum + Number(token.value || 0), 0);
-  els.allocation.innerHTML = targetSplit
-    .map((target) => {
-      const current = groupValue(tokens, target.tickers);
-      const targetValue = total * target.pct;
-      const diff = current - targetValue;
-      const progress = targetValue > 0 ? Math.min(140, (current / targetValue) * 100) : 0;
-      return `
-        <div class="cardlet">
-          <header><strong>${target.label}</strong><span class="badge ${Math.abs(diff) < 5 ? "good" : diff > 0 ? "warn" : "info"}">${diff >= 0 ? "+" : ""}${money(diff)}</span></header>
-          <p>Current ${money(current)} / target ${money(targetValue)} (${percent(target.pct * 100)}).</p>
-          <div class="bar"><span style="width:${progress}%"></span></div>
-        </div>
-      `;
-    })
+    `)
     .join("");
 }
 
-function renderActions(tokens) {
-  const badTokens = tokens.filter((token) => signalFor(token).tone === "bad");
-  const highRiskValue = groupValue(tokens, ["Yoda", "strawberry", "UTYA"]);
-  const total = tokens.reduce((sum, token) => sum + Number(token.value || 0), 0);
-  const memePct = total > 0 ? highRiskValue / total : 0;
-  const actions = [];
-
-  if (badTokens.length) {
-    actions.push(["Suspicious tokens", `${badTokens.length} token(s) have no price or blacklist/unknown status. Keep excluded from net worth decisions.`, "bad"]);
-  }
-  if (memePct > 0.12) {
-    actions.push(["Meme exposure high", `Meme bucket is ${percent(memePct * 100)} of tracked value. Target is 10%.`, "warn"]);
-  }
-  if (actions.length === 0) {
-    actions.push(["No urgent action", "Wallet is within the current watch rules. Keep tracking recovery targets.", "good"]);
-  }
-
-  els.actions.innerHTML = actions
-    .map(([title, text, tone]) => `<div class="cardlet"><header><strong>${title}</strong><span class="badge ${tone}">signal</span></header><p>${text}</p></div>`)
+function renderDefiTools() {
+  els.defi.innerHTML = defiTools
+    .map((tool) => `
+      <div class="cardlet">
+        <header><strong>${tool.title}</strong><span class="badge violet">${tool.tag}</span></header>
+        <p>${tool.text}</p>
+        <p><a href="${tool.url}" target="_blank" rel="noreferrer">Open ${tool.title}</a></p>
+      </div>
+    `)
     .join("");
 }
 
-function renderBag(bag) {
-  lastBag = bag;
-  const tokens = bag.crypto;
+function renderReport(report) {
+  lastReport = report;
+  const tokens = report.crypto;
   const total = tokens.reduce((sum, token) => sum + Number(token.value || 0), 0);
-  const tonValue = groupValue(tokens, ["TON"]);
-  const memeValue = groupValue(tokens, ["Yoda", "strawberry", "UTYA"]);
+  const ton = tokens.find((token) => token.ticker === "TON");
+  const grade = whaleGrade(ton?.quantity || 0, total);
   const riskCount = tokens.filter((token) => ["bad", "warn"].includes(signalFor(token).tone)).length;
 
   els.total.textContent = money(total);
-  els.ton.textContent = money(tonValue);
-  els.meme.textContent = money(memeValue);
+  els.ton.textContent = `${compact(ton?.quantity || 0)} TON`;
+  els.whaleGrade.textContent = grade.grade;
   els.risk.textContent = String(riskCount);
-  els.asOf.textContent = bag.asOf;
+  els.asOf.textContent = report.asOf;
+
   renderHoldings(tokens);
-  renderRecovery(tokens);
-  renderAllocation(tokens);
-  renderActions(tokens);
+  renderWhale(report);
+  renderTransactions(report);
+  renderDefiTools();
 }
 
-async function refreshWallet(address) {
-  els.status.textContent = "Scanning TON wallet...";
+function clearReport() {
+  els.total.textContent = "$0.00";
+  els.ton.textContent = "0 TON";
+  els.whaleGrade.textContent = "-";
+  els.risk.textContent = "0";
+  els.asOf.textContent = "Not loaded";
+  els.holdings.innerHTML = `<tr><td colspan="5">Paste any public TON wallet address and search.</td></tr>`;
+  els.whale.innerHTML = `<div class="cardlet"><header><strong>Waiting for wallet</strong><span class="badge info">search</span></header><p>No personal wallet is loaded by default.</p></div>`;
+  els.transactions.innerHTML = `<div class="cardlet"><header><strong>Recent flow</strong><span class="badge info">pending</span></header><p>Transactions appear after a wallet scan.</p></div>`;
+  renderDefiTools();
+}
+
+async function searchWallet(address) {
+  if (!address) {
+    els.status.textContent = "Paste a public TON wallet address first.";
+    return;
+  }
+  els.status.textContent = "Scanning public TON wallet...";
   tg?.MainButton?.showProgress(false);
-  const bag = await getTonWallet(address);
-  renderBag(bag);
-  els.status.textContent = `Loaded ${bag.crypto.length} token(s) from ${address.slice(0, 6)}...${address.slice(-6)}.`;
+  const report = await getTonWallet(address);
+  renderReport(report);
+  els.status.textContent = `Loaded ${report.crypto.length} token(s) and ${report.transactions.length} recent transaction(s) for ${shortAddress(address)}.`;
   tg?.MainButton?.hideProgress();
   tg?.HapticFeedback?.notificationOccurred("success");
 }
 
-async function refreshDemo() {
-  els.input.value = DEFAULT_WALLET;
-  await refreshWallet(DEFAULT_WALLET);
+async function copyCurrentSummary() {
+  if (!lastReport) {
+    els.status.textContent = "Search a wallet before copying a report.";
+    return;
+  }
+  const total = lastReport.crypto.reduce((sum, token) => sum + Number(token.value || 0), 0);
+  const ton = lastReport.crypto.find((token) => token.ticker === "TON");
+  const grade = whaleGrade(ton?.quantity || 0, total);
+  const lines = [
+    `TON Chain Radar - ${lastReport.asOf}`,
+    `Wallet: ${lastReport.wallet}`,
+    `Whale grade: ${grade.grade}`,
+    `Tracked value: ${money(total)}`,
+    ...lastReport.crypto.slice(0, 8).map((token) => `${token.ticker}: ${compact(token.quantity)} = ${money(token.value)}`),
+  ];
+  await navigator.clipboard.writeText(lines.join("\n"));
+  els.status.textContent = "Wallet report copied.";
+}
+
+function showError(error) {
+  els.status.textContent = error instanceof Error ? error.message : "Wallet scan failed.";
+  tg?.MainButton?.hideProgress();
+  tg?.HapticFeedback?.notificationOccurred("error");
 }
 
 els.form.addEventListener("submit", async (event) => {
   event.preventDefault();
   try {
-    await refreshWallet(els.input.value.trim());
+    await searchWallet(els.input.value.trim());
   } catch (error) {
-    els.status.textContent = error instanceof Error ? error.message : "Wallet scan failed.";
+    showError(error);
   }
 });
 
-els.loadDemo.addEventListener("click", async () => {
+els.sampleWhale.addEventListener("click", async () => {
+  els.input.value = SAMPLE_WHALE;
   try {
-    await refreshDemo();
+    await searchWallet(SAMPLE_WHALE);
   } catch (error) {
-    els.status.textContent = error instanceof Error ? error.message : "Demo load failed.";
+    showError(error);
   }
 });
 
@@ -334,9 +390,4 @@ els.copySummary.addEventListener("click", async () => {
 });
 
 initTelegram();
-
-refreshWallet(DEFAULT_WALLET).catch((error) => {
-  refreshDemo().catch(() => {
-    els.status.textContent = error instanceof Error ? error.message : "Initial load failed.";
-  });
-});
+clearReport();
