@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brinx Entertainment — Logo Suite Progress</title>
+  <meta name="description" content="Logo suite progress page for Brinx Entertainment." />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #121722;
+      --panel-2: #171e2b;
+      --line: rgba(255,255,255,0.1);
+      --text: #f5f7fb;
+      --muted: #98a2b3;
+      --accent: #7df3cf;
+      --accent-2: #7ab8ff;
+      --accent-3: #b38cff;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(179,140,255,.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(125,243,207,.16), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #090c11 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: rgba(18,23,34,.72);
+      backdrop-filter: blur(18px);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18,23,34,.92) 0%, rgba(12,16,24,.96) 100%);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy { padding: 34px; }
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      margin-top: 16px;
+      font-size: clamp(2.8rem, 7vw, 5.4rem);
+      line-height: .92;
+      letter-spacing: -.04em;
+    }
+
+    .lede {
+      margin-top: 18px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .meta {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+
+    .logo-panel {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .logo-stage {
+      min-height: 420px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+        radial-gradient(circle at center, rgba(125,243,207,.08), transparent 42%);
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+      gap: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logo-stage::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(255,255,255,.08);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .monogram {
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.14);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(125,243,207,.18), rgba(122,184,255,.12));
+      box-shadow: 0 0 0 10px rgba(125,243,207,.05);
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .wordmark {
+      font-size: clamp(2.2rem, 5vw, 4.3rem);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .submark {
+      font-size: clamp(.95rem, 2vw, 1.2rem);
+      color: var(--muted);
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      margin-left: .4em;
+    }
+
+    .section {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .section-card { padding: 28px; }
+    .section-card h2 { font-size: 1.4rem; margin-bottom: 14px; }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+
+    .list-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .progress {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .progress-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .progress-row header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+
+    @media (max-width: 920px) {
+      .hero, .section { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .logo-stage { min-height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div><div class="eyebrow">OwnYourWeb / Logo Suite Progress</div></div>
+      <div class="tag">Brinx Entertainment</div>
+    </div>
+
+    <section class="hero">
+      <article class="card hero-copy">
+        <div class="eyebrow">Phase 01 / Payment Received + Rush Queue</div>
+        <h1>Weekend rush logo suite now in motion.</h1>
+        <p class="lede">
+          This is currently a progress page for the Brinx Entertainment logo suite. Right now the focus is building the visual direction, shaping the main wordmark, and preparing first preview options before any final exports are delivered.
+        </p>
+
+        <div class="meta-grid">
+          <div class="meta"><span>Project</span>Logo Suite Package + Rush</div>
+          <div class="meta"><span>Current Focus</span>Logo Direction Development</div>
+          <div class="meta"><span>Status</span>In Progress</div>
+        </div>
+      </article>
+
+      <aside class="card logo-panel">
+        <div class="tag">Live Direction Preview</div>
+        <div class="logo-stage">
+          <div class="monogram">B</div>
+          <div>
+            <div class="wordmark">BRINX</div>
+            <div class="submark">Entertainment</div>
+          </div>
+          <div class="tag">Bold monogram + premium entertainment wordmark</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <article class="card section-card">
+        <h2>Logo Direction</h2>
+        <div class="list">
+          <div class="list-item"><strong>Primary wordmark</strong>Brinx should feel confident, polished, and entertainment-ready with a premium edge.</div>
+          <div class="list-item"><strong>Supporting icon</strong>A compact “B” monogram can support profile images, social branding, and smaller placements.</div>
+          <div class="list-item"><strong>Overall tone</strong>Clean, bold, modern, and credible — not cluttered, not gimmicky, and built to feel like a real brand.</div>
+        </div>
+      </article>
+
+      <article class="card section-card">
+        <h2>Progress Snapshot</h2>
+        <div class="progress">
+          <div class="progress-row"><header><span>Payment received</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
+          <div class="progress-row"><header><span>Logo concept direction</span><span>68%</span></header><div class="bar"><span style="width:68%"></span></div></div>
+          <div class="progress-row"><header><span>Initial preview preparation</span><span>42%</span></header><div class="bar"><span style="width:42%"></span></div></div>
+          <div class="progress-row"><header><span>Final export planning</span><span>20%</span></header><div class="bar"><span style="width:20%"></span></div></div>
+        </div>
+        <div class="footer-note">This is a demo progress page, not the final delivery page. It exists to show direction and momentum while the logo suite is being shaped.</div>
+      </article>
+    </section>
+
+    <section class="section">
+      <article class="card section-card">
+        <h2>What Gets Decided Next</h2>
+        <div class="list">
+          <div class="list-item"><strong>Wordmark style</strong>Lock whether the main Brinx typography leans more luxury-clean, nightlife-bold, or media-modern.</div>
+          <div class="list-item"><strong>Monogram direction</strong>Decide if the “B” icon should stay minimal or carry more motion and edge.</div>
+          <div class="list-item"><strong>Color system</strong>Choose the palette direction for the full logo suite and social-ready brand assets.</div>
+        </div>
+      </article>
+
+      <article class="card section-card">
+        <h2>Notes For Client Preview</h2>
+        <div class="list">
+          <div class="list-item"><strong>Current purpose</strong>This is a progress demo, not the final website or final brand board.</div>
+          <div class="list-item"><strong>What to react to</strong>Focus feedback on the overall logo feel: boldness, professionalism, and entertainment appeal.</div>
+          <div class="list-item"><strong>What comes after approval</strong>Once the direction is approved, the full logo suite gets finalized and exported in the promised file formats.</div>
+        </div>
+      </article>
+    </section>
+  </div>
+</body>
+</html>
