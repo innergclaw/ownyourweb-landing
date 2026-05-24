@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beginner Mechanic Guide | Trade School Starter</title>
+  <meta name="description" content="A beginner-friendly mechanic trade school guide with diagrams, starter tools, and common step-by-step maintenance fixes." />
+  <style>
+    :root {
+      --ink: #111319;
+      --paper: #f5f0e4;
+      --panel: #fffdf7;
+      --line: #111319;
+      --steel: #d8dde2;
+      --blue: #19b5ff;
+      --red: #ff4f3f;
+      --gold: #f4b740;
+      --green: #9dff43;
+      --muted: #62615b;
+      --shadow: 6px 6px 0 var(--line);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(17,19,25,.055) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17,19,25,.055) 1px, transparent 1px),
+        var(--paper);
+      background-size: 26px 26px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: inherit; font-weight: 950; }
+    p, h1, h2, h3 { margin: 0; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 54px;
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(330px, .85fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .panel,
+    .card,
+    .step,
+    .tool {
+      border: 3px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: 28px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: .88;
+      text-transform: uppercase;
+    }
+
+    h1 { max-width: 760px; font-size: clamp(3.1rem, 8vw, 7.5rem); }
+    h2 { font-size: clamp(2.2rem, 4.6vw, 4.4rem); }
+    h3 { font-size: 1.05rem; font-weight: 950; text-transform: uppercase; }
+
+    .lede {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 820;
+      line-height: 1.5;
+    }
+
+    .hero-actions,
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .button,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 3px solid var(--line);
+      padding: 8px 12px;
+      background: var(--green);
+      box-shadow: 3px 3px 0 var(--line);
+      font-weight: 950;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .button:nth-child(2) { background: var(--blue); }
+    .chip { min-height: 32px; background: var(--paper); box-shadow: none; font-size: .74rem; }
+    .chip.red { background: var(--red); color: #fff; }
+    .chip.gold { background: var(--gold); }
+    .chip.blue { background: var(--blue); }
+
+    .hero-visual {
+      min-height: 520px;
+      display: grid;
+      align-content: center;
+      padding: 18px;
+      background: #17191f;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .shop-poster {
+      position: relative;
+      min-height: 450px;
+      border: 3px solid #fff;
+      background:
+        radial-gradient(circle at 26% 22%, rgba(25,181,255,.35), transparent 20%),
+        radial-gradient(circle at 78% 72%, rgba(244,183,64,.3), transparent 24%),
+        linear-gradient(145deg, #242832, #0c0d10);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .poster-title {
+      position: relative;
+      z-index: 2;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: .86;
+      text-transform: uppercase;
+    }
+
+    .engine {
+      position: absolute;
+      right: 5%;
+      bottom: 5%;
+      width: min(420px, 88%);
+      aspect-ratio: 1.16;
+      border: 8px solid #07080a;
+      border-radius: 18px;
+      background: var(--steel);
+      box-shadow: 16px 16px 0 rgba(0,0,0,.45);
+      transform: rotate(-4deg);
+    }
+
+    .engine::before {
+      content: "";
+      position: absolute;
+      inset: 24% 9%;
+      border: 7px solid #07080a;
+      background:
+        linear-gradient(90deg, transparent 24%, #07080a 24% 29%, transparent 29% 47%, #07080a 47% 52%, transparent 52% 70%, #07080a 70% 75%, transparent 75%),
+        #aab2ba;
+    }
+
+    .engine::after {
+      content: "";
+      position: absolute;
+      width: 34%;
+      height: 34%;
+      right: 9%;
+      top: 10%;
+      border: 7px solid #07080a;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue), var(--gold), var(--red), var(--blue));
+    }
+
+    .spark {
+      position: absolute;
+      left: 16%;
+      bottom: 14%;
+      width: 120px;
+      height: 120px;
+      border: 8px solid var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 0 8px #07080a inset;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      max-width: 620px;
+      color: var(--muted);
+      font-weight: 820;
+      line-height: 1.45;
+    }
+
+    .grid-3,
+    .tools-grid,
+    .fix-grid,
+    .brand-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tools-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .fix-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .brand-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card,
+    .tool,
+    .step {
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .card p,
+    .tool p,
+    .step p,
+    .brand p,
+    li {
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .card h3,
+    .tool h3,
+    .step h3 {
+      margin-bottom: 8px;
+    }
+
+    .tool-icon {
+      width: 54px;
+      height: 54px;
+      margin-bottom: 10px;
+      border: 3px solid var(--line);
+      background: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      font-weight: 950;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    .diagram {
+      border: 3px solid var(--line);
+      background: #fff;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    svg { width: 100%; height: auto; display: block; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .flow .node {
+      position: relative;
+      min-height: 118px;
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .flow .node span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 820;
+      line-height: 1.35;
+      text-transform: none;
+    }
+
+    .fix-card {
+      display: grid;
+      grid-template-columns: minmax(190px, .7fr) minmax(0, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      border: 3px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .fix-card ol {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .fix-picture {
+      min-height: 240px;
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.65)),
+        var(--steel);
+      display: grid;
+      place-items: center;
+      padding: 10px;
+    }
+
+    .brand {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      padding: 14px;
+    }
+
+    .brand strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.35rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .warning {
+      border: 3px solid var(--line);
+      background: var(--gold);
+      padding: 14px;
+      font-weight: 900;
+      line-height: 1.45;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-weight: 850;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid-3,
+      .tools-grid,
+      .fix-grid,
+      .brand-grid,
+      .timeline,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { min-height: auto; }
+      .hero-visual { min-height: 420px; }
+      .section-head { display: grid; align-items: start; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 18px, 1160px); padding-top: 12px; }
+      .hero-copy, .panel { padding: 16px; }
+      h1 { font-size: clamp(2.85rem, 16vw, 4.7rem); }
+      .fix-card { grid-template-columns: 1fr; }
+      .hero-actions .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Trade school starter guide</p>
+        <h1>So You Want To Be A Mechanic</h1>
+        <p class="lede">A beginner-friendly guide for learning the path, tools, safety habits, and simple repairs that show up across common U.S. manufacturers like Ford, GM, Chrysler/Jeep/Ram, and Tesla.</p>
+        <div class="hero-actions">
+          <a class="button" href="#first-fixes">Start with repairs</a>
+          <a class="button" href="#career-path">See career path</a>
+        </div>
+        <div class="chips">
+          <span class="chip red">Safety first</span>
+          <span class="chip gold">Beginner level</span>
+          <span class="chip blue">Phone friendly</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of an engine bay and mechanic starter theme">
+        <div class="shop-poster">
+          <div class="poster-title">Learn<br>Fix<br>Level Up</div>
+          <div class="engine" aria-hidden="true"></div>
+          <div class="spark" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="career-path" class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">The path</p>
+          <h2>From curious to employable</h2>
+        </div>
+        <p>He does not need to know everything today. The first win is learning how vehicles are organized, how to work safely, and how to diagnose instead of guessing.</p>
+      </div>
+      <div class="timeline">
+        <article class="card">
+          <h3>1. Explore</h3>
+          <p>Watch basic repair videos, learn vehicle systems, and practice identifying parts under the hood.</p>
+        </article>
+        <article class="card">
+          <h3>2. Trade school</h3>
+          <p>Look for automotive technology programs with shop time, scan tool training, and manufacturer partnerships.</p>
+        </article>
+        <article class="card">
+          <h3>3. Entry job</h3>
+          <p>Start as a lube tech, tire tech, apprentice, or dealership helper while building real speed and confidence.</p>
+        </article>
+        <article class="card">
+          <h3>4. Certify</h3>
+          <p>Work toward ASE areas like brakes, engine repair, electrical, steering, suspension, and HVAC.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Map the vehicle</p>
+          <h2>How a car is grouped</h2>
+        </div>
+        <p>Most repairs become less scary when the car is split into systems. The job is to find which system is complaining.</p>
+      </div>
+      <div class="grid-3">
+        <div class="diagram">
+          <svg viewBox="0 0 560 360" role="img" aria-label="Simple engine bay diagram">
+            <rect x="20" y="40" width="520" height="280" rx="18" fill="#d8dde2" stroke="#111319" stroke-width="8"/>
+            <rect x="70" y="90" width="190" height="150" rx="16" fill="#19b5ff" stroke="#111319" stroke-width="7"/>
+            <text x="95" y="172" font-size="30" font-weight="900">ENGINE</text>
+            <rect x="310" y="82" width="135" height="88" rx="12" fill="#ff4f3f" stroke="#111319" stroke-width="7"/>
+            <text x="329" y="135" font-size="25" font-weight="900">BATTERY</text>
+            <rect x="305" y="210" width="160" height="60" rx="12" fill="#f4b740" stroke="#111319" stroke-width="7"/>
+            <text x="326" y="249" font-size="24" font-weight="900">AIR BOX</text>
+            <path d="M260 160 C300 160 300 230 305 235" fill="none" stroke="#111319" stroke-width="9"/>
+            <circle cx="97" cy="270" r="28" fill="#9dff43" stroke="#111319" stroke-width="7"/>
+            <text x="70" y="330" font-size="20" font-weight="900">FLUIDS</text>
+          </svg>
+        </div>
+        <article class="card">
+          <h3>Powertrain</h3>
+          <p>Engine, transmission, cooling, fuel, exhaust. This is where oil changes, spark plugs, belts, and overheating checks live.</p>
+        </article>
+        <article class="card">
+          <h3>Chassis</h3>
+          <p>Brakes, tires, steering, suspension. This is where safety inspections and tire rotations build real shop skill.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Starter tools</p>
+          <h2>First box setup</h2>
+        </div>
+        <p>Buy slowly. A good beginner mechanic learns what each tool does before chasing a huge toolbox.</p>
+      </div>
+      <div class="tools-grid">
+        <article class="tool">
+          <div class="tool-icon">1/2</div>
+          <h3>Socket set</h3>
+          <p>Metric sockets, ratchets, extensions, and a breaker bar. Most modern cars use metric fasteners.</p>
+        </article>
+        <article class="tool">
+          <div class="tool-icon">Nm</div>
+          <h3>Torque wrench</h3>
+          <p>Tightens bolts to spec. This matters for wheels, drain plugs, brakes, spark plugs, and engine parts.</p>
+        </article>
+        <article class="tool">
+          <div class="tool-icon">OBD</div>
+          <h3>Code reader</h3>
+          <p>Reads check-engine codes. A code is a clue, not an automatic parts order.</p>
+        </article>
+        <article class="tool">
+          <div class="tool-icon">V</div>
+          <h3>Multimeter</h3>
+          <p>Checks battery voltage, fuses, grounds, and simple electrical problems.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Diagnose first</p>
+          <h2>The no-guessing flow</h2>
+        </div>
+        <p>Good mechanics do not just throw parts at problems. They observe, test, confirm, then repair.</p>
+      </div>
+      <div class="flow">
+        <div class="node">Listen<span>What changed? Noise, smell, light, leak, vibration, no start?</span></div>
+        <div class="node">Scan<span>Read codes and freeze-frame data if a warning light is on.</span></div>
+        <div class="node">Inspect<span>Look for loose hoses, corrosion, low fluids, bad tires, leaks.</span></div>
+        <div class="node">Test<span>Use meter, pressure gauge, or service info to confirm.</span></div>
+        <div class="node">Repair<span>Fix it, clear codes if needed, then test drive safely.</span></div>
+      </div>
+    </section>
+
+    <section id="first-fixes" class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Step-by-step fixes</p>
+          <h2>Beginner jobs to learn</h2>
+        </div>
+        <p>These are common across U.S. road vehicles. Always check the exact service manual, fluid type, torque specs, and lift points for the year, make, and model.</p>
+      </div>
+      <div class="fix-grid">
+        <article class="fix-card">
+          <div class="fix-picture">
+            <svg viewBox="0 0 420 320" role="img" aria-label="Oil change diagram">
+              <rect x="40" y="55" width="340" height="120" rx="24" fill="#d8dde2" stroke="#111319" stroke-width="8"/>
+              <rect x="120" y="170" width="180" height="35" fill="#111319"/>
+              <path d="M210 205 C210 245 188 245 188 280 C188 298 232 298 232 280 C232 245 210 245 210 205Z" fill="#2c1b12" stroke="#111319" stroke-width="6"/>
+              <rect x="142" y="230" width="136" height="32" rx="8" fill="#f4b740" stroke="#111319" stroke-width="6"/>
+              <text x="118" y="41" font-size="28" font-weight="900">OIL CHANGE</text>
+            </svg>
+          </div>
+          <div>
+            <h3>Oil and filter change</h3>
+            <ol>
+              <li>Warm the engine briefly, then shut it off on level ground.</li>
+              <li>Lift safely with jack stands or use ramps rated for the vehicle.</li>
+              <li>Drain oil, replace drain plug washer if required, and torque the plug.</li>
+              <li>Swap the filter, add the correct oil, run engine, check leaks, recheck level.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="fix-card">
+          <div class="fix-picture">
+            <svg viewBox="0 0 420 320" role="img" aria-label="Battery service diagram">
+              <rect x="70" y="80" width="280" height="160" rx="18" fill="#ff4f3f" stroke="#111319" stroke-width="8"/>
+              <rect x="105" y="54" width="52" height="38" rx="8" fill="#d8dde2" stroke="#111319" stroke-width="7"/>
+              <rect x="265" y="54" width="52" height="38" rx="8" fill="#d8dde2" stroke="#111319" stroke-width="7"/>
+              <text x="120" y="180" font-size="58" font-weight="900" fill="#fff">12V</text>
+              <path d="M107 260 C145 232 170 250 204 226 C235 205 264 224 309 196" fill="none" stroke="#19b5ff" stroke-width="12"/>
+              <text x="96" y="38" font-size="28" font-weight="900">BATTERY CHECK</text>
+            </svg>
+          </div>
+          <div>
+            <h3>Battery and terminal clean</h3>
+            <ol>
+              <li>Turn vehicle off, remove key, and wear eye protection.</li>
+              <li>Inspect for swelling, leaking, corrosion, and loose clamps.</li>
+              <li>Disconnect negative first, then positive. Clean posts and clamps.</li>
+              <li>Reconnect positive first, then negative. Test voltage and starting.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="fix-card">
+          <div class="fix-picture">
+            <svg viewBox="0 0 420 320" role="img" aria-label="Brake inspection diagram">
+              <circle cx="210" cy="160" r="105" fill="#d8dde2" stroke="#111319" stroke-width="8"/>
+              <circle cx="210" cy="160" r="44" fill="#fffdf7" stroke="#111319" stroke-width="7"/>
+              <path d="M270 86 C335 125 332 204 268 242 L242 204 C278 180 279 135 240 113Z" fill="#19b5ff" stroke="#111319" stroke-width="7"/>
+              <rect x="282" y="130" width="56" height="68" rx="10" fill="#f4b740" stroke="#111319" stroke-width="7"/>
+              <text x="84" y="38" font-size="28" font-weight="900">BRAKE INSPECTION</text>
+            </svg>
+          </div>
+          <div>
+            <h3>Brake pad inspection</h3>
+            <ol>
+              <li>Secure the vehicle and remove the wheel.</li>
+              <li>Look at pad thickness, rotor grooves, leaks, and uneven wear.</li>
+              <li>Do not open brake hydraulics unless trained and prepared to bleed.</li>
+              <li>Reinstall wheel with a torque wrench and test pedal before driving.</li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="fix-card">
+          <div class="fix-picture">
+            <svg viewBox="0 0 420 320" role="img" aria-label="Air filter replacement diagram">
+              <rect x="75" y="74" width="270" height="172" rx="18" fill="#111319"/>
+              <rect x="102" y="101" width="216" height="118" rx="12" fill="#fffdf7" stroke="#111319" stroke-width="3"/>
+              <path d="M125 111 L125 210 M155 111 L155 210 M185 111 L185 210 M215 111 L215 210 M245 111 L245 210 M275 111 L275 210" stroke="#19b5ff" stroke-width="8"/>
+              <path d="M40 160 H92 M328 160 H380" stroke="#f4b740" stroke-width="15" stroke-linecap="round"/>
+              <text x="102" y="39" font-size="28" font-weight="900">AIR FILTER</text>
+            </svg>
+          </div>
+          <div>
+            <h3>Engine air filter</h3>
+            <ol>
+              <li>Find the air box near the intake tube.</li>
+              <li>Open clips or screws without dropping hardware into the engine bay.</li>
+              <li>Match the new filter shape and arrow direction if marked.</li>
+              <li>Close the box fully so unfiltered air cannot bypass the filter.</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Manufacturer awareness</p>
+          <h2>Common U.S. makes</h2>
+        </div>
+        <p>The core principles are the same, but each brand has its own scan tools, service procedures, and common patterns.</p>
+      </div>
+      <div class="brand-grid">
+        <article class="brand">
+          <strong>Ford</strong>
+          <p>Learn trucks, EcoBoost basics, F-Series maintenance, brake systems, and module diagnostics.</p>
+        </article>
+        <article class="brand">
+          <strong>GM</strong>
+          <p>Chevy, GMC, Buick, Cadillac. Practice LS/LT engine families, truck service, and electrical testing.</p>
+        </article>
+        <article class="brand">
+          <strong>Stellantis</strong>
+          <p>Chrysler, Dodge, Jeep, Ram. Learn Jeep suspension, Ram trucks, HEMI basics, and scan-tool workflows.</p>
+        </article>
+        <article class="brand">
+          <strong>Tesla</strong>
+          <p>EV safety, high-voltage awareness, tires, brakes, suspension, cooling loops, and software-driven diagnostics.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Rules that keep you alive</p>
+          <h2>Shop safety checklist</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="warning">Never trust only a jack. Use jack stands, wheel chocks, level ground, and proper lift points.</div>
+        <div class="warning">Never work on high-voltage EV systems without proper training, PPE, and lockout procedure.</div>
+        <div class="warning">Never guess torque specs on wheels, brakes, suspension, spark plugs, or engine internals.</div>
+      </div>
+    </section>
+
+    <p class="footer">Built as a starter map, not a replacement for a service manual, instructor, or certified technician.</p>
+  </main>
+</body>
+</html>
