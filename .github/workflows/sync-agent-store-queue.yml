@@ -24,13 +24,13 @@ jobs:
         env:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           OWNYOURWEB_SUPABASE_URL: https://zkyhhoxcrjkhywblzehr.supabase.co
-        run: node scripts/pull-ownyourweb-requests.mjs
+        run: npm run sync:queue-and-trackers
 
-      - name: Commit queue updates
+      - name: Commit queue and client tracker updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add agent-store/admin-queue.json
+          git add agent-store/admin-queue.json client-trackers
           git diff --cached --quiet && exit 0
-          git commit -m "Sync agent-store queue"
+          git commit -m "Sync agent-store queue and client trackers"
           git push
