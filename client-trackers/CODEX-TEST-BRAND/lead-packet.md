@@ -1,10 +1,10 @@
-# OMNI-GLOBAL-SOLUTIONS-LLC Client Tracker
+# CODEX-TEST-BRAND Client Tracker
 
-Request ID: 2026-05-23T01-36-11-282Z-name-your-price-name-your-price-logo-offer-torrance
-Created: 2026-05-23T01:36:11.282+00:00
-Client: Torrance
-Contact: darealtorr@icloud.com
-Business: Omni Global Solutions LLC
+Request ID: 2026-05-16T17-38-54-817Z-name-your-price-name-your-price-logo-offer-codex-test-inquiry
+Created: 2026-05-16T17:38:54.817+00:00
+Client: Codex Test Inquiry
+Contact: codex-test-inquiry@example.com
+Business: Codex Test Brand
 Industry: Graphic Design / Brand Identity
 Package: Name Your Price Logo Offer
 Budget: $100 - $250
@@ -16,12 +16,12 @@ Source: ShopNasGraphics Name Your Price Form
 
 ## Links
 
-Current website: http://shopnasgfx.com/
+Current website: n/a
 Checkout URL: n/a
 
 ## Request
 
-Omni nice writing global with the O being a globe
+TEST ONLY: new inquiry notification check. Please ignore.
 
 ## Assets Available
 

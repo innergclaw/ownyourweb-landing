@@ -1,10 +1,10 @@
-# OMNI-GLOBAL-SOLUTIONS-LLC Client Tracker
+# NPASSTWUQBVFDKJLVTAJAONR Client Tracker
 
-Request ID: 2026-05-23T01-36-11-282Z-name-your-price-name-your-price-logo-offer-torrance
-Created: 2026-05-23T01:36:11.282+00:00
-Client: Torrance
-Contact: darealtorr@icloud.com
-Business: Omni Global Solutions LLC
+Request ID: 2026-05-11T13-31-33-047Z-name-your-price-logo-offer-rwzlouveaggdtuzie
+Created: 2026-05-11T13:31:33.047+00:00
+Client: RwZlOUvEaGgDTUzie
+Contact: mo.z.ey.a.m.582@gmail.com
+Business: NPASsTWuqBvFdkjLvtAJaonR
 Industry: Graphic Design / Brand Identity
 Package: Name Your Price Logo Offer
 Budget: $100 - $250
@@ -16,12 +16,12 @@ Source: ShopNasGraphics Name Your Price Form
 
 ## Links
 
-Current website: http://shopnasgfx.com/
+Current website: n/a
 Checkout URL: n/a
 
 ## Request
 
-Omni nice writing global with the O being a globe
+qEDwnetLAMpBAwfX
 
 ## Assets Available
 
