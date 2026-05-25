@@ -141,43 +141,59 @@
 
     .nav a:hover,
     .nav a:focus-visible,
-    .demo-menu-wrap:hover .demo-sites-toggle,
-    .demo-menu-wrap:focus-within .demo-sites-toggle {
+    .demo-sites-toggle:hover,
+    .demo-sites-toggle:focus-visible {
       border-color: var(--line);
       background: var(--white);
       outline: none;
     }
 
-    .demo-menu-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+    .demo-sites-section {
+      padding: 10px 0 0;
+    }
+
+    .demo-sites-shell {
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(200,255,46,.2), transparent 34%),
+        linear-gradient(315deg, rgba(255,79,50,.14), transparent 40%),
+        var(--paper);
+      box-shadow: 8px 8px 0 var(--line);
+      padding: 16px;
+    }
+
+    .demo-sites-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .demo-sites-heading h2 {
+      margin: 0;
+      max-width: 11ch;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: .9;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .demo-sites-heading p {
+      max-width: 420px;
+      margin: 0;
+      color: var(--graphite);
+      font-size: .94rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: right;
     }
 
     .demo-menu {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 12px);
-      z-index: 60;
-      width: min(360px, calc(100vw - 28px));
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
-      border: 3px solid var(--line);
-      background: var(--paper);
-      padding: 12px;
-      box-shadow: 8px 8px 0 var(--line);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-6px);
-      transition: opacity .16s ease, transform .16s ease;
-    }
-
-    .demo-menu-wrap:hover .demo-menu,
-    .demo-menu-wrap:focus-within .demo-menu,
-    .demo-menu-wrap.open .demo-menu {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
     }
 
     .demo-menu .demo-site-card {
@@ -239,6 +255,13 @@
       font-size: .78rem;
       font-weight: 800;
       line-height: 1.35;
+    }
+
+    .demo-menu .demo-site-card:hover,
+    .demo-menu .demo-site-card:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--line);
+      outline: none;
     }
 
     .nav .nav-cta {
@@ -1316,16 +1339,22 @@
         box-shadow: 3px 3px 0 var(--line);
       }
 
-      .demo-menu-wrap {
-        flex: 0 0 auto;
+      .demo-sites-shell {
+        padding: 12px;
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .demo-sites-heading {
+        display: grid;
+        gap: 8px;
+      }
+
+      .demo-sites-heading p {
+        text-align: left;
       }
 
       .demo-menu {
-        position: fixed;
-        left: 11px;
-        right: auto;
-        top: 116px;
-        width: min(360px, calc(100vw - 22px));
+        grid-template-columns: 1fr;
       }
 
       .nav .nav-cta {
@@ -1483,51 +1512,7 @@
         <nav class="nav" aria-label="Primary navigation">
           <a class="nav-cta" href="#start">Start</a>
           <a href="agent-store/">Agent Store</a>
-          <div class="demo-menu-wrap">
-            <button class="demo-sites-toggle" type="button" aria-haspopup="true" aria-expanded="false">Purchase Demo Sites</button>
-            <div class="demo-menu" role="menu" aria-label="Demo sites">
-              <a class="demo-site-card" href="demos/towing-roadside.html" target="_blank" rel="noopener" role="menuitem">
-                <div class="demo-card-topline">
-                  <small>Local Service</small>
-                  <em class="demo-status">For Sale</em>
-                </div>
-                <strong>Towing & Roadside</strong>
-                <span>24/7 dispatch-style site for emergency calls, service areas, and roadside requests.</span>
-              </a>
-              <a class="demo-site-card" href="https://www.vaughnhustle.com/" target="_blank" rel="noopener" role="menuitem">
-                <div class="demo-card-topline">
-                  <small>Personal Brand</small>
-                  <em class="demo-status sold">Sold</em>
-                </div>
-                <strong>VHUSTLE</strong>
-                <span>High-energy fighter landing page with media, sponsor packages, and fan calls to action.</span>
-              </a>
-              <a class="demo-site-card" href="https://10for10boxing.com/" target="_blank" rel="noopener" role="menuitem">
-                <div class="demo-card-topline">
-                  <small>Boxing Brand</small>
-                  <em class="demo-status sold">Sold</em>
-                </div>
-                <strong>10for10boxing.com</strong>
-                <span>Boxing demo site for event promotion, sponsor visibility, and direct fan action.</span>
-              </a>
-              <a class="demo-site-card" href="https://www.allyzworldofknowledge.com/" target="_blank" rel="noopener" role="menuitem">
-                <div class="demo-card-topline">
-                  <small>Childcare Center</small>
-                  <em class="demo-status sold">Sold</em>
-                </div>
-                <strong>Allyz World</strong>
-                <span>Bright early learning site for programs, parent confidence, enrollment, and family trust.</span>
-              </a>
-              <a class="demo-site-card" href="https://innergclaw.github.io/ownyourweb-demos/demos/tinystarslearn/" target="_blank" rel="noopener" role="menuitem">
-                <div class="demo-card-topline">
-                  <small>Childcare Center</small>
-                  <em class="demo-status sold">Sold</em>
-                </div>
-                <strong>tinystarslearn.com</strong>
-                <span>Warm early learning site for programs, parent trust, enrollment, and family contact flow.</span>
-              </a>
-            </div>
-          </div>
+          <a class="demo-sites-toggle" href="#demo-sites">Purchase Demo Sites</a>
           <a href="#services">Services</a>
           <a href="#shopnasgraphics">Design Services</a>
           <a href="#process">Process</a>
@@ -1575,6 +1560,67 @@
                 </div>
               </div>
             </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section demo-sites-section" id="demo-sites">
+        <div class="wrap">
+          <div class="demo-sites-shell">
+            <div class="demo-sites-heading">
+              <h2>Purchase Demo Sites</h2>
+              <p>Six ready-to-preview website concepts. Pick a for-sale demo, then OWNYOURWEB customizes the copy, colors, sections, forms, and launch path for your business.</p>
+            </div>
+            <div class="demo-menu" aria-label="Demo sites for purchase">
+              <a class="demo-site-card" href="demos/ownyourweb-neuform-demo.html" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Premium Business</small>
+                  <em class="demo-status">For Sale</em>
+                </div>
+                <strong>Business Demo</strong>
+                <span>Clean HOME / ABOUT / CONTACT site for a service business, studio, wellness brand, or local company.</span>
+              </a>
+              <a class="demo-site-card" href="demos/towing-roadside.html" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Local Service</small>
+                  <em class="demo-status">For Sale</em>
+                </div>
+                <strong>Towing & Roadside</strong>
+                <span>24/7 dispatch-style site for emergency calls, service areas, and roadside requests.</span>
+              </a>
+              <a class="demo-site-card" href="https://www.vaughnhustle.com/" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Personal Brand</small>
+                  <em class="demo-status sold">Sold</em>
+                </div>
+                <strong>VHUSTLE</strong>
+                <span>High-energy fighter landing page with media, sponsor packages, and fan calls to action.</span>
+              </a>
+              <a class="demo-site-card" href="https://10for10boxing.com/" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Boxing Brand</small>
+                  <em class="demo-status sold">Sold</em>
+                </div>
+                <strong>10for10boxing.com</strong>
+                <span>Boxing demo site for event promotion, sponsor visibility, and direct fan action.</span>
+              </a>
+              <a class="demo-site-card" href="https://www.allyzworldofknowledge.com/" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Childcare Center</small>
+                  <em class="demo-status sold">Sold</em>
+                </div>
+                <strong>Allyz World</strong>
+                <span>Bright early learning site for programs, parent confidence, enrollment, and family trust.</span>
+              </a>
+              <a class="demo-site-card" href="https://innergclaw.github.io/ownyourweb-demos/demos/tinystarslearn/" target="_blank" rel="noopener">
+                <div class="demo-card-topline">
+                  <small>Childcare Center</small>
+                  <em class="demo-status sold">Sold</em>
+                </div>
+                <strong>tinystarslearn.com</strong>
+                <span>Warm early learning site for programs, parent trust, enrollment, and family contact flow.</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -1992,32 +2038,6 @@
       setHomeScene(0);
       resizeHomePreview();
       animateHomePreview(0);
-    }
-
-    const demoMenuWrap = document.querySelector('.demo-menu-wrap');
-    const demoMenuToggle = document.querySelector('.demo-sites-toggle');
-
-    if (demoMenuWrap && demoMenuToggle) {
-      demoMenuToggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        const isOpen = demoMenuWrap.classList.toggle('open');
-        demoMenuToggle.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!demoMenuWrap.contains(event.target)) {
-          demoMenuWrap.classList.remove('open');
-          demoMenuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          demoMenuWrap.classList.remove('open');
-          demoMenuToggle.setAttribute('aria-expanded', 'false');
-          demoMenuToggle.focus();
-        }
-      });
     }
 
   </script>
