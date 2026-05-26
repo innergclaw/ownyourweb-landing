@@ -407,6 +407,40 @@
       line-height: 1.45;
     }
 
+    .live-sync {
+      grid-column: 1 / -1;
+    }
+
+    .live-sync .sync-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .live-sync[data-sync-state="live"] .tag {
+      background: var(--lime);
+    }
+
+    .live-sync[data-sync-state="offline"] .tag {
+      background: var(--amber);
+    }
+
+    .note span,
+    .note small {
+      display: block;
+    }
+
+    .note small {
+      margin-top: 8px;
+      color: var(--ink);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
     @media (max-width: 900px) {
       .topbar,
       .section,
@@ -441,6 +475,7 @@
       }
     }
   </style>
+  <script src="/api-config.js"></script>
 </head>
 <body>
   <div class="shell">
@@ -508,6 +543,21 @@
           </div>
           <div class="complete-card">Current status: request received and logo direction is being prepared for first preview options.</div>
         </article>
+
+        <article class="panel live-sync" data-client-project-root data-project-slug="omni-global-solutions-logo-package">
+          <div class="sync-head">
+            <span class="tag cyan" data-live-status>Direction Review</span>
+            <span class="pill lime" data-live-last-synced>Live sync loading</span>
+          </div>
+          <h2>Live Project Updates</h2>
+          <div class="list">
+            <div class="note"><strong>Current step</strong><span data-live-current-step>Confirm direction, then prepare first logo preview options.</span></div>
+            <div class="note"><strong>Project stage</strong><span data-live-stage>Logo direction review</span></div>
+          </div>
+          <div class="list" data-live-updates>
+            <div class="note"><strong>Client tracker created</strong><span>The Omni Global Solutions LLC tracker is active. The current step is direction review before first logo previews are prepared.</span><small>Static fallback</small></div>
+          </div>
+        </article>
       </section>
 
       <section class="section">
@@ -553,5 +603,6 @@
       </section>
     </main>
   </div>
+  <script src="client-project-live.js" data-project-slug="omni-global-solutions-logo-package"></script>
 </body>
 </html>

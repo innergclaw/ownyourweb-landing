@@ -370,6 +370,40 @@
       line-height: 1.45;
     }
 
+    .live-sync {
+      grid-column: 1 / -1;
+    }
+
+    .live-sync .sync-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .live-sync[data-sync-state="live"] .tag {
+      background: var(--lime);
+    }
+
+    .live-sync[data-sync-state="offline"] .tag {
+      background: var(--amber);
+    }
+
+    .note span,
+    .note small {
+      display: block;
+    }
+
+    .note small {
+      margin-top: 8px;
+      color: var(--ink);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
     @media (max-width: 900px) {
       .topbar,
       .hero,
@@ -406,6 +440,7 @@
       }
     }
   </style>
+  <script src="/api-config.js"></script>
 </head>
 <body>
   <div class="shell">
@@ -464,6 +499,21 @@
           <div class="complete-card">Final status: Brinx Entertainment logo suite is complete, approved, and delivered.</div>
         </article>
 
+        <article class="panel live-sync" data-client-project-root data-project-slug="brinx-entertainment-rush-logo-suite">
+          <div class="sync-head">
+            <span class="tag lime" data-live-status>Order Completed</span>
+            <span class="pill cyan" data-live-last-synced>Live sync loading</span>
+          </div>
+          <h2>Live Project Updates</h2>
+          <div class="list">
+            <div class="note"><strong>Current step</strong><span data-live-current-step>Complete, approved, and final files sent out.</span></div>
+            <div class="note"><strong>Project stage</strong><span data-live-stage>Final files sent</span></div>
+          </div>
+          <div class="list" data-live-updates>
+            <div class="note"><strong>Final logo suite sent</strong><span>The Brinx Entertainment logo suite is complete, approved, and final files have been sent out.</span><small>Static fallback</small></div>
+          </div>
+        </article>
+
         <article class="panel preview-panel">
           <span class="tag lime">Approved Direction</span>
           <h2>Selected Preview Option</h2>
@@ -510,5 +560,6 @@
       </section>
     </main>
   </div>
+  <script src="client-project-live.js" data-project-slug="brinx-entertainment-rush-logo-suite"></script>
 </body>
 </html>
