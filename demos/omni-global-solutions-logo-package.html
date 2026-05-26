@@ -345,6 +345,21 @@
       overflow: hidden;
     }
 
+    .preview-open {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+      text-align: inherit;
+    }
+
+    .preview-open:focus-visible {
+      outline: 4px solid var(--cyan);
+      outline-offset: -4px;
+    }
+
     .preview-card img {
       display: block;
       width: 100%;
@@ -363,6 +378,54 @@
     .preview-card figcaption strong {
       font-weight: 950;
       text-transform: uppercase;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(16, 16, 20, .92);
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      width: min(1200px, 100%);
+      max-height: calc(100vh - 44px);
+      border: 3px solid var(--white);
+      background: var(--ink);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, .45);
+      overflow: auto;
+    }
+
+    .lightbox img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: var(--ink);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 101;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      color: var(--ink);
+      padding: 10px 13px;
+      font: inherit;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+      cursor: pointer;
     }
 
     .live-sync {
@@ -501,14 +564,18 @@
           </p>
           <div class="preview-grid">
             <figure class="preview-card">
-              <img src="assets/omni-global/omni-global-solutions-preview-01-yellow-ogs.png" alt="Omni Global Solutions preview option 01 with yellow OGS logo system" />
+              <button class="preview-open" type="button" data-full-src="assets/omni-global/omni-global-solutions-preview-01-yellow-ogs.png" data-full-alt="Omni Global Solutions preview option 01 with yellow OGS logo system">
+                <img src="assets/omni-global/omni-global-solutions-preview-01-yellow-ogs.png" alt="Omni Global Solutions preview option 01 with yellow OGS logo system" />
+              </button>
               <figcaption>
                 <strong>Option 01: Yellow OGS System</strong>
                 <span>Bold yellow, black, and white direction with a globe-inspired O mark, full text lockup, text-only version, and icon variations.</span>
               </figcaption>
             </figure>
             <figure class="preview-card">
-              <img src="assets/omni-global/omni-global-solutions-preview-02-green-globe.png" alt="Omni Global Solutions preview option 02 with green globe logo system" />
+              <button class="preview-open" type="button" data-full-src="assets/omni-global/omni-global-solutions-preview-02-green-globe.png" data-full-alt="Omni Global Solutions preview option 02 with green globe logo system">
+                <img src="assets/omni-global/omni-global-solutions-preview-02-green-globe.png" alt="Omni Global Solutions preview option 02 with green globe logo system" />
+              </button>
               <figcaption>
                 <strong>Option 02: Green Global System</strong>
                 <span>Green, silver, and black direction with a globe built into Global, plus text-only and OG icon variations.</span>
@@ -576,6 +643,47 @@
       </section>
     </main>
   </div>
+  <div class="lightbox" data-lightbox aria-hidden="true">
+    <button class="lightbox-close" type="button" data-lightbox-close>Close</button>
+    <div class="lightbox-inner" role="dialog" aria-modal="true" aria-label="Expanded logo preview">
+      <img src="" alt="" data-lightbox-image />
+    </div>
+  </div>
   <script src="client-project-live.js" data-project-slug="omni-global-solutions-logo-package"></script>
+  <script>
+    (() => {
+      const lightbox = document.querySelector("[data-lightbox]");
+      const lightboxImage = document.querySelector("[data-lightbox-image]");
+      const closeButton = document.querySelector("[data-lightbox-close]");
+      const openButtons = document.querySelectorAll("[data-full-src]");
+
+      if (!lightbox || !lightboxImage || !closeButton) return;
+
+      const close = () => {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImage.removeAttribute("src");
+        lightboxImage.removeAttribute("alt");
+      };
+
+      openButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          lightboxImage.src = button.dataset.fullSrc;
+          lightboxImage.alt = button.dataset.fullAlt || "Expanded logo preview";
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          closeButton.focus();
+        });
+      });
+
+      closeButton.addEventListener("click", close);
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) close();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) close();
+      });
+    })();
+  </script>
 </body>
 </html>
