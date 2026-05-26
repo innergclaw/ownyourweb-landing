@@ -407,6 +407,40 @@
       line-height: 1.45;
     }
 
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .preview-card {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--line);
+      overflow: hidden;
+    }
+
+    .preview-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: var(--ink);
+    }
+
+    .preview-card figcaption {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .preview-card figcaption strong {
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
     .live-sync {
       grid-column: 1 / -1;
     }
@@ -445,7 +479,8 @@
       .topbar,
       .section,
       .meta-grid,
-      .order-tracker {
+      .order-tracker,
+      .preview-grid {
         grid-template-columns: 1fr;
       }
 
@@ -495,7 +530,7 @@
 
           <div class="pill-row">
             <span class="pill lime">Request Received</span>
-            <span class="pill cyan">Direction Review</span>
+            <span class="pill cyan">Preview Review</span>
             <span class="pill amber">$100 - $250 Budget</span>
             <span class="pill violet">Logo Package</span>
           </div>
@@ -528,34 +563,58 @@
               <span class="status-icon">01</span>
               <div><strong>Request submitted</strong><span>Form received from ShopNasGraphics.</span></div>
             </div>
-            <div class="status-step active">
+            <div class="status-step done">
               <span class="status-icon">02</span>
               <div><strong>Direction review</strong><span>Logo idea and package details are being reviewed.</span></div>
             </div>
-            <div class="status-step">
+            <div class="status-step active">
               <span class="status-icon">03</span>
-              <div><strong>Preview delivery</strong><span>Initial logo concepts will be prepared next.</span></div>
+              <div><strong>Preview delivery</strong><span>Two initial logo concepts are ready for review.</span></div>
             </div>
             <div class="status-step">
               <span class="status-icon">04</span>
               <div><strong>Final files</strong><span>Final logo assets follow after approval.</span></div>
             </div>
           </div>
-          <div class="complete-card">Current status: request received and logo direction is being prepared for first preview options.</div>
+          <div class="complete-card">Current status: first two logo preview concepts are ready for review.</div>
+        </article>
+
+        <article class="panel" style="grid-column: 1 / -1;">
+          <span class="tag amber">First Preview Round</span>
+          <h2>Logo Concepts For Review</h2>
+          <p class="lede">
+            These are the first two visual directions for Omni Global Solutions LLC. Review the full logo, secondary text-only lockup, and icon/initial mark in each option.
+          </p>
+          <div class="preview-grid">
+            <figure class="preview-card">
+              <img src="../client-trackers/OMNI-GLOBAL-SOLUTIONS-LLC/previews/omni-global-solutions-preview-01-yellow-ogs.png" alt="Omni Global Solutions preview option 01 with yellow OGS logo system" />
+              <figcaption>
+                <strong>Option 01: Yellow OGS System</strong>
+                <span>Bold yellow, black, and white direction with a globe-inspired O mark, full text lockup, text-only version, and icon variations.</span>
+              </figcaption>
+            </figure>
+            <figure class="preview-card">
+              <img src="../client-trackers/OMNI-GLOBAL-SOLUTIONS-LLC/previews/omni-global-solutions-preview-02-green-globe.png" alt="Omni Global Solutions preview option 02 with green globe logo system" />
+              <figcaption>
+                <strong>Option 02: Green Global System</strong>
+                <span>Green, silver, and black direction with a globe built into Global, plus text-only and OG icon variations.</span>
+              </figcaption>
+            </figure>
+          </div>
         </article>
 
         <article class="panel live-sync" data-client-project-root data-project-slug="omni-global-solutions-logo-package">
           <div class="sync-head">
-            <span class="tag cyan" data-live-status>Direction Review</span>
+            <span class="tag cyan" data-live-status>Preview Review</span>
             <span class="pill lime" data-live-last-synced>Live sync loading</span>
           </div>
           <h2>Live Project Updates</h2>
           <div class="list">
-            <div class="note"><strong>Current step</strong><span data-live-current-step>Confirm direction, then prepare first logo preview options.</span></div>
-            <div class="note"><strong>Project stage</strong><span data-live-stage>Logo direction review</span></div>
+            <div class="note"><strong>Current step</strong><span data-live-current-step>Review Option 01 and Option 02, then respond with preferred direction or changes.</span></div>
+            <div class="note"><strong>Project stage</strong><span data-live-stage>First preview review</span></div>
           </div>
           <div class="list" data-live-updates>
-            <div class="note"><strong>Client tracker created</strong><span>The Omni Global Solutions LLC tracker is active. The current step is direction review before first logo previews are prepared.</span><small>Static fallback</small></div>
+            <div class="note"><strong>First two previews added</strong><span>Option 01 and Option 02 are now available for review on the client tracker.</span><small>Static fallback</small></div>
           </div>
         </article>
       </section>
@@ -567,7 +626,7 @@
             <div class="step"><b>1</b><span>Package: Name Your Price Logo Offer.</span></div>
             <div class="step"><b>2</b><span>Budget range submitted: $100 - $250.</span></div>
             <div class="step"><b>3</b><span>Design request: Omni nice writing Global with the O being a globe.</span></div>
-            <div class="step"><b>4</b><span>Next step: build first logo preview options for review.</span></div>
+            <div class="step"><b>4</b><span>Next step: client reviews Option 01 and Option 02, then sends preferred direction or requested changes.</span></div>
           </div>
         </article>
 
@@ -575,8 +634,8 @@
           <h2>Progress Snapshot</h2>
           <div class="progress">
             <div class="progress-row"><header><span>Request submitted</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
-            <div class="progress-row"><header><span>Direction review</span><span>65%</span></header><div class="bar"><span style="width:65%"></span></div></div>
-            <div class="progress-row"><header><span>Initial previews</span><span>25%</span></header><div class="bar"><span style="width:25%"></span></div></div>
+            <div class="progress-row"><header><span>Direction review</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
+            <div class="progress-row"><header><span>Initial previews</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
             <div class="progress-row"><header><span>Final delivery</span><span>0%</span></header><div class="bar"><span style="width:0%"></span></div></div>
           </div>
         </article>
@@ -595,8 +654,8 @@
         <article class="panel">
           <h2>Client Preview Notes</h2>
           <div class="list">
-            <div class="note"><strong>Current purpose</strong>This page is a client tracker for the active logo request.</div>
-            <div class="note"><strong>What to review</strong>Focus feedback on script style, globe usage, and overall professionalism.</div>
+            <div class="note"><strong>Current purpose</strong>This page is a client tracker for the active logo preview review.</div>
+            <div class="note"><strong>What to review</strong>Choose the preferred option or send notes on color, globe usage, typography, and icon direction.</div>
             <div class="note"><strong>What comes next</strong>Once the first direction is approved, the final logo files can be packaged for delivery.</div>
           </div>
         </article>
