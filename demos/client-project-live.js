@@ -47,7 +47,7 @@
     updateList.innerHTML = updates.slice(0, 5).map((update) => `
       <div class="note">
         <strong>${escapeHtml(update.title || "Project update")}</strong>
-        <span>${escapeHtml(update.body || "")}</span>
+        <span>${linkify(update.body || "")}</span>
         <small>${escapeHtml(update.status_label || project.status_label || "")} · ${escapeHtml(formatDate(update.created_at))}</small>
       </div>
     `).join("");
@@ -60,6 +60,13 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  function linkify(value) {
+    return escapeHtml(value).replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener">$1</a>'
+    );
   }
 
   async function load({ countView = false } = {}) {

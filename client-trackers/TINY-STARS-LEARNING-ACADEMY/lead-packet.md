@@ -8,14 +8,15 @@ Business: Tiny Stars Learning Academy
 Industry: Early Childhood Education / Learning Academy
 Package: Starter Landing Page Website
 Payment status: pending
-Project status: active
-Stage: Starter landing page setup
+Project status: demo_ready
+Stage: Starter website demo ready
 Priority: Medium
 Source: Manual client tracker setup
 
 ## Links
 
 Current tracker: https://ownyourweb.xyz/demos/tiny-stars-learning-academy-starter-landing-page.html
+Starter demo: https://ownyourweb.xyz/demos/tiny-stars-learning-academy.html
 Checkout URL: n/a
 
 ## Request
@@ -29,10 +30,11 @@ Build a starter landing page website for Tiny Stars Learning Academy using the p
 
 ## Next Steps
 
-- Build starter landing page layout.
-- Use the provided Tiny Stars logo and bright child-friendly color/theme direction.
-- Prepare first website preview for review.
+- Send the tracker URL to the client.
+- Ask client to review the starter landing page demo.
+- Collect edits for text, photos, sections, colors, and contact details.
 
 ## Latest Update
 
+2026-05-26: Starter landing page demo created and attached to tracker updates: https://ownyourweb.xyz/demos/tiny-stars-learning-academy.html
 2026-05-26: Client tracker folder created and starter landing page tracker prepared.

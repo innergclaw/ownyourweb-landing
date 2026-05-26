@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Stars Learning Academy</title>
+  <meta name="description" content="A playful starter landing page for Tiny Stars Learning Academy." />
+  <style>
+    :root {
+      --navy: #102047;
+      --green: #51ae36;
+      --grass: #7bd64f;
+      --sky: #70d6ff;
+      --cloud: #f4fcff;
+      --sun: #ffda3d;
+      --pink: #ff4fb8;
+      --orange: #ff8a2a;
+      --purple: #7147dc;
+      --white: #ffffff;
+      --soft: #fff8dc;
+      --muted: #50617f;
+      --shadow: 0 24px 70px rgba(16, 32, 71, .18);
+      --line: 3px solid var(--navy);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--navy);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 218, 61, .45) 0 80px, transparent 82px),
+        radial-gradient(circle at 86% 16%, rgba(255, 79, 184, .25) 0 90px, transparent 92px),
+        linear-gradient(180deg, #dcf7ff 0%, #fff8dc 48%, #e8ffd9 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .site {
+      overflow: hidden;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(1180px, calc(100% - 28px));
+      margin: 14px auto 0;
+      padding: 10px 12px;
+      border: var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 12px 30px rgba(16, 32, 71, .14);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .nav-brand img {
+      width: 132px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      font-weight: 950;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border: var(--line);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--white);
+      box-shadow: 4px 4px 0 var(--navy);
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .button.primary {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    .button.yellow {
+      background: var(--sun);
+    }
+
+    .hero {
+      position: relative;
+      width: min(1180px, calc(100% - 28px));
+      margin: 26px auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .78fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .panel,
+    .program,
+    .location,
+    .cta {
+      border: var(--line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 8px 8px 0 var(--navy);
+    }
+
+    .hero-copy {
+      padding: clamp(28px, 5vw, 56px);
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(255, 248, 220, .94)),
+        var(--white);
+    }
+
+    .eyebrow,
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      border: var(--line);
+      border-radius: 999px;
+      background: var(--sun);
+      padding: 8px 13px;
+      box-shadow: 4px 4px 0 var(--navy);
+      font-size: .75rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 {
+      font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      line-height: .92;
+    }
+
+    h1 {
+      margin-top: 22px;
+      max-width: 760px;
+      font-size: clamp(4rem, 9vw, 8.6rem);
+    }
+
+    h2 {
+      font-size: clamp(2.7rem, 6vw, 5.5rem);
+    }
+
+    h3 {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+    }
+
+    .lede {
+      margin-top: 20px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 800;
+      line-height: 1.58;
+    }
+
+    .hero-actions,
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-card {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      align-content: center;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(112, 214, 255, .95), rgba(81, 174, 54, .9)),
+        var(--sky);
+    }
+
+    .logo-cloud {
+      display: grid;
+      place-items: center;
+      min-height: 260px;
+      border: var(--line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: inset 0 -18px 0 rgba(16, 32, 71, .08);
+      padding: 24px;
+    }
+
+    .theme-card {
+      overflow: hidden;
+      border: var(--line);
+      border-radius: 24px;
+      background: var(--green);
+      box-shadow: 6px 6px 0 var(--navy);
+    }
+
+    .theme-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .section {
+      width: min(1180px, calc(100% - 28px));
+      margin: 28px auto 0;
+    }
+
+    .panel {
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .program-grid,
+    .location-grid,
+    .feature-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .program-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .location-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .program,
+    .location {
+      padding: 20px;
+      min-height: 180px;
+    }
+
+    .program:nth-child(1) { background: #e5ffd8; }
+    .program:nth-child(2) { background: #e1f7ff; }
+    .program:nth-child(3) { background: #fff0c0; }
+
+    .feature {
+      border: var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: var(--white);
+      font-weight: 900;
+      box-shadow: 5px 5px 0 var(--navy);
+    }
+
+    .feature b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.9rem;
+    }
+
+    .program p,
+    .location p,
+    .feature span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      padding: clamp(24px, 4vw, 42px);
+      background:
+        linear-gradient(135deg, rgba(255, 218, 61, .9), rgba(255, 79, 184, .82)),
+        var(--sun);
+    }
+
+    footer {
+      width: min(1180px, calc(100% - 28px));
+      margin: 28px auto 36px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        align-items: flex-start;
+        border-radius: 26px;
+        flex-direction: column;
+      }
+
+      .nav-links,
+      .hero-actions {
+        width: 100%;
+      }
+
+      .nav-links a,
+      .button {
+        flex: 1 1 auto;
+      }
+
+      .hero,
+      .program-grid,
+      .location-grid,
+      .feature-grid,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: auto;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav-brand" href="#home">
+        <img src="assets/tiny-stars/tiny-stars-logo.png" alt="Tiny Stars Learning Academy" />
+      </a>
+      <div class="nav-links">
+        <a href="#programs">Programs</a>
+        <a href="#locations">Locations</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main id="home">
+      <section class="hero">
+        <article class="hero-copy">
+          <span class="eyebrow">Learning, play, and bright little futures</span>
+          <h1>Where tiny stars learn, laugh, and grow.</h1>
+          <p class="lede">
+            Tiny Stars Learning Academy gives children a colorful, caring place to explore early learning, creative play, summer activities, and daily confidence-building routines.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="mailto:TINYSTARS1@YAHOO.COM">Start Enrollment</a>
+            <a class="button yellow" href="#programs">View Programs</a>
+          </div>
+          <div class="pill-row">
+            <span class="pill">ELRC Approved</span>
+            <span class="pill">Summer Camp</span>
+            <span class="pill">Multiple Locations</span>
+          </div>
+        </article>
+
+        <aside class="hero-card" aria-label="Tiny Stars brand preview">
+          <div class="logo-cloud">
+            <img src="assets/tiny-stars/tiny-stars-logo.png" alt="Tiny Stars Learning Academy logo" />
+          </div>
+          <figure class="theme-card">
+            <img src="assets/tiny-stars/tiny-stars-theme-reference.jpg" alt="Tiny Stars summer camp flyer" />
+          </figure>
+        </aside>
+      </section>
+
+      <section class="section" id="programs">
+        <article class="panel">
+          <span class="eyebrow">Programs</span>
+          <h2>Fun days with real learning built in.</h2>
+          <p class="lede">
+            A starter landing page can highlight the most important reasons parents should reach out: safe care, active learning, creative play, and clear enrollment steps.
+          </p>
+          <div class="program-grid">
+            <div class="program">
+              <h3>Summer Camp</h3>
+              <p>Trips, outdoor activities, dress-up days, storytelling, and playful daily themes.</p>
+            </div>
+            <div class="program">
+              <h3>Early Learning</h3>
+              <p>Age-friendly activities that help children build confidence, routines, and curiosity.</p>
+            </div>
+            <div class="program">
+              <h3>Creative Play</h3>
+              <p>Bright, hands-on experiences that make learning feel joyful and memorable.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <span class="eyebrow">Why Parents Choose Tiny Stars</span>
+          <h2>A page made for quick trust.</h2>
+          <div class="feature-grid">
+            <div class="feature"><b>1</b>Colorful brand presence<span>Logo-forward design that feels fun and recognizable.</span></div>
+            <div class="feature"><b>2</b>Clear program info<span>Parents can scan programs without digging.</span></div>
+            <div class="feature"><b>3</b>Easy contact path<span>Direct email CTA for enrollment questions.</span></div>
+            <div class="feature"><b>4</b>Mobile ready<span>Designed for busy parents checking from their phone.</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="locations">
+        <article class="panel">
+          <span class="eyebrow">Locations</span>
+          <h2>Serving families across the city.</h2>
+          <div class="location-grid">
+            <div class="location"><h3>Girard Ave.</h3><p>2706 W. Girard Ave.<br />267-639-6955</p></div>
+            <div class="location"><h3>Race Street</h3><p>5126 Race Street<br />267-969-5913</p></div>
+            <div class="location"><h3>Ridge Ave.</h3><p>2815 Ridge Ave.<br />215-689-0050</p></div>
+            <div class="location"><h3>Stenton Ave.</h3><p>7423 Stenton Ave.<br />445-230-8591</p></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="contact">
+        <article class="cta">
+          <div>
+            <span class="eyebrow">Ready to connect?</span>
+            <h2>Start with a quick message.</h2>
+            <p class="lede">Ask about availability, programs, summer camp, registration, or the best location for your family.</p>
+          </div>
+          <a class="button primary" href="mailto:TINYSTARS1@YAHOO.COM">Email Tiny Stars</a>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Starter website demo for Tiny Stars Learning Academy. Final copy, photos, forms, and location details can be adjusted during review.
+    </footer>
+  </div>
+</body>
+</html>
