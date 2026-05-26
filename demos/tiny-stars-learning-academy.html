@@ -113,13 +113,12 @@
       width: min(1180px, calc(100% - 28px));
       margin: 26px auto 0;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(340px, .78fr);
+      grid-template-columns: 1fr;
       gap: 24px;
       align-items: stretch;
     }
 
     .hero-copy,
-    .hero-card,
     .panel,
     .program,
     .location,
@@ -132,7 +131,7 @@
 
     .hero-copy {
       padding: clamp(28px, 5vw, 56px);
-      min-height: 620px;
+      min-height: 560px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -194,42 +193,6 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
-    }
-
-    .hero-card {
-      position: relative;
-      display: grid;
-      gap: 18px;
-      align-content: center;
-      padding: 24px;
-      background:
-        linear-gradient(180deg, rgba(112, 214, 255, .95), rgba(81, 174, 54, .9)),
-        var(--sky);
-    }
-
-    .logo-cloud {
-      display: grid;
-      place-items: center;
-      min-height: 260px;
-      border: var(--line);
-      border-radius: 28px;
-      background: rgba(255, 255, 255, .82);
-      box-shadow: inset 0 -18px 0 rgba(16, 32, 71, .08);
-      padding: 24px;
-    }
-
-    .theme-card {
-      overflow: hidden;
-      border: var(--line);
-      border-radius: 24px;
-      background: var(--green);
-      box-shadow: 6px 6px 0 var(--navy);
-    }
-
-    .theme-card img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
     }
 
     .section {
@@ -344,10 +307,6 @@
       .hero-copy {
         min-height: auto;
       }
-
-      .hero-card {
-        order: -1;
-      }
     }
   </style>
 </head>
@@ -382,15 +341,6 @@
             <span class="pill">Multiple Locations</span>
           </div>
         </article>
-
-        <aside class="hero-card" aria-label="Tiny Stars brand preview">
-          <div class="logo-cloud">
-            <img src="assets/tiny-stars/tiny-stars-logo.png" alt="Tiny Stars Learning Academy logo" />
-          </div>
-          <figure class="theme-card">
-            <img src="assets/tiny-stars/tiny-stars-theme-reference.jpg" alt="Tiny Stars summer camp flyer" />
-          </figure>
-        </aside>
       </section>
 
       <section class="section" id="programs">
