@@ -16,7 +16,7 @@ Source: ShopNasGraphics Name Your Price Form
 
 ## Links
 
-Current website: http://shopnasgfx.com/
+Current website: https://ownyourweb.xyz/demos/omni-global-solutions-logo-package.html
 Checkout URL: n/a
 
 ## Request
@@ -34,4 +34,3 @@ Not provided
 ## Latest Update
 
 n/a
-
