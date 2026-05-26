@@ -7,36 +7,50 @@
   <meta name="description" content="Client project tracker for the Omni Global Solutions LLC logo package." />
   <style>
     :root {
-      --bg: #0b0e13;
-      --panel: #121722;
-      --panel-2: #171e2b;
-      --line: rgba(255,255,255,0.1);
-      --text: #f5f7fb;
-      --muted: #98a2b3;
-      --accent: #78e3ff;
-      --accent-2: #d7ff64;
-      --accent-3: #7a5cff;
-      --shadow: 0 24px 80px rgba(0,0,0,.35);
-      --radius: 24px;
+      --ink: #101014;
+      --paper: #fbfaf4;
+      --white: #ffffff;
+      --muted: #62605a;
+      --line: #101014;
+      --lime: #caff34;
+      --pink: #ff4f9a;
+      --amber: #ffb000;
+      --cyan: #28d7ff;
+      --violet: #6d5cff;
+      --shadow: 8px 8px 0 var(--line);
     }
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(122,92,255,.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(120,227,255,.16), transparent 28%),
-        linear-gradient(180deg, #0b0e13 0%, #090c11 100%);
-      color: var(--text);
       min-height: 100vh;
-      line-height: 1.5;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(16,16,20,.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(16,16,20,.06) 1px, transparent 1px),
+        var(--paper);
+      background-size: 30px 30px;
     }
+
+    a { color: inherit; text-decoration: none; }
 
     .shell {
       width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 56px;
+      padding: 22px 0 56px;
+    }
+
+    .topbar,
+    .panel,
+    .tile,
+    .note,
+    .step,
+    .logo-card {
+      border: 3px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
     }
 
     .topbar {
@@ -44,145 +58,188 @@
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      padding: 14px 18px;
-      border: 1px solid var(--line);
-      background: rgba(18,23,34,.72);
-      backdrop-filter: blur(18px);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
+      padding: 14px 16px;
     }
 
-    .eyebrow, .tag {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--line);
+      background:
+        linear-gradient(90deg, var(--lime) 0 25%, var(--pink) 25% 50%, var(--amber) 50% 75%, var(--cyan) 75%);
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .tag,
+    .pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       width: fit-content;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 7px 10px;
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      background: rgba(255,255,255,.03);
+      box-shadow: 3px 3px 0 var(--line);
     }
+
+    .tag.lime,
+    .pill.lime { background: var(--lime); }
+    .tag.pink,
+    .pill.pink { background: var(--pink); color: var(--white); }
+    .tag.amber,
+    .pill.amber { background: var(--amber); }
+    .tag.cyan,
+    .pill.cyan { background: var(--cyan); }
+    .tag.violet,
+    .pill.violet { background: var(--violet); color: var(--white); }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 22px;
       margin-top: 24px;
+      align-items: stretch;
     }
 
-    .card {
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(18,23,34,.92) 0%, rgba(12,16,24,.96) 100%);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-copy {
-      padding: 34px;
-    }
+    .panel { padding: 28px; }
 
     h1, h2, h3, p { margin: 0; }
 
+    h1, h2, h3 {
+      font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 900;
+      line-height: .88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
     h1 {
       margin-top: 16px;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      line-height: .92;
-      letter-spacing: -.04em;
+      max-width: 840px;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
     }
+
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h3 { font-size: 1.55rem; }
 
     .lede {
       margin-top: 18px;
-      max-width: 680px;
+      max-width: 780px;
       color: var(--muted);
-      font-size: 1.06rem;
+      font-weight: 850;
+      line-height: 1.55;
+    }
+
+    .pill-row,
+    .meta-grid,
+    .section,
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 22px;
     }
 
     .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 12px;
-      margin-top: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
     }
 
-    .meta {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.03);
+    .tile {
+      padding: 14px;
+      min-height: 104px;
+      background: var(--paper);
     }
 
-    .meta span {
+    .tile span,
+    .label {
       display: block;
       color: var(--muted);
-      font-size: .8rem;
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 8px;
     }
 
-    .logo-panel {
-      padding: 28px;
-      display: grid;
-      gap: 18px;
+    .tile strong {
+      display: block;
+      margin-top: 9px;
+      font-size: 1rem;
+      font-weight: 950;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .section {
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .logo-card {
+      margin-top: 18px;
+      padding: 18px;
+      background: var(--ink);
+      color: var(--white);
     }
 
     .logo-stage {
-      min-height: 420px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
-        radial-gradient(circle at center, rgba(120,227,255,.08), transparent 42%);
+      min-height: 300px;
       display: grid;
-      align-content: center;
-      justify-items: center;
-      text-align: center;
+      place-items: center;
       gap: 16px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .logo-stage::before {
-      content: "";
-      position: absolute;
-      inset: 18px;
-      border: 1px dashed rgba(255,255,255,.08);
-      border-radius: 18px;
-      pointer-events: none;
+      border: 3px solid var(--white);
+      padding: 22px;
+      text-align: center;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.08) 1px, transparent 1px),
+        #101014;
+      background-size: 24px 24px;
     }
 
     .script-mark {
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
-      font-weight: 600;
-      font-style: italic;
-      letter-spacing: -.04em;
+      color: var(--lime);
+      font-size: clamp(3.8rem, 10vw, 8rem);
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-weight: 800;
+      line-height: .8;
     }
 
     .global-mark {
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
       justify-content: center;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 800;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: clamp(1.6rem, 4vw, 3.8rem);
+      font-weight: 950;
       letter-spacing: .12em;
       text-transform: uppercase;
     }
 
     .globe {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: 2px solid rgba(120,227,255,.72);
+      width: 62px;
+      height: 62px;
+      border: 4px solid var(--cyan);
+      border-radius: 999px;
       position: relative;
-      box-shadow: 0 0 0 8px rgba(120,227,255,.08);
+      box-shadow: 4px 4px 0 var(--white);
       flex: 0 0 auto;
     }
 
@@ -190,74 +247,42 @@
     .globe::after {
       content: "";
       position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid rgba(120,227,255,.45);
+      inset: 5px;
+      border: 2px solid var(--cyan);
+      border-radius: inherit;
     }
 
-    .globe::before { transform: scaleX(.45); }
-    .globe::after { transform: scaleY(.45); }
+    .globe::before { transform: scaleX(.42); }
+    .globe::after { transform: scaleY(.42); }
 
     .globe-lines {
       position: absolute;
-      inset: 50% 8px auto 8px;
-      height: 1px;
-      background: rgba(120,227,255,.45);
+      left: 8px;
+      right: 8px;
+      top: 50%;
+      height: 3px;
+      background: var(--cyan);
       transform: translateY(-50%);
-      box-shadow: 0 -12px 0 rgba(120,227,255,.24), 0 12px 0 rgba(120,227,255,.24);
-    }
-
-    .section {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .section-card { padding: 28px; }
-    .section-card h2 { font-size: 1.4rem; margin-bottom: 14px; }
-
-    .list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .list-item {
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-    }
-
-    .list-item strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .progress {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
+      box-shadow: 0 -14px 0 rgba(40,215,255,.55), 0 14px 0 rgba(40,215,255,.55);
     }
 
     .order-tracker {
       position: relative;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
       margin-top: 18px;
+      padding-top: 4px;
     }
 
     .order-tracker::before {
       content: "";
       position: absolute;
-      top: 25px;
+      top: 29px;
       left: 11%;
       right: 11%;
-      height: 2px;
-      background: rgba(255,255,255,.18);
+      height: 4px;
+      background: var(--line);
       z-index: 0;
     }
 
@@ -268,200 +293,265 @@
       justify-items: center;
       gap: 10px;
       text-align: center;
-      color: var(--muted);
-      font-size: .82rem;
-      font-weight: 700;
-    }
-
-    .status-step strong {
-      display: block;
-      color: var(--text);
-      font-size: .88rem;
+      font-weight: 950;
     }
 
     .status-icon {
-      width: 50px;
-      height: 50px;
+      width: 54px;
+      height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255,255,255,.16);
+      border: 4px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-size: 1.15rem;
-      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+      color: var(--ink);
+      background: var(--white);
+      font-size: .82rem;
+      line-height: 1;
+      box-shadow: 4px 4px 0 var(--line);
     }
 
-    .status-step.done .status-icon {
-      border-color: rgba(215,255,100,.58);
-      background: rgba(215,255,100,.14);
-      color: var(--accent-2);
+    .status-step.done .status-icon { background: var(--lime); }
+    .status-step.active .status-icon { background: var(--cyan); }
+
+    .status-step strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.15;
     }
 
-    .status-step.active .status-icon {
-      border-color: rgba(120,227,255,.68);
-      background: rgba(120,227,255,.14);
-      color: var(--accent);
+    .status-step span:not(.status-icon) {
+      display: block;
+      max-width: 210px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.35;
+      font-weight: 850;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      background: var(--paper);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .step b {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      font-size: .8rem;
+    }
+
+    .note {
+      padding: 14px;
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .progress {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
     }
 
     .progress-row {
       display: grid;
       gap: 10px;
+      font-weight: 900;
     }
 
     .progress-row header {
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      font-weight: 700;
     }
 
     .bar {
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
+      height: 14px;
+      border: 3px solid var(--line);
+      background: var(--white);
       overflow: hidden;
     }
 
     .bar > span {
       display: block;
       height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      background: linear-gradient(90deg, var(--lime), var(--cyan));
     }
 
-    .footer-note {
-      margin-top: 24px;
-      padding: 18px 20px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
+    .complete-card {
+      margin-top: 18px;
+      border: 3px solid var(--line);
+      background: var(--cyan);
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 900;
+      line-height: 1.45;
     }
 
-    @media (max-width: 920px) {
-      .hero,
+    @media (max-width: 900px) {
+      .topbar,
       .section,
-      .order-tracker { grid-template-columns: 1fr; }
-      .meta-grid { grid-template-columns: 1fr; }
-      .logo-stage { min-height: 340px; }
+      .meta-grid,
+      .order-tracker {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .order-tracker::before {
-        top: 25px;
-        bottom: 25px;
-        left: 25px;
+        top: 27px;
+        bottom: 27px;
+        left: 27px;
         right: auto;
-        width: 2px;
+        width: 4px;
         height: auto;
       }
+
       .status-step {
-        grid-template-columns: 50px minmax(0,1fr);
+        min-height: 78px;
+        grid-template-columns: 54px minmax(0, 1fr);
         justify-items: start;
         text-align: left;
+      }
+
+      .status-step span:not(.status-icon) {
+        max-width: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <div class="topbar">
-      <div><div class="eyebrow">ShopNasGraphics / Client Project Tracker</div></div>
-      <div class="tag">Omni Global Solutions LLC</div>
-    </div>
+    <header class="topbar">
+      <a class="brand" href="https://ownyourweb.xyz/"><span class="mark"></span><span>ShopNasGraphics / OwnYourWeb</span></a>
+      <span class="tag cyan">Client Tracker</span>
+    </header>
 
-    <section class="hero">
-      <article class="card hero-copy">
-        <div class="eyebrow">Name Your Price Logo Offer / Torrance</div>
-        <h1>Omni Global logo package is active.</h1>
-        <p class="lede">
-          This client tracker was created from Torrance's ShopNasGraphics form submission for Omni Global Solutions LLC. The requested direction is a clean written “Omni” style with “Global” shaped around a globe-inspired O.
-        </p>
+    <main>
+      <section class="hero">
+        <article class="panel">
+          <span class="tag pink">Name Your Price Logo Offer</span>
+          <h1>Omni Global logo package is active.</h1>
+          <p class="lede">
+            Torrance submitted a logo request for Omni Global Solutions LLC. The direction is a clean written Omni style with Global shaped around a globe-inspired O.
+          </p>
 
-        <div class="meta-grid">
-          <div class="meta"><span>Client</span>Torrance</div>
-          <div class="meta"><span>Business</span>Omni Global Solutions LLC</div>
-          <div class="meta"><span>Budget Range</span>$100 - $250</div>
-        </div>
-      </article>
-
-      <aside class="card logo-panel">
-        <div class="tag">Live Direction Preview</div>
-        <div class="logo-stage">
-          <div class="script-mark">Omni</div>
-          <div class="global-mark">
-            <span class="globe"><span class="globe-lines"></span></span>
-            <span>lobal</span>
+          <div class="pill-row">
+            <span class="pill lime">Request Received</span>
+            <span class="pill cyan">Direction Review</span>
+            <span class="pill amber">$100 - $250 Budget</span>
+            <span class="pill violet">Logo Package</span>
           </div>
-          <div class="tag">Nice writing + globe O concept</div>
-        </div>
-      </aside>
-    </section>
 
-    <section class="section">
-      <article class="card section-card" style="grid-column: 1 / -1;">
-        <h2>Order Status</h2>
-        <div class="order-tracker" aria-label="Project tracker for Omni Global Solutions logo package">
-          <div class="status-step done">
-            <span class="status-icon">✓</span>
-            <div><strong>Request submitted</strong><span>Form received from ShopNasGraphics.</span></div>
+          <div class="meta-grid">
+            <div class="tile"><span>Client</span><strong>Torrance</strong></div>
+            <div class="tile"><span>Business</span><strong>Omni Global Solutions LLC</strong></div>
+            <div class="tile"><span>Contact</span><strong>darealtorr@icloud.com</strong></div>
           </div>
-          <div class="status-step active">
-            <span class="status-icon">◌</span>
-            <div><strong>Direction review</strong><span>Logo idea and package details are being reviewed.</span></div>
+
+          <div class="logo-card">
+            <span class="tag lime">Direction Preview</span>
+            <div class="logo-stage" aria-label="Omni Global logo direction preview">
+              <div class="script-mark">Omni</div>
+              <div class="global-mark">
+                <span class="globe"><span class="globe-lines"></span></span>
+                <span>lobal</span>
+              </div>
+            </div>
           </div>
-          <div class="status-step">
-            <span class="status-icon">◇</span>
-            <div><strong>Preview delivery</strong><span>Initial logo concepts will be prepared next.</span></div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel" style="grid-column: 1 / -1;">
+          <span class="tag lime">Project Tracker</span>
+          <h2>Order Status</h2>
+          <div class="order-tracker" aria-label="Order status tracker">
+            <div class="status-step done">
+              <span class="status-icon">01</span>
+              <div><strong>Request submitted</strong><span>Form received from ShopNasGraphics.</span></div>
+            </div>
+            <div class="status-step active">
+              <span class="status-icon">02</span>
+              <div><strong>Direction review</strong><span>Logo idea and package details are being reviewed.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">03</span>
+              <div><strong>Preview delivery</strong><span>Initial logo concepts will be prepared next.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">04</span>
+              <div><strong>Final files</strong><span>Final logo assets follow after approval.</span></div>
+            </div>
           </div>
-          <div class="status-step">
-            <span class="status-icon">□</span>
-            <div><strong>Final files</strong><span>Final logo assets will follow after approval.</span></div>
+          <div class="complete-card">Current status: request received and logo direction is being prepared for first preview options.</div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <h2>Request Summary</h2>
+          <div class="list">
+            <div class="step"><b>1</b><span>Package: Name Your Price Logo Offer.</span></div>
+            <div class="step"><b>2</b><span>Budget range submitted: $100 - $250.</span></div>
+            <div class="step"><b>3</b><span>Design request: Omni nice writing Global with the O being a globe.</span></div>
+            <div class="step"><b>4</b><span>Next step: build first logo preview options for review.</span></div>
           </div>
-        </div>
-      </article>
-    </section>
+        </article>
 
-    <section class="section">
-      <article class="card section-card">
-        <h2>Logo Direction</h2>
-        <div class="list">
-          <div class="list-item"><strong>Primary mark direction</strong>“Omni” should feel smooth, premium, and handwritten — more signature than generic script.</div>
-          <div class="list-item"><strong>Global treatment</strong>The “O” in Global becomes a globe mark to reinforce scale, movement, and international energy.</div>
-          <div class="list-item"><strong>Overall tone</strong>Clean, modern, trustworthy, and business-ready — not playful, not overdecorated.</div>
-        </div>
-      </article>
+        <article class="panel">
+          <h2>Progress Snapshot</h2>
+          <div class="progress">
+            <div class="progress-row"><header><span>Request submitted</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
+            <div class="progress-row"><header><span>Direction review</span><span>65%</span></header><div class="bar"><span style="width:65%"></span></div></div>
+            <div class="progress-row"><header><span>Initial previews</span><span>25%</span></header><div class="bar"><span style="width:25%"></span></div></div>
+            <div class="progress-row"><header><span>Final delivery</span><span>0%</span></header><div class="bar"><span style="width:0%"></span></div></div>
+          </div>
+        </article>
+      </section>
 
-      <article class="card section-card">
-        <h2>Progress Snapshot</h2>
-        <div class="progress">
-          <div class="progress-row"><header><span>Request submitted</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
-          <div class="progress-row"><header><span>Project review</span><span>65%</span></header><div class="bar"><span style="width:65%"></span></div></div>
-          <div class="progress-row"><header><span>Initial preview preparation</span><span>25%</span></header><div class="bar"><span style="width:25%"></span></div></div>
-          <div class="progress-row"><header><span>Final file delivery</span><span>0%</span></header><div class="bar"><span style="width:0%"></span></div></div>
-        </div>
-        <div class="footer-note">Next delivery step: confirm the package direction, then prepare initial logo previews for Torrance.</div>
-      </article>
-    </section>
+      <section class="section">
+        <article class="panel">
+          <h2>Logo Direction</h2>
+          <div class="list">
+            <div class="note"><strong>Primary mark</strong>Omni should feel smooth, premium, and handwritten: more signature than generic script.</div>
+            <div class="note"><strong>Global treatment</strong>The O in Global should become a globe mark to reinforce scale, movement, and international energy.</div>
+            <div class="note"><strong>Overall tone</strong>Clean, modern, trustworthy, and business-ready without feeling overdecorated.</div>
+          </div>
+        </article>
 
-    <section class="section">
-      <article class="card section-card">
-        <h2>What Gets Decided Next</h2>
-        <div class="list">
-          <div class="list-item"><strong>Logo base</strong>Create the first working base for the Omni / Global wordmark direction.</div>
-          <div class="list-item"><strong>Preview options</strong>Prepare initial logo previews so Torrance can react to script style, globe usage, and overall tone.</div>
-          <div class="list-item"><strong>Brand details</strong>Collect website copy, services, preferred colors, and contact info while the logo direction is being refined.</div>
-        </div>
-      </article>
-
-      <article class="card section-card">
-        <h2>Notes For Client Preview</h2>
-        <div class="list">
-          <div class="list-item"><strong>Current purpose</strong>This is a progress page, not the final website.</div>
-          <div class="list-item"><strong>What to react to</strong>Focus feedback on the feel of the logo direction: script vibe, globe usage, and overall professionalism.</div>
-          <div class="list-item"><strong>What comes after approval</strong>Once a logo direction is approved, final logo files can be packaged for delivery.</div>
-        </div>
-      </article>
-    </section>
+        <article class="panel">
+          <h2>Client Preview Notes</h2>
+          <div class="list">
+            <div class="note"><strong>Current purpose</strong>This page is a client tracker for the active logo request.</div>
+            <div class="note"><strong>What to review</strong>Focus feedback on script style, globe usage, and overall professionalism.</div>
+            <div class="note"><strong>What comes next</strong>Once the first direction is approved, the final logo files can be packaged for delivery.</div>
+          </div>
+        </article>
+      </section>
+    </main>
   </div>
 </body>
 </html>
