@@ -96,7 +96,7 @@
       gap: 18px;
       width: min(1180px, calc(100% - 28px));
       margin: 16px auto 0;
-      padding: 9px 12px;
+      padding: 12px 18px;
       border: var(--line);
       border-radius: 999px;
       background: rgba(255, 255, 255, .92);
@@ -114,7 +114,7 @@
     }
 
     .nav-brand img {
-      width: 148px;
+      width: clamp(220px, 28vw, 360px);
       height: auto;
     }
 
@@ -415,6 +415,10 @@
         align-items: flex-start;
         border-radius: 26px;
         flex-direction: column;
+      }
+
+      .nav-brand img {
+        width: min(100%, 300px);
       }
 
       .nav-links,
