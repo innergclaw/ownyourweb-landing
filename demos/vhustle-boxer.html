@@ -348,6 +348,67 @@
       font-weight: 700;
     }
 
+    .clip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .media-card {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+    }
+
+    .media-card video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #070504;
+      filter: saturate(1.05) contrast(1.06);
+    }
+
+    .media-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 48%, rgba(5,4,3,.82)),
+        linear-gradient(135deg, rgba(239,120,0,.18), transparent 42%);
+      pointer-events: none;
+    }
+
+    .media-label {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: end;
+      color: var(--cream);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .media-label span {
+      color: var(--orange-2);
+      font-size: .78rem;
+    }
+
+    .media-label strong {
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(1.5rem, 2.4vw, 2.6rem);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -538,6 +599,7 @@
 
       .hero-grid,
       .section-head,
+      .clip-grid,
       .sponsor-grid,
       .cta-box {
         grid-template-columns: 1fr;
@@ -584,6 +646,10 @@
       .package,
       .cta-box {
         padding: 18px;
+      }
+
+      .media-card {
+        min-height: 390px;
       }
 
       .video-gate {
@@ -687,7 +753,72 @@
             <span class="eyebrow">Media Wall</span>
             <h2>Proof In Public.</h2>
           </div>
-          <p>Use the page as a clean hub for social proof, upcoming events, sponsor posts, and highlight content without making people dig through a feed.</p>
+          <p>New training clips, ring work, and behind-the-scenes moments from VHUSTLE.</p>
+        </div>
+        <div class="clip-grid" aria-label="VHUSTLE video clips">
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4684.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4684"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4684</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4819.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4819"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4819</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4820.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4820"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4820</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4821.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4821"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4821</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4826.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4826"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4826</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4836.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4836"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4836</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4839.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4839"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4839</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4844.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4844"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4844</span>
+            </div>
+          </article>
+          <article class="media-card">
+            <video src="assets/vhustle/mvi_4845.mp4" controls playsinline preload="metadata" aria-label="VHUSTLE video clip 4845"></video>
+            <div class="media-label">
+              <strong>Training Clip</strong>
+              <span>4845</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
