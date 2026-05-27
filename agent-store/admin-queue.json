@@ -1,6 +1,47 @@
 {
   "requests": [
     {
+      "store_agent": "ownyourweb",
+      "intent": "owner_stack_for_hire_lead",
+      "request_id": "owner-stack-lead-8a954b66-7bbb-4645-a8e3-acc771811cd5",
+      "created_at": "2026-05-27T19:22:00.598363+00:00",
+      "business_name": "Courtney Bennett",
+      "customer_first_name": "Courtney",
+      "customer_last_name": "Bennett",
+      "customer_email": "strengthandresilience22@gmail.com",
+      "industry": "Creative Services / Owner Stack",
+      "package": "Monthly creative support",
+      "budget_range": "$150–$300",
+      "timeline": "Not provided",
+      "buyer_agent_or_contact": "Courtney Bennett / strengthandresilience22@gmail.com",
+      "request": "Social media content , social media marketing and strategy , get more of a following and bookings. Also do you do PR?",
+      "assets_available": "Page URL: https://innergclaw.github.io/owner-stack/for-hire.html?v=46ae124\nReferrer: https://l.instagram.com/\nSubmitted through Owner Stack lead form.",
+      "current_website": "https://innergclaw.github.io/owner-stack/for-hire.html?v=46ae124",
+      "source_page": "For Hire Landing Page",
+      "admin_lane": "ownyourweb",
+      "pack_type": "lead",
+      "status": "pending_owner_approval",
+      "next_steps": [
+        "Review the inquiry and qualify the project fit.",
+        "Reply with scope, starting price, and next-step payment or booking link.",
+        "If the lead pays, update this tracker folder into an active project."
+      ],
+      "payment_status": "not_paid_lead",
+      "notification_status": "telegram_sent",
+      "raw_payload": {
+        "name": "Courtney Bennett",
+        "email": "strengthandresilience22@gmail.com",
+        "source": "For Hire Landing Page",
+        "pageUrl": "https://innergclaw.github.io/owner-stack/for-hire.html?v=46ae124",
+        "website": "",
+        "referrer": "https://l.instagram.com/",
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23D8133 Instagram 430.0.0.32.70 (iPhone18,3; iOS 26_3_1; en_US; en; scale=3.00; 1206x2622; IABMV/1; 972915403) NW/3 Safari/604.1",
+        "budgetRange": "$150–$300",
+        "projectType": "Monthly creative support",
+        "projectDetails": "Social media content , social media marketing and strategy , get more of a following and bookings. Also do you do PR? "
+      }
+    },
+    {
       "id": 17,
       "request_id": "2026-05-25T21-58-51-964Z-paid-customer-info-social-media-graphics-iaxnwbztjvrejushbw",
       "created_at": "2026-05-25T21:58:51.964+00:00",
