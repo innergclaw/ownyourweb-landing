@@ -4,28 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tiny Stars Learning Academy</title>
-  <meta name="description" content="A playful starter landing page for Tiny Stars Learning Academy." />
+  <meta name="description" content="A colorful starter landing page for Tiny Stars Learning Academy." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@500;600;700&display=swap');
 
     :root {
-      --navy: #102047;
-      --green: #51ae36;
-      --grass: #7bd64f;
-      --sky: #70d6ff;
-      --cloud: #f4fcff;
-      --blue: #0f9df5;
+      --navy: #07275b;
+      --deep: #031a42;
+      --blue: #0070ff;
+      --cyan: #30d0ff;
+      --yellow: #ffda3d;
+      --orange: #ffa000;
       --red: #ff3838;
-      --sun: #ffda3d;
       --pink: #ff4fb8;
-      --orange: #ff8a2a;
       --purple: #7147dc;
+      --green: #51ae36;
+      --mint: #c5f4d4;
+      --cream: #fff8dc;
       --white: #ffffff;
-      --soft: #fff8dc;
+      --ink: #102047;
       --muted: #50617f;
-      --shadow: 0 24px 70px rgba(16, 32, 71, .18);
-      --line: 3px solid var(--navy);
-      --radius: 32px;
+      --line: 4px solid var(--ink);
+      --shadow: 8px 8px 0 rgba(16, 32, 71, .92);
+      --soft-shadow: 0 24px 70px rgba(3, 26, 66, .24);
+      --radius: 34px;
     }
 
     * { box-sizing: border-box; }
@@ -33,256 +35,258 @@
     body {
       margin: 0;
       font-family: Fredoka, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--navy);
+      color: var(--ink);
       background:
-        radial-gradient(circle at 14% 11%, rgba(255, 218, 61, .5) 0 58px, transparent 60px),
-        radial-gradient(circle at 88% 13%, rgba(112, 214, 255, .42) 0 76px, transparent 78px),
-        radial-gradient(circle at 80% 86%, rgba(255, 79, 184, .22) 0 90px, transparent 92px),
-        linear-gradient(180deg, #eafaff 0%, #ffffff 42%, #edffe5 100%);
+        radial-gradient(circle at 9% 18%, rgba(0, 112, 255, .38) 0 130px, transparent 132px),
+        radial-gradient(circle at 94% 13%, rgba(255, 218, 61, .32) 0 96px, transparent 98px),
+        radial-gradient(circle at 88% 80%, rgba(81, 174, 54, .28) 0 140px, transparent 142px),
+        var(--navy);
+      overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3 {
+      font-family: "Baloo 2", Fredoka, ui-rounded, system-ui, sans-serif;
+      line-height: .9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
 
     .site {
       position: relative;
+      min-height: 100vh;
+      padding-bottom: 34px;
       overflow: hidden;
     }
 
-    .site::before,
-    .site::after {
-      content: "";
+    .shape {
       position: fixed;
       z-index: 0;
-      width: 210px;
-      height: 86px;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 24% 42%, #fff 0 38px, transparent 39px),
-        radial-gradient(circle at 50% 30%, #fff 0 52px, transparent 53px),
-        radial-gradient(circle at 76% 45%, #fff 0 42px, transparent 43px),
-        linear-gradient(#fff, #fff);
-      filter: drop-shadow(0 16px 24px rgba(16, 32, 71, .08));
-      opacity: .9;
       pointer-events: none;
     }
 
-    .nav,
-    main,
-    footer {
+    .shape.star {
+      width: 92px;
+      height: 92px;
+      background: var(--yellow);
+      clip-path: polygon(50% 0, 62% 34%, 98% 35%, 69% 56%, 79% 92%, 50% 70%, 21% 92%, 31% 56%, 2% 35%, 38% 34%);
+      filter: drop-shadow(6px 8px 0 rgba(3, 26, 66, .36));
+    }
+
+    .shape.star.one { left: 4vw; bottom: 12vh; background: var(--green); transform: rotate(-14deg); }
+    .shape.star.two { right: 6vw; top: 28vh; background: var(--pink); transform: rotate(18deg) scale(.8); }
+
+    .shape.crayon {
+      right: -16px;
+      top: 130px;
+      width: 42px;
+      height: 190px;
+      border: var(--line);
+      border-radius: 999px;
+      background: linear-gradient(var(--cyan), var(--blue));
+      transform: rotate(18deg);
+      box-shadow: 6px 6px 0 rgba(3, 26, 66, .42);
+    }
+
+    .shape.wiggle {
+      left: -32px;
+      top: 360px;
+      width: 180px;
+      height: 92px;
+      border: 18px solid var(--red);
+      border-right: 0;
+      border-radius: 80px 0 0 80px;
+      transform: rotate(20deg);
+      opacity: .9;
+    }
+
+    .shell {
       position: relative;
       z-index: 1;
-    }
-
-    .site::before {
-      left: -50px;
-      top: 160px;
-      transform: rotate(-6deg);
-    }
-
-    .site::after {
-      right: -54px;
-      top: 520px;
-      transform: rotate(7deg) scale(.88);
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
     }
 
     .nav {
       position: sticky;
-      top: 0;
-      z-index: 10;
+      top: 14px;
+      z-index: 20;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-      align-items: center;
+      grid-template-columns: 1fr;
+      justify-items: center;
       gap: 18px;
-      width: min(1180px, calc(100% - 28px));
-      margin: 16px auto 0;
-      padding: 12px 18px;
+      margin-top: 18px;
+      padding: clamp(22px, 4vw, 42px) clamp(18px, 4vw, 34px) 18px;
       border: var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .92);
-      box-shadow: 0 12px 30px rgba(16, 32, 71, .14);
-      backdrop-filter: blur(12px);
+      border-radius: 46px;
+      background: var(--white);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .nav::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -2px;
+      height: 28px;
+      border-radius: 42px 42px 0 0;
+      background:
+        radial-gradient(circle at 6% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 18% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 30% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 42% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 54% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 66% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 78% 0, var(--navy) 0 46px, transparent 47px),
+        radial-gradient(circle at 90% 0, var(--navy) 0 46px, transparent 47px);
+      pointer-events: none;
     }
 
     .nav-brand {
       display: flex;
-      grid-column: 2;
-      align-items: center;
       justify-content: center;
-      justify-self: center;
-      gap: 10px;
-      min-width: 0;
-      font-weight: 950;
-      text-transform: uppercase;
+      width: 100%;
     }
 
     .nav-brand img {
-      width: clamp(220px, 28vw, 360px);
+      width: clamp(260px, 36vw, 460px);
       height: auto;
     }
 
     .nav-links {
-      display: flex;
-      grid-column: 3;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(130px, 1fr));
+      gap: 12px;
+      width: min(850px, 100%);
+    }
+
+    .nav-links a,
+    .button,
+    .pill,
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
-      justify-content: flex-end;
-      justify-self: end;
-      gap: 8px;
-      min-width: 0;
-      font-size: .8rem;
-      font-weight: 950;
-      letter-spacing: .04em;
+      justify-content: center;
+      border: var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: 5px 6px 0 var(--ink);
+      color: var(--ink);
+      font-size: .86rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-align: center;
       text-transform: uppercase;
     }
 
     .nav-links a,
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      border: var(--line);
-      border-radius: 999px;
-      padding: 10px 16px;
-      background: var(--white);
-      box-shadow: 4px 4px 0 var(--navy);
-      font-weight: 700;
-      text-transform: uppercase;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-    }
+    .button { min-height: 54px; padding: 12px 18px; }
+    .nav-links a:nth-child(1) { background: var(--yellow); }
+    .nav-links a:nth-child(2) { background: var(--cyan); }
+    .nav-links a:nth-child(3) { background: var(--pink); color: var(--white); }
 
     .nav-links a:hover,
     .button:hover {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 var(--navy);
-    }
-
-    .button.primary {
-      background: var(--pink);
-      color: var(--white);
-    }
-
-    .button.yellow {
-      background: var(--sun);
+      box-shadow: 3px 4px 0 var(--ink);
     }
 
     .hero {
-      position: relative;
-      width: min(1180px, calc(100% - 28px));
-      margin: 22px auto 0;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, .58fr);
+      gap: 22px;
+      margin-top: 26px;
       align-items: stretch;
     }
 
-    .hero-copy,
-    .panel,
+    .card,
     .program,
+    .feature,
     .location,
     .cta {
+      position: relative;
+      overflow: hidden;
       border: var(--line);
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, .94);
-      box-shadow: 8px 8px 0 var(--navy);
+      background: var(--white);
+      box-shadow: var(--shadow);
     }
 
     .hero-copy {
-      position: relative;
-      overflow: hidden;
+      min-height: 560px;
       padding: clamp(28px, 5vw, 58px);
-      min-height: 470px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       background:
-        radial-gradient(circle at 92% 20%, rgba(255, 218, 61, .55) 0 78px, transparent 80px),
-        radial-gradient(circle at 12% 84%, rgba(112, 214, 255, .45) 0 88px, transparent 90px),
-        linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(255, 248, 220, .92)),
-        var(--white);
+        radial-gradient(circle at 86% 18%, rgba(255, 218, 61, .72) 0 88px, transparent 90px),
+        linear-gradient(135deg, var(--white), var(--cream));
+    }
+
+    .hero-copy::before,
+    .hero-copy::after,
+    .cloud-band::before {
+      content: "";
+      position: absolute;
+      pointer-events: none;
     }
 
     .hero-copy::before {
-      content: "";
-      position: absolute;
-      top: 28px;
-      right: clamp(18px, 5vw, 54px);
-      width: clamp(112px, 16vw, 190px);
-      height: clamp(56px, 8vw, 92px);
-      border-radius: 999px;
+      right: -70px;
+      bottom: -150px;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
       background:
-        radial-gradient(circle at 24% 48%, #fff 0 28px, transparent 29px),
-        radial-gradient(circle at 50% 34%, #fff 0 42px, transparent 43px),
-        radial-gradient(circle at 76% 50%, #fff 0 34px, transparent 35px),
-        linear-gradient(#fff, #fff);
-      box-shadow: 0 14px 28px rgba(16, 32, 71, .1);
+        radial-gradient(circle, transparent 0 33%, var(--purple) 34% 40%, var(--blue) 41% 48%, var(--green) 49% 56%, var(--yellow) 57% 64%, var(--orange) 65% 72%, var(--red) 73% 80%, transparent 81%);
     }
 
     .hero-copy::after {
-      content: "";
-      position: absolute;
-      right: -92px;
-      bottom: -132px;
-      width: 330px;
-      height: 330px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle, transparent 0 34%, var(--purple) 35% 42%, var(--blue) 43% 50%, var(--green) 51% 58%, var(--sun) 59% 66%, var(--orange) 67% 74%, var(--red) 75% 82%, transparent 83%);
-      opacity: .92;
-    }
-
-    .hero-copy > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow,
-    .pill {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      border: var(--line);
+      top: 42px;
+      right: 56px;
+      width: 180px;
+      height: 78px;
       border-radius: 999px;
-      background: var(--sun);
-      padding: 8px 13px;
-      box-shadow: 4px 4px 0 var(--navy);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      background:
+        radial-gradient(circle at 24% 54%, #fff 0 31px, transparent 32px),
+        radial-gradient(circle at 52% 34%, #fff 0 44px, transparent 45px),
+        radial-gradient(circle at 78% 55%, #fff 0 34px, transparent 35px),
+        linear-gradient(#fff, #fff);
+      box-shadow: 0 14px 28px rgba(16, 32, 71, .12);
     }
 
-    h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 {
-      font-family: "Baloo 2", Fredoka, ui-rounded, system-ui, sans-serif;
-      letter-spacing: 0;
-      text-transform: uppercase;
-      line-height: .9;
+    .hero-copy > * { position: relative; z-index: 1; }
+
+    .eyebrow {
+      width: fit-content;
+      min-height: 38px;
+      padding: 9px 14px;
+      background: var(--yellow);
+      font-size: .75rem;
     }
 
     h1 {
-      margin-top: 18px;
-      max-width: 820px;
-      font-size: clamp(3.7rem, 8vw, 7.8rem);
+      max-width: 840px;
+      margin-top: 20px;
       color: var(--blue);
-      text-shadow:
-        3px 3px 0 var(--white),
-        6px 6px 0 rgba(16, 32, 71, .16);
+      font-size: clamp(4rem, 9vw, 8.2rem);
+      text-shadow: 4px 4px 0 var(--white), 8px 8px 0 rgba(16, 32, 71, .18);
     }
 
     h2 {
-      font-size: clamp(2.5rem, 5.5vw, 4.9rem);
+      color: var(--blue);
+      font-size: clamp(2.6rem, 6vw, 5.7rem);
+      text-shadow: 3px 3px 0 rgba(255, 255, 255, .9), 6px 6px 0 rgba(16, 32, 71, .12);
     }
 
-    h3 {
-      font-size: clamp(1.55rem, 2.6vw, 2.3rem);
-    }
+    h3 { font-size: clamp(1.7rem, 2.8vw, 2.4rem); }
 
     .lede {
-      margin-top: 16px;
-      max-width: 680px;
+      max-width: 700px;
+      margin-top: 18px;
       color: var(--muted);
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(1.03rem, 2vw, 1.24rem);
       font-weight: 600;
       line-height: 1.58;
     }
@@ -292,201 +296,227 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 22px;
+      margin-top: 24px;
+    }
+
+    .button.primary { background: var(--pink); color: var(--white); }
+    .button.yellow { background: var(--yellow); }
+    .button.blue { background: var(--cyan); }
+
+    .pill {
+      min-height: 38px;
+      padding: 8px 13px;
+      background: var(--white);
+      box-shadow: 4px 5px 0 var(--ink);
+      font-size: .74rem;
+    }
+
+    .side-card {
+      min-height: 560px;
+      padding: 24px;
+      display: grid;
+      align-content: space-between;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .side-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 22%, rgba(255, 79, 184, .88) 0 16px, transparent 17px),
+        radial-gradient(circle at 82% 26%, rgba(255, 218, 61, .9) 0 15px, transparent 16px),
+        radial-gradient(circle at 18% 82%, rgba(48, 208, 255, .8) 0 72px, transparent 74px),
+        radial-gradient(circle at 88% 84%, rgba(81, 174, 54, .88) 0 84px, transparent 86px);
+      opacity: .9;
+    }
+
+    .side-card > * { position: relative; z-index: 1; }
+
+    .stat-bubble {
+      border: var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 20px;
+      box-shadow: 6px 7px 0 var(--ink);
+    }
+
+    .stat-bubble strong {
+      display: block;
+      color: var(--pink);
+      font-family: "Baloo 2", Fredoka, sans-serif;
+      font-size: 4rem;
+      line-height: .8;
+    }
+
+    .side-card h2 {
+      color: var(--white);
+      font-size: clamp(2.7rem, 5vw, 4.4rem);
+      text-shadow: none;
     }
 
     .section {
-      width: min(1180px, calc(100% - 28px));
-      margin: 22px auto 0;
+      margin-top: 24px;
     }
 
-    .panel {
+    .cloud-band {
       position: relative;
-      overflow: hidden;
-      padding: clamp(24px, 4vw, 40px);
+      padding-top: 34px;
     }
 
-    .panel::after {
-      content: "";
-      position: absolute;
-      right: -34px;
-      top: -28px;
-      width: 130px;
-      height: 64px;
-      border-radius: 999px;
+    .cloud-band::before {
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 42px;
       background:
-        radial-gradient(circle at 25% 50%, rgba(112, 214, 255, .4) 0 28px, transparent 29px),
-        radial-gradient(circle at 52% 34%, rgba(112, 214, 255, .32) 0 40px, transparent 41px),
-        radial-gradient(circle at 78% 52%, rgba(112, 214, 255, .38) 0 30px, transparent 31px),
-        linear-gradient(rgba(112, 214, 255, .25), rgba(112, 214, 255, .25));
-      pointer-events: none;
+        radial-gradient(circle at 7% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 19% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 31% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 43% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 55% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 67% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 79% 100%, var(--white) 0 48px, transparent 49px),
+        radial-gradient(circle at 91% 100%, var(--white) 0 48px, transparent 49px);
+    }
+
+    .section-panel {
+      padding: clamp(24px, 4vw, 42px);
+      background: var(--white);
     }
 
     .program-grid,
-    .location-grid,
-    .feature-grid {
+    .feature-grid,
+    .location-grid {
       display: grid;
       gap: 18px;
-      margin-top: 22px;
+      margin-top: 24px;
     }
 
-    .program-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .feature-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .location-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .program-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     .program,
+    .feature,
     .location {
-      position: relative;
-      padding: 20px;
-      min-height: 166px;
-      overflow: hidden;
+      min-height: 178px;
+      padding: 22px;
     }
 
-    .program::after,
-    .location::after {
-      content: "";
-      position: absolute;
-      right: -18px;
-      bottom: -18px;
-      width: 82px;
-      height: 82px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .42);
-    }
+    .program:nth-child(1) { background: var(--yellow); }
+    .program:nth-child(2) { background: var(--mint); }
+    .program:nth-child(3) { background: #dff4ff; }
 
-    .program:nth-child(1) { background: #dfffca; }
-    .program:nth-child(2) { background: #dff7ff; }
-    .program:nth-child(3) { background: #fff0bd; }
-
-    .location:nth-child(1) { background: #fff0bd; }
-    .location:nth-child(2) { background: #ffd8ec; }
-    .location:nth-child(3) { background: #dff7ff; }
-    .location:nth-child(4) { background: #dfffca; }
-
-    .feature {
-      border: var(--line);
-      border-radius: 22px;
-      padding: 18px;
-      background: var(--white);
-      font-weight: 700;
-      box-shadow: 5px 5px 0 var(--navy);
-    }
+    .feature:nth-child(1) { background: var(--blue); color: var(--white); }
+    .feature:nth-child(2) { background: var(--green); color: var(--white); }
+    .feature:nth-child(3) { background: var(--yellow); }
+    .feature:nth-child(4) { background: var(--red); color: var(--white); }
 
     .feature b {
       display: block;
-      margin-bottom: 8px;
-      font-size: 1.9rem;
+      margin-bottom: 12px;
+      font-family: "Baloo 2", Fredoka, sans-serif;
+      font-size: 3.4rem;
+      line-height: .8;
     }
 
     .program p,
-    .location p,
-    .feature span {
+    .feature span,
+    .location p {
       display: block;
-      margin-top: 10px;
-      color: var(--muted);
+      margin-top: 12px;
       font-weight: 600;
-      line-height: 1.5;
+      line-height: 1.48;
     }
+
+    .location:nth-child(1) { background: var(--cream); }
+    .location:nth-child(2) { background: #ffe0ef; }
+    .location:nth-child(3) { background: #dff4ff; }
+    .location:nth-child(4) { background: #e6ffd8; }
 
     .cta {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 20px;
+      gap: 24px;
       align-items: center;
-      padding: clamp(24px, 4vw, 42px);
+      padding: clamp(26px, 4vw, 44px);
       background:
-        radial-gradient(circle at 92% 20%, rgba(255, 255, 255, .55) 0 76px, transparent 78px),
-        linear-gradient(135deg, rgba(255, 218, 61, .92), rgba(255, 79, 184, .82)),
-        var(--sun);
+        radial-gradient(circle at 88% 20%, rgba(255, 255, 255, .56) 0 76px, transparent 78px),
+        linear-gradient(135deg, var(--yellow), var(--pink));
     }
 
     footer {
       width: min(1180px, calc(100% - 28px));
-      margin: 28px auto 36px;
-      color: var(--muted);
+      margin: 30px auto 0;
+      color: rgba(255, 255, 255, .74);
       font-size: .9rem;
       font-weight: 600;
       text-align: center;
     }
 
-    @media (max-width: 900px) {
-      .nav {
-        align-items: center;
-        border-radius: 26px;
-        grid-template-columns: 1fr;
-      }
-
-      .nav-brand,
-      .nav-links {
-        grid-column: 1;
-        justify-self: center;
-      }
-
-      .nav-brand {
-        width: 100%;
-      }
-
-      .nav-links {
-        justify-content: center;
-      }
-
-      .nav-brand img {
-        width: min(100%, 300px);
-      }
-
-      .nav-links,
-      .hero-actions {
-        width: 100%;
-      }
-
-      .nav-links a,
-      .button {
-        flex: 1 1 auto;
-      }
-
+    @media (max-width: 980px) {
       .hero,
+      .cta { grid-template-columns: 1fr; }
+      .side-card { min-height: 420px; }
       .program-grid,
-      .location-grid,
       .feature-grid,
-      .cta {
-        grid-template-columns: 1fr;
-      }
+      .location-grid { grid-template-columns: 1fr 1fr; }
+    }
 
-      .hero-copy {
-        min-height: auto;
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 20px, 1180px); }
+      .nav { border-radius: 34px; padding: 30px 14px 14px; }
+      .nav-brand img { width: min(100%, 330px); }
+      .nav-links { grid-template-columns: 1fr; }
+      .hero-copy,
+      .side-card,
+      .section-panel,
+      .cta { padding: 22px; }
+      h1 {
+        max-width: 100%;
+        font-size: clamp(2.45rem, 10vw, 3.35rem);
+        line-height: .96;
+        overflow-wrap: break-word;
       }
+      h2 { font-size: clamp(2.3rem, 11vw, 3.7rem); }
+      .program-grid,
+      .feature-grid,
+      .location-grid { grid-template-columns: 1fr; }
+      .hero-copy { min-height: 0; }
+      .hero-copy::after { display: none; }
+      .button { width: 100%; }
     }
   </style>
 </head>
 <body>
   <div class="site">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="nav-brand" href="#home">
-        <img src="assets/tiny-stars/tiny-stars-logo.png" alt="Tiny Stars Learning Academy" />
-      </a>
-      <div class="nav-links">
-        <a href="#programs">Programs</a>
-        <a href="#locations">Locations</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
+    <span class="shape star one" aria-hidden="true"></span>
+    <span class="shape star two" aria-hidden="true"></span>
+    <span class="shape crayon" aria-hidden="true"></span>
+    <span class="shape wiggle" aria-hidden="true"></span>
 
-    <main id="home">
+    <header class="shell">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-brand" href="#home">
+          <img src="assets/tiny-stars/tiny-stars-logo.png" alt="Tiny Stars Learning Academy" />
+        </a>
+        <div class="nav-links">
+          <a href="#programs">Programs</a>
+          <a href="#locations">Locations</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="home" class="shell">
       <section class="hero">
-        <article class="hero-copy">
+        <article class="card hero-copy">
           <span class="eyebrow">Learning, play, and bright little futures</span>
           <h1>Where tiny stars learn, laugh, and grow.</h1>
-          <p class="lede">
-            Tiny Stars Learning Academy gives children a colorful, caring place to explore early learning, creative play, summer activities, and daily confidence-building routines.
-          </p>
+          <p class="lede">Tiny Stars Learning Academy gives children a colorful, caring place to explore early learning, creative play, summer activities, and daily confidence-building routines.</p>
           <div class="hero-actions">
             <a class="button primary" href="mailto:TINYSTARS1@YAHOO.COM">Start Enrollment</a>
             <a class="button yellow" href="#programs">View Programs</a>
@@ -497,47 +527,42 @@
             <span class="pill">Multiple Locations</span>
           </div>
         </article>
+
+        <aside class="card side-card" aria-label="Tiny Stars highlights">
+          <span class="eyebrow">Play. Learn. Grow. Together.</span>
+          <h2>Bright days for curious kids.</h2>
+          <div class="stat-bubble"><strong>4</strong> Philadelphia-area locations for families.</div>
+        </aside>
       </section>
 
-      <section class="section" id="programs">
-        <article class="panel">
+      <section class="section cloud-band" id="programs">
+        <article class="card section-panel">
           <span class="eyebrow">Programs</span>
           <h2>Fun days with real learning built in.</h2>
-          <p class="lede">
-            A starter landing page can highlight the most important reasons parents should reach out: safe care, active learning, creative play, and clear enrollment steps.
-          </p>
+          <p class="lede">This page is designed to help parents quickly understand the care, activities, and enrollment path without digging through extra details.</p>
           <div class="program-grid">
-            <div class="program">
-              <h3>Summer Camp</h3>
-              <p>Trips, outdoor activities, dress-up days, storytelling, and playful daily themes.</p>
-            </div>
-            <div class="program">
-              <h3>Early Learning</h3>
-              <p>Age-friendly activities that help children build confidence, routines, and curiosity.</p>
-            </div>
-            <div class="program">
-              <h3>Creative Play</h3>
-              <p>Bright, hands-on experiences that make learning feel joyful and memorable.</p>
-            </div>
+            <div class="program"><h3>Summer Camp</h3><p>Trips, outdoor activities, dress-up days, storytelling, and playful daily themes.</p></div>
+            <div class="program"><h3>Early Learning</h3><p>Age-friendly activities that help children build confidence, routines, and curiosity.</p></div>
+            <div class="program"><h3>Creative Play</h3><p>Bright, hands-on experiences that make learning feel joyful and memorable.</p></div>
           </div>
         </article>
       </section>
 
-      <section class="section">
-        <article class="panel">
+      <section class="section cloud-band">
+        <article class="card section-panel">
           <span class="eyebrow">Why Parents Choose Tiny Stars</span>
-          <h2>A page made for quick trust.</h2>
+          <h2>Colorful, clear, and easy to trust.</h2>
           <div class="feature-grid">
-            <div class="feature"><b>1</b>Colorful brand presence<span>Logo-forward design that feels fun and recognizable.</span></div>
-            <div class="feature"><b>2</b>Clear program info<span>Parents can scan programs without digging.</span></div>
-            <div class="feature"><b>3</b>Easy contact path<span>Direct email CTA for enrollment questions.</span></div>
+            <div class="feature"><b>1</b>Brand presence<span>Logo-forward design that feels fun and recognizable.</span></div>
+            <div class="feature"><b>2</b>Program info<span>Parents can scan programs without digging.</span></div>
+            <div class="feature"><b>3</b>Easy contact<span>Direct email CTA for enrollment questions.</span></div>
             <div class="feature"><b>4</b>Mobile ready<span>Designed for busy parents checking from their phone.</span></div>
           </div>
         </article>
       </section>
 
-      <section class="section" id="locations">
-        <article class="panel">
+      <section class="section cloud-band" id="locations">
+        <article class="card section-panel">
           <span class="eyebrow">Locations</span>
           <h2>Serving families across the city.</h2>
           <div class="location-grid">
