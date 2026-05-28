@@ -6,6 +6,7 @@ Current client tracker pages:
 
 - Brinx Entertainment: `https://ownyourweb.xyz/demos/brinx-entertainment-rush-logo-suite.html`
 - Omni Global Solutions LLC: `https://ownyourweb.xyz/demos/omni-global-solutions-logo-package.html`
+- Tiny Stars Learning Academy: `https://ownyourweb.xyz/demos/tiny-stars-learning-academy-starter-landing-page.html`
 
 ## Flow
 
