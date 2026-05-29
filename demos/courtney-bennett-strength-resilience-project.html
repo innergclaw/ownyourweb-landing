@@ -7,19 +7,17 @@
   <meta name="description" content="Client project tracker for Strength & Resilience Children Lounge website refresh, social media clean up, and starter brand identity marketing." />
   <style>
     :root {
-      --bg: #101116;
-      --panel: #171a22;
-      --panel-2: #202532;
-      --paper: #fff8ea;
-      --muted: #aab0bd;
-      --text: #fff8ea;
-      --line: rgba(255,255,255,.13);
-      --gold: #f7c85f;
-      --green: #8df0b6;
-      --pink: #f58bb4;
-      --blue: #8bb8ff;
-      --shadow: 0 24px 80px rgba(0,0,0,.35);
-      --radius: 24px;
+      --ink: #101014;
+      --paper: #fbfaf4;
+      --white: #ffffff;
+      --muted: #62605a;
+      --line: #101014;
+      --lime: #caff34;
+      --pink: #ff4f9a;
+      --amber: #ffb000;
+      --cyan: #28d7ff;
+      --violet: #6d5cff;
+      --shadow: 8px 8px 0 var(--line);
     }
 
     * { box-sizing: border-box; }
@@ -28,437 +26,524 @@
     body {
       min-height: 100vh;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
+      color: var(--ink);
       background:
-        radial-gradient(circle at 15% 12%, rgba(245,139,180,.18), transparent 30%),
-        radial-gradient(circle at 84% 10%, rgba(139,184,255,.18), transparent 26%),
-        radial-gradient(circle at 70% 78%, rgba(141,240,182,.12), transparent 34%),
-        linear-gradient(180deg, #101116 0%, #0b0c10 100%);
-      line-height: 1.5;
+        linear-gradient(90deg, rgba(16,16,20,.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(16,16,20,.06) 1px, transparent 1px),
+        var(--paper);
+      background-size: 30px 30px;
     }
 
     a { color: inherit; text-decoration: none; }
 
     .shell {
-      width: min(1180px, calc(100% - 32px));
+      width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 56px;
+      padding: 22px 0 56px;
     }
 
     .topbar,
-    .card,
-    .step,
-    .service,
-    .note {
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(23,26,34,.92), rgba(13,15,20,.96));
-      border-radius: var(--radius);
+    .panel,
+    .tile,
+    .note,
+    .step {
+      border: 3px solid var(--line);
+      background: var(--white);
       box-shadow: var(--shadow);
     }
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
-      padding: 14px 18px;
-      backdrop-filter: blur(18px);
+      padding: 14px 16px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 950;
       text-transform: uppercase;
-      letter-spacing: .04em;
     }
 
     .mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.18);
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--line);
       background:
-        linear-gradient(135deg, var(--pink), transparent 52%),
-        linear-gradient(225deg, var(--blue), transparent 50%),
-        var(--green);
-      box-shadow: 0 0 30px rgba(245,139,180,.18);
+        linear-gradient(90deg, var(--lime) 0 25%, var(--pink) 25% 50%, var(--amber) 50% 75%, var(--cyan) 75%);
+      box-shadow: 4px 4px 0 var(--line);
     }
 
     .tag,
     .pill {
       display: inline-flex;
-      width: fit-content;
       align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.04);
-      font-size: .74rem;
-      font-weight: 850;
-      letter-spacing: .08em;
+      width: fit-content;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 7px 10px;
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .06em;
       text-transform: uppercase;
+      box-shadow: 3px 3px 0 var(--line);
     }
 
-    .pill.gold { color: #21170b; background: var(--gold); border-color: transparent; }
-    .pill.green { color: #092117; background: var(--green); border-color: transparent; }
-    .pill.pink { color: #281019; background: var(--pink); border-color: transparent; }
-    .pill.blue { color: #0d1728; background: var(--blue); border-color: transparent; }
+    .tag.lime,
+    .pill.lime { background: var(--lime); }
+    .tag.pink,
+    .pill.pink { background: var(--pink); color: var(--white); }
+    .tag.amber,
+    .pill.amber { background: var(--amber); }
+    .tag.cyan,
+    .pill.cyan { background: var(--cyan); }
+    .tag.violet,
+    .pill.violet { background: var(--violet); color: var(--white); }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 22px;
       margin-top: 24px;
       align-items: stretch;
     }
 
-    .card { padding: 32px; }
+    .panel { padding: 28px; }
 
     h1, h2, h3, p { margin: 0; }
 
     h1, h2, h3 {
       font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
       font-weight: 900;
-      line-height: .9;
+      line-height: .88;
       letter-spacing: 0;
       text-transform: uppercase;
     }
 
     h1 {
-      margin-top: 18px;
-      font-size: clamp(3rem, 7vw, 6.2rem);
+      margin-top: 16px;
+      max-width: 860px;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
     }
 
-    h2 { font-size: clamp(2rem, 4vw, 3.6rem); }
-    h3 { font-size: 1.75rem; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h3 { font-size: 1.55rem; }
 
     .lede {
       margin-top: 18px;
-      max-width: 720px;
+      max-width: 820px;
       color: var(--muted);
-      font-size: 1.08rem;
-      font-weight: 750;
+      font-weight: 850;
+      line-height: 1.55;
+    }
+
+    .pill-row,
+    .meta-grid,
+    .section,
+    .list {
+      display: grid;
+      gap: 12px;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .meta-grid,
-    .service-grid,
-    .plan-grid,
-    .timeline {
-      display: grid;
-      gap: 14px;
+      margin-top: 22px;
     }
 
     .meta-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 24px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
     }
 
-    .meta {
-      min-height: 116px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.035);
+    .tile {
+      padding: 14px;
+      min-height: 104px;
+      background: var(--paper);
     }
 
-    .meta span,
+    .tile span,
     .label {
       display: block;
       color: var(--muted);
       font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .08em;
+      font-weight: 950;
+      letter-spacing: .06em;
       text-transform: uppercase;
     }
 
-    .meta strong {
+    .tile strong {
       display: block;
       margin-top: 9px;
-      font-size: 1.05rem;
-      line-height: 1.25;
+      font-size: 1rem;
+      font-weight: 950;
+      line-height: 1.2;
       overflow-wrap: anywhere;
     }
 
-    .deposit {
-      min-height: 100%;
-      display: grid;
-      align-content: space-between;
-      gap: 26px;
-      background:
-        linear-gradient(135deg, rgba(247,200,95,.18), transparent 48%),
-        linear-gradient(180deg, rgba(23,26,34,.92), rgba(13,15,20,.96));
-    }
-
-    .price {
-      margin-top: 16px;
-      font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      font-size: clamp(4rem, 8vw, 7rem);
-      line-height: .86;
-    }
-
-    .deposit-due {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-      padding: 18px;
-      border-radius: 20px;
-      background: var(--paper);
-      color: #15110b;
-    }
-
-    .deposit-due strong {
-      font-size: 1.2rem;
-      font-weight: 950;
-    }
-
     .section {
-      margin-top: 24px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 16px;
-    }
-
-    .service-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .service {
-      min-height: 190px;
-      padding: 24px;
-      display: grid;
-      align-content: space-between;
-      gap: 18px;
-    }
-
-    .service p,
-    .step p,
-    .note p {
-      color: var(--muted);
-      font-weight: 720;
-    }
-
-    .timeline {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .step {
-      min-height: 178px;
-      padding: 20px;
-    }
-
-    .step-num {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: #111;
-      background: var(--gold);
-      font-weight: 950;
-      margin-bottom: 18px;
-    }
-
-    .note {
-      padding: 24px;
-      border-color: rgba(247,200,95,.24);
-      background:
-        linear-gradient(135deg, rgba(247,200,95,.14), transparent 48%),
-        rgba(255,255,255,.035);
-    }
-
-    .footer-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
       margin-top: 22px;
     }
 
-    .btn {
-      min-height: 52px;
+    .order-tracker {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+      padding-top: 4px;
+    }
+
+    .order-tracker::before {
+      content: "";
+      position: absolute;
+      top: 29px;
+      left: 11%;
+      right: 11%;
+      height: 4px;
+      background: var(--line);
+      z-index: 0;
+    }
+
+    .status-step {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      text-align: center;
+      font-weight: 950;
+    }
+
+    .status-icon {
+      width: 54px;
+      height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      border: 4px solid var(--line);
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      padding: 0 18px;
+      color: var(--ink);
+      background: var(--white);
       font-size: .82rem;
+      line-height: 1;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .status-step.done .status-icon { background: var(--lime); }
+    .status-step.active .status-icon { background: var(--cyan); }
+
+    .status-step strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.15;
+    }
+
+    .status-step span:not(.status-icon) {
+      display: block;
+      max-width: 210px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.35;
+      font-weight: 850;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      background: var(--paper);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .step b {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      font-size: .8rem;
+    }
+
+    .note {
+      padding: 14px;
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
       font-weight: 950;
-      letter-spacing: .08em;
+    }
+
+    .progress {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .progress-row {
+      display: grid;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .progress-row header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .bar {
+      height: 14px;
+      border: 3px solid var(--line);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--lime), var(--cyan));
+    }
+
+    .complete-card {
+      margin-top: 18px;
+      border: 3px solid var(--line);
+      background: var(--cyan);
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--line);
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .live-sync {
+      grid-column: 1 / -1;
+    }
+
+    .live-sync .sync-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .live-sync[data-sync-state="live"] .tag {
+      background: var(--lime);
+    }
+
+    .live-sync[data-sync-state="offline"] .tag {
+      background: var(--amber);
+    }
+
+    .note span,
+    .note small {
+      display: block;
+    }
+
+    .note small {
+      margin-top: 8px;
+      color: var(--ink);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .05em;
       text-transform: uppercase;
-      background: rgba(255,255,255,.06);
     }
 
-    .btn.primary {
-      color: #161008;
-      background: var(--gold);
-      border-color: transparent;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    @media (max-width: 860px) {
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      padding: 0 14px;
+      box-shadow: 4px 4px 0 var(--line);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .button.secondary { background: var(--white); }
+
+    @media (max-width: 900px) {
       .topbar,
-      .section-head {
+      .section,
+      .meta-grid,
+      .order-tracker {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .hero,
-      .service-grid,
-      .timeline {
-        grid-template-columns: 1fr;
+      .order-tracker::before {
+        top: 27px;
+        bottom: 27px;
+        left: 27px;
+        right: auto;
+        width: 4px;
+        height: auto;
       }
 
-      .meta-grid {
-        grid-template-columns: 1fr;
+      .status-step {
+        min-height: 78px;
+        grid-template-columns: 54px minmax(0, 1fr);
+        justify-items: start;
+        text-align: left;
+      }
+
+      .status-step span:not(.status-icon) {
+        max-width: none;
       }
     }
   </style>
+  <script src="/api-config.js"></script>
 </head>
 <body>
-  <main class="shell">
+  <div class="shell">
     <header class="topbar">
-      <a class="brand" href="https://ownyourweb.xyz">
-        <span class="mark" aria-hidden="true"></span>
-        <span>OWNYOURWEB</span>
-      </a>
-      <span class="tag">Official Client Project #4</span>
+      <a class="brand" href="https://ownyourweb.xyz/"><span class="mark"></span><span>ShopNasGraphics / OwnYourWeb</span></a>
+      <span class="tag cyan">Client Tracker</span>
     </header>
 
-    <section class="hero">
-      <article class="card">
-        <span class="tag">Strength & Resilience Children Lounge</span>
-        <h1>Website Refresh + Social Cleanup</h1>
-        <p class="lede">
-          Project tracker for Courtney Bennett's social media clean up, website refresh, starter brand identity marketing, and ownership-ready web system.
-        </p>
-        <div class="pill-row">
-          <span class="pill green">Deposit Received</span>
-          <span class="pill gold">Demo Build Starting</span>
-          <span class="pill pink">Brand Consistency</span>
-          <span class="pill blue">Automation Resources</span>
-        </div>
-        <div class="meta-grid">
-          <div class="meta"><span>Client</span><strong>Courtney Bennett</strong></div>
-          <div class="meta"><span>Email</span><strong>strengthandresilience22@gmail.com</strong></div>
-          <div class="meta"><span>Business</span><strong>Strength & Resilience Children Lounge</strong></div>
-          <div class="meta"><span>Status</span><strong>Deposit received / demo build starting</strong></div>
-        </div>
-      </article>
+    <main>
+      <section class="hero">
+        <article class="panel">
+          <span class="tag pink">Official Client Project #4</span>
+          <h1>Strength & Resilience refresh is active.</h1>
+          <p class="lede">
+            Courtney Bennett confirmed the 50% deposit for a social media clean up, website refresh, starter brand identity marketing, and ownership-ready web system for Strength & Resilience Children Lounge.
+          </p>
 
-      <aside class="card deposit">
-        <div>
-          <span class="tag">Project Scope</span>
-          <div class="price">$350</div>
-          <p class="lede">Social Media Clean Up + Website Refresh package.</p>
-        </div>
-        <div class="deposit-due">
-          <span class="label">Received - May 29</span>
-          <strong>50% deposit received. Demo setup is ready to begin.</strong>
-          <p>Deposit paid: $175. Remaining balance: $175.</p>
-          <a class="btn primary" href="https://buy.stripe.com/4gM8wR1FR9Gp1KScyfao813">View Payment Link</a>
-        </div>
-      </aside>
-    </section>
+          <div class="pill-row">
+            <span class="pill lime">Deposit Received</span>
+            <span class="pill cyan">Demo Build Starting</span>
+            <span class="pill amber">$350 Website Refresh</span>
+            <span class="pill violet">Brand + Web System</span>
+          </div>
 
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <span class="tag">Services Included</span>
-          <h2>What This Build Covers</h2>
-        </div>
-      </div>
-      <div class="service-grid">
-        <article class="service">
-          <span class="pill green">01</span>
-          <div>
-            <h3>Website Revamp</h3>
-            <p>Demo site build with ownership connections for domain, email list, contact flow, and client-facing information structure.</p>
+          <div class="meta-grid">
+            <div class="tile"><span>Client</span><strong>Courtney Bennett</strong></div>
+            <div class="tile"><span>Business</span><strong>Strength & Resilience Children Lounge</strong></div>
+            <div class="tile"><span>Contact</span><strong>strengthandresilience22@gmail.com</strong></div>
           </div>
         </article>
-        <article class="service">
-          <span class="pill pink">02</span>
-          <div>
-            <h3>Uniform Brand Style</h3>
-            <p>Starter visual consistency across existing information so the brand feels cleaner, more trusted, and easier to understand.</p>
-          </div>
-        </article>
-        <article class="service">
-          <span class="pill blue">03</span>
-          <div>
-            <h3>Conversion Cues</h3>
-            <p>Pop ups, visual cues, and clear calls to action for booking, signing up, or contacting with questions.</p>
-          </div>
-        </article>
-        <article class="service">
-          <span class="pill gold">04</span>
-          <div>
-            <h3>Automation + Scaling</h3>
-            <p>Resources and direction for using the new identity with automation, follow-up, email capture, and future growth systems.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+      </section>
 
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <span class="tag">Build Path</span>
-          <h2>Project Steps</h2>
-        </div>
-      </div>
-      <div class="timeline">
-        <article class="step">
-          <div class="step-num">1</div>
-          <h3>Deposit</h3>
-          <p>50% deposit received to start the demo build.</p>
+      <section class="section">
+        <article class="panel" style="grid-column: 1 / -1;">
+          <span class="tag lime">Project Tracker</span>
+          <h2>Order Status</h2>
+          <div class="order-tracker" aria-label="Order status tracker">
+            <div class="status-step done">
+              <span class="status-icon">01</span>
+              <div><strong>Request submitted</strong><span>Owner Stack inquiry received from Courtney.</span></div>
+            </div>
+            <div class="status-step done">
+              <span class="status-icon">02</span>
+              <div><strong>Deposit received</strong><span>50% deposit paid on May 29 to start the project.</span></div>
+            </div>
+            <div class="status-step active">
+              <span class="status-icon">03</span>
+              <div><strong>Demo build</strong><span>Website refresh demo and brand consistency direction start next.</span></div>
+            </div>
+            <div class="status-step">
+              <span class="status-icon">04</span>
+              <div><strong>Connections</strong><span>Domain, contact, email list, booking cues, and automation resources follow after demo review.</span></div>
+            </div>
+          </div>
+          <div class="complete-card">Current status: deposit received. Demo build is starting for Strength & Resilience Children Lounge.</div>
+          <div class="actions">
+            <a class="button" href="https://buy.stripe.com/4gM8wR1FR9Gp1KScyfao813">View Payment Link</a>
+            <a class="button secondary" href="mailto:strengthandresilience22@gmail.com">Email Client</a>
+          </div>
         </article>
-        <article class="step">
-          <div class="step-num">2</div>
-          <h3>Clean Up</h3>
-          <p>Review current social/web presence and organize what needs visual consistency.</p>
-        </article>
-        <article class="step">
-          <div class="step-num">3</div>
-          <h3>Demo Site</h3>
-          <p>Create the refreshed demo page with contact, booking, email capture, and CTA direction.</p>
-        </article>
-        <article class="step">
-          <div class="step-num">4</div>
-          <h3>Connect</h3>
-          <p>Prepare ownership connections: domain, contact flow, email list, and automation resources.</p>
-        </article>
-      </div>
-    </section>
 
-    <section class="section">
-      <article class="note">
-        <span class="tag">Current Note</span>
-        <h2 style="margin-top: 12px;">Deposit received. Demo build starts next.</h2>
-        <p style="margin-top: 12px;">
-          Next step: build the first website refresh demo for Strength & Resilience Children Lounge and organize the updated brand direction.
-        </p>
-        <div class="footer-actions">
-          <a class="btn primary" href="https://buy.stripe.com/4gM8wR1FR9Gp1KScyfao813">View Payment Link</a>
-          <a class="btn primary" href="mailto:strengthandresilience22@gmail.com">Email Client</a>
-          <a class="btn" href="https://ownyourweb.xyz">OWNYOURWEB</a>
-        </div>
-      </article>
-    </section>
-  </main>
+        <article class="panel live-sync" data-client-project-root data-project-slug="courtney-bennett-strength-resilience-project">
+          <div class="sync-head">
+            <span class="tag cyan" data-live-status>Deposit Received</span>
+            <span class="pill lime" data-live-last-synced>Live sync loading</span>
+          </div>
+          <h2>Live Project Updates</h2>
+          <div class="list">
+            <div class="note"><strong>Current step</strong><span data-live-current-step>Build the first website refresh demo and organize the new visual direction.</span></div>
+            <div class="note"><strong>Project stage</strong><span data-live-stage>Deposit received / demo build starting</span></div>
+          </div>
+          <div class="list" data-live-updates>
+            <div class="note"><strong>Deposit received</strong><span>Courtney reported payment made. The project can move into the first website refresh demo.</span><small>Static fallback</small></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <h2>Request Summary</h2>
+          <div class="list">
+            <div class="step"><b>1</b><span>Package: Social Media Clean Up + Website Refresh.</span></div>
+            <div class="step"><b>2</b><span>Total: $350. Deposit paid: $175. Remaining balance: $175.</span></div>
+            <div class="step"><b>3</b><span>Original ask: social media content, marketing strategy, more following, bookings, and PR question.</span></div>
+            <div class="step"><b>4</b><span>Next step: build the demo page with cleaner visual consistency and stronger booking/sign-up cues.</span></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Progress Snapshot</h2>
+          <div class="progress">
+            <div class="progress-row"><header><span>Request submitted</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
+            <div class="progress-row"><header><span>Deposit received</span><span>100%</span></header><div class="bar"><span style="width:100%"></span></div></div>
+            <div class="progress-row"><header><span>Demo build</span><span>20%</span></header><div class="bar"><span style="width:20%"></span></div></div>
+            <div class="progress-row"><header><span>Final connections</span><span>0%</span></header><div class="bar"><span style="width:0%"></span></div></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel">
+          <h2>Build Direction</h2>
+          <div class="list">
+            <div class="note"><strong>Website refresh</strong>Demo site with ownership connections for domain, email list, contact flow, and client-facing structure.</div>
+            <div class="note"><strong>Brand consistency</strong>Keep the same core information, but create a cleaner visual system so the brand feels more trusted and organized.</div>
+            <div class="note"><strong>Conversion cues</strong>Add clear booking, sign-up, question/contact, pop-up, and visual prompts so visitors know what to do next.</div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Client Preview Notes</h2>
+          <div class="list">
+            <div class="note"><strong>Current purpose</strong>This page is the client-facing tracker for Courtney's active web refresh project.</div>
+            <div class="note"><strong>What to gather</strong>Current website/social links, photos, brand references, booking/contact details, and signup/email list needs.</div>
+            <div class="note"><strong>What comes next</strong>After the first demo is built, review visual direction, CTA flow, and ownership connections before finalizing.</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="client-project-live.js" data-project-slug="courtney-bennett-strength-resilience-project"></script>
 </body>
 </html>
