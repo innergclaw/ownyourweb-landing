@@ -17,7 +17,6 @@ Source: ShopNasGraphics Name Your Price Form
 ## Links
 
 Current website: http://shopnasgfx.com/
-Official project URL: https://ownyourweb.xyz/demos/omni-global-solutions-progress.html
 Checkout URL: n/a
 
 ## Request
@@ -35,3 +34,4 @@ Not provided
 ## Latest Update
 
 n/a
+
