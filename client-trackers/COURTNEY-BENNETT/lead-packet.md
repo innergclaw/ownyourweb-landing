@@ -18,7 +18,7 @@ Source: For Hire Landing Page
 
 Current website: https://innergclaw.github.io/owner-stack/for-hire.html?v=46ae124
 Official project URL: https://ownyourweb.xyz/demos/courtney-bennett-strength-resilience-project.html
-Checkout URL: n/a
+Checkout URL: https://buy.stripe.com/4gM8wR1FR9Gp1KScyfao813
 
 ## Request
 
@@ -51,4 +51,5 @@ Submitted through Owner Stack lead form.
 
 ## Latest Update
 
+2026-05-29: Stripe checkout link added for $175 deposit.
 2026-05-29: Official project URL created for Strength & Resilience Children Lounge.
