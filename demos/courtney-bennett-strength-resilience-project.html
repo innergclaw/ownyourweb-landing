@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strength & Resilience Children Lounge - Project Tracker</title>
+  <meta name="description" content="Client project tracker for Strength & Resilience Children Lounge website refresh, social media clean up, and starter brand identity marketing." />
+  <style>
+    :root {
+      --bg: #101116;
+      --panel: #171a22;
+      --panel-2: #202532;
+      --paper: #fff8ea;
+      --muted: #aab0bd;
+      --text: #fff8ea;
+      --line: rgba(255,255,255,.13);
+      --gold: #f7c85f;
+      --green: #8df0b6;
+      --pink: #f58bb4;
+      --blue: #8bb8ff;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(245,139,180,.18), transparent 30%),
+        radial-gradient(circle at 84% 10%, rgba(139,184,255,.18), transparent 26%),
+        radial-gradient(circle at 70% 78%, rgba(141,240,182,.12), transparent 34%),
+        linear-gradient(180deg, #101116 0%, #0b0c10 100%);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar,
+    .card,
+    .step,
+    .service,
+    .note {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(23,26,34,.92), rgba(13,15,20,.96));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background:
+        linear-gradient(135deg, var(--pink), transparent 52%),
+        linear-gradient(225deg, var(--blue), transparent 50%),
+        var(--green);
+      box-shadow: 0 0 30px rgba(245,139,180,.18);
+    }
+
+    .tag,
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.04);
+      font-size: .74rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pill.gold { color: #21170b; background: var(--gold); border-color: transparent; }
+    .pill.green { color: #092117; background: var(--green); border-color: transparent; }
+    .pill.pink { color: #281019; background: var(--pink); border-color: transparent; }
+    .pill.blue { color: #0d1728; background: var(--blue); border-color: transparent; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      margin-top: 24px;
+      align-items: stretch;
+    }
+
+    .card { padding: 32px; }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3 {
+      font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(3rem, 7vw, 6.2rem);
+    }
+
+    h2 { font-size: clamp(2rem, 4vw, 3.6rem); }
+    h3 { font-size: 1.75rem; }
+
+    .lede {
+      margin-top: 18px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      font-weight: 750;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .meta-grid,
+    .service-grid,
+    .plan-grid,
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .meta {
+      min-height: 116px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .meta span,
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .meta strong {
+      display: block;
+      margin-top: 9px;
+      font-size: 1.05rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .deposit {
+      min-height: 100%;
+      display: grid;
+      align-content: space-between;
+      gap: 26px;
+      background:
+        linear-gradient(135deg, rgba(247,200,95,.18), transparent 48%),
+        linear-gradient(180deg, rgba(23,26,34,.92), rgba(13,15,20,.96));
+    }
+
+    .price {
+      margin-top: 16px;
+      font-family: Impact, Anton, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      line-height: .86;
+    }
+
+    .deposit-due {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--paper);
+      color: #15110b;
+    }
+
+    .deposit-due strong {
+      font-size: 1.2rem;
+      font-weight: 950;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service {
+      min-height: 190px;
+      padding: 24px;
+      display: grid;
+      align-content: space-between;
+      gap: 18px;
+    }
+
+    .service p,
+    .step p,
+    .note p {
+      color: var(--muted);
+      font-weight: 720;
+    }
+
+    .timeline {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .step {
+      min-height: 178px;
+      padding: 20px;
+    }
+
+    .step-num {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #111;
+      background: var(--gold);
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    .note {
+      padding: 24px;
+      border-color: rgba(247,200,95,.24);
+      background:
+        linear-gradient(135deg, rgba(247,200,95,.14), transparent 48%),
+        rgba(255,255,255,.035);
+    }
+
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 0 18px;
+      font-size: .82rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.06);
+    }
+
+    .btn.primary {
+      color: #161008;
+      background: var(--gold);
+      border-color: transparent;
+    }
+
+    @media (max-width: 860px) {
+      .topbar,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero,
+      .service-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="https://ownyourweb.xyz">
+        <span class="mark" aria-hidden="true"></span>
+        <span>OWNYOURWEB</span>
+      </a>
+      <span class="tag">Official Client Project #4</span>
+    </header>
+
+    <section class="hero">
+      <article class="card">
+        <span class="tag">Strength & Resilience Children Lounge</span>
+        <h1>Website Refresh + Social Cleanup</h1>
+        <p class="lede">
+          Project tracker for Courtney Bennett's social media clean up, website refresh, starter brand identity marketing, and ownership-ready web system.
+        </p>
+        <div class="pill-row">
+          <span class="pill gold">Deposit Due Today</span>
+          <span class="pill green">Demo Site Prep</span>
+          <span class="pill pink">Brand Consistency</span>
+          <span class="pill blue">Automation Resources</span>
+        </div>
+        <div class="meta-grid">
+          <div class="meta"><span>Client</span><strong>Courtney Bennett</strong></div>
+          <div class="meta"><span>Email</span><strong>strengthandresilience22@gmail.com</strong></div>
+          <div class="meta"><span>Business</span><strong>Strength & Resilience Children Lounge</strong></div>
+          <div class="meta"><span>Status</span><strong>In progress setup / deposit due</strong></div>
+        </div>
+      </article>
+
+      <aside class="card deposit">
+        <div>
+          <span class="tag">Project Scope</span>
+          <div class="price">$350</div>
+          <p class="lede">Social Media Clean Up + Website Refresh package.</p>
+        </div>
+        <div class="deposit-due">
+          <span class="label">Due Today - May 29</span>
+          <strong>50% deposit required to begin the site demo.</strong>
+          <p>Deposit amount: $175. Remaining balance: $175.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="tag">Services Included</span>
+          <h2>What This Build Covers</h2>
+        </div>
+      </div>
+      <div class="service-grid">
+        <article class="service">
+          <span class="pill green">01</span>
+          <div>
+            <h3>Website Revamp</h3>
+            <p>Demo site build with ownership connections for domain, email list, contact flow, and client-facing information structure.</p>
+          </div>
+        </article>
+        <article class="service">
+          <span class="pill pink">02</span>
+          <div>
+            <h3>Uniform Brand Style</h3>
+            <p>Starter visual consistency across existing information so the brand feels cleaner, more trusted, and easier to understand.</p>
+          </div>
+        </article>
+        <article class="service">
+          <span class="pill blue">03</span>
+          <div>
+            <h3>Conversion Cues</h3>
+            <p>Pop ups, visual cues, and clear calls to action for booking, signing up, or contacting with questions.</p>
+          </div>
+        </article>
+        <article class="service">
+          <span class="pill gold">04</span>
+          <div>
+            <h3>Automation + Scaling</h3>
+            <p>Resources and direction for using the new identity with automation, follow-up, email capture, and future growth systems.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="tag">Build Path</span>
+          <h2>Project Steps</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="step">
+          <div class="step-num">1</div>
+          <h3>Deposit</h3>
+          <p>Collect 50% deposit to start the demo build.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">2</div>
+          <h3>Clean Up</h3>
+          <p>Review current social/web presence and organize what needs visual consistency.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">3</div>
+          <h3>Demo Site</h3>
+          <p>Create the refreshed demo page with contact, booking, email capture, and CTA direction.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">4</div>
+          <h3>Connect</h3>
+          <p>Prepare ownership connections: domain, contact flow, email list, and automation resources.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="note">
+        <span class="tag">Current Note</span>
+        <h2 style="margin-top: 12px;">Demo begins after deposit.</h2>
+        <p style="margin-top: 12px;">
+          Once the deposit is received, the next step is the first website refresh demo for Strength & Resilience Children Lounge.
+        </p>
+        <div class="footer-actions">
+          <a class="btn primary" href="mailto:strengthandresilience22@gmail.com">Email Client</a>
+          <a class="btn" href="https://ownyourweb.xyz">OWNYOURWEB</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

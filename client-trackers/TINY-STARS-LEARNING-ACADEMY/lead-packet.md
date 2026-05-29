@@ -17,6 +17,7 @@ Source: Manual client tracker setup
 
 Current tracker: https://ownyourweb.xyz/demos/tiny-stars-learning-academy-starter-landing-page.html
 Starter demo: https://ownyourweb.xyz/demos/tiny-stars-learning-academy.html
+Official project URL: https://ownyourweb.xyz/demos/tiny-stars-learning-academy-starter-landing-page.html
 Checkout URL: n/a
 
 ## Request
