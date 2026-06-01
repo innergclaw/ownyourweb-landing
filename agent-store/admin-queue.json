@@ -1,6 +1,41 @@
 {
   "requests": [
     {
+      "id": 18,
+      "request_id": "2026-06-01T13-55-23-620Z-name-your-price-name-your-price-logo-offer-angie-ferguson",
+      "created_at": "2026-06-01T13:55:23.62+00:00",
+      "status": "pending_owner_approval",
+      "payment_status": "pending_owner_approval",
+      "source_page": "ShopNasGraphics Name Your Price Form",
+      "customer_first_name": "Angie",
+      "customer_last_name": "Ferguson",
+      "customer_email": "angeferg81@gmail.com",
+      "business_name": "Soulful Birth Doula",
+      "industry": "Graphic Design / Brand Identity",
+      "package": "Name Your Price Logo Offer",
+      "budget_range": "$50 - $100",
+      "timeline": "Not provided",
+      "buyer_agent_or_contact": "angeferg81@gmail.com",
+      "current_website": "http://shopnasgfx.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPMTI0MDI0NTc0Mjg3NDE0AAGn7D3IenHcIL3Go3dtmj3j0pvcChhpWS5V4wKsNzR5rzXmWBIEPKugL3-H4J8_aem_9c0Hq3WamyP080BefwDa6g",
+      "request": "Color : pink, blue, yellow, mint green . Nothing in the pastel colors. \n\nEye catching that can wear at hospitals",
+      "assets_available": "Not provided",
+      "raw_payload": {
+        "name": "Angie Ferguson",
+        "email": "angeferg81@gmail.com",
+        "source": "ShopNasGraphics Name Your Price Form",
+        "message": "Color : pink, blue, yellow, mint green . Nothing in the pastel colors. \n\nEye catching that can wear at hospitals ",
+        "_subject": "New ShopNasGraphics Name Your Price Inquiry",
+        "page_url": "http://shopnasgfx.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPMTI0MDI0NTc0Mjg3NDE0AAGn7D3IenHcIL3Go3dtmj3j0pvcChhpWS5V4wKsNzR5rzXmWBIEPKugL3-H4J8_aem_9c0Hq3WamyP080BefwDa6g",
+        "intake_lane": "name_your_price",
+        "source_page": "ShopNasGraphics Name Your Price Form",
+        "budget_range": "$50 - $100",
+        "project_type": "Name Your Price Logo Offer",
+        "submitted_at": "2026-06-01T13:55:22.876Z",
+        "business_name": "Soulful Birth Doula"
+      },
+      "customer_phone": null
+    },
+    {
       "store_agent": "ownyourweb",
       "intent": "owner_stack_for_hire_lead",
       "request_id": "owner-stack-lead-8a954b66-7bbb-4645-a8e3-acc771811cd5",
@@ -79,7 +114,8 @@
         "business_name": "WnsRlIYijsGUmsyCHQ",
         "reference_links": "tzwqaIUEscMpcirNBOhdW",
         "payment_reference": "tiTscEziKoRXcHupws"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 16,
@@ -113,7 +149,8 @@
         "project_type": "Name Your Price Logo Offer",
         "submitted_at": "2026-05-25T21:58:35.265Z",
         "business_name": "UEDqgdlbMaGEvwXa"
-      }
+      },
+      "customer_phone": null
     },
     {
       "store_agent": "ownyourweb",
@@ -422,7 +459,8 @@
         "project_type": "Name Your Price Logo Offer",
         "submitted_at": "2026-05-23T01:36:10.324Z",
         "business_name": "Omni Global Solutions LLC"
-      }
+      },
+      "customer_phone": null
     },
     {
       "store_agent": "ownyourweb",
@@ -918,7 +956,8 @@
         "project_type": "Name Your Price Logo Offer",
         "submitted_at": "2026-05-16T23:21:58.628Z",
         "business_name": "NASGFX"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 13,
@@ -955,7 +994,8 @@
         "business_name": "Codex Paid Test Brand",
         "reference_links": "https://example.com/test-reference",
         "payment_reference": "TEST-STRIPE-123"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 12,
@@ -986,7 +1026,8 @@
         "budget_range": "$100 - $250",
         "project_type": "Name Your Price Logo Offer",
         "business_name": "Codex Test Brand"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 11,
@@ -1017,7 +1058,8 @@
         "budget_range": "$50 - $100",
         "project_type": "Name Your Price Logo Offer",
         "business_name": "Just Be You Society"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 10,
@@ -1048,7 +1090,8 @@
         "budget_range": "$50 - $100",
         "project_type": "Name Your Price Logo Offer",
         "business_name": "INNERG INTEL"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 9,
@@ -1079,7 +1122,8 @@
         "budget_range": "$100 - $250",
         "project_type": "Name Your Price Logo Offer",
         "business_name": "NPASsTWuqBvFdkjLvtAJaonR"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 6,
@@ -1111,7 +1155,8 @@
         "customer_email": "topic-only@example.com",
         "customer_last_name": "Only",
         "customer_first_name": "Topic"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 5,
@@ -1143,7 +1188,8 @@
         "customer_email": "button-test-2@example.com",
         "customer_last_name": "Test Two",
         "customer_first_name": "Button"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 4,
@@ -1175,7 +1221,8 @@
         "customer_email": "button-test@example.com",
         "customer_last_name": "Test",
         "customer_first_name": "Button"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 3,
@@ -1210,7 +1257,8 @@
         "current_website": "",
         "customer_last_name": "mayo",
         "customer_first_name": "nas"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 2,
@@ -1242,7 +1290,8 @@
         "customer_email": "live-test@example.com",
         "customer_last_name": "Test",
         "customer_first_name": "Live"
-      }
+      },
+      "customer_phone": null
     },
     {
       "id": 1,
@@ -1274,7 +1323,8 @@
         "customer_email": "supabase-test@example.com",
         "customer_last_name": "Test",
         "customer_first_name": "Supabase"
-      }
+      },
+      "customer_phone": null
     }
   ]
 }
