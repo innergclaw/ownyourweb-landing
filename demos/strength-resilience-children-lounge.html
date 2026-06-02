@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Strength &amp; Resilience Children Lounge</title>
-  <meta name="description" content="A polished childcare website demo direction for Strength &amp; Resilience Children Lounge." />
+  <title>SR Sensory Gym | Strength and Resilience Nonprofit Inc.</title>
+  <meta name="description" content="SR Sensory Gym is an inclusive sensory-based play space for neurotypical and neurodivergent children in Willow Grove, PA." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -360,7 +360,7 @@
 
     .cta-band {
       display: grid;
-      grid-template-columns: 1.08fr .92fr;
+      grid-template-columns: .88fr 1.12fr;
       gap: 18px;
       padding: 30px;
       background:
@@ -382,11 +382,50 @@
       backdrop-filter: blur(6px);
     }
 
-    .cta-box ul {
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.85;
-      font-weight: 600;
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid rgba(31,31,31,.18);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,.78);
+      font: inherit;
+    }
+
+    .form-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(31,31,31,.18);
+      background: var(--ink);
+      color: var(--warm-white);
+      cursor: pointer;
     }
 
     .footer-note {
@@ -471,6 +510,15 @@
       .hero-actions {
         grid-template-columns: 1fr;
       }
+
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-field.full,
+      .form-submit {
+        grid-column: auto;
+      }
     }
   </style>
 </head>
@@ -480,14 +528,14 @@
       <a class="brand" href="https://ownyourweb.xyz/">
         <img src="assets/strength-resilience-logo.png" alt="Strength &amp; Resilience Children Lounge logo" />
         <div>
-          <strong>Strength &amp; Resilience Children Lounge</strong>
-          <span>OwnYourWeb demo direction for Courtney Bennett</span>
+          <strong>SR Sensory Gym</strong>
+          <span>Strength and Resilience Nonprofit Inc.</span>
         </div>
       </a>
 
       <nav class="nav-links" aria-label="Primary">
         <a href="#about">About</a>
-        <a href="#experience">Experience</a>
+        <a href="#experience">Services</a>
         <a href="#visit">Visit</a>
         <a href="#connect">Connect</a>
       </nav>
@@ -497,22 +545,22 @@
       <section class="hero">
         <article class="panel hero-copy">
           <div class="hero-actions">
-            <a class="button primary" href="courtney-bennett-strength-resilience-project.html">Open client tracker</a>
-            <a class="button secondary" href="#connect">Ask about enrollment</a>
+            <a class="button primary" href="#experience">Explore the gym</a>
+            <a class="button secondary" href="#connect">Contact us</a>
           </div>
 
           <div class="hero-points">
             <div class="info-pill">
-              <span class="info-label">Website priority</span>
-              <strong>Build trust quickly with parents and caregivers</strong>
+              <span class="info-label">Inclusive play</span>
+              <strong>A safe sensory-based play space for children of all abilities</strong>
             </div>
             <div class="info-pill">
-              <span class="info-label">Main shift</span>
-              <strong>Calmer, more professional presentation with clearer structure</strong>
+              <span class="info-label">Purposeful movement</span>
+              <strong>Open play experiences that support confidence, connection, and regulation</strong>
             </div>
             <div class="info-pill">
-              <span class="info-label">Next layer</span>
-              <strong>Hours, age groups, photos, inquiry form, and social proof</strong>
+              <span class="info-label">Willow Grove, PA</span>
+              <strong>319 Easton Rd. with weekday and weekend hours</strong>
             </div>
           </div>
         </article>
@@ -527,26 +575,26 @@
       <section id="about">
         <div class="section-head">
           <div>
-            <span class="eyebrow">First impression</span>
-            <h2>What families should understand right away</h2>
+            <span class="eyebrow">Welcome to SR Sensory Gym</span>
+            <h2>We see different abilities.</h2>
           </div>
           <p>
-            The homepage should feel welcoming and organized, clearly explain the care experience, and make it easy for families to take the next step without digging for information.
+            SR Sensory Gym is a safe, inclusive, and engaging sensory-based play space designed for neurotypical and neurodivergent children. Every child deserves a place where they feel understood, empowered, and celebrated.
           </p>
         </div>
 
         <div class="highlights">
           <article class="highlight-card">
-            <h3>Safe, supportive care</h3>
-            <p>Lead with a calm explanation of the environment, daily structure, and the level of attentiveness parents can expect.</p>
+            <h3>Active sensory room</h3>
+            <p>Children can jump, climb, and swing in a movement-friendly space designed for sensory seekers and children who may feel over or under stimulated.</p>
           </article>
           <article class="highlight-card">
-            <h3>Play with purpose</h3>
-            <p>Frame the program around confidence, resilience, learning, and healthy social growth instead of only listing tasks or supervision.</p>
+            <h3>Calming room</h3>
+            <p>A relaxing space with soothing music, gentle lighting, and weighted products that can help children pause, refocus, and regulate.</p>
           </article>
           <article class="highlight-card">
-            <h3>Clear next steps</h3>
-            <p>Let families know exactly how to inquire, schedule a visit, ask questions, or get enrollment details from the first scroll.</p>
+            <h3>Party room</h3>
+            <p>A welcoming space for hosted birthday parties, celebrations, and kids' days out with family and friends.</p>
           </article>
         </div>
       </section>
@@ -554,53 +602,53 @@
       <section id="experience">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Experience design</span>
-            <h2>More like a family destination, less like a generic daycare page</h2>
+            <span class="eyebrow">A space to explore and grow</span>
+            <h2>Purposeful play in a judgment-free setting.</h2>
           </div>
           <p>
-            Peek-a-Brew works because it feels intentional, welcoming, and easy to navigate. This demo borrows that kind of polish while keeping Courtney’s own childcare identity and logo colors.
+            From climbing structures and crash pads to calming sensory areas and interactive activities, every part of the gym is designed to encourage development in a fun, supportive environment.
           </p>
         </div>
 
         <div class="story-grid">
           <article class="story-card featured">
-            <h3>A refined homepage story</h3>
+            <h3>More than a gym</h3>
             <p>
-              The site can open with a stronger narrative about nurturing care, playful development, and dependable communication for parents. The visual rhythm should feel clean and elevated, with fewer loud decorations and more confidence in the layout itself.
+              SR Sensory Gym is a welcoming community space where children of all abilities can explore, learn, and grow together. Our gym supports children with sensory processing needs, those on the autism spectrum, and children who benefit from movement-based and interactive play.
             </p>
             <div class="story-list">
               <div class="story-item">
-                <strong>Cleaner hierarchy</strong>
-                <span>Better spacing, calmer sections, and more readable page flow from headline to CTA.</span>
+                <strong>Sensory regulation</strong>
+                <span>Movement and calming spaces help children engage with new stimuli in a supportive environment.</span>
               </div>
               <div class="story-item">
-                <strong>Professional warmth</strong>
-                <span>Friendly, inviting colors balanced with cream backgrounds and quieter framing.</span>
+                <strong>Motor development</strong>
+                <span>Climbing, swinging, and active play give children room to move with purpose and build confidence.</span>
               </div>
               <div class="story-item">
-                <strong>Family confidence</strong>
-                <span>Clear sections for programs, age ranges, daily rhythm, and what makes the space feel safe.</span>
+                <strong>Peer connection</strong>
+                <span>Structured and open-play experiences support social interaction in an inclusive setting.</span>
               </div>
             </div>
           </article>
 
           <article class="story-card">
-            <h3>What this version is proving</h3>
+            <h3>Our mission</h3>
             <p>
-              This pass is about tone and structure. It shows that the brand can look more polished and trustworthy without losing its warmth, color, or child-centered energy.
+              We exist to create a balance between neurotypical and neurodivergent children. It is our commitment and passion to provide a safe environment where all children can thrive and flourish.
             </p>
             <div class="story-list">
               <div class="story-item">
-                <strong>Better nav</strong>
-                <span>Simple top-level links that feel polished and parent-friendly.</span>
+                <strong>Inclusion matters</strong>
+                <span>Every child deserves a place where they feel empowered and celebrated.</span>
               </div>
               <div class="story-item">
-                <strong>Better CTAs</strong>
-                <span>Calls to action written around questions, tours, and enrollment instead of vague prompts.</span>
+                <strong>Community matters</strong>
+                <span>Families deserve a supportive space built around dignity, service, and connection.</span>
               </div>
               <div class="story-item">
-                <strong>Better positioning</strong>
-                <span>The lounge reads as a cared-for family offering, not just a quick service page.</span>
+                <strong>Growth matters</strong>
+                <span>Purposeful play can support independence, resilience, and confidence over time.</span>
               </div>
             </div>
           </article>
@@ -610,42 +658,42 @@
       <section id="visit">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Suggested homepage sections</span>
-            <h2>What a polished family website would highlight next</h2>
+            <span class="eyebrow">Plan your visit</span>
+            <h2>Everything families need to know.</h2>
           </div>
           <p>
-            These are the sections that can make the demo feel more real and more premium once Courtney provides specifics.
+            Explore open play, connect about parties and memberships, or reach out before your visit. Please check the website and Instagram for the latest schedule and availability.
           </p>
         </div>
 
         <div class="visit-grid">
           <article class="visit-card">
-            <h3>Programs &amp; ages</h3>
-            <p>Clear explanation of who the space is for and how the day is structured.</p>
+            <h3>Open play &amp; parties</h3>
+            <p>Choose the experience that fits your family or celebration.</p>
             <ul>
-              <li>Age groups served</li>
-              <li>Daily schedule rhythm</li>
-              <li>Learning and play balance</li>
+              <li>Book open play</li>
+              <li>Plan a birthday party</li>
+              <li>Ask about memberships</li>
             </ul>
           </article>
 
           <article class="visit-card">
-            <h3>Visit information</h3>
-            <p>Show practical details that parents usually want before reaching out.</p>
+            <h3>Hours of operation</h3>
+            <p>Visit the gym during weekday afternoons or weekend hours.</p>
             <ul>
-              <li>Hours and location</li>
-              <li>Contact and inquiry options</li>
-              <li>What to bring / what to expect</li>
+              <li>Tues-Fri: 3:00 pm-7:00 pm</li>
+              <li>Sat &amp; Sun: 11:00 am-4:00 pm</li>
+              <li>Private parties may affect availability</li>
             </ul>
           </article>
 
           <article class="visit-card">
-            <h3>Trust builders</h3>
-            <p>Give families confidence through signals that feel real and reassuring.</p>
+            <h3>Find the lounge</h3>
+            <p>Contact us with questions or schedule a meet and greet.</p>
             <ul>
-              <li>Photos of the environment</li>
-              <li>Parent testimonials</li>
-              <li>Safety, cleanliness, and communication notes</li>
+              <li>319 Easton Rd.</li>
+              <li>Willow Grove, PA 19090</li>
+              <li>Info@srchildrenslounge.com</li>
             </ul>
           </article>
         </div>
@@ -653,24 +701,35 @@
 
       <section class="cta-band" id="connect">
         <div>
-          <span class="eyebrow" style="color: var(--ink);">Call to action direction</span>
-          <h3>Ready to ask a question, schedule a tour, or see the next revision?</h3>
+          <span class="eyebrow" style="color: var(--ink);">Contact us</span>
+          <h3>Have questions? We would love to hear from you.</h3>
           <p>
-            This section can become the real inquiry area once Courtney sends final contact details, exact services, hours, and any enrollment process steps she wants families to follow.
+            Ask about open play, memberships, parties, or scheduling a meet and greet. Send a message and the SR Sensory Gym team can follow up with your family.
           </p>
         </div>
 
-        <div class="cta-box">
-          <ul>
-            <li>Add a polished contact or enrollment form</li>
-            <li>Include exact hours, location, and program ages</li>
-            <li>Connect social links and email list signup</li>
-            <li>Feature parent testimonials or founder note</li>
-          </ul>
-        </div>
+        <form class="cta-box contact-form" action="mailto:Info@srchildrenslounge.com" method="post" enctype="text/plain">
+          <div class="form-field">
+            <label for="first-name">First name</label>
+            <input id="first-name" name="First name" autocomplete="given-name" required />
+          </div>
+          <div class="form-field">
+            <label for="last-name">Last name</label>
+            <input id="last-name" name="Last name" autocomplete="family-name" required />
+          </div>
+          <div class="form-field full">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="Email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-field full">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="Message" required></textarea>
+          </div>
+          <button class="button form-submit" type="submit">Send message</button>
+        </form>
       </section>
 
-      <p class="footer-note">OWNYOURWEB demo concept for Courtney Bennett and Strength &amp; Resilience Children Lounge.</p>
+      <p class="footer-note">SR Sensory Gym | 319 Easton Rd, Willow Grove, PA 19090 | Info@srchildrenslounge.com</p>
       <p class="footer-contact">
         <strong>Strength and Resilience Non-profit Inc.</strong>
         Rushener's cell: <a href="tel:+16108091602">(610) - 809 -1602</a><br />
