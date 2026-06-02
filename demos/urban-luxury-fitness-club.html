@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>District Form | Private Personal Training</title>
+  <meta name="description" content="Luxury urban private trainer website demo for sale by OwnYourWeb.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #080909;
+      --concrete: #131515;
+      --panel: #1b1e1d;
+      --panel-soft: #252928;
+      --paper: #f3f0e9;
+      --white: #fdfdf9;
+      --muted: #aeb3ae;
+      --muted-dark: #5f665f;
+      --line: rgba(255,255,255,.14);
+      --line-dark: rgba(8,9,9,.15);
+      --lime: #d4ff3f;
+      --silver: #d8ddd8;
+      --chrome: #9ba39d;
+      --gold: #bea36b;
+      --shadow: 0 22px 54px rgba(0,0,0,.36);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--night); }
+
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: Manrope, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 78% 4%, rgba(212,255,63,.11), transparent 26%),
+        linear-gradient(120deg, rgba(190,163,107,.09), transparent 22%),
+        var(--night);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .2;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 17px, rgba(255,255,255,.06) 18px 19px),
+        repeating-linear-gradient(90deg, transparent 0 23px, rgba(255,255,255,.045) 24px 25px);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.1));
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .sale-bar {
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      color: var(--night);
+      background:
+        repeating-linear-gradient(135deg, var(--lime) 0 18px, #bada2d 18px 34px);
+    }
+
+    .sale-inner {
+      min-height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .sale-inner span {
+      display: inline-flex;
+      min-height: 24px;
+      align-items: center;
+      padding: 2px 12px;
+      border: 1px solid rgba(212,255,63,.76);
+      border-radius: 999px;
+      background: rgba(8,9,9,.92);
+      color: var(--lime);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,9,9,.84);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.3);
+      background:
+        linear-gradient(135deg, rgba(212,255,63,.88) 0 28%, transparent 28%),
+        linear-gradient(315deg, rgba(255,255,255,.24) 0 26%, transparent 26%),
+        var(--panel);
+      box-shadow: 4px 4px 0 rgba(212,255,63,.72);
+      font-family: Oswald, Impact, sans-serif;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .brand strong,
+    h1, h2, h3 {
+      font-family: Oswald, Impact, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .nav a {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: 0 14px;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.04);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover { border-color: var(--lime); color: var(--white); }
+    .nav .join-mini { border-color: var(--lime); background: var(--lime); color: var(--night); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      background:
+        linear-gradient(180deg, rgba(8,9,9,.04), rgba(8,9,9,.94)),
+        radial-gradient(circle at 20% 16%, rgba(212,255,63,.14), transparent 30%),
+        linear-gradient(120deg, #171919 0%, #090a0a 62%, #1c2118 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: -12vw;
+      right: -12vw;
+      bottom: -230px;
+      height: 390px;
+      transform: rotate(-5deg);
+      background:
+        linear-gradient(90deg, transparent 0 48%, rgba(212,255,63,.88) 48% 49%, transparent 49% 51%, rgba(212,255,63,.88) 51% 52%, transparent 52% 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 58px),
+        #202322;
+      box-shadow: inset 0 28px 64px rgba(0,0,0,.44);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      min-height: calc(100vh - 114px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+      gap: 38px;
+      align-items: center;
+      padding: 70px 0 92px;
+    }
+
+    .status-pill {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(212,255,63,.44);
+      border-radius: 999px;
+      background: rgba(212,255,63,.1);
+      color: var(--lime);
+      padding: 9px 13px;
+      font-size: .77rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .status-pill::before {
+      content: none;
+    }
+
+    h1 {
+      max-width: 780px;
+      font-size: clamp(4.4rem, 10vw, 9rem);
+      line-height: .82;
+    }
+
+    .outline {
+      color: transparent;
+      -webkit-text-stroke: 1.8px rgba(255,255,255,.84);
+      text-stroke: 1.8px rgba(255,255,255,.84);
+    }
+
+    .lead {
+      max-width: 620px;
+      margin-top: 24px;
+      color: rgba(255,255,255,.74);
+      font-size: clamp(1.02rem, 1.7vw, 1.2rem);
+      line-height: 1.62;
+      font-weight: 700;
+    }
+
+    .hero-actions, .panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .btn {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 20px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .16s ease, opacity .16s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); opacity: .9; }
+    .btn.join { background: var(--lime); color: var(--night); }
+    .btn.tour { border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: var(--white); }
+
+    .access-panel {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      padding: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+        rgba(18,20,19,.8);
+      box-shadow: var(--shadow);
+    }
+
+    .access-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .18;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(212,255,63,.76) 18px 20px, transparent 20px 38px);
+      pointer-events: none;
+    }
+
+    .visual-stage {
+      position: relative;
+      min-height: 360px;
+      display: grid;
+      align-content: end;
+      padding: 22px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8,9,9,.1), rgba(8,9,9,.72)),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.045) 1px, transparent 1px),
+        radial-gradient(circle at 64% 32%, rgba(212,255,63,.22), transparent 28%),
+        #101212;
+      background-size: auto, 32px 32px, 32px 32px, auto, auto;
+    }
+
+    .visual-stage::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 20%;
+      height: 38%;
+      border-top: 2px solid rgba(255,255,255,.16);
+      border-bottom: 2px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,.12) 18% 19%, transparent 19% 42%, rgba(255,255,255,.12) 42% 43%, transparent 43% 68%, rgba(255,255,255,.12) 68% 69%, transparent 69%);
+    }
+
+    .visual-stage::after {
+      content: "DISTRICT";
+      position: absolute;
+      right: 22px;
+      top: 22px;
+      color: rgba(255,255,255,.12);
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 5.4rem;
+      line-height: 1;
+      letter-spacing: .04em;
+      writing-mode: vertical-rl;
+    }
+
+    .stage-copy { position: relative; z-index: 1; }
+    .stage-copy small,
+    .access-card small {
+      display: block;
+      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .stage-copy strong {
+      display: block;
+      max-width: 330px;
+      margin-top: 8px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 3rem;
+      line-height: .92;
+      text-transform: uppercase;
+    }
+
+    .access-card {
+      position: relative;
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .access-card strong {
+      display: block;
+      margin-top: 6px;
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 74px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .section.light {
+      color: #101211;
+      background: linear-gradient(180deg, #f4f2ee, #dfe3df);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 450px);
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    h2 { font-size: clamp(2.8rem, 6vw, 5.8rem); line-height: .9; }
+
+    .section-head p {
+      color: inherit;
+      opacity: .78;
+      line-height: 1.62;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .program-tile {
+      min-height: 230px;
+      display: grid;
+      align-content: space-between;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+        var(--panel);
+      box-shadow: 0 14px 34px rgba(0,0,0,.2);
+    }
+
+    .light .program-tile {
+      color: #101211;
+      border-color: rgba(16,18,17,.14);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 18px 34px rgba(16,18,17,.1);
+    }
+
+    .program-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--lime);
+      color: var(--night);
+      font-family: Oswald, Impact, sans-serif;
+      font-size: 1.55rem;
+    }
+
+    .program-tile h3 { margin-top: 26px; font-size: 2rem; line-height: .96; }
+    .program-tile p { margin-top: 8px; color: inherit; opacity: .66; line-height: 1.52; font-weight: 700; }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, 500px);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .district-map,
+    .club-panel,
+    .request-panel {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 28px;
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+    }
+
+    .district-map {
+      min-height: 430px;
+      position: relative;
+      background:
+        linear-gradient(90deg, transparent 0 49%, rgba(212,255,63,.82) 49% 51%, transparent 51%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 52px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 52px),
+        #202322;
+    }
+
+    .district-pin {
+      position: absolute;
+      left: 52%;
+      top: 42%;
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 16px solid rgba(212,255,63,.18);
+      background: var(--lime);
+      color: var(--night);
+      font-family: Oswald, Impact, sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%);
+    }
+
+    .district-list {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .district-list span {
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: rgba(8,9,9,.82);
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .club-panel, .request-panel { padding: 24px; }
+    .light .club-panel { color: #101211; border-color: rgba(16,18,17,.14); background: rgba(255,255,255,.74); box-shadow: 0 18px 34px rgba(16,18,17,.1); }
+    .club-panel h3, .request-panel h3 { font-size: 2.8rem; line-height: .92; }
+
+    .club-list {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .club-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(16,18,17,.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,.74);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .club-list li::before {
+      content: "";
+      width: 12px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--lime);
+      flex: 0 0 auto;
+    }
+
+    .request-panel { background: #171a19; }
+    .request-panel p { margin-top: 12px; color: var(--muted); line-height: 1.58; font-weight: 700; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255,255,255,.76);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      font: inherit;
+    }
+
+    textarea { min-height: 98px; resize: vertical; }
+    .full { grid-column: 1 / -1; }
+    .wide { width: 100%; margin-top: 14px; }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,.1);
+      background: #080909;
+    }
+
+    .footer-inner {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .floating-buy {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--lime);
+      color: var(--night);
+      box-shadow: 0 14px 34px rgba(0,0,0,.3);
+      font-family: Oswald, Impact, sans-serif;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-grid { min-height: auto; padding: 62px 0 78px; }
+    }
+
+    @media (max-width: 720px) {
+      .sale-inner { min-height: 46px; font-size: .72rem; }
+      .sale-inner > :last-child { display: none; }
+      .topbar-inner { min-height: auto; padding: 14px 0; flex-direction: column; align-items: stretch; }
+      .nav { justify-content: center; flex-wrap: wrap; }
+      h1 { font-size: clamp(4rem, 19vw, 6.8rem); }
+      .hero-grid { padding-top: 50px; }
+      .program-grid, .form-grid { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .district-list { grid-template-columns: 1fr; }
+      .footer-inner { padding: 18px 0; align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sale-bar">
+    <div class="wrap sale-inner">
+      <span>OwnYourWeb Demo For Sale</span>
+      <strong>Luxury fitness layout ready to customize</strong>
+      <span>Personal trainer concept</span>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">
+        <div class="brand-mark">DF</div>
+        <div>
+          <strong>District Form</strong>
+          <small>Private Training by Appointment</small>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#programs">Training</a>
+        <a href="#approach">Approach</a>
+        <a href="#apply">Consult</a>
+        <a class="join-mini" href="#apply">Book consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="status-pill">Private training availability</div>
+          <h1>Private training for the <span class="outline">city</span> pace.</h1>
+          <p class="lead">One-on-one coaching for people who expect more from their time. Every session is built around your goals, your movement, and a plan that keeps working after you leave the studio.</p>
+          <div class="hero-actions">
+            <a class="btn join" href="#apply">Book a consultation</a>
+            <a class="btn tour" href="#approach">See the approach</a>
+          </div>
+        </div>
+
+        <aside class="access-panel">
+          <div class="visual-stage">
+            <div class="stage-copy">
+              <small>Private city studio</small>
+              <strong>Your coach. Your plan. Your work.</strong>
+            </div>
+          </div>
+          <div class="access-card">
+            <small>Private session blocks</small>
+            <strong>By appointment</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section light" id="programs">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Built for the work.</h2>
+          <p>Every section is framed for a real independent trainer: clear coaching offers, direct booking actions, and a premium city voice that can be customized around a personal brand.</p>
+        </div>
+
+        <div class="program-grid">
+          <article class="program-tile">
+            <span class="program-icon">01</span>
+            <div><h3>Private strength training</h3><p>One-on-one strength sessions with progressive programming, focused technique, and measurable weekly work.</p></div>
+          </article>
+          <article class="program-tile">
+            <span class="program-icon">02</span>
+            <div><h3>Body recomposition</h3><p>Personalized training for building strength, improving conditioning, and creating sustainable visible progress.</p></div>
+          </article>
+          <article class="program-tile">
+            <span class="program-icon">03</span>
+            <div><h3>Athletic performance</h3><p>Movement, power, and conditioning work tailored to how you want to perform in the gym and beyond it.</p></div>
+          </article>
+          <article class="program-tile">
+            <span class="program-icon">04</span>
+            <div><h3>Mobility and accountability</h3><p>Recovery guidance, progress reviews, and consistent check-ins that keep your plan realistic between sessions.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Made for downtown momentum.</h2>
+          <p>Private training should feel personal before the first session. The city map, direct details, and disciplined layout position the trainer as a premium local coach with a clear place to train and a clear way to begin.</p>
+        </div>
+
+        <div class="split">
+          <div class="district-map">
+            <div class="district-pin">Private Studio</div>
+            <div class="district-list">
+              <span>Strength work</span>
+              <span>Mobility</span>
+              <span>Conditioning</span>
+            </div>
+          </div>
+
+          <aside class="club-panel">
+            <h3>What private coaching changes.</h3>
+            <ul class="club-list">
+              <li>One coach who knows your plan</li>
+              <li>Sessions tailored to your goals</li>
+              <li>Private studio training by appointment</li>
+              <li>Flexible early and evening blocks</li>
+              <li>Direct progress reviews and accountability</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="apply">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Book a consultation.</h2>
+          <p>This intake panel is ready for an assessment request, introductory session, or direct consultation with a private trainer.</p>
+        </div>
+
+        <div class="split">
+          <article class="club-panel">
+            <h3>This demo is for sale.</h3>
+            <p class="lead" style="color:#39403b;">Use this sleek city-fitness direction for a personal trainer, strength coach, athletic performance specialist, or private urban studio. OwnYourWeb can swap the branding, coaching offers, and contact flow for the buyer.</p>
+            <div class="panel-actions">
+              <a class="btn join" href="mailto:hello@ownyourweb.xyz?subject=Urban%20Luxury%20Fitness%20Demo">Buy this demo</a>
+            </div>
+          </article>
+
+          <form class="request-panel">
+            <h3>Private training inquiry</h3>
+            <p>Share your details and primary goal. A trainer-led site should make the next step feel simple and personal.</p>
+            <div class="form-grid">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name">
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="you@example.com">
+              </div>
+              <div class="full">
+                <label for="interest">Training focus</label>
+                <select id="interest" name="interest">
+                  <option>Build strength</option>
+                  <option>Body recomposition</option>
+                  <option>Athletic performance</option>
+                  <option>Mobility and consistency</option>
+                </select>
+              </div>
+              <div class="full">
+                <label for="message">Goals</label>
+                <textarea id="message" name="message" placeholder="What are you training for?"></textarea>
+              </div>
+            </div>
+            <button class="btn join wide" type="button">Request consultation</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>District Form Private Personal Training - OwnYourWeb for-sale trainer demo.</span>
+      <a href="mailto:hello@ownyourweb.xyz?subject=Urban%20Luxury%20Fitness%20Demo">Customize this layout</a>
+    </div>
+  </footer>
+
+  <a class="floating-buy" href="mailto:hello@ownyourweb.xyz?subject=Urban%20Luxury%20Fitness%20Demo">Buy this demo</a>
+</body>
+</html>
