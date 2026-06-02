@@ -4,20 +4,22 @@ Request ID: owner-stack-lead-8a954b66-7bbb-4645-a8e3-acc771811cd5
 Created: 2026-05-27T19:22:00.598363+00:00
 Client: Courtney Bennett
 Contact: strengthandresilience22@gmail.com
-Business: Courtney Bennett
-Industry: Creative Services / Owner Stack
-Package: Monthly creative support
-Budget: $150–$300
-Payment status: not_paid_lead
-Project status: pending_owner_approval
-Stage: Lead
-Priority: Low
+Business: SR Sensory Gym / Strength and Resilience Nonprofit Inc.
+Industry: Children's Sensory Gym / Nonprofit / Family Services
+Package: Social Media Clean Up + Website Refresh
+Budget: $350
+Payment status: 50% deposit received, 2026-05-29
+Project status: preview_sent
+Stage: Client preview sent / awaiting feedback
+Priority: Medium
 Source: For Hire Landing Page
 
 ## Links
 
 Current website: https://innergclaw.github.io/owner-stack/for-hire.html?v=46ae124
-Checkout URL: n/a
+Official project URL: https://ownyourweb.xyz/demos/courtney-bennett-strength-resilience-project.html
+Starter demo URL: https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html
+Checkout URL: https://buy.stripe.com/4gM8wR1FR9Gp1KScyfao813
 
 ## Request
 
@@ -31,11 +33,14 @@ Submitted through Owner Stack lead form.
 
 ## Next Steps
 
-- Review the inquiry and qualify the project fit.
-- Reply with scope, starting price, and next-step payment or booking link.
-- If the lead pays, update this tracker folder into an active project.
+- Gather Courtney's feedback on the live SR Sensory Gym preview.
+- Collect final photos, booking links, membership details, and any requested copy edits.
+- Apply review notes, connect ownership tools, and prepare the approved launch version.
 
 ## Latest Update
 
-n/a
-
+2026-06-02: Client-ready SR Sensory Gym preview refreshed with live-site-aligned copy, contact form, logo colors, footer contact details, and Instagram link. Preview sent out for review: https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html
+2026-06-01: First childcare demo created: https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html
+2026-05-29: Client reported payment made. Project status updated to deposit received / demo build starting.
+2026-05-29: Stripe checkout link added for $175 deposit.
+2026-05-29: Official project URL created for Strength & Resilience Children Lounge.

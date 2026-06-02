@@ -31,12 +31,13 @@ This is the current official OwnYourWeb project list.
 - Starter Demo URL: https://ownyourweb.xyz/demos/tiny-stars-learning-academy.html
 - Tracker: `client-trackers/TINY-STARS-LEARNING-ACADEMY/`
 
-### Strength & Resilience Children Lounge
+### SR Sensory Gym / Strength and Resilience Nonprofit Inc.
 
-- Status: In progress / deposit due
+- Status: Client preview sent / awaiting feedback
 - Client: Courtney Bennett
 - Project: Social Media Clean Up + Website Refresh
-- URL: https://ownyourweb.xyz/demos/courtney-bennett-strength-resilience-project.html
+- Tracker URL: https://ownyourweb.xyz/demos/courtney-bennett-strength-resilience-project.html
+- Starter Demo URL: https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html
 - Tracker: `client-trackers/COURTNEY-BENNETT/`
 
 ## URL Pattern
