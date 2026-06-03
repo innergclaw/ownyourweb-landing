@@ -228,6 +228,68 @@
       width: min(100%, 500px);
     }
 
+    .hero-photo {
+      min-height: 100%;
+      overflow: hidden;
+      border-color: rgba(25, 200, 106, .42);
+      background: #ffffff;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    .photo-section {
+      display: grid;
+      gap: 18px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      grid-auto-rows: 260px;
+      gap: 16px;
+    }
+
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+      border: 2px solid rgba(31,31,31,.1);
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      box-shadow: 0 16px 34px rgba(31,31,31,.08);
+    }
+
+    .photo-card:first-child {
+      grid-row: span 2;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-card span {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      max-width: calc(100% - 28px);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 24px rgba(31,31,31,.12);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
     section {
       margin-top: 28px;
     }
@@ -242,10 +304,12 @@
 
     #about { border-color: rgba(25, 200, 106, .5); }
     #experience { border-color: rgba(255, 164, 27, .58); }
+    #photos { border-color: rgba(25, 200, 106, .4); }
     #visit { border-color: rgba(245, 61, 45, .48); }
 
     #about .eyebrow { color: var(--forest); }
     #experience .eyebrow { color: var(--tangerine); }
+    #photos .eyebrow { color: var(--forest); }
     #visit .eyebrow { color: var(--poppy); }
 
     .section-head {
@@ -479,12 +543,21 @@
       .story-grid,
       .cta-band,
       .visit-grid,
-      .highlights {
+      .highlights,
+      .photo-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-points {
         grid-template-columns: 1fr;
+      }
+
+      .hero-photo img {
+        min-height: 420px;
+      }
+
+      .photo-card:first-child {
+        grid-row: span 1;
       }
     }
 
@@ -536,6 +609,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#experience">Services</a>
+        <a href="#photos">Photos</a>
         <a href="#visit">Visit</a>
         <a href="#connect">Connect</a>
       </nav>
@@ -565,10 +639,8 @@
           </div>
         </article>
 
-        <article class="logo-card">
-          <div class="logo-stage">
-            <img src="assets/strength-resilience-logo.png" alt="Strength &amp; Resilience logo preview" />
-          </div>
+        <article class="panel hero-photo">
+          <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="Colorful SR Sensory Gym play space with swings and padded floor tiles" />
         </article>
       </section>
 
@@ -596,6 +668,41 @@
             <h3>Party room</h3>
             <p>A welcoming space for hosted birthday parties, celebrations, and kids' days out with family and friends.</p>
           </article>
+        </div>
+      </section>
+
+      <section id="photos" class="photo-section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Inside the lounge</span>
+            <h2>A bright space built for movement, play, and calm.</h2>
+          </div>
+          <p>
+            Families can see the sensory gym before they arrive: active play zones, learning corners, calming tools, and colorful equipment designed for children to explore safely.
+          </p>
+        </div>
+
+        <div class="photo-grid" aria-label="SR Sensory Gym photo gallery">
+          <figure class="photo-card">
+            <img src="assets/strength-resilience/sr-open-play.jpeg" alt="Open play room with activity stations, tables, and sensory equipment" />
+            <span>Open play</span>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/strength-resilience/sr-learning-corner.jpeg" alt="Learning corner with alphabet, numbers, emotions, and playroom rules posters" />
+            <span>Learning corner</span>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/strength-resilience/sr-climb-slide.jpeg" alt="Climbing wall, foam pit, and blue slide inside the sensory gym" />
+            <span>Climb &amp; slide</span>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/strength-resilience/sr-sensory-wall.jpeg" alt="Sensory wall with tactile boards and interactive activity panels" />
+            <span>Sensory wall</span>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="Wide sensory gym view with swings and colorful padded floor tiles" />
+            <span>Movement room</span>
+          </figure>
         </div>
       </section>
 
