@@ -382,6 +382,22 @@
       line-height: 1.72;
     }
 
+    .highlight-image {
+      margin: 18px 0 0;
+      overflow: hidden;
+      border: 2px solid rgba(31,31,31,.08);
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 14px 28px rgba(31,31,31,.08);
+    }
+
+    .highlight-image img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
     .story-grid {
       grid-template-columns: 1.04fr .96fr;
     }
@@ -696,6 +712,9 @@
           <article class="highlight-card">
             <h3>Party room</h3>
             <p>A welcoming space for hosted birthday parties, celebrations, and kids' days out with family and friends.</p>
+            <figure class="highlight-image">
+              <img src="assets/strength-resilience/sr-party-room.jpeg" alt="SR Sensory Gym party room set up with decorated tables, chairs, and birthday party supplies" />
+            </figure>
           </article>
         </div>
       </section>
