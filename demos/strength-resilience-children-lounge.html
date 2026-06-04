@@ -483,6 +483,38 @@
       max-width: 560px;
     }
 
+    .donor-band {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 18px;
+      padding: 30px;
+      border: 2px solid rgba(25,200,106,.46);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 86% 16%, rgba(25,200,106,.15) 0 110px, transparent 112px),
+        linear-gradient(135deg, #ffffff, rgba(255,164,27,.08));
+      box-shadow: var(--shadow);
+    }
+
+    .donor-band h3 {
+      font-size: 2.65rem;
+    }
+
+    .donor-band p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .donor-box {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 24px;
+      border: 1px solid rgba(31,31,31,.1);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.78);
+    }
+
     .cta-box {
       padding: 22px;
       border-radius: 24px;
@@ -586,6 +618,7 @@
       .hero,
       .story-grid,
       .cta-band,
+      .donor-band,
       .visit-grid,
       .highlights,
       .photo-grid {
@@ -912,6 +945,19 @@
           </div>
           <button class="button form-submit" type="submit">Send message</button>
         </form>
+      </section>
+
+      <section class="donor-band" id="donate">
+        <div>
+          <span class="eyebrow">Support the mission</span>
+          <h3>Help Strength and Resilience serve more families.</h3>
+        </div>
+        <div class="donor-box">
+          <p>
+            Donations support Strength and Resilience Nonprofit Inc. as the team creates safe, sensory-friendly spaces, resources, and experiences for children and families.
+          </p>
+          <a class="button primary" href="https://donorbox.org/strength-and-resilience-nonprofit-inc" target="_blank" rel="noopener">Donate with Donorbox</a>
+        </div>
       </section>
 
       <p class="footer-note">SR Sensory Gym | 319 Easton Rd, Willow Grove, PA 19090 | Info@srchildrenslounge.com</p>
