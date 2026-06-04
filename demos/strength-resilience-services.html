@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Party | SR Sensory Gym</title>
-  <meta name="description" content="Book a birthday party at SR Sensory Gym in Willow Grove, PA. View Basic, Deluxe, and Premium birthday packages for 2026." />
+  <title>Services | SR Sensory Gym</title>
+  <meta name="description" content="Explore SR Sensory Gym services, monthly memberships, open play, consultations, summer play passes, birthday parties, and tours." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -33,7 +33,7 @@
       background:
         radial-gradient(circle at 10% 10%, rgba(25,200,106,.08) 0 180px, transparent 182px),
         radial-gradient(circle at 90% 14%, rgba(255,164,27,.1) 0 180px, transparent 182px),
-        linear-gradient(180deg, #ffffff 0%, rgba(255,164,27,.07) 100%);
+        linear-gradient(180deg, #ffffff 0%, rgba(25,200,106,.05) 100%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -142,8 +142,7 @@
     }
 
     .panel,
-    .package-card,
-    .add-on-card,
+    .service-card,
     .note-band {
       border: 2px solid var(--line);
       border-radius: var(--radius-xl);
@@ -156,9 +155,9 @@
       align-content: center;
       gap: 18px;
       padding: clamp(28px, 4vw, 44px);
-      border-color: rgba(255, 164, 27, .56);
+      border-color: rgba(25, 200, 106, .5);
       background:
-        radial-gradient(circle at 88% 15%, rgba(255,164,27,.18) 0 120px, transparent 122px),
+        radial-gradient(circle at 88% 15%, rgba(25,200,106,.16) 0 120px, transparent 122px),
         linear-gradient(135deg, #ffffff, rgba(255,164,27,.08));
     }
 
@@ -166,7 +165,8 @@
       font-size: clamp(3.8rem, 9vw, 8rem);
     }
 
-    .hero p {
+    .hero p,
+    .note-band p {
       max-width: 620px;
       color: var(--muted);
       font-size: 1.04rem;
@@ -176,7 +176,7 @@
     .hero-photo {
       overflow: hidden;
       min-height: 520px;
-      border-color: rgba(25, 200, 106, .42);
+      border-color: rgba(255, 164, 27, .5);
     }
 
     .hero-photo img {
@@ -210,29 +210,6 @@
       border-color: rgba(31,31,31,.08);
     }
 
-    .quick-points {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .quick-point {
-      min-height: 116px;
-      padding: 20px;
-      border: 1px solid rgba(31,31,31,.12);
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.78);
-      box-shadow: inset 0 0 0 1px rgba(31,31,31,.04);
-    }
-
-    .quick-point strong {
-      display: block;
-      margin-top: 10px;
-      font-size: 1rem;
-      line-height: 1.45;
-    }
-
     section {
       margin-top: 28px;
       scroll-margin-top: 132px;
@@ -264,118 +241,77 @@
       line-height: 1.7;
     }
 
-    .packages {
+    .service-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .package-card {
-      position: relative;
+    .service-card {
       display: grid;
-      gap: 16px;
+      gap: 14px;
       padding: 28px;
-      overflow: hidden;
       border-color: rgba(31,31,31,.1);
       background: linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
     }
 
-    .package-card:nth-child(1) { border-color: rgba(25,200,106,.52); }
-    .package-card:nth-child(2) { border-color: rgba(255,164,27,.62); }
-    .package-card:nth-child(3) { border-color: rgba(245,61,45,.52); }
+    .service-card:nth-child(1),
+    .service-card:nth-child(4) { border-color: rgba(25,200,106,.52); }
+    .service-card:nth-child(2),
+    .service-card:nth-child(5) { border-color: rgba(255,164,27,.62); }
+    .service-card:nth-child(3),
+    .service-card:nth-child(6) { border-color: rgba(245,61,45,.52); }
 
-    .package-number {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      color: #ffffff;
-      background: var(--ink);
-      font-weight: 900;
+    .service-card h3 {
+      font-size: 2.6rem;
     }
 
-    .package-card h3 {
-      font-size: 3rem;
+    .service-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(31,31,31,.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,.8);
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
     .price {
-      font-size: 2.4rem;
+      font-size: 2rem;
       font-weight: 900;
       letter-spacing: -.04em;
     }
 
-    .package-card ul,
-    .add-on-card ul,
-    .note-band ul {
-      margin: 0;
-      padding-left: 18px;
+    .service-card p {
       color: var(--muted);
-      line-height: 1.86;
-    }
-
-    .add-ons-grid {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 16px;
-    }
-
-    .add-on-card {
-      padding: 28px;
-      border-color: rgba(255,164,27,.56);
-      background: linear-gradient(180deg, #ffffff, rgba(25,200,106,.04));
-    }
-
-    .add-on-card h3,
-    .note-band h3 {
-      margin-bottom: 16px;
-      font-size: 2.2rem;
-    }
-
-    .decor-packages {
-      display: grid;
-      gap: 14px;
-    }
-
-    .decor-package {
-      padding: 18px;
-      border: 1px solid rgba(31,31,31,.1);
-      border-radius: 20px;
-      background: rgba(255,255,255,.72);
-    }
-
-    .decor-package strong {
-      display: block;
-      font-size: 1.1rem;
-    }
-
-    .decor-package p {
-      margin-top: 8px;
-      color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .note-band {
       display: grid;
-      grid-template-columns: .8fr 1.2fr;
+      grid-template-columns: .88fr 1.12fr;
       gap: 18px;
       padding: 30px;
-      border-color: rgba(245,61,45,.46);
+      border-color: rgba(255,164,27,.56);
       background:
         radial-gradient(circle at 92% 12%, rgba(255,164,27,.18) 0 100px, transparent 102px),
-        linear-gradient(135deg, #ffffff, rgba(245,61,45,.06));
-    }
-
-    .note-band p {
-      color: var(--muted);
-      line-height: 1.75;
+        linear-gradient(135deg, #ffffff, rgba(25,200,106,.06));
     }
 
     @media (max-width: 980px) {
       .hero,
-      .quick-points,
-      .packages,
-      .add-ons-grid,
+      .service-grid,
       .note-band {
         grid-template-columns: 1fr;
       }
@@ -434,8 +370,8 @@
 
       <nav class="nav-links" aria-label="Primary">
         <a href="strength-resilience-children-lounge.html#home">Home</a>
-        <a href="strength-resilience-book-a-party.html" aria-current="page">Book a Party</a>
-        <a href="strength-resilience-services.html">Services</a>
+        <a href="strength-resilience-book-a-party.html">Book a Party</a>
+        <a href="strength-resilience-services.html" aria-current="page">Services</a>
         <a href="strength-resilience-services.html#memberships">Memberships</a>
         <a href="strength-resilience-children-lounge.html#calendar">Events</a>
         <a href="strength-resilience-children-lounge.html#connect">Waiver</a>
@@ -449,149 +385,123 @@
     <main>
       <section class="hero" id="home">
         <article class="panel hero-copy">
-          <span class="eyebrow">Birthday packages</span>
-          <h1>Party bookings for 2026 are officially open.</h1>
+          <span class="eyebrow">Services</span>
+          <h1>Play, support, parties, and visits.</h1>
           <p>
-            Celebrate your child's special day in a fun, safe, and sensory-friendly space designed for both neurotypical and neurodivergent children.
+            Explore open play, monthly memberships, consultations, summer play passes, birthday parties, and tours at SR Sensory Gym.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#packages">View packages</a>
-            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Booking%20Request">Book now</a>
+            <a class="button primary" href="#memberships">View memberships</a>
+            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Ask a question</a>
           </div>
         </article>
 
         <article class="panel hero-photo">
-          <img src="assets/strength-resilience/sr-party-room.jpeg" alt="SR Sensory Gym party room set up with decorated tables and chairs" />
+          <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="SR Sensory Gym movement room with swings and colorful padded flooring" />
         </article>
       </section>
 
-      <div class="quick-points" aria-label="Party booking highlights">
-        <div class="quick-point">
-          <span class="info-label">Private parties</span>
-          <strong>Two-hour private celebrations with room for play, family, and friends.</strong>
-        </div>
-        <div class="quick-point">
-          <span class="info-label">Sensory gym access</span>
-          <strong>Children can enjoy a safe, inclusive gym space during the celebration.</strong>
-        </div>
-        <div class="quick-point">
-          <span class="info-label">Setup and cleanup</span>
-          <strong>Stress-free setup and cleanup are included with every birthday package.</strong>
-        </div>
-      </div>
-
-      <section class="section" id="packages">
+      <section class="section" id="memberships">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Now booking April 2026</span>
-            <h2>Birthday packages.</h2>
+            <span class="eyebrow">Monthly memberships</span>
+            <h2>Open play access.</h2>
           </div>
           <p>
-            Choose the package that fits your celebration. Each party includes two hours of celebration time in a sensory-friendly environment.
+            Memberships and open play services are designed to give families flexible access to a safe, inclusive sensory gym space.
           </p>
         </div>
 
-        <div class="packages">
-          <article class="package-card">
-            <div class="package-number">1</div>
-            <h3>Basic</h3>
-            <div class="price">$400</div>
-            <ul>
-              <li>2-hour private party</li>
-              <li>Up to 10 kids</li>
-              <li>$10 per additional child</li>
-              <li>Complete set-up and clean-up</li>
-            </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Basic%20Birthday%20Party%20Booking">Book now</a>
-          </article>
-
-          <article class="package-card">
-            <div class="package-number">2</div>
-            <h3>Deluxe</h3>
-            <div class="price">$525</div>
-            <ul>
-              <li>2-hour private party</li>
-              <li>Solid color plates and utensils</li>
-              <li>1 staff attendant</li>
-              <li>Up to 15 kids</li>
-              <li>2 pizzas</li>
-              <li>Complete set-up and clean-up</li>
-            </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Deluxe%20Birthday%20Party%20Booking">Book now</a>
-          </article>
-
-          <article class="package-card">
-            <div class="package-number">3</div>
-            <h3>Premium</h3>
-            <div class="price">$720</div>
-            <ul>
-              <li>2-hour private party</li>
-              <li>Solid color plates and utensils</li>
-              <li>2 staff attendants</li>
-              <li>Up to 20 kids</li>
-              <li>3 pizzas</li>
-              <li>2 dozen cupcakes</li>
-              <li>Complete set-up and clean-up</li>
-            </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Premium%20Birthday%20Party%20Booking">Book now</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="addons">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Celebratory dessert table</span>
-            <h2>Available add-ons.</h2>
-          </div>
-          <p>
-            Add custom party details to make the celebration feel more personal and photo-ready.
-          </p>
-        </div>
-
-        <div class="add-ons-grid">
-          <article class="add-on-card">
-            <h3>Party extras</h3>
-            <ul>
-              <li>Custom cups - $25/dozen</li>
-              <li>Favor boxes - $65/dozen</li>
-              <li>Balloon garland - $125</li>
-              <li>Face painting available</li>
-            </ul>
-          </article>
-
-          <article class="add-on-card">
-            <h3>Decor packages</h3>
-            <div class="decor-packages">
-              <div class="decor-package">
-                <strong>Package #1 - $350</strong>
-                <p>Balloons, backdrop, favor boxes, and table decor for up to 12 kids.</p>
-              </div>
-              <div class="decor-package">
-                <strong>Package #2 - $650</strong>
-                <p>Balloons, backdrop, character cutouts, favor boxes, and table decor for up to 18 kids.</p>
-              </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Openplay</h3>
+            <div class="service-meta">
+              <span class="pill">Tue-Sun</span>
+              <span class="pill">Duration varies</span>
             </div>
+            <div class="price">Starting at $5</div>
+            <p>Flexible open play access for children to explore movement, sensory activities, and safe play.</p>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Openplay%20Booking">Book now</a>
+          </article>
+
+          <article class="service-card">
+            <h3>Consultation</h3>
+            <div class="service-meta">
+              <span class="pill">30 min</span>
+            </div>
+            <div class="price">$50</div>
+            <p>A focused consultation to discuss your child's needs, family questions, and the best fit for your visit.</p>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Consultation%20Request">Book now</a>
+          </article>
+
+          <article class="service-card">
+            <h3>Schedule tour</h3>
+            <div class="service-meta">
+              <span class="pill">15 min</span>
+            </div>
+            <div class="price">Contact us</div>
+            <p>Tour the lounge, see the sensory spaces, and ask questions before your family joins or books.</p>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Schedule%20Tour%20Request">Schedule tour</a>
           </article>
         </div>
       </section>
 
-      <section class="note-band" id="details">
+      <section class="section" id="summer">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Summer open play sale</span>
+            <h2>Summer play passes.</h2>
+          </div>
+          <p>
+            Save on repeat visits with summer open play passes built for families planning multiple trips to the gym.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>5 visits</h3>
+            <div class="service-meta">
+              <span class="pill">2 hr visits</span>
+            </div>
+            <div class="price">$75</div>
+            <p>Five summer open play visits for families who want flexible, repeat access.</p>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Summer%20Play%20Pass%205%20Visits">Book now</a>
+          </article>
+
+          <article class="service-card">
+            <h3>10 visits</h3>
+            <div class="service-meta">
+              <span class="pill">2 hr visits</span>
+            </div>
+            <div class="price">$140</div>
+            <p>Ten summer open play visits for families who want the best value across the season.</p>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Summer%20Play%20Pass%2010%20Visits">Book now</a>
+          </article>
+
+          <article class="service-card">
+            <h3>Birthday party</h3>
+            <div class="service-meta">
+              <span class="pill">2 hr</span>
+            </div>
+            <div class="price">From $400</div>
+            <p>Private birthday party packages with sensory gym access, setup, cleanup, and celebration space.</p>
+            <a class="button primary" href="strength-resilience-book-a-party.html">View packages</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="note-band" id="contact">
         <div>
-          <span class="eyebrow">Booking details</span>
-          <h3>Reserve your party date.</h3>
-          <p>A $150 deposit is required to reserve the party date.</p>
+          <span class="eyebrow">Need help choosing?</span>
+          <h3>Start with a tour or message the team.</h3>
         </div>
         <div>
-          <ul>
-            <li>Each party includes 2 hours of celebration time.</li>
-            <li>An additional hour is available for $85, based on availability.</li>
-            <li>Final guest count is due before the event.</li>
-            <li>All children must have a signed waiver.</li>
-          </ul>
+          <p>
+            If you are unsure which option is the best fit, reach out with your child's age, needs, preferred date, and what type of visit you are planning.
+          </p>
           <div class="hero-actions" style="margin-top: 18px;">
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Deposit%20Request">Book now</a>
-            <a class="button secondary" href="strength-resilience-children-lounge.html#connect">Ask a question</a>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Contact us</a>
+            <a class="button secondary" href="strength-resilience-children-lounge.html#calendar">View calendar</a>
           </div>
         </div>
       </section>
