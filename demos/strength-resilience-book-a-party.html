@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Party | SR Sensory Gym</title>
+  <meta name="description" content="Book a birthday party at SR Sensory Gym in Willow Grove, PA. View Basic, Deluxe, and Premium birthday packages for 2026." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --forest: #19c86a;
+      --sun: #ffa41b;
+      --poppy: #f53d2d;
+      --cream: #ffffff;
+      --warm-white: #ffffff;
+      --sage: rgba(25, 200, 106, .1);
+      --sand: rgba(255, 164, 27, .12);
+      --ink: #1f1f1f;
+      --muted: rgba(31, 31, 31, .68);
+      --line: rgba(31, 31, 31, .16);
+      --shadow: 0 18px 50px rgba(31, 31, 31, .1);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(25,200,106,.08) 0 180px, transparent 182px),
+        radial-gradient(circle at 90% 14%, rgba(255,164,27,.1) 0 180px, transparent 182px),
+        linear-gradient(180deg, #ffffff 0%, rgba(255,164,27,.07) 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      line-height: .95;
+      letter-spacing: -.03em;
+      font-weight: 600;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px;
+      border: 2px solid rgba(25, 200, 106, .34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .brand span,
+    .eyebrow,
+    .info-label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .brand span { display: block; margin-top: 4px; }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      flex: 1 1 520px;
+    }
+
+    .nav-links a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(31,31,31,.08);
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: #ffffff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 28px;
+      margin-top: 28px;
+      align-items: stretch;
+    }
+
+    .panel,
+    .package-card,
+    .add-on-card,
+    .note-band {
+      border: 2px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--warm-white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: clamp(28px, 4vw, 44px);
+      border-color: rgba(255, 164, 27, .56);
+      background:
+        radial-gradient(circle at 88% 15%, rgba(255,164,27,.18) 0 120px, transparent 122px),
+        linear-gradient(135deg, #ffffff, rgba(255,164,27,.08));
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 9vw, 8rem);
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.75;
+    }
+
+    .hero-photo {
+      overflow: hidden;
+      min-height: 520px;
+      border-color: rgba(25, 200, 106, .42);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      box-shadow: 0 12px 28px rgba(31,31,31,.1);
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255,255,255,.86);
+      border-color: rgba(31,31,31,.08);
+    }
+
+    .quick-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .quick-point {
+      min-height: 116px;
+      padding: 20px;
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.78);
+      box-shadow: inset 0 0 0 1px rgba(31,31,31,.04);
+    }
+
+    .quick-point strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    section {
+      margin-top: 28px;
+      scroll-margin-top: 132px;
+    }
+
+    .section {
+      padding: clamp(24px, 3.2vw, 34px);
+      border: 2px solid rgba(25, 200, 106, .42);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.3rem, 4.2vw, 4rem);
+    }
+
+    .section-head p {
+      max-width: 520px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .package-card {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      padding: 28px;
+      overflow: hidden;
+      border-color: rgba(31,31,31,.1);
+      background: linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
+    }
+
+    .package-card:nth-child(1) { border-color: rgba(25,200,106,.52); }
+    .package-card:nth-child(2) { border-color: rgba(255,164,27,.62); }
+    .package-card:nth-child(3) { border-color: rgba(245,61,45,.52); }
+
+    .package-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #ffffff;
+      background: var(--ink);
+      font-weight: 900;
+    }
+
+    .package-card h3 {
+      font-size: 3rem;
+    }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .package-card ul,
+    .add-on-card ul,
+    .note-band ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.86;
+    }
+
+    .add-ons-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 16px;
+    }
+
+    .add-on-card {
+      padding: 28px;
+      border-color: rgba(255,164,27,.56);
+      background: linear-gradient(180deg, #ffffff, rgba(25,200,106,.04));
+    }
+
+    .add-on-card h3,
+    .note-band h3 {
+      margin-bottom: 16px;
+      font-size: 2.2rem;
+    }
+
+    .decor-packages {
+      display: grid;
+      gap: 14px;
+    }
+
+    .decor-package {
+      padding: 18px;
+      border: 1px solid rgba(31,31,31,.1);
+      border-radius: 20px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .decor-package strong {
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .decor-package p {
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .note-band {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 18px;
+      padding: 30px;
+      border-color: rgba(245,61,45,.46);
+      background:
+        radial-gradient(circle at 92% 12%, rgba(255,164,27,.18) 0 100px, transparent 102px),
+        linear-gradient(135deg, #ffffff, rgba(245,61,45,.06));
+    }
+
+    .note-band p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .quick-points,
+      .packages,
+      .add-ons-grid,
+      .note-band {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo img {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      section {
+        scroll-margin-top: 220px;
+      }
+
+      .site-header {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 32px;
+      }
+
+      .brand {
+        align-items: center;
+      }
+
+      .nav-links {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links a {
+        flex: 0 0 auto;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="strength-resilience-children-lounge.html#home">
+        <img src="assets/strength-resilience-logo.png" alt="Strength &amp; Resilience Children Lounge logo" />
+        <div>
+          <strong>SR Sensory Gym</strong>
+          <span>Strength and Resilience Nonprofit Inc.</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="strength-resilience-children-lounge.html#home">Home</a>
+        <a href="strength-resilience-book-a-party.html" aria-current="page">Book a Party</a>
+        <a href="strength-resilience-children-lounge.html#experience">Services</a>
+        <a href="strength-resilience-children-lounge.html#visit">Memberships</a>
+        <a href="strength-resilience-children-lounge.html#calendar">Events</a>
+        <a href="strength-resilience-children-lounge.html#connect">Waiver</a>
+        <a href="strength-resilience-children-lounge.html#connect">Shop</a>
+        <a href="strength-resilience-children-lounge.html#connect">Gift Card</a>
+        <a href="strength-resilience-children-lounge.html#about">About Us</a>
+        <a href="strength-resilience-children-lounge.html#connect">FAQ's</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <article class="panel hero-copy">
+          <span class="eyebrow">Birthday packages</span>
+          <h1>Party bookings for 2026 are officially open.</h1>
+          <p>
+            Celebrate your child's special day in a fun, safe, and sensory-friendly space designed for both neurotypical and neurodivergent children.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#packages">View packages</a>
+            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Booking%20Request">Book now</a>
+          </div>
+        </article>
+
+        <article class="panel hero-photo">
+          <img src="assets/strength-resilience/sr-party-room.jpeg" alt="SR Sensory Gym party room set up with decorated tables and chairs" />
+        </article>
+      </section>
+
+      <div class="quick-points" aria-label="Party booking highlights">
+        <div class="quick-point">
+          <span class="info-label">Private parties</span>
+          <strong>Two-hour private celebrations with room for play, family, and friends.</strong>
+        </div>
+        <div class="quick-point">
+          <span class="info-label">Sensory gym access</span>
+          <strong>Children can enjoy a safe, inclusive gym space during the celebration.</strong>
+        </div>
+        <div class="quick-point">
+          <span class="info-label">Setup and cleanup</span>
+          <strong>Stress-free setup and cleanup are included with every birthday package.</strong>
+        </div>
+      </div>
+
+      <section class="section" id="packages">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Now booking April 2026</span>
+            <h2>Birthday packages.</h2>
+          </div>
+          <p>
+            Choose the package that fits your celebration. Each party includes two hours of celebration time in a sensory-friendly environment.
+          </p>
+        </div>
+
+        <div class="packages">
+          <article class="package-card">
+            <div class="package-number">1</div>
+            <h3>Basic</h3>
+            <div class="price">$400</div>
+            <ul>
+              <li>2-hour private party</li>
+              <li>Up to 10 kids</li>
+              <li>$10 per additional child</li>
+              <li>Complete set-up and clean-up</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Basic%20Birthday%20Party%20Booking">Book now</a>
+          </article>
+
+          <article class="package-card">
+            <div class="package-number">2</div>
+            <h3>Deluxe</h3>
+            <div class="price">$525</div>
+            <ul>
+              <li>2-hour private party</li>
+              <li>Solid color plates and utensils</li>
+              <li>1 staff attendant</li>
+              <li>Up to 15 kids</li>
+              <li>2 pizzas</li>
+              <li>Complete set-up and clean-up</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Deluxe%20Birthday%20Party%20Booking">Book now</a>
+          </article>
+
+          <article class="package-card">
+            <div class="package-number">3</div>
+            <h3>Premium</h3>
+            <div class="price">$720</div>
+            <ul>
+              <li>2-hour private party</li>
+              <li>Solid color plates and utensils</li>
+              <li>2 staff attendants</li>
+              <li>Up to 20 kids</li>
+              <li>3 pizzas</li>
+              <li>2 dozen cupcakes</li>
+              <li>Complete set-up and clean-up</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Premium%20Birthday%20Party%20Booking">Book now</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="addons">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Celebratory dessert table</span>
+            <h2>Available add-ons.</h2>
+          </div>
+          <p>
+            Add custom party details to make the celebration feel more personal and photo-ready.
+          </p>
+        </div>
+
+        <div class="add-ons-grid">
+          <article class="add-on-card">
+            <h3>Party extras</h3>
+            <ul>
+              <li>Custom cups - $25/dozen</li>
+              <li>Favor boxes - $65/dozen</li>
+              <li>Balloon garland - $125</li>
+              <li>Face painting available</li>
+            </ul>
+          </article>
+
+          <article class="add-on-card">
+            <h3>Decor packages</h3>
+            <div class="decor-packages">
+              <div class="decor-package">
+                <strong>Package #1 - $350</strong>
+                <p>Balloons, backdrop, favor boxes, and table decor for up to 12 kids.</p>
+              </div>
+              <div class="decor-package">
+                <strong>Package #2 - $650</strong>
+                <p>Balloons, backdrop, character cutouts, favor boxes, and table decor for up to 18 kids.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="note-band" id="details">
+        <div>
+          <span class="eyebrow">Booking details</span>
+          <h3>Reserve your party date.</h3>
+          <p>A $150 deposit is required to reserve the party date.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Each party includes 2 hours of celebration time.</li>
+            <li>An additional hour is available for $85, based on availability.</li>
+            <li>Final guest count is due before the event.</li>
+            <li>All children must have a signed waiver.</li>
+          </ul>
+          <div class="hero-actions" style="margin-top: 18px;">
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Deposit%20Request">Book now</a>
+            <a class="button secondary" href="strength-resilience-children-lounge.html#connect">Ask a question</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
