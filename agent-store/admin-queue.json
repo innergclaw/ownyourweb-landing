@@ -1,6 +1,45 @@
 {
   "requests": [
     {
+      "store_agent": "ownyourweb",
+      "intent": "owner_stack_for_hire_lead",
+      "request_id": "owner-stack-lead-50665108-5438-4449-adcc-749b8028adee",
+      "created_at": "2026-06-04T18:35:16.905566+00:00",
+      "business_name": "Nafis b",
+      "customer_first_name": "Nafis",
+      "customer_last_name": "b",
+      "customer_email": "nafisbr89@gmail.com",
+      "industry": "Creative Services / Owner Stack",
+      "package": "For Hire / Owner Stack Inquiry",
+      "budget_range": "Not provided",
+      "timeline": "Not provided",
+      "buyer_agent_or_contact": "Nafis b / nafisbr89@gmail.com",
+      "request": "Owner Stack / For Hire lead submitted. Review raw payload for full context.",
+      "assets_available": "Page URL: https://innergclaw.github.io/owner-stack/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPMTI0MDI0NTc0Mjg3NDE0AAGn7mgtYUDsCLDQA-bAWNlocbKjIJF0ThAq-yAlMf8EEfp9uLuTE6Qpgdb8kNM_aem_xad4ON5uFlMyk2DhLhn9kw\nReferrer: https://l.instagram.com/\nSubmitted through Owner Stack lead form.",
+      "current_website": "https://innergclaw.github.io/owner-stack/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPMTI0MDI0NTc0Mjg3NDE0AAGn7mgtYUDsCLDQA-bAWNlocbKjIJF0ThAq-yAlMf8EEfp9uLuTE6Qpgdb8kNM_aem_xad4ON5uFlMyk2DhLhn9kw",
+      "source_page": "Owner Stack Website Gate",
+      "admin_lane": "ownyourweb",
+      "pack_type": "lead",
+      "status": "pending_owner_approval",
+      "next_steps": [
+        "Review the inquiry and qualify the project fit.",
+        "Reply with scope, starting price, and next-step payment or booking link.",
+        "If the lead pays, update this tracker folder into an active project."
+      ],
+      "payment_status": "not_paid_lead",
+      "notification_status": "telegram_sent",
+      "raw_payload": {
+        "name": "Nafis b",
+        "email": "nafisbr89@gmail.com",
+        "source": "Owner Stack Website Gate",
+        "pageUrl": "https://innergclaw.github.io/owner-stack/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPMTI0MDI0NTc0Mjg3NDE0AAGn7mgtYUDsCLDQA-bAWNlocbKjIJF0ThAq-yAlMf8EEfp9uLuTE6Qpgdb8kNM_aem_xad4ON5uFlMyk2DhLhn9kw",
+        "website": "",
+        "referrer": "https://l.instagram.com/",
+        "form-name": "owner-stack-access",
+        "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23F81 Instagram 432.0.0.27.62 (iPhone18,2; iOS 26_5_1; en_US; en; scale=3.00; 1320x2868; IABMV/1; 983743279) Safari/604.1"
+      }
+    },
+    {
       "id": 18,
       "request_id": "2026-06-01T13-55-23-620Z-name-your-price-name-your-price-logo-offer-angie-ferguson",
       "created_at": "2026-06-01T13:55:23.62+00:00",
