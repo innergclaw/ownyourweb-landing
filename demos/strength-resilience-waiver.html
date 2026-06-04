@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waiver | SR Sensory Gym</title>
+  <meta name="description" content="Complete the SR Sensory Gym general liability waiver online before visiting the sensory gym." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --forest: #19c86a;
+      --sun: #ffa41b;
+      --poppy: #f53d2d;
+      --cream: #ffffff;
+      --warm-white: #ffffff;
+      --sage: rgba(25, 200, 106, .1);
+      --sand: rgba(255, 164, 27, .12);
+      --ink: #1f1f1f;
+      --muted: rgba(31, 31, 31, .68);
+      --line: rgba(31, 31, 31, .16);
+      --shadow: 0 18px 50px rgba(31, 31, 31, .1);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(25,200,106,.08) 0 180px, transparent 182px),
+        radial-gradient(circle at 90% 14%, rgba(255,164,27,.1) 0 180px, transparent 182px),
+        linear-gradient(180deg, #ffffff 0%, rgba(255,164,27,.07) 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    img { display: block; max-width: 100%; }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      line-height: .95;
+      letter-spacing: -.03em;
+      font-weight: 600;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px;
+      border: 2px solid rgba(25, 200, 106, .34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .brand span,
+    .eyebrow,
+    .form-field label,
+    .waiver-check span {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .brand span { display: block; margin-top: 4px; }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      flex: 1 1 520px;
+    }
+
+    .nav-links a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(31,31,31,.08);
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: #ffffff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 28px;
+      margin-top: 28px;
+      align-items: stretch;
+    }
+
+    .panel,
+    .waiver-form,
+    .waiver-summary,
+    .download-card {
+      border: 2px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--warm-white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: clamp(28px, 4vw, 44px);
+      border-color: rgba(255, 164, 27, .56);
+      background:
+        radial-gradient(circle at 88% 15%, rgba(255,164,27,.18) 0 120px, transparent 122px),
+        linear-gradient(135deg, #ffffff, rgba(255,164,27,.08));
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 9vw, 8rem);
+    }
+
+    .hero p,
+    .waiver-summary p,
+    .download-card p,
+    .form-intro {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .hero-photo {
+      overflow: hidden;
+      min-height: 520px;
+      border-color: rgba(25, 200, 106, .42);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      box-shadow: 0 12px 28px rgba(31,31,31,.1);
+      cursor: pointer;
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255,255,255,.86);
+      border-color: rgba(31,31,31,.08);
+    }
+
+    section {
+      margin-top: 28px;
+      scroll-margin-top: 132px;
+    }
+
+    .waiver-layout {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .waiver-summary,
+    .download-card {
+      padding: clamp(24px, 3vw, 32px);
+    }
+
+    .waiver-summary {
+      display: grid;
+      gap: 16px;
+      border-color: rgba(25,200,106,.42);
+      background: rgba(255,255,255,.82);
+    }
+
+    .waiver-summary h2,
+    .waiver-form h2 {
+      font-size: clamp(2.3rem, 4.2vw, 4rem);
+    }
+
+    .waiver-points {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .waiver-points li {
+      padding: 14px 16px;
+      border: 1px solid rgba(31,31,31,.1);
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(255,255,255,.74);
+      line-height: 1.55;
+    }
+
+    .waiver-form {
+      padding: clamp(24px, 3.2vw, 34px);
+      border-color: rgba(255,164,27,.56);
+      background:
+        radial-gradient(circle at 92% 10%, rgba(25,200,106,.12) 0 110px, transparent 112px),
+        linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      border: 1px solid rgba(31,31,31,.18);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,.86);
+      font: inherit;
+    }
+
+    .form-field textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .waiver-checks {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .waiver-check {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid rgba(31,31,31,.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .waiver-check input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--forest);
+    }
+
+    .waiver-check strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .95rem;
+    }
+
+    .waiver-check p {
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .form-status {
+      grid-column: 1 / -1;
+      min-height: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .form-status[data-tone="success"] { color: #147943; }
+    .form-status[data-tone="error"] { color: var(--poppy); }
+
+    .download-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      border-color: rgba(245,61,45,.42);
+      background: linear-gradient(135deg, #ffffff, rgba(245,61,45,.05));
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .waiver-layout,
+      .download-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo img {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      section { scroll-margin-top: 220px; }
+
+      .site-header {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 32px;
+      }
+
+      .nav-links {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links a { flex: 0 0 auto; }
+
+      .hero-actions,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-field.full,
+      .form-status {
+        grid-column: auto;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/strength-resilience/flow.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="strength-resilience-children-lounge.html#home">
+        <img src="assets/strength-resilience-logo.png" alt="Strength &amp; Resilience Children Lounge logo" />
+        <div>
+          <strong>SR Sensory Gym</strong>
+          <span>Strength and Resilience Nonprofit Inc.</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="strength-resilience-children-lounge.html#home">Home</a>
+        <a href="strength-resilience-book-a-party.html">Book a Party</a>
+        <a href="strength-resilience-services.html">Services</a>
+        <a href="strength-resilience-memberships.html">Memberships</a>
+        <a href="strength-resilience-events.html">Events</a>
+        <a href="strength-resilience-waiver.html" aria-current="page">Waiver</a>
+        <a href="strength-resilience-children-lounge.html#connect">Shop</a>
+        <a href="strength-resilience-children-lounge.html#connect">Gift Card</a>
+        <a href="strength-resilience-children-lounge.html#about">About Us</a>
+        <a href="strength-resilience-children-lounge.html#connect">FAQ's</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <article class="panel hero-copy">
+          <span class="eyebrow">General liability waiver</span>
+          <h1>Complete the family waiver before play.</h1>
+          <p>
+            Please read the waiver carefully and submit family information before visiting SR Sensory Gym. This form helps the team prepare safely and follow up when needed.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#waiver-form">Fill out waiver</a>
+            <a class="button secondary" href="assets/strength-resilience/sr-sensory-gym-general-waiver.docx" download>Download DOCX</a>
+          </div>
+        </article>
+
+        <article class="panel hero-photo">
+          <img src="assets/strength-resilience/sr-open-play.jpeg" alt="Open play room inside SR Sensory Gym" />
+        </article>
+      </section>
+
+      <section class="waiver-layout">
+        <aside class="waiver-summary">
+          <span class="eyebrow">Please read carefully</span>
+          <h2>SR Sensory Gym waiver summary.</h2>
+          <p>
+            This is a legal document affecting your rights. The form includes assumption of risk, parent supervision, release of liability, medical authorization, health and safety, optional photo/video consent, and facility rule acknowledgments.
+          </p>
+          <ul class="waiver-points">
+            <li>SR Sensory Gym is a parent-supervised environment.</li>
+            <li>Children must be actively supervised while inside the facility.</li>
+            <li>All children must have a signed waiver before participation.</li>
+            <li>Photo/video consent is optional and not required for participation.</li>
+          </ul>
+        </aside>
+
+        <form class="waiver-form" id="waiver-form" data-sr-intake-form>
+          <input type="hidden" name="intake_type" value="waiver" />
+          <input type="hidden" name="requested_service" value="General Liability Waiver" />
+          <input type="hidden" name="waiver_version" value="SR Sensory Gym General Liability Waiver 2026-06-04" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+
+          <span class="eyebrow">Family information</span>
+          <h2>Waiver form.</h2>
+          <p class="form-intro">
+            Submit this form for one family visit. Add all participating children in the child name field.
+          </p>
+
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="parent-guardian-name">Parent/guardian name</label>
+              <input id="parent-guardian-name" name="parent_guardian_name" autocomplete="name" required />
+            </div>
+            <div class="form-field">
+              <label for="waiver-phone">Phone number</label>
+              <input id="waiver-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="form-field">
+              <label for="waiver-email">Email</label>
+              <input id="waiver-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="form-field full">
+              <label for="child-names">Child's name(s)</label>
+              <textarea id="child-names" name="child_names" required></textarea>
+            </div>
+            <div class="form-field full">
+              <label for="child-ages">Child age(s)</label>
+              <input id="child-ages" name="child_ages" required />
+            </div>
+            <div class="form-field">
+              <label for="emergency-contact-name">Emergency contact</label>
+              <input id="emergency-contact-name" name="emergency_contact_name" required />
+            </div>
+            <div class="form-field">
+              <label for="emergency-contact-phone">Emergency phone</label>
+              <input id="emergency-contact-phone" name="emergency_contact_phone" type="tel" required />
+            </div>
+            <div class="form-field full">
+              <label for="emergency-contact-relationship">Emergency relationship</label>
+              <input id="emergency-contact-relationship" name="emergency_contact_relationship" />
+            </div>
+            <div class="form-field full">
+              <label for="health-notes">Health or sensory notes</label>
+              <textarea id="health-notes" name="health_notes" placeholder="Share allergies, medical needs, sensory considerations, or anything the team should know."></textarea>
+            </div>
+            <div class="form-field full">
+              <label for="photo-video-consent">Photo/video consent</label>
+              <select id="photo-video-consent" name="photo_video_consent" required>
+                <option value="">Choose one</option>
+                <option value="true">I give permission</option>
+                <option value="false">I do not give permission</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="waiver-checks" aria-label="Waiver acknowledgments">
+            <label class="waiver-check">
+              <input type="checkbox" name="assumption_of_risk" required />
+              <span><strong>Assumption of risk</strong><p>I understand sensory-based activities may involve risks including falls, collisions, equipment-related injuries, or sensory overstimulation.</p></span>
+            </label>
+            <label class="waiver-check">
+              <input type="checkbox" name="parent_supervision" required />
+              <span><strong>Parent/guardian supervision</strong><p>I understand SR Sensory Gym is parent-supervised and I agree to actively supervise my child at all times.</p></span>
+            </label>
+            <label class="waiver-check">
+              <input type="checkbox" name="release_of_liability" required />
+              <span><strong>Release of liability</strong><p>I release SR Sensory Gym, its owners, employees, volunteers, and affiliates from claims arising from injury, illness, accident, or property damage.</p></span>
+            </label>
+            <label class="waiver-check">
+              <input type="checkbox" name="medical_authorization" required />
+              <span><strong>Medical authorization</strong><p>In an emergency, I authorize SR Sensory Gym staff to obtain necessary medical treatment and accept financial responsibility for services provided.</p></span>
+            </label>
+            <label class="waiver-check">
+              <input type="checkbox" name="health_safety_acknowledgment" required />
+              <span><strong>Health and safety</strong><p>I confirm my child is able to participate and agree not to bring my child if they are experiencing symptoms of illness.</p></span>
+            </label>
+            <label class="waiver-check">
+              <input type="checkbox" name="facility_rules_agreement" required />
+              <span><strong>Facility rules</strong><p>I agree to follow posted rules and staff instructions. I understand failure to follow guidelines may result in removal without refund.</p></span>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="electronic-signature">Electronic signature</label>
+              <input id="electronic-signature" name="electronic_signature" placeholder="Type your full legal name" required />
+            </div>
+            <p class="form-status" data-sr-form-status aria-live="polite"></p>
+            <button class="button primary" type="submit">Submit waiver</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="download-card">
+        <div>
+          <span class="eyebrow">Paper copy</span>
+          <h3>Need the original document?</h3>
+          <p>Download the SR Sensory Gym General Liability Waiver &amp; Release Form as a DOCX file.</p>
+        </div>
+        <a class="button secondary" href="assets/strength-resilience/sr-sensory-gym-general-waiver.docx" download>Download waiver</a>
+      </section>
+    </main>
+  </div>
+  <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
+</body>
+</html>

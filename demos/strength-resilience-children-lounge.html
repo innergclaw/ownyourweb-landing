@@ -545,6 +545,17 @@
       cursor: pointer;
     }
 
+    .form-status {
+      grid-column: 1 / -1;
+      min-height: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .form-status[data-tone="success"] { color: #147943; }
+    .form-status[data-tone="error"] { color: var(--poppy); }
+
     .footer-note {
       margin-top: 18px;
       text-align: center;
@@ -677,7 +688,7 @@
         <a href="strength-resilience-services.html">Services</a>
         <a href="strength-resilience-memberships.html">Memberships</a>
         <a href="strength-resilience-events.html">Events</a>
-        <a href="#connect">Waiver</a>
+        <a href="strength-resilience-waiver.html">Waiver</a>
         <a href="#connect">Shop</a>
         <a href="#connect">Gift Card</a>
         <a href="#about">About Us</a>
@@ -888,23 +899,31 @@
           </p>
         </div>
 
-        <form class="cta-box contact-form" action="mailto:Info@srchildrenslounge.com" method="post" enctype="text/plain">
+        <form class="cta-box contact-form" data-sr-intake-form>
+          <input type="hidden" name="intake_type" value="general_inquiry" />
+          <input type="hidden" name="requested_service" value="Website Contact Form" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
           <div class="form-field">
             <label for="first-name">First name</label>
-            <input id="first-name" name="First name" autocomplete="given-name" required />
+            <input id="first-name" name="first_name" autocomplete="given-name" required />
           </div>
           <div class="form-field">
             <label for="last-name">Last name</label>
-            <input id="last-name" name="Last name" autocomplete="family-name" required />
+            <input id="last-name" name="last_name" autocomplete="family-name" required />
+          </div>
+          <div class="form-field full">
+            <label for="contact-phone">Phone</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" required />
           </div>
           <div class="form-field full">
             <label for="contact-email">Email</label>
-            <input id="contact-email" name="Email" type="email" autocomplete="email" required />
+            <input id="contact-email" name="email" type="email" autocomplete="email" required />
           </div>
           <div class="form-field full">
             <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="Message" required></textarea>
+            <textarea id="contact-message" name="message" required></textarea>
           </div>
+          <p class="form-status" data-sr-form-status aria-live="polite"></p>
           <button class="button form-submit" type="submit">Send message</button>
         </form>
       </section>
@@ -934,5 +953,6 @@
     </main>
   </div>
   <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
 </html>

@@ -144,7 +144,8 @@
     .panel,
     .package-card,
     .add-on-card,
-    .note-band {
+    .note-band,
+    .booking-form {
       border: 2px solid var(--line);
       border-radius: var(--radius-xl);
       background: var(--warm-white);
@@ -371,6 +372,66 @@
       line-height: 1.75;
     }
 
+    .booking-form {
+      padding: clamp(24px, 3.2vw, 34px);
+      border-color: rgba(25, 200, 106, .42);
+      background:
+        radial-gradient(circle at 92% 10%, rgba(255,164,27,.16) 0 110px, transparent 112px),
+        linear-gradient(180deg, #ffffff, rgba(25,200,106,.05));
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      border: 1px solid rgba(31,31,31,.18);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,.86);
+      font: inherit;
+    }
+
+    .form-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    .form-status {
+      grid-column: 1 / -1;
+      min-height: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .form-status[data-tone="success"] { color: #147943; }
+    .form-status[data-tone="error"] { color: var(--poppy); }
+
     @media (max-width: 980px) {
       .hero,
       .quick-points,
@@ -414,9 +475,15 @@
         flex: 0 0 auto;
       }
 
-      .hero-actions {
+      .hero-actions,
+      .form-grid {
         display: grid;
         grid-template-columns: 1fr;
+      }
+
+      .form-field.full,
+      .form-status {
+        grid-column: auto;
       }
     }
   </style>
@@ -439,7 +506,7 @@
         <a href="strength-resilience-services.html">Services</a>
         <a href="strength-resilience-memberships.html">Memberships</a>
         <a href="strength-resilience-events.html">Events</a>
-        <a href="strength-resilience-children-lounge.html#connect">Waiver</a>
+        <a href="strength-resilience-waiver.html">Waiver</a>
         <a href="strength-resilience-children-lounge.html#connect">Shop</a>
         <a href="strength-resilience-children-lounge.html#connect">Gift Card</a>
         <a href="strength-resilience-children-lounge.html#about">About Us</a>
@@ -457,7 +524,7 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#packages">View packages</a>
-            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Booking%20Request">Book now</a>
+            <a class="button secondary" href="#party-request">Book now</a>
           </div>
         </article>
 
@@ -503,7 +570,7 @@
               <li>$10 per additional child</li>
               <li>Complete set-up and clean-up</li>
             </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Basic%20Birthday%20Party%20Booking">Book now</a>
+            <a class="button primary" href="#party-request">Book now</a>
           </article>
 
           <article class="package-card">
@@ -518,7 +585,7 @@
               <li>2 pizzas</li>
               <li>Complete set-up and clean-up</li>
             </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Deluxe%20Birthday%20Party%20Booking">Book now</a>
+            <a class="button primary" href="#party-request">Book now</a>
           </article>
 
           <article class="package-card">
@@ -534,7 +601,7 @@
               <li>2 dozen cupcakes</li>
               <li>Complete set-up and clean-up</li>
             </ul>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Premium%20Birthday%20Party%20Booking">Book now</a>
+            <a class="button primary" href="#party-request">Book now</a>
           </article>
         </div>
       </section>
@@ -577,6 +644,71 @@
         </div>
       </section>
 
+      <section class="booking-form" id="party-request">
+        <span class="eyebrow">Party request form</span>
+        <h2>Start the booking conversation.</h2>
+        <p style="margin-top: 12px; max-width: 720px; color: var(--muted); line-height: 1.75;">
+          Share your preferred party details and the SR Sensory Gym team will follow up with availability, deposit details, and next steps.
+        </p>
+
+        <form data-sr-intake-form>
+          <input type="hidden" name="intake_type" value="party_booking" />
+          <input type="hidden" name="requested_service" value="Birthday Party Booking" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="booking-first-name">First name</label>
+              <input id="booking-first-name" name="first_name" autocomplete="given-name" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-last-name">Last name</label>
+              <input id="booking-last-name" name="last_name" autocomplete="family-name" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-phone">Phone</label>
+              <input id="booking-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-email">Email</label>
+              <input id="booking-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="form-field">
+              <label for="party-package">Package</label>
+              <select id="party-package" name="party_package" required>
+                <option value="">Choose a package</option>
+                <option value="Basic - $400">Basic - $400</option>
+                <option value="Deluxe - $525">Deluxe - $525</option>
+                <option value="Premium - $720">Premium - $720</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="guest-count">Estimated kids</label>
+              <input id="guest-count" name="guest_count" placeholder="Example: 12 kids" />
+            </div>
+            <div class="form-field">
+              <label for="preferred-date">Preferred date</label>
+              <input id="preferred-date" name="preferred_date" type="date" />
+            </div>
+            <div class="form-field">
+              <label for="preferred-time">Preferred time</label>
+              <input id="preferred-time" name="preferred_time" placeholder="Example: 2:00 PM" />
+            </div>
+            <div class="form-field full">
+              <label for="child-names">Birthday child / children</label>
+              <input id="child-names" name="child_names" placeholder="Child name and age if available" />
+            </div>
+            <div class="form-field full">
+              <label for="booking-message">Notes or questions</label>
+              <textarea id="booking-message" name="message" placeholder="Theme, add-ons, accessibility needs, questions, or preferred callback time."></textarea>
+            </div>
+            <p class="form-status" data-sr-form-status aria-live="polite"></p>
+            <button class="button primary" type="submit">Submit party request</button>
+          </div>
+        </form>
+      </section>
+
       <section class="note-band" id="details">
         <div>
           <span class="eyebrow">Booking details</span>
@@ -591,7 +723,7 @@
             <li>All children must have a signed waiver.</li>
           </ul>
           <div class="hero-actions" style="margin-top: 18px;">
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Birthday%20Party%20Deposit%20Request">Book now</a>
+            <a class="button primary" href="#party-request">Book now</a>
             <a class="button secondary" href="strength-resilience-children-lounge.html#connect">Ask a question</a>
           </div>
         </div>
@@ -599,5 +731,6 @@
     </main>
   </div>
   <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
 </html>
