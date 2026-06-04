@@ -29,6 +29,28 @@
   }
 }
 
+@keyframes srFloatIn {
+  from {
+    opacity: 0;
+    transform: translateY(34px) scale(.965);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes srSoftDrift {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 body {
   animation: srPageIn .65s ease both, srFloatGlow 18s ease-in-out infinite;
   background-size: auto, auto, 100% 100%;
@@ -54,6 +76,30 @@ main > *:nth-child(4) { animation-delay: .15s; }
 main > *:nth-child(5) { animation-delay: .2s; }
 main > *:nth-child(6) { animation-delay: .25s; }
 main > *:nth-child(7) { animation-delay: .3s; }
+
+.sr-flow-ready .sr-reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(.965);
+  filter: blur(10px);
+}
+
+.sr-flow-ready .sr-reveal.is-visible {
+  animation: srFloatIn .82s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.sr-flow-ready .sr-reveal.is-visible:nth-child(2) { animation-delay: .06s; }
+.sr-flow-ready .sr-reveal.is-visible:nth-child(3) { animation-delay: .12s; }
+.sr-flow-ready .sr-reveal.is-visible:nth-child(4) { animation-delay: .18s; }
+.sr-flow-ready .sr-reveal.is-visible:nth-child(5) { animation-delay: .24s; }
+.sr-flow-ready .sr-reveal.is-visible:nth-child(6) { animation-delay: .3s; }
+
+.sr-flow-ready .sr-float {
+  animation: srSoftDrift 5.5s ease-in-out infinite;
+  animation-delay: var(--sr-float-delay, 0s);
+}
+
+.sr-flow-ready .sr-float:nth-child(2n) { --sr-float-delay: .45s; }
+.sr-flow-ready .sr-float:nth-child(3n) { --sr-float-delay: .9s; }
 
 .nav-links a,
 .button,
@@ -172,5 +218,11 @@ main > section:not(.hero):hover,
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
+  }
+
+  .sr-flow-ready .sr-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
