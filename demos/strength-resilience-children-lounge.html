@@ -104,7 +104,9 @@
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      justify-content: flex-end;
+      gap: 8px;
+      flex: 1 1 520px;
     }
 
     .nav-links a,
@@ -112,11 +114,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
+      min-height: 40px;
+      padding: 0 12px;
       border-radius: 999px;
-      font-size: .9rem;
+      font-size: .74rem;
       font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .nav-links a {
@@ -617,11 +621,17 @@
       }
 
       .nav-links {
-        justify-content: center;
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
       }
 
       .nav-links a {
-        flex: 1 1 140px;
+        flex: 0 0 auto;
       }
 
       .hero-actions {
@@ -651,17 +661,21 @@
       </a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="#about">About</a>
+        <a href="#home">Home</a>
+        <a href="#visit">Book a Party</a>
         <a href="#experience">Services</a>
-        <a href="#photos">Photos</a>
-        <a href="#calendar">Calendar</a>
-        <a href="#visit">Visit</a>
-        <a href="#connect">Connect</a>
+        <a href="#visit">Memberships</a>
+        <a href="#calendar">Events</a>
+        <a href="#connect">Waiver</a>
+        <a href="#connect">Shop</a>
+        <a href="#connect">Gift Card</a>
+        <a href="#about">About Us</a>
+        <a href="#connect">FAQ's</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="home">
         <article class="panel hero-copy">
           <div class="hero-actions">
             <a class="button primary" href="#experience">Explore the gym</a>
