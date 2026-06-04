@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | SR Sensory Gym</title>
-  <meta name="description" content="Explore SR Sensory Gym services, monthly memberships, open play, consultations, summer play passes, birthday parties, and tours." />
+  <title>Memberships | SR Sensory Gym</title>
+  <meta name="description" content="Choose an SR Sensory Gym monthly membership plan for unlimited play, family memberships, classes, events, and sensory-friendly access." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -14,8 +14,6 @@
       --poppy: #f53d2d;
       --cream: #ffffff;
       --warm-white: #ffffff;
-      --sage: rgba(25, 200, 106, .1);
-      --sand: rgba(255, 164, 27, .12);
       --ink: #1f1f1f;
       --muted: rgba(31, 31, 31, .68);
       --line: rgba(31, 31, 31, .16);
@@ -33,7 +31,7 @@
       background:
         radial-gradient(circle at 10% 10%, rgba(25,200,106,.08) 0 180px, transparent 182px),
         radial-gradient(circle at 90% 14%, rgba(255,164,27,.1) 0 180px, transparent 182px),
-        linear-gradient(180deg, #ffffff 0%, rgba(25,200,106,.05) 100%);
+        linear-gradient(180deg, #ffffff 0%, rgba(255,164,27,.06) 100%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -90,7 +88,7 @@
 
     .brand span,
     .eyebrow,
-    .info-label {
+    .plan-label {
       color: var(--muted);
       font-size: .76rem;
       font-weight: 700;
@@ -142,7 +140,7 @@
     }
 
     .panel,
-    .service-card,
+    .plan-card,
     .note-band {
       border: 2px solid var(--line);
       border-radius: var(--radius-xl);
@@ -241,61 +239,69 @@
       line-height: 1.7;
     }
 
-    .service-grid {
+    .plan-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .service-card {
+    .plan-card {
+      position: relative;
       display: grid;
-      gap: 14px;
+      align-content: start;
+      gap: 15px;
       padding: 28px;
+      overflow: hidden;
       border-color: rgba(31,31,31,.1);
       background: linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
     }
 
-    .service-card:nth-child(1),
-    .service-card:nth-child(4) { border-color: rgba(25,200,106,.52); }
-    .service-card:nth-child(2),
-    .service-card:nth-child(5) { border-color: rgba(255,164,27,.62); }
-    .service-card:nth-child(3),
-    .service-card:nth-child(6) { border-color: rgba(245,61,45,.52); }
+    .plan-card:nth-child(1) { border-color: rgba(25,200,106,.52); }
+    .plan-card:nth-child(2) { border-color: rgba(255,164,27,.62); }
+    .plan-card:nth-child(3) { border-color: rgba(245,61,45,.52); }
 
-    .service-card h3 {
-      font-size: 2.6rem;
-    }
-
-    .service-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill {
+    .badge {
+      width: fit-content;
+      min-height: 32px;
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
       padding: 0 12px;
-      border: 1px solid rgba(31,31,31,.08);
       border-radius: 999px;
-      background: rgba(255,255,255,.8);
-      color: var(--muted);
-      font-size: .76rem;
-      font-weight: 800;
-      letter-spacing: .06em;
+      color: #ffffff;
+      background: var(--poppy);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em;
       text-transform: uppercase;
     }
 
-    .price {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -.04em;
+    .plan-card h3 {
+      font-size: 2.65rem;
     }
 
-    .service-card p {
+    .price {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -.05em;
+    }
+
+    .price span {
+      padding-bottom: 8px;
       color: var(--muted);
-      line-height: 1.7;
+      font-size: .86rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .plan-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.82;
     }
 
     .note-band {
@@ -311,7 +317,7 @@
 
     @media (max-width: 980px) {
       .hero,
-      .service-grid,
+      .plan-grid,
       .note-band {
         grid-template-columns: 1fr;
       }
@@ -371,8 +377,8 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="strength-resilience-children-lounge.html#home">Home</a>
         <a href="strength-resilience-book-a-party.html">Book a Party</a>
-        <a href="strength-resilience-services.html" aria-current="page">Services</a>
-        <a href="strength-resilience-memberships.html">Memberships</a>
+        <a href="strength-resilience-services.html">Services</a>
+        <a href="strength-resilience-memberships.html" aria-current="page">Memberships</a>
         <a href="strength-resilience-children-lounge.html#calendar">Events</a>
         <a href="strength-resilience-children-lounge.html#connect">Waiver</a>
         <a href="strength-resilience-children-lounge.html#connect">Shop</a>
@@ -385,123 +391,90 @@
     <main>
       <section class="hero" id="home">
         <article class="panel hero-copy">
-          <span class="eyebrow">Services</span>
-          <h1>Play, support, parties, and visits.</h1>
+          <span class="eyebrow">Monthly memberships</span>
+          <h1>Choose your pricing plan.</h1>
           <p>
-            Explore open play, monthly memberships, consultations, summer play passes, birthday parties, and tours at SR Sensory Gym.
+            Find the membership that works for your family and gives your child consistent access to safe, sensory-friendly play.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#memberships">View memberships</a>
-            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Ask a question</a>
+            <a class="button primary" href="#plans">View plans</a>
+            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=Membership%20Question">Ask a question</a>
           </div>
         </article>
 
         <article class="panel hero-photo">
-          <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="SR Sensory Gym movement room with swings and colorful padded flooring" />
+          <img src="assets/strength-resilience/sr-open-play.jpeg" alt="SR Sensory Gym open play room with activity stations and sensory equipment" />
         </article>
       </section>
 
-      <section class="section" id="memberships">
+      <section class="section" id="plans">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Monthly memberships</span>
-            <h2>Open play access.</h2>
+            <span class="eyebrow">Choose your pricing plan</span>
+            <h2>Find one that works for you.</h2>
           </div>
           <p>
-            Memberships and open play services are designed to give families flexible access to a safe, inclusive sensory gym space.
+            Monthly membership plans require a minimum of three months and remain valid for twelve months.
           </p>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>Openplay</h3>
-            <div class="service-meta">
-              <span class="pill">Tue-Sun</span>
-              <span class="pill">Duration varies</span>
-            </div>
-            <div class="price">Starting at $5</div>
-            <p>Flexible open play access for children to explore movement, sensory activities, and safe play.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Openplay%20Booking">Book now</a>
+        <div class="plan-grid">
+          <article class="plan-card">
+            <span class="plan-label">Unlimited Play</span>
+            <h3>Individual</h3>
+            <div class="price">$79 <span>Every month</span></div>
+            <ul>
+              <li>Unlimited play membership</li>
+              <li>Minimum of 3 months required</li>
+              <li>Must cancel 3 business days before next billing cycle</li>
+              <li>Valid for 12 months</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Unlimited%20Play%20Membership%20Request">Buy now</a>
           </article>
 
-          <article class="service-card">
-            <h3>Consultation</h3>
-            <div class="service-meta">
-              <span class="pill">30 min</span>
-            </div>
-            <div class="price">$50</div>
-            <p>A focused consultation to discuss your child's needs, family questions, and the best fit for your visit.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Consultation%20Request">Book now</a>
+          <article class="plan-card">
+            <span class="badge">Best Value</span>
+            <span class="plan-label">Family of 2</span>
+            <h3>Family plan</h3>
+            <div class="price">$130 <span>Every month</span></div>
+            <ul>
+              <li>Unlimited play membership for family of 2</li>
+              <li>Minimum of 3 months required</li>
+              <li>Must cancel 2 business days before next billing cycle</li>
+              <li>Discounted classes/events</li>
+              <li>Valid for 12 months</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Family%20of%202%20Membership%20Request">Buy now</a>
           </article>
 
-          <article class="service-card">
-            <h3>Schedule tour</h3>
-            <div class="service-meta">
-              <span class="pill">15 min</span>
-            </div>
-            <div class="price">Contact us</div>
-            <p>Tour the lounge, see the sensory spaces, and ask questions before your family joins or books.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Schedule%20Tour%20Request">Schedule tour</a>
+          <article class="plan-card">
+            <span class="plan-label">Membership (Unlimited Play)</span>
+            <h3>Family of 3</h3>
+            <div class="price">$200 <span>Every month</span></div>
+            <ul>
+              <li>Unlimited play membership for family of 3</li>
+              <li>Minimum of 3 months required</li>
+              <li>Must cancel 2 business days before next billing cycle</li>
+              <li>Discounted classes/events</li>
+              <li>Valid for 12 months</li>
+            </ul>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Family%20of%203%20Membership%20Request">Buy now</a>
           </article>
         </div>
       </section>
 
-      <section class="section" id="summer">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Summer open play sale</span>
-            <h2>Summer play passes.</h2>
-          </div>
-          <p>
-            Save on repeat visits with summer open play passes built for families planning multiple trips to the gym.
-          </p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>5 visits</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr visits</span>
-            </div>
-            <div class="price">$75</div>
-            <p>Five summer open play visits for families who want flexible, repeat access.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Summer%20Play%20Pass%205%20Visits">Book now</a>
-          </article>
-
-          <article class="service-card">
-            <h3>10 visits</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr visits</span>
-            </div>
-            <div class="price">$140</div>
-            <p>Ten summer open play visits for families who want the best value across the season.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Summer%20Play%20Pass%2010%20Visits">Book now</a>
-          </article>
-
-          <article class="service-card">
-            <h3>Birthday party</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr</span>
-            </div>
-            <div class="price">From $400</div>
-            <p>Private birthday party packages with sensory gym access, setup, cleanup, and celebration space.</p>
-            <a class="button primary" href="strength-resilience-book-a-party.html">View packages</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="note-band" id="contact">
+      <section class="note-band" id="details">
         <div>
-          <span class="eyebrow">Need help choosing?</span>
-          <h3>Start with a tour or message the team.</h3>
+          <span class="eyebrow">Membership details</span>
+          <h3>Questions before joining?</h3>
         </div>
         <div>
           <p>
-            If you are unsure which option is the best fit, reach out with your child's age, needs, preferred date, and what type of visit you are planning.
+            Reach out before purchasing if you need help choosing between individual, family of 2, or family of 3 membership options.
           </p>
           <div class="hero-actions" style="margin-top: 18px;">
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Contact us</a>
-            <a class="button secondary" href="strength-resilience-children-lounge.html#calendar">View calendar</a>
+            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Membership%20Question">Contact us</a>
+            <a class="button secondary" href="strength-resilience-services.html">View services</a>
           </div>
         </div>
       </section>
