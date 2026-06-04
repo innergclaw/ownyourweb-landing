@@ -1,0 +1,176 @@
+@keyframes srPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes srFloatGlow {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 12% 8%, 86% 10%, 0% 0%;
+  }
+}
+
+@keyframes srContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+body {
+  animation: srPageIn .65s ease both, srFloatGlow 18s ease-in-out infinite;
+  background-size: auto, auto, 100% 100%;
+}
+
+.site-header {
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+.site-header:hover {
+  transform: translateY(-2px);
+  border-color: rgba(25, 200, 106, .58);
+  box-shadow: 0 24px 62px rgba(31, 31, 31, .12);
+}
+
+main > * {
+  animation: srContentIn .72s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+main > *:nth-child(2) { animation-delay: .05s; }
+main > *:nth-child(3) { animation-delay: .1s; }
+main > *:nth-child(4) { animation-delay: .15s; }
+main > *:nth-child(5) { animation-delay: .2s; }
+main > *:nth-child(6) { animation-delay: .25s; }
+main > *:nth-child(7) { animation-delay: .3s; }
+
+.nav-links a,
+.button,
+.footer-link {
+  position: relative;
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.nav-links a::after,
+.button::after,
+.footer-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.38) 50%, transparent 100%);
+  transform: translateX(-120%);
+  transition: transform .52s ease;
+  pointer-events: none;
+}
+
+.nav-links a:hover,
+.button:hover,
+.footer-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(31,31,31,.12);
+}
+
+.nav-links a:hover::after,
+.button:hover::after,
+.footer-link:hover::after {
+  transform: translateX(120%);
+}
+
+.panel,
+main > section:not(.hero),
+.section,
+.package-card,
+.service-card,
+.plan-card,
+.event-card,
+.note-band,
+.donor-band,
+.quick-point,
+.photo-card,
+.highlight-card,
+.story-card,
+.visit-card {
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+
+.panel:hover,
+main > section:not(.hero):hover,
+.section:hover,
+.package-card:hover,
+.service-card:hover,
+.plan-card:hover,
+.event-card:hover,
+.note-band:hover,
+.donor-band:hover,
+.quick-point:hover,
+.photo-card:hover,
+.highlight-card:hover,
+.story-card:hover,
+.visit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 62px rgba(31,31,31,.13);
+}
+
+.hero-photo,
+.photo-card,
+.calendar-card,
+.highlight-image {
+  isolation: isolate;
+}
+
+.hero-photo img,
+.photo-card img,
+.calendar-card img,
+.highlight-image img {
+  transition: transform .65s cubic-bezier(.2, .8, .2, 1), filter .65s ease;
+}
+
+.hero-photo:hover img,
+.photo-card:hover img,
+.calendar-card:hover img,
+.highlight-image:hover img {
+  transform: scale(1.035);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.price,
+.package-number,
+.badge,
+.info-label,
+.event-label,
+.plan-label,
+.eyebrow {
+  transition: transform .24s ease, color .24s ease;
+}
+
+.package-card:hover .price,
+.service-card:hover .price,
+.plan-card:hover .price,
+.event-card:hover .event-label,
+.highlight-card:hover .eyebrow,
+.quick-point:hover .info-label {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
