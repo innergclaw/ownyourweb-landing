@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | SR Sensory Gym</title>
-  <meta name="description" content="Explore SR Sensory Gym services, monthly memberships, open play, consultations, summer play passes, birthday parties, and tours." />
+  <title>Book Now | SR Sensory Gym</title>
+  <meta name="description" content="Book open play, daily passes, and summer open play passes at SR Sensory Gym in Willow Grove, PA." />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -14,8 +14,6 @@
       --poppy: #f53d2d;
       --cream: #ffffff;
       --warm-white: #ffffff;
-      --sage: rgba(25, 200, 106, .1);
-      --sand: rgba(255, 164, 27, .12);
       --ink: #1f1f1f;
       --muted: rgba(31, 31, 31, .68);
       --line: rgba(31, 31, 31, .16);
@@ -33,7 +31,7 @@
       background:
         radial-gradient(circle at 10% 10%, rgba(25,200,106,.08) 0 180px, transparent 182px),
         radial-gradient(circle at 90% 14%, rgba(255,164,27,.1) 0 180px, transparent 182px),
-        linear-gradient(180deg, #ffffff 0%, rgba(25,200,106,.05) 100%);
+        linear-gradient(180deg, #ffffff 0%, rgba(255,164,27,.07) 100%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -90,7 +88,8 @@
 
     .brand span,
     .eyebrow,
-    .info-label {
+    .info-label,
+    .form-field label {
       color: var(--muted);
       font-size: .76rem;
       font-weight: 700;
@@ -142,7 +141,9 @@
     }
 
     .panel,
-    .service-card,
+    .section,
+    .pass-card,
+    .booking-form,
     .note-band {
       border: 2px solid var(--line);
       border-radius: var(--radius-xl);
@@ -155,10 +156,10 @@
       align-content: center;
       gap: 18px;
       padding: clamp(28px, 4vw, 44px);
-      border-color: rgba(25, 200, 106, .5);
+      border-color: rgba(255, 164, 27, .56);
       background:
-        radial-gradient(circle at 88% 15%, rgba(25,200,106,.16) 0 120px, transparent 122px),
-        linear-gradient(135deg, #ffffff, rgba(255,164,27,.08));
+        radial-gradient(circle at 88% 15%, rgba(255,164,27,.18) 0 120px, transparent 122px),
+        linear-gradient(135deg, #ffffff, rgba(25,200,106,.08));
     }
 
     .hero h1 {
@@ -166,17 +167,18 @@
     }
 
     .hero p,
+    .section-head p,
+    .pass-card p,
     .note-band p {
-      max-width: 620px;
       color: var(--muted);
-      font-size: 1.04rem;
+      font-size: 1.02rem;
       line-height: 1.75;
     }
 
     .hero-photo {
       overflow: hidden;
       min-height: 520px;
-      border-color: rgba(255, 164, 27, .5);
+      border-color: rgba(25, 200, 106, .42);
     }
 
     .hero-photo img {
@@ -197,6 +199,7 @@
       padding: 0 18px;
       border: 1px solid transparent;
       box-shadow: 0 12px 28px rgba(31,31,31,.1);
+      cursor: pointer;
     }
 
     .button.primary {
@@ -215,12 +218,14 @@
       scroll-margin-top: 132px;
     }
 
-    .section {
+    .section,
+    .booking-form {
       padding: clamp(24px, 3.2vw, 34px);
-      border: 2px solid rgba(25, 200, 106, .42);
-      border-radius: var(--radius-xl);
+    }
+
+    .section {
+      border-color: rgba(25, 200, 106, .42);
       background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow);
     }
 
     .section-head {
@@ -231,39 +236,41 @@
       margin-bottom: 18px;
     }
 
-    .section-head h2 {
+    .section-head h2,
+    .booking-form h2 {
       font-size: clamp(2.3rem, 4.2vw, 4rem);
     }
 
     .section-head p {
       max-width: 520px;
-      color: var(--muted);
-      line-height: 1.7;
     }
 
-    .service-grid {
+    .pass-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .service-card {
+    .pass-card {
       display: grid;
       gap: 14px;
-      padding: 28px;
+      padding: 26px;
       border-color: rgba(31,31,31,.1);
       background: linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
     }
 
-    .service-card:nth-child(1),
-    .service-card:nth-child(4) { border-color: rgba(25,200,106,.52); }
-    .service-card:nth-child(2),
-    .service-card:nth-child(5) { border-color: rgba(255,164,27,.62); }
-    .service-card:nth-child(3),
-    .service-card:nth-child(6) { border-color: rgba(245,61,45,.52); }
+    .pass-card:nth-child(1) { border-color: rgba(25,200,106,.52); }
+    .pass-card:nth-child(2) { border-color: rgba(255,164,27,.62); }
+    .pass-card:nth-child(3) { border-color: rgba(245,61,45,.52); }
 
-    .service-card h3 {
-      font-size: 2.6rem;
+    .pass-card h3 {
+      font-size: 2.8rem;
+    }
+
+    .price {
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: -.04em;
     }
 
     .service-meta {
@@ -277,41 +284,85 @@
       align-items: center;
       min-height: 34px;
       padding: 0 12px;
-      border: 1px solid rgba(31,31,31,.08);
+      border: 1px solid rgba(31,31,31,.1);
       border-radius: 999px;
-      background: rgba(255,255,255,.8);
+      background: rgba(255,255,255,.75);
       color: var(--muted);
       font-size: .76rem;
       font-weight: 800;
-      letter-spacing: .06em;
       text-transform: uppercase;
     }
 
-    .price {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -.04em;
+    .booking-form {
+      border-color: rgba(255, 164, 27, .56);
+      background:
+        radial-gradient(circle at 92% 10%, rgba(25,200,106,.12) 0 110px, transparent 112px),
+        linear-gradient(180deg, #ffffff, rgba(255,164,27,.05));
     }
 
-    .service-card p {
-      color: var(--muted);
-      line-height: 1.7;
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
     }
+
+    .form-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      border: 1px solid rgba(31,31,31,.18);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,.86);
+      font: inherit;
+    }
+
+    .form-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    .form-status {
+      grid-column: 1 / -1;
+      min-height: 24px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .form-status[data-tone="success"] { color: #147943; }
+    .form-status[data-tone="error"] { color: var(--poppy); }
 
     .note-band {
       display: grid;
-      grid-template-columns: .88fr 1.12fr;
+      grid-template-columns: .8fr 1.2fr;
       gap: 18px;
       padding: 30px;
-      border-color: rgba(255,164,27,.56);
+      border-color: rgba(245,61,45,.46);
       background:
         radial-gradient(circle at 92% 12%, rgba(255,164,27,.18) 0 100px, transparent 102px),
-        linear-gradient(135deg, #ffffff, rgba(25,200,106,.06));
+        linear-gradient(135deg, #ffffff, rgba(245,61,45,.06));
+    }
+
+    .note-band h3 {
+      margin-bottom: 16px;
+      font-size: 2.2rem;
     }
 
     @media (max-width: 980px) {
       .hero,
-      .service-grid,
+      .pass-grid,
       .note-band {
         grid-template-columns: 1fr;
       }
@@ -332,10 +383,6 @@
         border-radius: 32px;
       }
 
-      .brand {
-        align-items: center;
-      }
-
       .nav-links {
         flex: 0 0 auto;
         justify-content: flex-start;
@@ -350,9 +397,15 @@
         flex: 0 0 auto;
       }
 
-      .hero-actions {
+      .hero-actions,
+      .form-grid {
         display: grid;
         grid-template-columns: 1fr;
+      }
+
+      .form-field.full,
+      .form-status {
+        grid-column: auto;
       }
     }
   </style>
@@ -371,9 +424,9 @@
 
       <nav class="nav-links" aria-label="Primary">
         <a href="strength-resilience-children-lounge.html#home">Home</a>
-        <a href="strength-resilience-book-now.html">Book Now</a>
+        <a href="strength-resilience-book-now.html" aria-current="page">Book Now</a>
         <a href="strength-resilience-book-a-party.html">Book a Party</a>
-        <a href="strength-resilience-services.html" aria-current="page">Services</a>
+        <a href="strength-resilience-services.html">Services</a>
         <a href="strength-resilience-memberships.html">Memberships</a>
         <a href="strength-resilience-events.html">Events</a>
         <a href="strength-resilience-waiver.html">Waiver</a>
@@ -387,35 +440,35 @@
     <main>
       <section class="hero" id="home">
         <article class="panel hero-copy">
-          <span class="eyebrow">Services</span>
-          <h1>Play, support, parties, and visits.</h1>
+          <span class="eyebrow">Book now</span>
+          <h1>Open play, daily passes, and summer visits.</h1>
           <p>
-            Explore open play, monthly memberships, consultations, summer play passes, birthday parties, and tours at SR Sensory Gym.
+            Choose the visit option that fits your family, then send the request so the SR Sensory Gym team can confirm availability and next steps.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#memberships">View memberships</a>
-            <a class="button secondary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Ask a question</a>
+            <a class="button primary" href="#book-request">Start booking</a>
+            <a class="button secondary" href="strength-resilience-waiver.html">Complete waiver</a>
           </div>
         </article>
 
         <article class="panel hero-photo">
-          <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="SR Sensory Gym movement room with swings and colorful padded flooring" />
+          <img src="assets/strength-resilience/sr-gym-main.jpeg" alt="SR Sensory Gym open play room with swings and colorful padded floor tiles" />
         </article>
       </section>
 
-      <section class="section" id="memberships">
+      <section class="section" id="passes">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Monthly memberships</span>
-            <h2>Open play access.</h2>
+            <span class="eyebrow">Open play options</span>
+            <h2>Pick your play pass.</h2>
           </div>
           <p>
-            Memberships and open play services are designed to give families flexible access to a safe, inclusive sensory gym space.
+            This page is focused on booking visits: open play, daily passes, and summer open play specials.
           </p>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card">
+        <div class="pass-grid">
+          <article class="pass-card">
             <h3>Openplay</h3>
             <div class="service-meta">
               <span class="pill">Tue-Sun</span>
@@ -423,92 +476,116 @@
             </div>
             <div class="price">Starting at $5</div>
             <p>Flexible open play access for children to explore movement, sensory activities, and safe play.</p>
-            <a class="button primary" href="strength-resilience-book-now.html#book-request">Book now</a>
+            <a class="button primary" href="#book-request">Book open play</a>
           </article>
 
-          <article class="service-card">
-            <h3>Consultation</h3>
+          <article class="pass-card">
+            <h3>Daily pass</h3>
             <div class="service-meta">
-              <span class="pill">30 min</span>
+              <span class="pill">Single visit</span>
+              <span class="pill">Open play</span>
             </div>
-            <div class="price">$50</div>
-            <p>A focused consultation to discuss your child's needs, family questions, and the best fit for your visit.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Consultation%20Request">Book now</a>
+            <div class="price">Request time</div>
+            <p>Plan a one-day visit for your child or family and let the team confirm the best available time.</p>
+            <a class="button primary" href="#book-request">Book daily pass</a>
           </article>
 
-          <article class="service-card">
-            <h3>Schedule tour</h3>
+          <article class="pass-card">
+            <h3>Summer open play</h3>
             <div class="service-meta">
-              <span class="pill">15 min</span>
+              <span class="pill">5 visits - $75</span>
+              <span class="pill">10 visits - $140</span>
             </div>
-            <div class="price">Contact us</div>
-            <p>Tour the lounge, see the sensory spaces, and ask questions before your family joins or books.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Schedule%20Tour%20Request">Schedule tour</a>
+            <div class="price">Save on visits</div>
+            <p>Summer play passes are built for families planning repeat trips to the sensory gym.</p>
+            <a class="button primary" href="#book-request">Book summer pass</a>
           </article>
         </div>
       </section>
 
-      <section class="section" id="summer">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Summer open play sale</span>
-            <h2>Summer play passes.</h2>
+      <section class="booking-form" id="book-request">
+        <span class="eyebrow">Booking request</span>
+        <h2>Request open play.</h2>
+        <p style="margin-top: 12px; max-width: 720px; color: var(--muted); line-height: 1.75;">
+          Send the visit details and the SR Sensory Gym team will follow up with availability, payment details, and anything your family needs before arrival.
+        </p>
+
+        <form data-sr-intake-form>
+          <input type="hidden" name="intake_type" value="open_play_booking" />
+          <input type="hidden" name="requested_service" value="Open Play / Daily Pass / Summer Pass Booking" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="booking-first-name">First name</label>
+              <input id="booking-first-name" name="first_name" autocomplete="given-name" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-last-name">Last name</label>
+              <input id="booking-last-name" name="last_name" autocomplete="family-name" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-phone">Phone</label>
+              <input id="booking-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="form-field">
+              <label for="booking-email">Email</label>
+              <input id="booking-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="form-field">
+              <label for="requested-service">Booking type</label>
+              <select id="requested-service" name="membership_interest" required>
+                <option value="">Choose one</option>
+                <option value="Openplay">Openplay</option>
+                <option value="Daily pass">Daily pass</option>
+                <option value="Summer play pass - 5 visits">Summer play pass - 5 visits</option>
+                <option value="Summer play pass - 10 visits">Summer play pass - 10 visits</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="preferred-date">Preferred date</label>
+              <input id="preferred-date" name="preferred_date" type="date" />
+            </div>
+            <div class="form-field">
+              <label for="preferred-time">Preferred time</label>
+              <input id="preferred-time" name="preferred_time" placeholder="Example: 3:30 PM" />
+            </div>
+            <div class="form-field">
+              <label for="child-ages">Child age(s)</label>
+              <input id="child-ages" name="child_ages" />
+            </div>
+            <div class="form-field full">
+              <label for="child-names">Child name(s)</label>
+              <input id="child-names" name="child_names" />
+            </div>
+            <div class="form-field full">
+              <label for="booking-message">Notes or questions</label>
+              <textarea id="booking-message" name="message" placeholder="Share sensory notes, first visit questions, preferred callback time, or anything the team should know."></textarea>
+            </div>
+            <p class="form-status" data-sr-form-status aria-live="polite"></p>
+            <button class="button primary" type="submit">Submit booking request</button>
           </div>
-          <p>
-            Save on repeat visits with summer open play passes built for families planning multiple trips to the gym.
-          </p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>5 visits</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr visits</span>
-            </div>
-            <div class="price">$75</div>
-            <p>Five summer open play visits for families who want flexible, repeat access.</p>
-            <a class="button primary" href="strength-resilience-book-now.html#book-request">Book now</a>
-          </article>
-
-          <article class="service-card">
-            <h3>10 visits</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr visits</span>
-            </div>
-            <div class="price">$140</div>
-            <p>Ten summer open play visits for families who want the best value across the season.</p>
-            <a class="button primary" href="strength-resilience-book-now.html#book-request">Book now</a>
-          </article>
-
-          <article class="service-card">
-            <h3>Birthday party</h3>
-            <div class="service-meta">
-              <span class="pill">2 hr</span>
-            </div>
-            <div class="price">From $400</div>
-            <p>Private birthday party packages with sensory gym access, setup, cleanup, and celebration space.</p>
-            <a class="button primary" href="strength-resilience-book-a-party.html">View packages</a>
-          </article>
-        </div>
+        </form>
       </section>
 
-      <section class="note-band" id="contact">
+      <section class="note-band">
         <div>
-          <span class="eyebrow">Need help choosing?</span>
-          <h3>Start with a tour or message the team.</h3>
+          <span class="eyebrow">Before arrival</span>
+          <h3>Waivers still matter.</h3>
         </div>
         <div>
           <p>
-            If you are unsure which option is the best fit, reach out with your child's age, needs, preferred date, and what type of visit you are planning.
+            All children must have a signed waiver before participating. Families can complete the waiver online before open play, daily visits, summer passes, or birthday parties.
           </p>
           <div class="hero-actions" style="margin-top: 18px;">
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=SR%20Sensory%20Gym%20Service%20Question">Contact us</a>
-            <a class="button secondary" href="strength-resilience-events.html">View calendar</a>
+            <a class="button primary" href="strength-resilience-waiver.html">Complete waiver</a>
+            <a class="button secondary" href="strength-resilience-events.html">View events</a>
           </div>
         </div>
       </section>
     </main>
   </div>
   <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
 </html>
