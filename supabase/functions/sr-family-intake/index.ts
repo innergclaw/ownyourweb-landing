@@ -199,8 +199,16 @@ async function saveRecord(record: IntakeRecord) {
 
 function emailSubject(record: IntakeRecord) {
   if (record.intake_type === "waiver") return `New SR Sensory Gym waiver: ${record.parent_guardian_name}`;
+  if (record.intake_type === "open_play_booking") return `New SR open play booking request: ${record.parent_guardian_name}`;
   if (record.intake_type === "party_booking") return `New SR party booking request: ${record.parent_guardian_name}`;
   return `New SR family inquiry: ${record.parent_guardian_name}`;
+}
+
+function emailHeading(record: IntakeRecord) {
+  if (record.intake_type === "waiver") return "SR Sensory Gym Waiver";
+  if (record.intake_type === "open_play_booking") return "SR Sensory Gym Open Play Booking";
+  if (record.intake_type === "party_booking") return "SR Sensory Gym Party Booking";
+  return "SR Sensory Gym Family Intake";
 }
 
 function emailHtml(record: IntakeRecord) {
@@ -231,7 +239,7 @@ function emailHtml(record: IntakeRecord) {
 
   return `
     <div style="font-family:Arial,sans-serif;color:#1f1f1f;line-height:1.55">
-      <h2 style="margin:0 0 12px">SR Sensory Gym Family Intake</h2>
+      <h2 style="margin:0 0 12px">${escapeHtml(emailHeading(record))}</h2>
       <p style="margin:0 0 18px">A family submitted information through the SR Sensory Gym website.</p>
       <table style="border-collapse:collapse;width:100%;max-width:760px">
         ${rows.map(([label, value]) => `
