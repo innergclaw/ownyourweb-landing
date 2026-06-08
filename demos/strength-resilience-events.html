@@ -245,6 +245,7 @@
     }
 
     .calendar-card {
+      position: relative;
       margin: 0;
       overflow: hidden;
       border: 2px solid rgba(255, 164, 27, .38);
@@ -257,6 +258,42 @@
       width: 100%;
       height: auto;
       background: #ffffff;
+    }
+
+    .calendar-event-link {
+      position: absolute;
+      left: 57.65%;
+      top: 36.9%;
+      width: 9.45%;
+      height: 13%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 7px;
+      border: 3px solid transparent;
+      border-radius: 18px;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+
+    .calendar-event-link span {
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #ffffff;
+      background: var(--poppy);
+      box-shadow: 0 6px 16px rgba(31,31,31,.2);
+      font-size: clamp(.52rem, .78vw, .72rem);
+      font-weight: 800;
+      letter-spacing: .04em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .calendar-event-link:hover,
+    .calendar-event-link:focus-visible {
+      border-color: var(--poppy);
+      box-shadow: 0 0 0 5px rgba(245,61,45,.18);
+      transform: scale(1.025);
+      outline: none;
     }
 
     .event-grid {
@@ -417,6 +454,15 @@
 
         <figure class="calendar-card">
           <img src="assets/strength-resilience/sr-calendar.png" alt="SR Sensory Gym monthly event calendar and schedule" />
+          <a
+            class="calendar-event-link"
+            href="https://www.srchildrenslounge.com/event-details/kids-movie-night"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Purchase tickets for Kids Movie Night on June 12 from 6 PM to 8 PM"
+          >
+            <span>Tickets</span>
+          </a>
         </figure>
       </section>
 
