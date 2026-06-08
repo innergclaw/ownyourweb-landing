@@ -54,13 +54,13 @@
     }
 
     .site-header {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      justify-items: center;
       align-items: center;
-      gap: 18px;
-      padding: 16px 18px;
+      gap: 10px;
+      padding: 14px 18px 16px;
       border: 2px solid rgba(25, 200, 106, .34);
-      border-radius: 999px;
+      border-radius: 32px;
       background: rgba(255, 255, 255, .92);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
@@ -71,20 +71,22 @@
 
     .brand {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 6px;
       min-width: 0;
+      text-align: center;
     }
 
     .brand img {
-      width: 72px;
-      height: 72px;
+      width: 82px;
+      height: 82px;
       object-fit: contain;
     }
 
     .brand strong {
       display: block;
-      font-size: 1rem;
+      font-size: 1.12rem;
       font-weight: 800;
     }
 
@@ -98,14 +100,16 @@
       text-transform: uppercase;
     }
 
-    .brand span { display: block; margin-top: 4px; }
+    .brand span { display: block; margin-top: 5px; }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: center;
       gap: 8px;
-      flex: 1 1 520px;
+      width: 100%;
+      padding-top: 12px;
+      border-top: 1px solid rgba(31,31,31,.09);
     }
 
     .nav-links a,
@@ -452,23 +456,31 @@
       }
 
       .site-header {
-        flex-direction: column;
-        align-items: stretch;
-        border-radius: 32px;
+        padding: 16px 12px;
+        border-radius: 26px;
       }
 
       .brand {
-        align-items: center;
+        width: 100%;
+      }
+
+      .brand img {
+        width: 74px;
+        height: 74px;
       }
 
       .nav-links {
-        flex: 0 0 auto;
         justify-content: flex-start;
         align-items: center;
         flex-wrap: nowrap;
         overflow-x: auto;
-        padding-bottom: 4px;
+        padding: 12px 2px 5px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
       }
 
       .nav-links a {
