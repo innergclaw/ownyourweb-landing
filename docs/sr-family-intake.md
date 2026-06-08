@@ -8,6 +8,7 @@ SR Sensory Gym uses a dedicated Edge Function and private database table for fam
 - Book Now page: `https://ownyourweb.xyz/demos/strength-resilience-book-now.html#book-request`
 - Party booking page: `https://ownyourweb.xyz/demos/strength-resilience-book-a-party.html#party-request`
 - Home contact form: `https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html#connect`
+- Newsletter popup: appears on the homepage after five seconds.
 
 ## Submission Types
 
@@ -15,6 +16,7 @@ SR Sensory Gym uses a dedicated Edge Function and private database table for fam
 - `open_play_booking`: Book Now form for open play, daily pass, and summer open play requests.
 - `party_booking`: Book A Party form for birthday packages.
 - `general_inquiry`: homepage contact form.
+- `newsletter_signup`: email-only signup from the delayed homepage popup.
 
 ## Backend Files
 

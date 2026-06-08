@@ -602,6 +602,134 @@
       font-size: .94rem;
     }
 
+    .newsletter-popup[hidden] {
+      display: none;
+    }
+
+    .newsletter-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .28s ease, visibility .28s ease;
+    }
+
+    .newsletter-popup.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .newsletter-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 18, 18, .62);
+      backdrop-filter: blur(3px);
+    }
+
+    .newsletter-card {
+      position: relative;
+      width: min(520px, 100%);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      background: #fff8f2;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+      transform: translateY(24px) scale(.98);
+      transition: transform .32s ease;
+    }
+
+    .newsletter-popup.is-visible .newsletter-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .newsletter-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      z-index: 2;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      color: #b8b8b8;
+      background: transparent;
+      cursor: pointer;
+      font: 700 3rem/1 Arial, sans-serif;
+    }
+
+    .newsletter-copy {
+      padding: 64px 42px 38px;
+    }
+
+    .newsletter-copy h2 {
+      max-width: 420px;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      line-height: .9;
+    }
+
+    .newsletter-copy > p {
+      margin-top: 24px;
+      color: #3a3632;
+      font-size: 1.12rem;
+      line-height: 1.55;
+    }
+
+    .newsletter-form {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .newsletter-form label {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .newsletter-form input[type="email"] {
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid #5a514b;
+      border-radius: 0;
+      padding: 8px 4px 12px;
+      color: var(--ink);
+      background: transparent;
+      font: italic 1.15rem Georgia, serif;
+      outline: none;
+    }
+
+    .newsletter-form input[type="email"]:focus {
+      border-color: var(--forest);
+    }
+
+    .newsletter-form .form-status {
+      min-height: 0;
+      margin: 0;
+      font-size: .88rem;
+    }
+
+    .newsletter-submit {
+      justify-self: center;
+      min-width: 190px;
+      min-height: 58px;
+      border: 2px solid #514841;
+      color: #332d29;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .newsletter-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
     @media (max-width: 980px) {
       .hero,
       .story-grid,
@@ -666,6 +794,14 @@
       .form-field.full,
       .form-submit {
         grid-column: auto;
+      }
+
+      .newsletter-copy {
+        padding: 58px 28px 32px;
+      }
+
+      .newsletter-copy h2 {
+        font-size: clamp(2.45rem, 12vw, 3.4rem);
       }
     }
   </style>
@@ -953,6 +1089,28 @@
       </div>
     </main>
   </div>
+
+  <div class="newsletter-popup" data-sr-newsletter-popup hidden>
+    <button class="newsletter-backdrop" type="button" data-sr-newsletter-close aria-label="Close newsletter signup"></button>
+    <aside class="newsletter-card" role="dialog" aria-modal="true" aria-labelledby="newsletter-title">
+      <button class="newsletter-close" type="button" data-sr-newsletter-close aria-label="Close newsletter signup">&times;</button>
+      <div class="newsletter-copy">
+        <h2 id="newsletter-title">Get the Latest News to Your Inbox</h2>
+        <p>Subscribe to our newsletter to receive news, events, and updates from SR Sensory Gym.</p>
+        <form class="newsletter-form" data-sr-intake-form data-sr-newsletter-form>
+          <input type="hidden" name="intake_type" value="newsletter_signup" />
+          <input type="hidden" name="requested_service" value="Newsletter Signup" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+          <label for="newsletter-email">Enter your email here *</label>
+          <input id="newsletter-email" name="email" type="email" placeholder="Email" autocomplete="email" required />
+          <p class="form-status" data-sr-form-status aria-live="polite"></p>
+          <button class="newsletter-submit" type="submit">Sign Up</button>
+        </form>
+      </div>
+      <img class="newsletter-image" src="assets/strength-resilience/sr-party-room.jpeg" alt="A celebration setup inside SR Sensory Gym" />
+    </aside>
+  </div>
+
   <script src="assets/strength-resilience/flow.js"></script>
   <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
