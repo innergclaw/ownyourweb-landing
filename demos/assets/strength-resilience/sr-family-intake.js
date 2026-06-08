@@ -129,7 +129,7 @@
       window.requestAnimationFrame(() => {
         newsletterPopup.classList.add("is-visible");
       });
-    }, 5000);
+    }, 2000);
   }
 
   document.querySelectorAll("[data-sr-intake-form]").forEach(bindForm);

@@ -615,7 +615,7 @@
       z-index: 100;
       display: grid;
       place-items: center;
-      padding: 20px;
+      padding: 18px;
       opacity: 0;
       visibility: hidden;
       transition: opacity .28s ease, visibility .28s ease;
@@ -629,18 +629,25 @@
     .newsletter-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(18, 18, 18, .62);
-      backdrop-filter: blur(3px);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(25, 200, 106, .24), transparent 260px),
+        radial-gradient(circle at 82% 26%, rgba(255, 164, 27, .22), transparent 240px),
+        rgba(31, 31, 31, .34);
+      backdrop-filter: blur(8px);
     }
 
     .newsletter-card {
       position: relative;
-      width: min(520px, 100%);
-      max-height: calc(100vh - 40px);
+      width: min(560px, 100%);
+      max-height: calc(100vh - 36px);
       overflow-y: auto;
-      background: #fff8f2;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
-      transform: translateY(24px) scale(.98);
+      border: 2px solid rgba(25, 200, 106, .24);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(255, 164, 27, .16) 0 110px, transparent 112px),
+        linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,248,238,.98));
+      box-shadow: 0 24px 70px rgba(31, 31, 31, .2);
+      transform: translateY(18px) scale(.98);
       transition: transform .32s ease;
     }
 
@@ -650,60 +657,66 @@
 
     .newsletter-close {
       position: absolute;
-      top: 14px;
-      right: 16px;
+      top: 18px;
+      right: 18px;
       z-index: 2;
-      width: 48px;
-      height: 48px;
-      border: 0;
-      color: #b8b8b8;
-      background: transparent;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(31,31,31,.08);
+      border-radius: 50%;
+      color: rgba(31,31,31,.48);
+      background: rgba(255,255,255,.82);
       cursor: pointer;
-      font: 700 3rem/1 Arial, sans-serif;
+      font: 700 2.2rem/1 Arial, sans-serif;
+      box-shadow: 0 10px 22px rgba(31,31,31,.08);
     }
 
     .newsletter-copy {
-      padding: 64px 42px 38px;
+      padding: 44px 42px 24px;
     }
 
     .newsletter-copy h2 {
       max-width: 420px;
-      font-size: clamp(2.6rem, 8vw, 4rem);
-      line-height: .9;
+      font-size: clamp(2.35rem, 7vw, 3.55rem);
+      line-height: .92;
     }
 
     .newsletter-copy > p {
-      margin-top: 24px;
+      margin-top: 18px;
       color: #3a3632;
-      font-size: 1.12rem;
+      font-size: 1rem;
       line-height: 1.55;
     }
 
     .newsletter-form {
       display: grid;
-      gap: 18px;
-      margin-top: 28px;
+      gap: 14px;
+      margin-top: 22px;
     }
 
     .newsletter-form label {
-      font-size: 1rem;
+      color: var(--muted);
+      font-size: .72rem;
       font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .newsletter-form input[type="email"] {
       width: 100%;
-      border: 0;
-      border-bottom: 2px solid #5a514b;
-      border-radius: 0;
-      padding: 8px 4px 12px;
+      border: 1px solid rgba(31,31,31,.14);
+      border-radius: 999px;
+      padding: 14px 18px;
       color: var(--ink);
-      background: transparent;
-      font: italic 1.15rem Georgia, serif;
+      background: rgba(255,255,255,.88);
+      font: 600 1rem Manrope, ui-sans-serif, system-ui, sans-serif;
       outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
     }
 
     .newsletter-form input[type="email"]:focus {
       border-color: var(--forest);
+      box-shadow: 0 0 0 4px rgba(25, 200, 106, .12);
     }
 
     .newsletter-form .form-status {
@@ -713,21 +726,25 @@
     }
 
     .newsletter-submit {
-      justify-self: center;
-      min-width: 190px;
-      min-height: 58px;
-      border: 2px solid #514841;
-      color: #332d29;
-      background: transparent;
+      justify-self: stretch;
+      min-height: 52px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--warm-white);
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      box-shadow: 0 16px 30px rgba(25, 200, 106, .22);
     }
 
     .newsletter-image {
       width: 100%;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16 / 7;
       object-fit: cover;
+      border-top: 1px solid rgba(31,31,31,.08);
     }
 
     @media (max-width: 980px) {
@@ -797,7 +814,7 @@
       }
 
       .newsletter-copy {
-        padding: 58px 28px 32px;
+        padding: 42px 26px 24px;
       }
 
       .newsletter-copy h2 {

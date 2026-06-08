@@ -8,7 +8,7 @@ SR Sensory Gym uses a dedicated Edge Function and private database table for fam
 - Book Now page: `https://ownyourweb.xyz/demos/strength-resilience-book-now.html#book-request`
 - Party booking page: `https://ownyourweb.xyz/demos/strength-resilience-book-a-party.html#party-request`
 - Home contact form: `https://ownyourweb.xyz/demos/strength-resilience-children-lounge.html#connect`
-- Newsletter popup: appears on the homepage after five seconds.
+- Newsletter popup: appears on the homepage after two seconds.
 
 ## Submission Types
 
