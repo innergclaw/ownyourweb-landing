@@ -368,7 +368,9 @@
     .outcome-visual {
       position: relative;
       overflow: hidden;
-      background: var(--lime);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(150,201,0,.12), transparent 54%),
+        var(--white);
     }
 
     .globe-mark {
@@ -377,13 +379,13 @@
       left: 50%;
       width: min(72%, 470px);
       transform: translate(-50%, -50%);
-      opacity: .86;
+      opacity: 1;
     }
 
     .orbit {
       position: absolute;
       inset: 12%;
-      border: 1px solid rgba(21,26,28,.28);
+      border: 1px solid rgba(150,201,0,.42);
       border-radius: 50%;
       animation: spin 18s linear infinite;
     }
@@ -516,7 +518,7 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#home" aria-label="OMNI Global Solutions home">
-        <img src="assets/omni-site/omni-global-solutions-logo.png" alt="OMNI Global Solutions LLC">
+        <img src="assets/omni-site/omni-global-solutions-header-logo.png" alt="OMNI Global Solutions LLC">
       </a>
       <nav class="nav" aria-label="Primary navigation">
         <a href="#solutions">Solutions</a>
@@ -627,7 +629,7 @@
       <div class="outcome-layout">
         <div class="outcome-visual">
           <div class="orbit" aria-hidden="true"></div>
-          <img class="globe-mark" src="assets/omni-global/omni-global-solutions-preview-02-green-globe.png" alt="OMNI Global Solutions globe identity mark">
+          <img class="globe-mark" src="assets/omni-site/omni-global-solutions-icon.png" alt="OMNI Global Solutions globe identity mark">
         </div>
         <div class="outcome-copy reveal">
           <span class="eyebrow">The result</span>
