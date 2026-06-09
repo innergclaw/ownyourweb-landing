@@ -275,6 +275,21 @@
       transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
     }
 
+    .calendar-event-link.messy-thursday {
+      left: 46.85%;
+      top: 52.7%;
+    }
+
+    .calendar-event-link.messy-thursday span {
+      background: #7a5bc7;
+    }
+
+    .calendar-event-link.messy-thursday:hover,
+    .calendar-event-link.messy-thursday:focus-visible {
+      border-color: #7a5bc7;
+      box-shadow: 0 0 0 5px rgba(122,91,199,.18);
+    }
+
     .calendar-event-link span {
       padding: 5px 8px;
       border-radius: 999px;
@@ -298,7 +313,7 @@
 
     .event-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -315,6 +330,11 @@
 
     .event-card:nth-child(2) {
       border-color: rgba(245,61,45,.45);
+    }
+
+    .event-card:nth-child(3) {
+      border-color: rgba(122,91,199,.45);
+      background: linear-gradient(180deg, #ffffff, rgba(122,91,199,.07));
     }
 
     .event-card h3 {
@@ -485,6 +505,15 @@
           >
             <span>Tickets</span>
           </a>
+          <a
+            class="calendar-event-link messy-thursday"
+            href="https://square.link/u/FhIkEWa4"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Purchase admission for Messy Thursdays on June 18 from 5 PM to 6:30 PM"
+          >
+            <span>Book</span>
+          </a>
         </figure>
       </section>
 
@@ -505,6 +534,18 @@
           <h3>Kids Movie Night.</h3>
           <p>June 12 from 6 PM to 8 PM. Purchase tickets online to reserve your child's spot.</p>
           <strong>Purchase tickets →</strong>
+        </a>
+        <a
+          class="event-card event-purchase-card"
+          href="https://square.link/u/FhIkEWa4"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Purchase admission for Messy Thursdays"
+        >
+          <span class="event-label">Thursday special</span>
+          <h3>Messy Thursdays.</h3>
+          <p>June 18 from 5 PM to 6:30 PM. Enjoy messy play activities and open gym access for $25.</p>
+          <strong>Purchase admission →</strong>
         </a>
       </section>
 
