@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMNI Global Solutions LLC | Business Solutions</title>
+  <meta name="description" content="OMNI Global Solutions LLC helps organizations strengthen operations, coordinate projects, and build practical systems for sustainable growth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <style>
+    :root {
+      --ink: #151a1c;
+      --graphite: #33383a;
+      --muted: #697174;
+      --lime: #96c900;
+      --lime-deep: #6e9800;
+      --lime-soft: #eff8d6;
+      --paper: #f6f8f4;
+      --white: #ffffff;
+      --line: rgba(21, 26, 28, .14);
+      --shadow: 0 22px 70px rgba(21, 26, 28, .13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Manrope, system-ui, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, textarea { font: inherit; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .demo-bar {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 18px;
+      color: var(--white);
+      background: var(--ink);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: absolute;
+      top: 34px;
+      right: 0;
+      left: 0;
+      z-index: 10;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+
+    .header-inner {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      width: min(330px, 42vw);
+      padding: 12px 18px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 10px 35px rgba(0,0,0,.18);
+    }
+
+    .brand img {
+      width: 100%;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid transparent;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      border-color: rgba(255,255,255,.42);
+      outline: none;
+    }
+
+    .nav .nav-cta {
+      margin-left: 8px;
+      color: var(--ink);
+      background: var(--lime);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      display: grid;
+      align-items: end;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(9,13,14,.96) 0%, rgba(9,13,14,.77) 39%, rgba(9,13,14,.14) 72%),
+        url("assets/omni-site/omni-global-team-hero.jpg") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      bottom: -220px;
+      width: 520px;
+      height: 520px;
+      border: 90px solid rgba(150,201,0,.2);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 210px 0 92px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--lime);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -.04em;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-top: 22px;
+      font-size: clamp(4.4rem, 9vw, 8.4rem);
+      line-height: .84;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: transform .18s ease, background .18s ease;
+    }
+
+    .button:hover { transform: translateY(-3px); }
+    .button.primary { color: var(--ink); background: var(--lime); }
+    .button.secondary { color: var(--white); border-color: rgba(255,255,255,.4); }
+
+    .metric-band {
+      position: relative;
+      z-index: 3;
+      margin-top: -1px;
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric {
+      min-height: 132px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 28px;
+      border-right: 1px solid rgba(255,255,255,.13);
+    }
+
+    .metric:last-child { border-right: 0; }
+    .metric strong {
+      color: var(--lime);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.65rem;
+    }
+    .metric span { color: rgba(255,255,255,.62); font-size: .82rem; }
+
+    section { scroll-margin-top: 40px; }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 52px;
+    }
+
+    .section-head h2,
+    .approach-copy h2,
+    .contact-copy h2 {
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: .9;
+    }
+
+    .section-head p,
+    .approach-copy p,
+    .contact-copy p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .solution-card {
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: 0 14px 38px rgba(21,26,28,.06);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .solution-card:hover {
+      border-color: rgba(150,201,0,.78);
+      transform: translateY(-6px);
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--lime-soft);
+    }
+
+    .icon-box svg { width: 24px; height: 24px; }
+    .solution-card small {
+      color: var(--lime-deep);
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .solution-card h3 { margin-top: 14px; font-size: 1.75rem; line-height: 1; }
+    .solution-card p { margin: 16px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+    .approach {
+      color: var(--white);
+      background: var(--graphite);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .approach-copy p { color: rgba(255,255,255,.65); }
+    .approach-copy .eyebrow { margin-bottom: 20px; }
+
+    .steps {
+      counter-reset: approach;
+      border-top: 1px solid rgba(255,255,255,.16);
+    }
+
+    .step {
+      counter-increment: approach;
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+
+    .step::before {
+      content: "0" counter(approach);
+      color: var(--lime);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .step h3 { font-size: 1.35rem; }
+    .step p { margin: 7px 0 0; color: rgba(255,255,255,.58); line-height: 1.65; }
+
+    .outcomes {
+      background: var(--white);
+    }
+
+    .outcome-layout {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      min-height: 560px;
+    }
+
+    .outcome-visual {
+      position: relative;
+      overflow: hidden;
+      background: var(--lime);
+    }
+
+    .globe-mark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(72%, 470px);
+      transform: translate(-50%, -50%);
+      opacity: .86;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(21,26,28,.28);
+      border-radius: 50%;
+      animation: spin 18s linear infinite;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      top: 8%;
+      left: 15%;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 0 0 7px rgba(255,255,255,.24);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .outcome-copy {
+      display: grid;
+      align-content: center;
+      gap: 26px;
+      padding: clamp(38px, 6vw, 76px);
+      background: var(--paper);
+    }
+
+    .outcome-copy h2 { font-size: clamp(3rem, 5.5vw, 5.8rem); line-height: .9; }
+    .outcome-list { display: grid; gap: 12px; }
+    .outcome-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .outcome-item svg { width: 20px; color: var(--lime-deep); }
+
+    .contact {
+      padding: 100px 0;
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-copy p { max-width: 650px; color: rgba(255,255,255,.65); }
+    .contact .button { min-width: 220px; }
+
+    footer {
+      padding: 26px 0;
+      color: var(--muted);
+      background: var(--white);
+      font-size: .78rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 980px) {
+      .nav a:not(.nav-cta) { display: none; }
+      .hero { min-height: 700px; background-position: 62% center; }
+      .metrics, .solution-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.13); }
+      .section-head, .approach-grid, .outcome-layout, .contact-grid { grid-template-columns: 1fr; }
+      .section-head, .approach-grid { gap: 36px; }
+      .outcome-visual { min-height: 480px; }
+      .contact-grid { justify-items: start; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .site-header { top: 48px; }
+      .header-inner { min-height: 78px; }
+      .brand { width: 210px; padding: 8px 10px; }
+      .brand img { height: 38px; }
+      .nav .nav-cta { min-height: 40px; padding: 0 11px; font-size: .68rem; }
+      .hero { min-height: 720px; background-position: 69% center; }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(9,13,14,.28);
+      }
+      .hero-content { padding: 190px 0 72px; }
+      h1 { font-size: clamp(3.6rem, 19vw, 5.4rem); }
+      .actions { display: grid; }
+      .metrics, .solution-grid { grid-template-columns: 1fr; }
+      .metric { min-height: 104px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+      .metric:last-child { border-bottom: 0; }
+      .section { padding: 78px 0; }
+      .section-head { margin-bottom: 34px; }
+      .solution-card { min-height: 270px; }
+      .outcome-visual { min-height: 360px; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">Website concept prepared by OwnYourWeb</div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#home" aria-label="OMNI Global Solutions home">
+        <img src="assets/omni-site/omni-global-solutions-logo.png" alt="OMNI Global Solutions LLC">
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#solutions">Solutions</a>
+        <a href="#approach">Approach</a>
+        <a href="#outcomes">Outcomes</a>
+        <a class="nav-cta" href="#contact">Let's Talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="wrap hero-content">
+        <span class="eyebrow">Business clarity. Global perspective.</span>
+        <h1>Solutions that move business forward.</h1>
+        <p class="hero-copy">
+          OMNI Global Solutions helps organizations organize complex work, strengthen operations, and move from ideas to practical execution.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#solutions">Explore Solutions <i data-lucide="arrow-down-right"></i></a>
+          <a class="button secondary" href="#contact">Start a Conversation</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="metric-band">
+      <div class="wrap metrics">
+        <div class="metric"><strong>01</strong><span>Strategy built around the real objective</span></div>
+        <div class="metric"><strong>02</strong><span>Systems that make execution clearer</span></div>
+        <div class="metric"><strong>03</strong><span>Support across teams and projects</span></div>
+        <div class="metric"><strong>04</strong><span>Solutions designed to scale</span></div>
+      </div>
+    </div>
+
+    <section class="section" id="solutions">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Core capabilities</span>
+            <h2>Built for the work behind growth.</h2>
+          </div>
+          <p>
+            Every engagement starts with understanding the challenge, identifying the operational gaps, and creating a practical path from where the business is now to where it needs to go.
+          </p>
+        </div>
+
+        <div class="solution-grid">
+          <article class="solution-card reveal">
+            <div class="icon-box"><i data-lucide="compass"></i></div>
+            <div>
+              <small>Strategy</small>
+              <h3>Business Direction</h3>
+              <p>Clarify priorities, align resources, and build a focused roadmap around the next objective.</p>
+            </div>
+          </article>
+          <article class="solution-card reveal">
+            <div class="icon-box"><i data-lucide="workflow"></i></div>
+            <div>
+              <small>Operations</small>
+              <h3>Process Improvement</h3>
+              <p>Turn scattered workflows into repeatable systems that reduce friction and support consistency.</p>
+            </div>
+          </article>
+          <article class="solution-card reveal">
+            <div class="icon-box"><i data-lucide="briefcase-business"></i></div>
+            <div>
+              <small>Execution</small>
+              <h3>Project Support</h3>
+              <p>Coordinate priorities, timelines, communication, and deliverables so important work keeps moving.</p>
+            </div>
+          </article>
+          <article class="solution-card reveal">
+            <div class="icon-box"><i data-lucide="globe-2"></i></div>
+            <div>
+              <small>Scale</small>
+              <h3>Growth Systems</h3>
+              <p>Create stronger infrastructure for expansion, partnerships, service delivery, and long-term growth.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section approach" id="approach">
+      <div class="wrap approach-grid">
+        <div class="approach-copy reveal">
+          <span class="eyebrow">How OMNI works</span>
+          <h2>Clear thinking. Practical movement.</h2>
+          <p>
+            OMNI brings structure to the moving pieces, then turns that structure into decisions, systems, and accountable next steps.
+          </p>
+        </div>
+        <div class="steps reveal">
+          <article class="step">
+            <div><h3>Understand the environment</h3><p>Review the goals, people, processes, constraints, and opportunities shaping the work.</p></div>
+          </article>
+          <article class="step">
+            <div><h3>Define the right solution</h3><p>Build a focused plan that fits the actual organization instead of forcing a generic playbook.</p></div>
+          </article>
+          <article class="step">
+            <div><h3>Move into execution</h3><p>Translate strategy into clear ownership, practical actions, and measurable progress.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="outcomes" id="outcomes">
+      <div class="outcome-layout">
+        <div class="outcome-visual">
+          <div class="orbit" aria-hidden="true"></div>
+          <img class="globe-mark" src="assets/omni-global/omni-global-solutions-preview-02-green-globe.png" alt="OMNI Global Solutions globe identity mark">
+        </div>
+        <div class="outcome-copy reveal">
+          <span class="eyebrow">The result</span>
+          <h2>A stronger operating position.</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Clearer priorities and decisions</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Better organized workflows</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Stronger team coordination</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Systems prepared for growth</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Start the conversation</span>
+          <h2>Bring the challenge. Build the solution.</h2>
+          <p>Tell OMNI what needs to move, improve, or become more organized. The first step is a focused conversation around the objective.</p>
+        </div>
+        <a class="button primary reveal" href="mailto:darealtorr@icloud.com?subject=OMNI%20Global%20Solutions%20Consultation">Request Consultation <i data-lucide="arrow-up-right"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>&copy; 2026 OMNI Global Solutions LLC</span>
+      <span>Website concept by OwnYourWeb</span>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    });
+  </script>
+</body>
+</html>
