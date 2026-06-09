@@ -328,6 +328,28 @@
       line-height: 1.7;
     }
 
+    .event-purchase-card {
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .event-purchase-card:hover,
+    .event-purchase-card:focus-visible {
+      border-color: var(--poppy);
+      box-shadow: 0 22px 48px rgba(245,61,45,.18);
+      transform: translateY(-4px);
+      outline: none;
+    }
+
+    .event-purchase-card strong {
+      display: inline-flex;
+      margin-top: 18px;
+      color: var(--poppy);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
     .note-band {
       display: grid;
       grid-template-columns: .88fr 1.12fr;
@@ -472,11 +494,18 @@
           <h3>Structured family activities.</h3>
           <p>Science Saturdays, toddler time, and class-style activities may appear on the monthly schedule.</p>
         </article>
-        <article class="event-card">
+        <a
+          class="event-card event-purchase-card"
+          href="https://www.srchildrenslounge.com/event-details/kids-movie-night"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Purchase tickets for Kids Movie Night"
+        >
           <span class="event-label">Special events</span>
-          <h3>Registration may be required.</h3>
-          <p>Special events can require registration online and may affect open play availability.</p>
-        </article>
+          <h3>Kids Movie Night.</h3>
+          <p>June 12 from 6 PM to 8 PM. Purchase tickets online to reserve your child's spot.</p>
+          <strong>Purchase tickets →</strong>
+        </a>
       </section>
 
       <section class="note-band" id="event-contact">
