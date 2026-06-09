@@ -298,7 +298,7 @@
 
     .event-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -308,12 +308,12 @@
       background: linear-gradient(180deg, #ffffff, rgba(25,200,106,.05));
     }
 
-    .event-card:nth-child(2) {
+    .event-card:first-child {
       border-color: rgba(255,164,27,.6);
       background: linear-gradient(180deg, #ffffff, rgba(255,164,27,.08));
     }
 
-    .event-card:nth-child(3) {
+    .event-card:nth-child(2) {
       border-color: rgba(245,61,45,.45);
     }
 
@@ -467,11 +467,6 @@
       </section>
 
       <section class="event-grid" aria-label="Event calendar details">
-        <article class="event-card">
-          <span class="event-label">Open play</span>
-          <h3>Drop-in style play windows.</h3>
-          <p>Review the calendar before visiting so you can see open play days and times for the month.</p>
-        </article>
         <article class="event-card">
           <span class="event-label">Classes</span>
           <h3>Structured family activities.</h3>
