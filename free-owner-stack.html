@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Owner Readiness Stack | OWNYOURWEB</title>
+  <meta name="description" content="Get the free Owner Readiness Stack and see what your business needs to move from an idea or social page into an owned business system.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --graphite: #232323;
+      --muted: #686761;
+      --lime: #c8ff2e;
+      --amber: #ffb000;
+      --coral: #ff4f32;
+      --cyan: #31d8ff;
+      --line: #191919;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13,13,13,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, a { -webkit-tap-highlight-color: transparent; }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      border-bottom: 3px solid var(--line);
+      background: rgba(251,250,245,.94);
+    }
+
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      box-shadow: 5px 5px 0 var(--lime);
+    }
+
+    .brand-mark span:nth-child(1) { background: var(--lime); }
+    .brand-mark span:nth-child(2) { background: var(--amber); }
+    .brand-mark span:nth-child(3) { background: var(--coral); }
+    .brand-mark span:nth-child(4) { background: var(--cyan); }
+
+    .brand-copy {
+      display: grid;
+      line-height: 1;
+    }
+
+    .brand-copy small {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .68rem;
+      text-transform: uppercase;
+    }
+
+    .back {
+      border: 2px solid var(--line);
+      padding: 10px 14px;
+      background: var(--white);
+      font-size: .8rem;
+      font-weight: 900;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .hero {
+      padding: 72px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, .75fr);
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      border: 2px solid var(--line);
+      padding: 8px 10px;
+      background: var(--lime);
+      font-size: .76rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Anton, Impact, sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-top: 24px;
+      max-width: 9ch;
+      font-size: clamp(4.8rem, 11vw, 9.5rem);
+      line-height: .9;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: var(--graphite);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .mini-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .mini-stack span {
+      border: 2px solid var(--line);
+      padding: 7px 9px;
+      background: var(--white);
+      font-size: .74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .form-card {
+      position: relative;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: clamp(24px, 5vw, 42px);
+      box-shadow: 12px 12px 0 var(--line);
+    }
+
+    .form-card::before {
+      content: "FREE";
+      position: absolute;
+      top: -18px;
+      right: 18px;
+      border: 3px solid var(--line);
+      padding: 7px 12px;
+      background: var(--coral);
+      color: var(--white);
+      font-weight: 1000;
+      transform: rotate(3deg);
+    }
+
+    .form-card h2 {
+      max-width: 9ch;
+      font-size: clamp(2.7rem, 6vw, 4.8rem);
+      line-height: .9;
+    }
+
+    .form-card p {
+      margin: 18px 0 24px;
+      color: var(--graphite);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      min-height: 56px;
+      border: 3px solid var(--line);
+      border-radius: 0;
+      padding: 0 14px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+    }
+
+    input:focus {
+      outline: 4px solid rgba(49,216,255,.35);
+      outline-offset: 1px;
+    }
+
+    .honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .submit {
+      width: 100%;
+      min-height: 58px;
+      margin-top: 12px;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 1000;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .submit:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .privacy {
+      margin: 16px 0 0 !important;
+      color: var(--muted) !important;
+      font-size: .75rem;
+      line-height: 1.4 !important;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 16px;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .status.error { color: #b82412; }
+
+    .stack-section {
+      display: none;
+      padding: 34px 0 84px;
+    }
+
+    .stack-section.unlocked {
+      display: block;
+      animation: reveal .45s ease both;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stack-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .stack-head h2 {
+      max-width: 10ch;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: .86;
+    }
+
+    .score-key {
+      border: 3px solid var(--line);
+      padding: 14px;
+      background: var(--amber);
+      font-size: .76rem;
+      font-weight: 900;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stack-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      border: 3px solid var(--line);
+      padding: 20px;
+      background: var(--white);
+      box-shadow: 7px 7px 0 rgba(13,13,13,.22);
+    }
+
+    .stack-number {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--line);
+      background: var(--lime);
+      font-family: Anton, Impact, sans-serif;
+      font-size: 1.7rem;
+    }
+
+    .stack-item:nth-child(2) .stack-number,
+    .stack-item:nth-child(6) .stack-number { background: var(--cyan); }
+    .stack-item:nth-child(3) .stack-number,
+    .stack-item:nth-child(7) .stack-number { background: var(--amber); }
+    .stack-item:nth-child(4) .stack-number { background: var(--coral); color: var(--white); }
+
+    .stack-item h3 {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .stack-item p {
+      margin: 8px 0 0;
+      color: var(--graphite);
+      font-size: .88rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-top: 12px;
+      font-size: .79rem;
+      font-weight: 800;
+    }
+
+    .check input {
+      width: 19px;
+      min-height: 19px;
+      flex: 0 0 auto;
+      margin: 0;
+      accent-color: var(--lime);
+    }
+
+    .results {
+      margin-top: 24px;
+      border: 3px solid var(--line);
+      padding: 24px;
+      background: var(--ink);
+      color: var(--white);
+      box-shadow: 9px 9px 0 var(--lime);
+    }
+
+    .results h3 {
+      font-size: 2.1rem;
+    }
+
+    .results p {
+      margin: 10px 0 0;
+      max-width: 760px;
+      color: #deddd7;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .action {
+      border: 2px solid var(--white);
+      padding: 11px 14px;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .action.secondary {
+      background: transparent;
+      color: var(--white);
+    }
+
+    footer {
+      border-top: 3px solid var(--line);
+      padding: 24px 0;
+      background: var(--white);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 800px) {
+      .hero { padding-top: 48px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(4.7rem, 24vw, 7.2rem); }
+      .stack-head { grid-template-columns: 1fr; }
+      .score-key { justify-self: start; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .brand-copy small { display: none; }
+    }
+
+    @media print {
+      .topbar, .hero, footer, .actions { display: none !important; }
+      .stack-section { display: block !important; padding: 0; }
+      .stack-item, .results, .score-key { box-shadow: none; break-inside: avoid; }
+      body { background: #fff; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html" aria-label="OWNYOURWEB home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-copy">
+          <strong>OWNYOURWEB</strong>
+          <small>part of the INNERGINTEL ECOSYSTEM</small>
+        </span>
+      </a>
+      <a class="back" href="index.html">Back To Site</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Become An Owner In 2026</div>
+          <h1>Are You Ready To Own?</h1>
+          <p class="lead">Enter your email to unlock the free Owner Readiness Stack. Score the seven pieces every serious business needs before leaving a job, launching an offer, or depending on social media for everything.</p>
+          <div class="mini-stack" aria-label="Owner Stack categories">
+            <span>Offer</span>
+            <span>Brand</span>
+            <span>Domain</span>
+            <span>Website</span>
+            <span>Payment</span>
+            <span>Leads</span>
+            <span>Follow-Up</span>
+          </div>
+        </div>
+
+        <aside class="form-card" aria-label="Unlock the free Owner Readiness Stack">
+          <h2>Get The Free Stack</h2>
+          <p>No long application. Enter your email, unlock the checklist, and see the next system your business needs.</p>
+          <form id="readinessForm">
+            <label for="readinessEmail">Email Address</label>
+            <input id="readinessEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            <div class="honeypot" aria-hidden="true">
+              <label for="ownerWebsite">Website</label>
+              <input id="ownerWebsite" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <button class="submit" id="readinessSubmit" type="submit">Unlock My Owner Stack</button>
+            <p class="privacy">By unlocking the stack, you agree to receive practical ownership updates from InnerG Intel and OWNYOURWEB. Unsubscribe anytime.</p>
+            <div class="status" id="readinessStatus" role="status" aria-live="polite"></div>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stack-section" id="stack" aria-hidden="true">
+      <div class="wrap">
+        <div class="stack-head">
+          <div>
+            <div class="eyebrow">Your Free Readiness Scorecard</div>
+            <h2>The Owner Stack</h2>
+          </div>
+          <div class="score-key">CHECK EACH LAYER YOU ALREADY OWN</div>
+        </div>
+
+        <div class="stack-grid">
+          <article class="stack-item">
+            <span class="stack-number">1</span>
+            <div>
+              <h3>Clear Offer</h3>
+              <p>People can quickly understand what you sell, who it helps, what it costs, and what they should do next.</p>
+              <label class="check"><input class="score-check" type="checkbox"> I can explain my offer in one sentence.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">2</span>
+            <div>
+              <h3>Official Brand</h3>
+              <p>You have consistent logo files, colors, typography, and visuals that make the business recognizable.</p>
+              <label class="check"><input class="score-check" type="checkbox"> I own usable brand files.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">3</span>
+            <div>
+              <h3>Owned Domain</h3>
+              <p>Your business has a domain registered under an account you control, not only a social username.</p>
+              <label class="check"><input class="score-check" type="checkbox"> I control my business domain.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">4</span>
+            <div>
+              <h3>Digital Home</h3>
+              <p>Your website clearly explains the business, builds trust, works on mobile, and gives visitors a next step.</p>
+              <label class="check"><input class="score-check" type="checkbox"> My website actively supports the business.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">5</span>
+            <div>
+              <h3>Payment Path</h3>
+              <p>A customer can pay, reserve, subscribe, or begin the buying process without confusion.</p>
+              <label class="check"><input class="score-check" type="checkbox"> Customers have a clear way to pay.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">6</span>
+            <div>
+              <h3>Lead Capture</h3>
+              <p>You collect customer contact information through forms, bookings, downloads, or an email list you control.</p>
+              <label class="check"><input class="score-check" type="checkbox"> I collect leads outside social media.</label>
+            </div>
+          </article>
+          <article class="stack-item">
+            <span class="stack-number">7</span>
+            <div>
+              <h3>Follow-Up System</h3>
+              <p>New leads and customers enter an organized process for communication, delivery, reminders, and future offers.</p>
+              <label class="check"><input class="score-check" type="checkbox"> Every lead has a defined next step.</label>
+            </div>
+          </article>
+        </div>
+
+        <div class="results">
+          <h3 id="scoreTitle">Your Score: 0 / 7</h3>
+          <p id="scoreMessage">Start checking the layers you already control. Your lowest layers reveal what to build next.</p>
+          <div class="actions">
+            <button class="action" type="button" onclick="window.print()">Save / Print My Stack</button>
+            <a class="action secondary" href="index.html#start">Build My Missing Layers</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">OWNYOURWEB • BECOME AN OWNER IN 2026 • POWERED BY INNERG INTEL</div>
+  </footer>
+
+  <script src="/api-config.js"></script>
+  <script>
+    const form = document.getElementById('readinessForm');
+    const emailInput = document.getElementById('readinessEmail');
+    const submitButton = document.getElementById('readinessSubmit');
+    const statusBox = document.getElementById('readinessStatus');
+    const stackSection = document.getElementById('stack');
+    const scoreChecks = Array.from(document.querySelectorAll('.score-check'));
+    const scoreTitle = document.getElementById('scoreTitle');
+    const scoreMessage = document.getElementById('scoreMessage');
+    const endpoint = window.OWNYOURWEB_OWNER_READINESS_ENDPOINT || '';
+
+    function unlockStack() {
+      stackSection.classList.add('unlocked');
+      stackSection.setAttribute('aria-hidden', 'false');
+      statusBox.classList.remove('error');
+      statusBox.textContent = 'Unlocked. Your Owner Readiness Stack is ready below.';
+      stackSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateScore() {
+      const score = scoreChecks.filter((check) => check.checked).length;
+      scoreTitle.textContent = `Your Score: ${score} / 7`;
+
+      if (score <= 2) {
+        scoreMessage.textContent = 'You have the beginning of an idea or side hustle. Focus first on your offer, brand, and domain before making a major leap.';
+      } else if (score <= 4) {
+        scoreMessage.textContent = 'Your foundation is forming. Connect the missing layers so attention can move into leads, payments, and follow-up.';
+      } else if (score <= 6) {
+        scoreMessage.textContent = 'You are close to operating like an owner. Strengthen the remaining layer and make sure the whole system works together.';
+      } else {
+        scoreMessage.textContent = 'Your core Owner Stack is connected. Your next move is improving traffic, conversion, automation, and repeatable growth.';
+      }
+    }
+
+    scoreChecks.forEach((check) => check.addEventListener('change', updateScore));
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusBox.classList.remove('error');
+      statusBox.textContent = '';
+      submitButton.disabled = true;
+      submitButton.textContent = 'Unlocking...';
+
+      const payload = {
+        email: emailInput.value.trim(),
+        source_page: 'ownyourweb.xyz/free-owner-stack.html',
+        campaign: 'become_an_owner_2026',
+        resource: 'free_owner_readiness_stack',
+        referrer: document.referrer,
+        _gotcha: form.elements._gotcha.value
+      };
+
+      try {
+        if (!endpoint) throw new Error('Signup endpoint is unavailable');
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || 'Signup failed');
+        }
+
+        unlockStack();
+        form.reset();
+        submitButton.textContent = 'Stack Unlocked';
+      } catch (error) {
+        statusBox.classList.add('error');
+        statusBox.textContent = 'We could not unlock the stack yet. Please try again in a moment.';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Unlock My Owner Stack';
+        console.error('Owner Readiness signup failed:', error);
+      }
+    });
+  </script>
+</body>
+</html>
