@@ -1,4 +1,68 @@
 (() => {
+  const mobileShopQuery = window.matchMedia("(max-width: 760px)");
+  const shopDetails = document.querySelector(".nav-shop");
+  const shopSummary = shopDetails?.querySelector("summary");
+  const shopLink = shopDetails?.querySelector(".nav-shop-menu a");
+
+  if (shopDetails && shopSummary && shopLink) {
+    const shopOverlay = document.createElement("div");
+    shopOverlay.className = "nav-shop-overlay";
+    shopOverlay.setAttribute("aria-hidden", "true");
+    shopOverlay.innerHTML = `<a href="${shopLink.href}" target="_blank" rel="noopener noreferrer">${shopLink.textContent.trim()}</a>`;
+    document.body.appendChild(shopOverlay);
+
+    const closeShop = () => {
+      shopDetails.removeAttribute("open");
+      shopOverlay.classList.remove("is-open");
+      shopOverlay.setAttribute("aria-hidden", "true");
+    };
+
+    const positionShop = () => {
+      const summaryRect = shopSummary.getBoundingClientRect();
+      const overlayTop = Math.min(summaryRect.bottom + 8, window.innerHeight - 76);
+      shopOverlay.style.setProperty("--shop-overlay-top", `${Math.max(12, overlayTop)}px`);
+    };
+
+    shopDetails.addEventListener("toggle", () => {
+      if (!mobileShopQuery.matches) {
+        shopOverlay.classList.remove("is-open");
+        shopOverlay.setAttribute("aria-hidden", "true");
+        return;
+      }
+
+      if (shopDetails.open) {
+        positionShop();
+        shopOverlay.classList.add("is-open");
+        shopOverlay.setAttribute("aria-hidden", "false");
+      } else {
+        shopOverlay.classList.remove("is-open");
+        shopOverlay.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!shopDetails.open || !mobileShopQuery.matches) return;
+      if (shopDetails.contains(event.target) || shopOverlay.contains(event.target)) return;
+      closeShop();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeShop();
+    });
+
+    window.addEventListener("resize", () => {
+      if (!mobileShopQuery.matches) {
+        closeShop();
+      } else if (shopDetails.open) {
+        positionShop();
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (shopDetails.open && mobileShopQuery.matches) positionShop();
+    }, { passive: true });
+  }
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealSelector = [
     "main > section",
