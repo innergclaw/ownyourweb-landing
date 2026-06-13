@@ -335,6 +335,66 @@
       outline: none;
     }
 
+    .featured-event {
+      display: grid;
+      grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      padding: clamp(24px, 4vw, 42px) 0;
+      border-top: 2px solid rgba(25, 200, 106, .3);
+      border-bottom: 2px solid rgba(255, 164, 27, .35);
+    }
+
+    .featured-event figure {
+      margin: 0;
+      overflow: hidden;
+      border: 2px solid rgba(31, 31, 31, .12);
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .featured-event img {
+      width: 100%;
+      height: auto;
+    }
+
+    .featured-event h2 {
+      margin-top: 10px;
+    }
+
+    .featured-event-copy > p {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .event-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .event-fact {
+      padding: 14px 16px;
+      border-left: 4px solid var(--forest);
+      background: rgba(25, 200, 106, .07);
+    }
+
+    .event-fact strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: .76rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .event-fact span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
     .event-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -408,6 +468,7 @@
     @media (max-width: 980px) {
       .hero,
       .event-grid,
+      .featured-event,
       .note-band {
         grid-template-columns: 1fr;
       }
@@ -466,6 +527,10 @@
 
       .calendar-booking .button {
         width: 100%;
+      }
+
+      .event-facts {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -567,6 +632,49 @@
             target="_blank"
             rel="noopener noreferrer"
           >Book monthly events</a>
+        </div>
+      </section>
+
+      <section class="featured-event" aria-labelledby="glow-party-title">
+        <figure>
+          <img
+            src="assets/strength-resilience/lets-glow-crazy-kids.jpeg"
+            alt="Let's Glow Crazy Kids glow-in-the-dark party flyer"
+          />
+        </figure>
+        <div class="featured-event-copy">
+          <span class="eyebrow">Featured July event</span>
+          <h2 id="glow-party-title">Let's Glow Crazy Kids.</h2>
+          <p>
+            A glow-in-the-dark party where kids can dance, play, and make new friends in a bright, sensory-friendly celebration.
+          </p>
+          <div class="event-facts">
+            <div class="event-fact">
+              <strong>Date &amp; time</strong>
+              <span>July 17, 2026 | 5 PM-7 PM</span>
+            </div>
+            <div class="event-fact">
+              <strong>Ages</strong>
+              <span>Children ages 1-8</span>
+            </div>
+            <div class="event-fact">
+              <strong>Admission</strong>
+              <span>$40 | Siblings $25</span>
+            </div>
+            <div class="event-fact">
+              <strong>Early bird</strong>
+              <span>$35 admission</span>
+            </div>
+          </div>
+          <p>319 Easton Rd., Willow Grove, PA</p>
+          <div class="hero-actions" style="margin-top: 20px;">
+            <a
+              class="button primary"
+              href="https://square.link/u/TMuheSKC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Register for the glow party</a>
+          </div>
         </div>
       </section>
 
