@@ -395,6 +395,38 @@
       font-weight: 700;
     }
 
+    .science-event {
+      border-top-color: rgba(0, 148, 255, .35);
+      border-bottom-color: rgba(25, 200, 106, .35);
+    }
+
+    .science-dates {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin: 22px 0;
+    }
+
+    .science-dates span {
+      padding: 10px 8px;
+      border: 1px solid rgba(0, 148, 255, .24);
+      border-radius: 8px;
+      color: #0b567f;
+      background: rgba(0, 148, 255, .08);
+      font-size: .78rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .booking-note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--sun);
+      background: rgba(255, 164, 27, .09);
+      color: var(--ink);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
     .event-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -528,6 +560,10 @@
       .event-facts {
         grid-template-columns: 1fr;
       }
+
+      .science-dates {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
   <link rel="stylesheet" href="assets/strength-resilience/flow.css" />
@@ -619,6 +655,55 @@
             target="_blank"
             rel="noopener noreferrer"
           >Book monthly events</a>
+        </div>
+      </section>
+
+      <section class="featured-event science-event" aria-labelledby="science-saturdays-title">
+        <figure>
+          <img
+            src="assets/strength-resilience/science-saturdays.jpeg"
+            alt="Science Saturdays flyer with experiments, sensory science, dates, time, price, and location"
+          />
+        </figure>
+        <div class="featured-event-copy">
+          <span class="eyebrow">Every Saturday | Summer 2026</span>
+          <h2 id="science-saturdays-title">Science Saturdays.</h2>
+          <p>
+            Hands-on experiments, sensory science, and interactive fun every Saturday from June 20 through August 22.
+          </p>
+          <div class="event-facts">
+            <div class="event-fact">
+              <strong>Time</strong>
+              <span>12 PM-1 PM</span>
+            </div>
+            <div class="event-fact">
+              <strong>Admission</strong>
+              <span>$30 per session</span>
+            </div>
+          </div>
+          <div class="science-dates" aria-label="Available Science Saturdays dates">
+            <span>June 20</span>
+            <span>June 27</span>
+            <span>July 4</span>
+            <span>July 11</span>
+            <span>July 18</span>
+            <span>July 25</span>
+            <span>August 1</span>
+            <span>August 8</span>
+            <span>August 15</span>
+            <span>August 22</span>
+          </div>
+          <p class="booking-note">
+            In Square, select <strong>Science Saturdays</strong>, choose the Saturday you want, and complete the booking for that date.
+          </p>
+          <div class="hero-actions" style="margin-top: 20px;">
+            <a
+              class="button primary"
+              href="https://book.squareup.com/appointments/aqxtnbhobr9uti/location/LRYJM6EQ570NZ/services/AVI7IOXZVLVPTK2FHYHJ5345"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Choose a Saturday &amp; book</a>
+          </div>
         </div>
       </section>
 
