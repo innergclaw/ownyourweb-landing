@@ -260,6 +260,30 @@
       background: #ffffff;
     }
 
+    .calendar-booking {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px;
+      border: 2px solid rgba(25, 200, 106, .28);
+      border-radius: var(--radius-lg);
+      background: rgba(25, 200, 106, .08);
+    }
+
+    .calendar-booking p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .calendar-booking strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+
     .calendar-event-link {
       position: absolute;
       left: 57.65%;
@@ -434,6 +458,15 @@
         display: grid;
         grid-template-columns: 1fr;
       }
+
+      .calendar-booking {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .calendar-booking .button {
+        width: 100%;
+      }
     }
   </style>
   <link rel="stylesheet" href="assets/strength-resilience/flow.css" />
@@ -522,6 +555,19 @@
             <span>Book</span>
           </a>
         </figure>
+
+        <div class="calendar-booking">
+          <p>
+            <strong>Book events for the month</strong>
+            View available dates and reserve upcoming SR Sensory Gym events.
+          </p>
+          <a
+            class="button primary"
+            href="https://app.squareup.com/appointments/book/aqxtnbhobr9uti/LRYJM6EQ570NZ/start"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Book monthly events</a>
+        </div>
       </section>
 
       <section class="event-grid" aria-label="Event calendar details">
