@@ -2,13 +2,15 @@
   const mobileShopQuery = window.matchMedia("(max-width: 760px)");
   const shopDetails = document.querySelector(".nav-shop");
   const shopSummary = shopDetails?.querySelector("summary");
-  const shopLink = shopDetails?.querySelector(".nav-shop-menu a");
+  const shopLinks = [...(shopDetails?.querySelectorAll(".nav-shop-menu a") || [])];
 
-  if (shopDetails && shopSummary && shopLink) {
+  if (shopDetails && shopSummary && shopLinks.length) {
     const shopOverlay = document.createElement("div");
     shopOverlay.className = "nav-shop-overlay";
     shopOverlay.setAttribute("aria-hidden", "true");
-    shopOverlay.innerHTML = `<a href="${shopLink.href}" target="_blank" rel="noopener noreferrer">${shopLink.textContent.trim()}</a>`;
+    shopOverlay.innerHTML = shopLinks.map((shopLink) => (
+      `<a href="${shopLink.href}" target="_blank" rel="noopener noreferrer">${shopLink.textContent.trim()}</a>`
+    )).join("");
     document.body.appendChild(shopOverlay);
 
     const closeShop = () => {

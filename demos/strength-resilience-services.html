@@ -452,7 +452,7 @@
             </div>
             <div class="price">$50</div>
             <p>For those interested in asking questions and learning more about starting a sensory gym.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Consultation%20Request">Book now</a>
+            <a class="button primary" href="#service-request" data-sr-service-choice="Sensory Gym Consultation - $50">Request consultation</a>
           </article>
 
           <article class="service-card">
@@ -462,7 +462,7 @@
             </div>
             <div class="price">Contact us</div>
             <p>Tour the lounge, see the sensory spaces, and ask questions before your family joins or books.</p>
-            <a class="button primary" href="mailto:Info@srchildrenslounge.com?subject=Schedule%20Tour%20Request">Schedule tour</a>
+            <a class="button primary" href="#service-request" data-sr-service-choice="Schedule a 15-minute Tour">Schedule tour</a>
           </article>
         </div>
       </section>
@@ -511,6 +511,63 @@
         </div>
       </section>
 
+      <section class="sr-intake-panel" id="service-request">
+        <span class="eyebrow">Consultations &amp; tours</span>
+        <h2>Request a time with the team.</h2>
+        <p>
+          Choose the service, share your preferred date, and the SR Sensory Gym team will follow up to confirm availability and next steps.
+        </p>
+
+        <form data-sr-intake-form data-sr-service-request-form>
+          <input type="hidden" name="intake_type" value="service_request" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+          <div class="sr-form-grid">
+            <div class="sr-form-field">
+              <label for="service-first-name">First name</label>
+              <input id="service-first-name" name="first_name" autocomplete="given-name" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-last-name">Last name</label>
+              <input id="service-last-name" name="last_name" autocomplete="family-name" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-phone">Phone</label>
+              <input id="service-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-email">Email</label>
+              <input id="service-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-type">Service</label>
+              <select id="service-type" name="requested_service" required>
+                <option value="">Choose one</option>
+                <option value="Sensory Gym Consultation - $50">Sensory Gym Consultation - $50</option>
+                <option value="Schedule a 15-minute Tour">Schedule a 15-minute Tour</option>
+              </select>
+            </div>
+            <div class="sr-form-field">
+              <label for="service-date">Preferred date</label>
+              <input id="service-date" name="preferred_date" type="date" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-time">Preferred time</label>
+              <input id="service-time" name="preferred_time" placeholder="Example: 4:00 PM" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="service-child-ages">Child age(s), if applicable</label>
+              <input id="service-child-ages" name="child_ages" />
+            </div>
+            <div class="sr-form-field full">
+              <label for="service-message">Questions or notes</label>
+              <textarea id="service-message" name="message" placeholder="Tell the team what you would like to discuss or see during your visit."></textarea>
+            </div>
+            <p class="sr-form-status" data-sr-form-status aria-live="polite"></p>
+            <button class="button primary" type="submit">Send request</button>
+          </div>
+        </form>
+      </section>
+
       <section class="note-band" id="contact">
         <div>
           <span class="eyebrow">Need help choosing?</span>
@@ -529,5 +586,7 @@
     </main>
   </div>
   <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-services.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
 </html>

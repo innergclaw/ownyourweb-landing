@@ -201,6 +201,8 @@ function emailSubject(record: IntakeRecord) {
   if (record.intake_type === "waiver") return `New SR Sensory Gym waiver: ${record.parent_guardian_name}`;
   if (record.intake_type === "open_play_booking") return `New SR open play booking request: ${record.parent_guardian_name}`;
   if (record.intake_type === "party_booking") return `New SR party booking request: ${record.parent_guardian_name}`;
+  if (record.intake_type === "event_registration") return `New SR event registration: ${record.requested_service} - ${record.preferred_date}`;
+  if (record.intake_type === "service_request") return `New SR service request: ${record.requested_service}`;
   if (record.intake_type === "newsletter_signup") return `New SR newsletter subscriber: ${record.email}`;
   return `New SR family inquiry: ${record.parent_guardian_name}`;
 }
@@ -209,6 +211,8 @@ function emailHeading(record: IntakeRecord) {
   if (record.intake_type === "waiver") return "SR Sensory Gym Waiver";
   if (record.intake_type === "open_play_booking") return "SR Sensory Gym Open Play Booking";
   if (record.intake_type === "party_booking") return "SR Sensory Gym Party Booking";
+  if (record.intake_type === "event_registration") return "SR Sensory Gym Event Registration";
+  if (record.intake_type === "service_request") return "SR Sensory Gym Service Request";
   if (record.intake_type === "newsletter_signup") return "New SR Sensory Gym Newsletter Subscriber";
   return "SR Sensory Gym Family Intake";
 }

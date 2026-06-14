@@ -635,27 +635,100 @@
           <img src="assets/strength-resilience/sr-calendar.png" alt="SR Sensory Gym monthly event calendar and schedule" />
           <a
             class="calendar-event-link messy-thursday"
-            href="https://square.link/u/FhIkEWa4"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Purchase admission for Messy Thursdays on June 18 from 5 PM to 6:30 PM"
+            href="#register"
+            data-sr-event-choice="messy"
+            aria-label="Choose a Messy Thursdays date and register"
           >
-            <span>Book</span>
+            <span>Choose date</span>
           </a>
         </figure>
 
         <div class="calendar-booking">
           <p>
             <strong>Book events for the month</strong>
-            View available dates and reserve upcoming SR Sensory Gym events.
+            Select an active event and choose the exact available date that works for your family.
           </p>
           <a
             class="button primary"
-            href="https://app.squareup.com/appointments/book/aqxtnbhobr9uti/LRYJM6EQ570NZ/start"
-            target="_blank"
-            rel="noopener noreferrer"
-          >Book monthly events</a>
+            href="#register"
+          >Choose event &amp; date</a>
         </div>
+      </section>
+
+      <section class="sr-intake-panel" id="register">
+        <span class="eyebrow">Event registration</span>
+        <h2>Choose the event and exact date.</h2>
+        <p>
+          Save your family details and preferred date first. After the date is recorded, continue to the matching secure Square checkout to complete payment.
+        </p>
+
+        <form data-sr-intake-form data-sr-payment-form data-sr-event-registration-form>
+          <input type="hidden" name="intake_type" value="event_registration" />
+          <input type="hidden" name="requested_service" value="" />
+          <input type="hidden" name="preferred_time" value="" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+
+          <div class="sr-form-grid">
+            <div class="sr-form-field">
+              <label for="event-name">Event</label>
+              <select id="event-name" name="event_name" required>
+                <option value="">Choose an event</option>
+                <option value="messy">Messy Thursdays</option>
+                <option value="science">Science Saturdays</option>
+                <option value="glow">Let's Glow Crazy Kids</option>
+              </select>
+            </div>
+            <div class="sr-form-field">
+              <label for="event-date">Available date</label>
+              <select id="event-date" name="preferred_date" required disabled>
+                <option value="">Choose an event first</option>
+              </select>
+            </div>
+            <div class="sr-form-field">
+              <label for="event-first-name">First name</label>
+              <input id="event-first-name" name="first_name" autocomplete="given-name" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-last-name">Last name</label>
+              <input id="event-last-name" name="last_name" autocomplete="family-name" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-phone">Phone</label>
+              <input id="event-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-email">Email</label>
+              <input id="event-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-child-names">Child name(s)</label>
+              <input id="event-child-names" name="child_names" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-child-ages">Child age(s)</label>
+              <input id="event-child-ages" name="child_ages" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-attendees">Number of children</label>
+              <input id="event-attendees" name="guest_count" type="number" min="1" max="20" value="1" required />
+            </div>
+            <div class="sr-form-field">
+              <label for="event-notes">Notes</label>
+              <input id="event-notes" name="message" placeholder="Sibling pricing, accessibility needs, or questions" />
+            </div>
+            <p class="sr-form-status" data-sr-form-status aria-live="polite"></p>
+            <button class="button primary" type="submit">Save date &amp; continue</button>
+
+            <div class="sr-payment-step" data-sr-payment-step hidden>
+              <strong>Date saved. Complete payment to finish registration.</strong>
+              <span data-sr-payment-summary></span>
+              <p>
+                Square may ask for the date again. Enter the same date you selected above so the payment and registration match.
+              </p>
+              <a class="button primary" data-sr-payment-link href="#" target="_blank" rel="noopener noreferrer">Continue to secure payment</a>
+            </div>
+          </div>
+        </form>
       </section>
 
       <section class="featured-event science-event" aria-labelledby="science-saturdays-title">
@@ -699,9 +772,8 @@
           <div class="hero-actions" style="margin-top: 20px;">
             <a
               class="button primary"
-              href="https://square.link/u/gW1DNzvZ"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#register"
+              data-sr-event-choice="science"
             >Choose a Saturday &amp; register</a>
           </div>
         </div>
@@ -742,9 +814,8 @@
           <div class="hero-actions" style="margin-top: 20px;">
             <a
               class="button primary"
-              href="https://square.link/u/TMuheSKC"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#register"
+              data-sr-event-choice="glow"
             >Register for the glow party</a>
           </div>
         </div>
@@ -758,10 +829,9 @@
         </article>
         <a
           class="event-card event-purchase-card"
-          href="https://square.link/u/FhIkEWa4"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Purchase admission for Messy Thursdays"
+          href="#register"
+          data-sr-event-choice="messy"
+          aria-label="Choose a Messy Thursdays date and register"
         >
           <span class="event-label">Thursday special</span>
           <h3>Messy Thursdays.</h3>
@@ -788,5 +858,7 @@
     </main>
   </div>
   <script src="assets/strength-resilience/flow.js"></script>
+  <script src="assets/strength-resilience/sr-events.js"></script>
+  <script src="assets/strength-resilience/sr-family-intake.js"></script>
 </body>
 </html>

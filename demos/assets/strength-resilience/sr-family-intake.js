@@ -37,6 +37,7 @@
       event.preventDefault();
       const button = form.querySelector('button[type="submit"]');
       const original = button ? button.textContent : "";
+      const payload = serialize(form);
 
       if (button) {
         button.disabled = true;
@@ -48,19 +49,32 @@
         const response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(serialize(form)),
+          body: JSON.stringify(payload),
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok || !data.ok) {
           throw new Error(data.error || "Submission failed");
         }
-        form.reset();
         const isNewsletter = form.matches("[data-sr-newsletter-form]");
+        const isPaymentForm = form.matches("[data-sr-payment-form]");
+        if (!isPaymentForm) {
+          form.reset();
+        }
         setStatus(
           form,
-          isNewsletter ? "You're signed up. Welcome to the SR community!" : "Submitted. The SR Sensory Gym team will follow up soon.",
+          isNewsletter
+            ? "You're signed up. Welcome to the SR community!"
+            : isPaymentForm
+              ? "Your date is saved. Continue to secure payment below."
+              : "Submitted. The SR Sensory Gym team will follow up soon.",
           "success"
         );
+        if (isPaymentForm) {
+          form.dispatchEvent(new CustomEvent("sr:submitted", {
+            bubbles: true,
+            detail: { payload, response: data },
+          }));
+        }
         if (isNewsletter) {
           window.setTimeout(() => closeNewsletterPopup(true), 1200);
         }

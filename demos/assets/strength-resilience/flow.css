@@ -306,7 +306,7 @@ main > section:not(.hero):hover,
     left: 50%;
     z-index: 1000;
     display: block;
-    min-width: 164px;
+    min-width: 188px;
     padding: 9px;
     border: 1px solid rgba(25, 200, 106, .22);
     border-radius: 20px;
@@ -340,5 +340,124 @@ main > section:not(.hero):hover,
     letter-spacing: .04em;
     text-transform: uppercase;
     box-shadow: 0 12px 24px rgba(31, 31, 31, .12);
+  }
+
+  .nav-shop-overlay a + a {
+    margin-top: 8px;
+  }
+}
+
+.sr-intake-panel {
+  padding: clamp(26px, 4vw, 48px);
+  border: 1px solid rgba(31, 31, 31, .1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 22px 52px rgba(31, 31, 31, .1);
+}
+
+.sr-intake-panel h2 {
+  margin: 8px 0 12px;
+}
+
+.sr-intake-panel > p {
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.sr-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.sr-form-field {
+  display: grid;
+  gap: 7px;
+}
+
+.sr-form-field.full,
+.sr-form-status,
+.sr-payment-step {
+  grid-column: 1 / -1;
+}
+
+.sr-form-field label {
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.sr-form-field input,
+.sr-form-field select,
+.sr-form-field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid rgba(31, 31, 31, .18);
+  border-radius: 8px;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+}
+
+.sr-form-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.sr-form-field input:focus,
+.sr-form-field select:focus,
+.sr-form-field textarea:focus {
+  border-color: var(--forest);
+  outline: 3px solid rgba(25, 200, 106, .16);
+}
+
+.sr-form-status {
+  min-height: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.sr-form-status[data-tone="success"] {
+  color: #147943;
+}
+
+.sr-form-status[data-tone="error"] {
+  color: var(--poppy);
+}
+
+.sr-payment-step {
+  padding: 20px;
+  border: 1px solid rgba(25, 200, 106, .3);
+  border-radius: 8px;
+  background: rgba(25, 200, 106, .08);
+}
+
+.sr-payment-step[hidden] {
+  display: none;
+}
+
+.sr-payment-step strong,
+.sr-payment-step span {
+  display: block;
+}
+
+.sr-payment-step span {
+  margin: 6px 0 16px;
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .sr-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sr-form-field.full,
+  .sr-form-status,
+  .sr-payment-step {
+    grid-column: auto;
   }
 }
