@@ -1233,9 +1233,12 @@
       <div class="newsletter-copy">
         <h2 id="newsletter-title">Get the Latest News to Your Inbox</h2>
         <p>Subscribe to our newsletter to receive news, events, and updates from SR Sensory Gym.</p>
-        <form class="newsletter-form" data-sr-intake-form data-sr-newsletter-form>
+        <form class="newsletter-form" data-sr-intake-form data-sr-newsletter-form data-sr-endpoint="https://formspree.io/f/mqeonbba">
           <input type="hidden" name="intake_type" value="newsletter_signup" />
           <input type="hidden" name="requested_service" value="Newsletter Signup" />
+          <input type="hidden" name="form_type" value="newsletter_signup" />
+          <input type="hidden" name="source_site" value="srchildrenslounge" />
+          <input type="hidden" name="source_page" value="newsletter_popup" />
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
           <label for="newsletter-email">Enter your email here *</label>
           <input id="newsletter-email" name="email" type="email" placeholder="Email" autocomplete="email" required />
