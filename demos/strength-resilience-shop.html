@@ -464,15 +464,30 @@
       }
 
       .site-header {
-        top: 10px;
+        position: static;
+        top: auto;
         padding: 14px 12px;
       }
 
       .nav-links {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
         gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
-      .nav-links a,
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        width: auto;
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+
       .button,
       .ghost-button {
         width: 100%;
