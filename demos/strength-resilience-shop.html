@@ -297,6 +297,22 @@
       border-radius: var(--radius-lg);
     }
 
+    .product-cover {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--soft-line);
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(25,200,106,.06));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    }
+
+    .product-cover img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+    }
+
     .product-top {
       display: grid;
       gap: 12px;
@@ -607,6 +623,9 @@
           </article>
 
           <article class="product-card">
+            <figure class="product-cover">
+              <img src="assets/strength-resilience/sr-strength-tshirt-cover.png" alt="White Strength and Resilience Sensory Gym t-shirt mockup" />
+            </figure>
             <div class="product-top">
               <div class="product-badge">TS</div>
               <span class="card-tag">Apparel</span>
