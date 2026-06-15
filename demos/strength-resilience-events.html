@@ -655,8 +655,11 @@
           Save your family details and preferred date first. After the date is recorded, continue to the matching secure Square checkout to complete payment.
         </p>
 
-        <form data-sr-intake-form data-sr-payment-form data-sr-event-registration-form>
+        <form data-sr-intake-form data-sr-payment-form data-sr-event-registration-form data-sr-endpoint="https://formspree.io/f/mwvjyozj">
           <input type="hidden" name="intake_type" value="event_registration" />
+          <input type="hidden" name="form_type" value="event_registration" />
+          <input type="hidden" name="source_site" value="srchildrenslounge" />
+          <input type="hidden" name="source_page" value="events_registration" />
           <input type="hidden" name="requested_service" value="" />
           <input type="hidden" name="preferred_time" value="" />
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
