@@ -526,9 +526,12 @@
           Send the visit details and the SR Sensory Gym team will follow up with availability, payment details, and anything your family needs before arrival.
         </p>
 
-        <form data-sr-intake-form>
+        <form data-sr-intake-form data-sr-endpoint="https://formspree.io/f/xrevjkyr">
           <input type="hidden" name="intake_type" value="open_play_booking" />
           <input type="hidden" name="requested_service" value="Open Play / Daily Pass / Summer Pass Booking" />
+          <input type="hidden" name="form_type" value="booking_request" />
+          <input type="hidden" name="source_site" value="srchildrenslounge" />
+          <input type="hidden" name="source_page" value="book_now" />
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
 
           <div class="form-grid">
