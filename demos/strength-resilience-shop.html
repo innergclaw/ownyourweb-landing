@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | SR Sensory Gym</title>
+  <meta name="description" content="Browse SR Sensory Gym merchandise including socks, hats, sweatshirts, and apparel from the Strength and Resilience shop." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --forest: #19c86a;
+      --sun: #ffa41b;
+      --poppy: #f53d2d;
+      --ink: #1f1f1f;
+      --muted: rgba(31, 31, 31, .68);
+      --line: rgba(31, 31, 31, .14);
+      --soft-line: rgba(31, 31, 31, .08);
+      --warm-white: #ffffff;
+      --shadow: 0 18px 50px rgba(31, 31, 31, .1);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(25,200,106,.1) 0 170px, transparent 172px),
+        radial-gradient(circle at 88% 12%, rgba(255,164,27,.12) 0 180px, transparent 182px),
+        linear-gradient(180deg, #ffffff 0%, rgba(245, 61, 45, .04) 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      line-height: .95;
+      letter-spacing: -.03em;
+      font-weight: 600;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .site-header {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px 16px;
+      border: 2px solid rgba(25, 200, 106, .34);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .brand img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.12rem;
+      font-weight: 800;
+    }
+
+    .brand span,
+    .eyebrow,
+    .card-tag,
+    .note-label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .brand span { display: block; margin-top: 5px; }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding-top: 12px;
+      border-top: 1px solid rgba(31,31,31,.09);
+    }
+
+    .nav-links a,
+    .button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(31,31,31,.08);
+    }
+
+    .nav-links a[aria-current="page"] {
+      color: #ffffff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .hero,
+    .shop-grid,
+    .live-links,
+    .next-links {
+      display: grid;
+      gap: 22px;
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+      margin-top: 28px;
+      align-items: stretch;
+    }
+
+    .panel,
+    .product-card,
+    .link-panel,
+    .cta-panel {
+      border: 2px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--warm-white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: clamp(28px, 4vw, 42px);
+      border-color: rgba(255,164,27,.44);
+      background:
+        radial-gradient(circle at 88% 18%, rgba(255,164,27,.16) 0 120px, transparent 122px),
+        linear-gradient(135deg, #ffffff, rgba(25,200,106,.08));
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 9vw, 7rem);
+    }
+
+    .hero p,
+    .section-intro,
+    .product-card p,
+    .link-panel p,
+    .cta-panel p {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+    }
+
+    .hero-art {
+      overflow: hidden;
+      min-height: 520px;
+      border-color: rgba(245,61,45,.3);
+      background:
+        linear-gradient(160deg, rgba(25,200,106,.16), rgba(255,164,27,.18)),
+        #ffffff;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-art::before,
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      opacity: .9;
+    }
+
+    .hero-art::before {
+      width: 360px;
+      height: 360px;
+      right: -80px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(255,164,27,.55), rgba(255,164,27,0));
+    }
+
+    .hero-art::after {
+      width: 320px;
+      height: 320px;
+      left: -70px;
+      bottom: -80px;
+      background: radial-gradient(circle, rgba(25,200,106,.45), rgba(25,200,106,0));
+    }
+
+    .hero-stack {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-content: center;
+      gap: 16px;
+      min-height: 100%;
+      padding: 36px;
+    }
+
+    .stack-card {
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--soft-line);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 14px 28px rgba(31,31,31,.08);
+    }
+
+    .stack-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-top: 10px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button,
+    .ghost-button {
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      box-shadow: 0 12px 28px rgba(31,31,31,.1);
+    }
+
+    .button {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
+    }
+
+    .ghost-button {
+      color: var(--ink);
+      background: rgba(255,255,255,.88);
+      border-color: var(--soft-line);
+    }
+
+    section {
+      margin-top: 28px;
+      scroll-margin-top: 130px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+    }
+
+    .shop-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-card {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .product-top {
+      display: grid;
+      gap: 12px;
+    }
+
+    .product-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 14px 26px rgba(31,31,31,.1);
+    }
+
+    .product-card:nth-child(4n + 1) .product-badge { background: linear-gradient(135deg, var(--forest), #12a957); }
+    .product-card:nth-child(4n + 2) .product-badge { background: linear-gradient(135deg, var(--sun), #ff7d12); }
+    .product-card:nth-child(4n + 3) .product-badge { background: linear-gradient(135deg, var(--poppy), #ff7c54); }
+    .product-card:nth-child(4n) .product-badge { background: linear-gradient(135deg, #111111, #4d4d4d); }
+
+    .product-card h3 {
+      font-size: 2rem;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+      border-top: 1px solid var(--soft-line);
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .product-card ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .product-card li::before {
+      content: "• ";
+      color: var(--forest);
+      font-weight: 800;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .product-actions .button,
+    .product-actions .ghost-button {
+      flex: 1 1 200px;
+    }
+
+    .product-actions .ghost-button.pending {
+      background: rgba(31,31,31,.04);
+      color: var(--muted);
+      box-shadow: none;
+    }
+
+    .link-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .link-panel,
+    .cta-panel {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .link-panel h3,
+    .cta-panel h3 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .live-links,
+    .next-links {
+      margin-top: 18px;
+    }
+
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--soft-line);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.8);
+    }
+
+    .link-row strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .link-row span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .cta-panel {
+      border-color: rgba(255,164,27,.44);
+      background:
+        radial-gradient(circle at top right, rgba(255,164,27,.16), transparent 40%),
+        linear-gradient(145deg, #ffffff, rgba(245,61,45,.05));
+    }
+
+    .cta-panel .button {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .link-layout,
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 14px;
+      }
+
+      .site-header {
+        top: 10px;
+        padding: 14px 12px;
+      }
+
+      .nav-links {
+        gap: 6px;
+      }
+
+      .nav-links a,
+      .button,
+      .ghost-button {
+        width: 100%;
+      }
+
+      .hero h1,
+      .section-head h2 {
+        line-height: 1;
+      }
+
+      .product-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .link-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="strength-resilience-children-lounge.html#home">
+        <img src="assets/strength-resilience-logo.png" alt="Strength &amp; Resilience Children Lounge logo" />
+        <div>
+          <strong>SR Sensory Gym</strong>
+          <span>Strength and Resilience Nonprofit Inc.</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="strength-resilience-children-lounge.html#home">Home</a>
+        <a href="strength-resilience-book-now.html">Book Now</a>
+        <a href="strength-resilience-book-a-party.html">Book a Party</a>
+        <a href="strength-resilience-services.html">Services</a>
+        <a href="strength-resilience-memberships.html">Memberships</a>
+        <a href="strength-resilience-events.html">Events</a>
+        <a href="strength-resilience-waiver.html">Waiver</a>
+        <a href="strength-resilience-shop.html" aria-current="page">Shop</a>
+        <a href="https://app.squareup.com/gift/MLZ7ERDANNXQT/order" target="_blank" rel="noopener noreferrer">Gift Card</a>
+        <a href="strength-resilience-children-lounge.html#about">About Us</a>
+        <a href="strength-resilience-faq.html">FAQ's</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="shop">
+        <article class="panel hero-copy">
+          <span class="eyebrow">Mini Shop</span>
+          <h1>Merch for the movement.</h1>
+          <p>
+            This mini shop pulls the current Strength &amp; Resilience merch into one clean page so families can browse the collection without digging through separate store pages.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#catalog">Browse merch</a>
+            <a class="ghost-button" href="#shop-links">Update payment links</a>
+          </div>
+        </article>
+
+        <article class="panel hero-art" aria-hidden="true">
+          <div class="hero-stack">
+            <div class="stack-card">
+              <span class="note-label">Live now</span>
+              <strong>Hats, socks, sweatshirts, and gift cards are already connected.</strong>
+            </div>
+            <div class="stack-card">
+              <span class="note-label">Next step</span>
+              <strong>Additional Square payment links can drop into the remaining merch cards without changing the page layout.</strong>
+            </div>
+            <div class="stack-card">
+              <span class="note-label">Store goal</span>
+              <strong>A simple catalog that feels like part of the site, not a separate system.</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="catalog">
+        <div class="section-head">
+          <span class="eyebrow">Merch Catalog</span>
+          <h2>Old shop, cleaner format.</h2>
+          <p class="section-intro">
+            These items reflect the current merch set from the original store. Items with live Square links are ready to purchase now, and the rest are prepared for the links you add next.
+          </p>
+        </div>
+
+        <div class="shop-grid">
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">SR</div>
+              <span class="card-tag">Accessories</span>
+              <h3>SR Grippy Socks</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$7</span>
+              <span>Live link ready</span>
+            </div>
+            <p>Grip socks for kids and adults using the play space.</p>
+            <ul>
+              <li>Required for active play areas</li>
+              <li>Easy checkout already connected</li>
+            </ul>
+            <div class="product-actions">
+              <a class="button" href="https://square.link/u/NXiAli9T" target="_blank" rel="noopener noreferrer">Buy socks</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">DA</div>
+              <span class="card-tag">Headwear</span>
+              <h3>Different Abilities Hats</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$20</span>
+              <span>Live link ready</span>
+            </div>
+            <p>Branded hats for families and supporters of the SR mission.</p>
+            <ul>
+              <li>Current hat checkout is already active</li>
+              <li>Good entry-price merch option</li>
+            </ul>
+            <div class="product-actions">
+              <a class="button" href="https://square.link/u/zEARYSxe" target="_blank" rel="noopener noreferrer">Buy hat</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">SS</div>
+              <span class="card-tag">Sweatshirts</span>
+              <h3>Different Abilities Sweatshirts</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$30-$40</span>
+              <span>Live link ready</span>
+            </div>
+            <p>Adult and kids sweatshirt options grouped into one easy purchase path.</p>
+            <ul>
+              <li>Kids sweatshirt starts at $30</li>
+              <li>Adult sweatshirt starts at $40</li>
+            </ul>
+            <div class="product-actions">
+              <a class="button" href="https://square.link/u/XzsOlg9N" target="_blank" rel="noopener noreferrer">Buy sweatshirts</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">TS</div>
+              <span class="card-tag">Apparel</span>
+              <h3>Strength Tshirt</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$25</span>
+              <span>Link needed</span>
+            </div>
+            <p>Core Strength tee from the original SR store collection.</p>
+            <ul>
+              <li>Separate Square link still needed</li>
+              <li>Good staple product for the merch wall</li>
+            </ul>
+            <div class="product-actions">
+              <span class="ghost-button pending">Add Square link next</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">SC</div>
+              <span class="card-tag">Apparel</span>
+              <h3>Strength &amp; Resilience Classic Tshirt</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$25</span>
+              <span>Link needed</span>
+            </div>
+            <p>A classic branded tee that keeps the main SR identity front and center.</p>
+            <ul>
+              <li>Separate payment link still needed</li>
+              <li>Can be linked as its own standalone product</li>
+            </ul>
+            <div class="product-actions">
+              <span class="ghost-button pending">Add Square link next</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">KT</div>
+              <span class="card-tag">Kids Tee</span>
+              <h3>Different Abilities Unisex Tshirt (Kids)</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$20</span>
+              <span>Link needed</span>
+            </div>
+            <p>Kid-sized version of the Different Abilities shirt from the original store.</p>
+            <ul>
+              <li>Dedicated checkout link still needed</li>
+              <li>Works well beside the sweatshirt offer</li>
+            </ul>
+            <div class="product-actions">
+              <span class="ghost-button pending">Add Square link next</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">DA</div>
+              <span class="card-tag">Apparel</span>
+              <h3>Different Abilities Unisex Tshirt</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$25</span>
+              <span>Link needed</span>
+            </div>
+            <p>Adult-sized Different Abilities tee from the existing SR merch set.</p>
+            <ul>
+              <li>Separate adult shirt link still needed</li>
+              <li>Can later support size variants by note</li>
+            </ul>
+            <div class="product-actions">
+              <span class="ghost-button pending">Add Square link next</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">DV</div>
+              <span class="card-tag">Variant</span>
+              <h3>Different Abilities Tee Variant</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">$25</span>
+              <span>Link needed</span>
+            </div>
+            <p>The old store shows an additional Different Abilities t-shirt variant that can be preserved as its own listing.</p>
+            <ul>
+              <li>Useful if colors or print styles differ</li>
+              <li>Ready for a separate Square checkout link</li>
+            </ul>
+            <div class="product-actions">
+              <span class="ghost-button pending">Add Square link next</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-top">
+              <div class="product-badge">GC</div>
+              <span class="card-tag">Gift Card</span>
+              <h3>SR Gift Card</h3>
+            </div>
+            <div class="price-row">
+              <span class="price">Custom</span>
+              <span>Live link ready</span>
+            </div>
+            <p>Easy gift card purchase for families who want to support or prepay visits.</p>
+            <ul>
+              <li>Separate Square gift card checkout</li>
+              <li>Clean option for birthdays and family gifts</li>
+            </ul>
+            <div class="product-actions">
+              <a class="button" href="https://app.squareup.com/gift/MLZ7ERDANNXQT/order" target="_blank" rel="noopener noreferrer">Buy gift card</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="shop-links">
+        <div class="link-layout">
+          <article class="link-panel">
+            <span class="eyebrow">Already Connected</span>
+            <h3>Live checkout links.</h3>
+            <p>These products are already connected through Square and ready for customers right now.</p>
+            <div class="live-links">
+              <div class="link-row">
+                <div>
+                  <strong>SR Grippy Socks</strong>
+                  <span>$7 Square checkout</span>
+                </div>
+                <a class="button" href="https://square.link/u/NXiAli9T" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Different Abilities Hats</strong>
+                  <span>$20 Square checkout</span>
+                </div>
+                <a class="button" href="https://square.link/u/zEARYSxe" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Different Abilities Sweatshirts</strong>
+                  <span>$30-$40 Square checkout</span>
+                </div>
+                <a class="button" href="https://square.link/u/XzsOlg9N" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Gift Card</strong>
+                  <span>Square gift card flow</span>
+                </div>
+                <a class="button" href="https://app.squareup.com/gift/MLZ7ERDANNXQT/order" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="cta-panel">
+            <span class="eyebrow">Still To Connect</span>
+            <h3>Next Square links to create.</h3>
+            <p>The page is ready for the rest of the merch. Once you create these Square links, we can drop them in without redesigning anything.</p>
+            <div class="next-links">
+              <div class="link-row">
+                <div>
+                  <strong>Strength Tshirt</strong>
+                  <span>$25</span>
+                </div>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Strength &amp; Resilience Classic Tshirt</strong>
+                  <span>$25</span>
+                </div>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Different Abilities Unisex Tshirt (Kids)</strong>
+                  <span>$20</span>
+                </div>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Different Abilities Unisex Tshirt</strong>
+                  <span>$25</span>
+                </div>
+              </div>
+              <div class="link-row">
+                <div>
+                  <strong>Different Abilities Tee Variant</strong>
+                  <span>$25</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
