@@ -1,5 +1,5 @@
 (function () {
-  const endpoint = window.SR_FAMILY_INTAKE_ENDPOINT || "https://zkyhhoxcrjkhywblzehr.supabase.co/functions/v1/sr-family-intake";
+  const defaultEndpoint = window.SR_FAMILY_INTAKE_ENDPOINT || "https://zkyhhoxcrjkhywblzehr.supabase.co/functions/v1/sr-family-intake";
 
   function setStatus(form, message, tone) {
     const status = form.querySelector("[data-sr-form-status]");
@@ -46,13 +46,19 @@
       setStatus(form, "Sending your information securely...", "neutral");
 
       try {
-        const response = await fetch(endpoint, {
+        const endpoint = form.dataset.srEndpoint || defaultEndpoint;
+        const useFormspree = endpoint.includes("formspree.io");
+        const response = await fetch(endpoint, useFormspree ? {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form),
+        } : {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
         const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.ok) {
+        if (!response.ok || (!useFormspree && !data.ok)) {
           throw new Error(data.error || "Submission failed");
         }
         const isNewsletter = form.matches("[data-sr-newsletter-form]");
