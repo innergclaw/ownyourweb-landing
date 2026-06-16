@@ -137,18 +137,11 @@
       background: linear-gradient(135deg, var(--forest), rgba(25,200,106,.78));
     }
 
-    .hero,
     .shop-grid,
     .live-links,
     .next-links {
       display: grid;
       gap: 22px;
-    }
-
-    .hero {
-      grid-template-columns: minmax(0, 1fr);
-      margin-top: 28px;
-      align-items: stretch;
     }
 
     .panel,
@@ -161,22 +154,6 @@
       box-shadow: var(--shadow);
     }
 
-    .hero-copy {
-      display: grid;
-      align-content: center;
-      gap: 18px;
-      padding: clamp(28px, 4vw, 42px);
-      border-color: rgba(255,164,27,.44);
-      background:
-        radial-gradient(circle at 88% 18%, rgba(255,164,27,.16) 0 120px, transparent 122px),
-        linear-gradient(135deg, #ffffff, rgba(25,200,106,.08));
-    }
-
-    .hero h1 {
-      font-size: clamp(3.8rem, 9vw, 7rem);
-    }
-
-    .hero p,
     .section-intro,
     .product-card p,
     .link-panel p,
@@ -184,12 +161,6 @@
       color: var(--muted);
       line-height: 1.72;
       font-size: 1rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .button,
@@ -386,7 +357,6 @@
     }
 
     @media (max-width: 980px) {
-      .hero,
       .link-layout,
       .shop-grid {
         grid-template-columns: 1fr;
@@ -473,19 +443,6 @@
     </header>
 
     <main>
-      <section class="hero" id="shop">
-        <article class="panel hero-copy">
-          <p>
-            This mini shop pulls the current Strength &amp; Resilience merch into one clean page so families can browse the collection without digging through separate store pages.
-          </p>
-          <div class="hero-actions">
-            <a class="button" href="#catalog">Browse merch</a>
-            <a class="ghost-button" href="https://app.squareup.com/gift/MLZ7ERDANNXQT/order" target="_blank" rel="noopener noreferrer">Gift Card</a>
-          </div>
-        </article>
-
-      </section>
-
       <section id="catalog">
         <div class="section-head">
           <span class="eyebrow">Merch Catalog</span>
