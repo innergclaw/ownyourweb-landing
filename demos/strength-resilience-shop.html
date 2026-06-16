@@ -146,7 +146,7 @@
     }
 
     .hero {
-      grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+      grid-template-columns: minmax(0, 1fr);
       margin-top: 28px;
       align-items: stretch;
     }
@@ -184,66 +184,6 @@
       color: var(--muted);
       line-height: 1.72;
       font-size: 1rem;
-    }
-
-    .hero-art {
-      overflow: hidden;
-      min-height: 520px;
-      border-color: rgba(245,61,45,.3);
-      background:
-        linear-gradient(160deg, rgba(25,200,106,.16), rgba(255,164,27,.18)),
-        #ffffff;
-      position: relative;
-      isolation: isolate;
-    }
-
-    .hero-art::before,
-    .hero-art::after {
-      content: "";
-      position: absolute;
-      inset: auto;
-      border-radius: 999px;
-      opacity: .9;
-    }
-
-    .hero-art::before {
-      width: 360px;
-      height: 360px;
-      right: -80px;
-      top: -70px;
-      background: radial-gradient(circle, rgba(255,164,27,.55), rgba(255,164,27,0));
-    }
-
-    .hero-art::after {
-      width: 320px;
-      height: 320px;
-      left: -70px;
-      bottom: -80px;
-      background: radial-gradient(circle, rgba(25,200,106,.45), rgba(25,200,106,0));
-    }
-
-    .hero-stack {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      align-content: center;
-      gap: 16px;
-      min-height: 100%;
-      padding: 36px;
-    }
-
-    .stack-card {
-      padding: 18px 20px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--soft-line);
-      background: rgba(255,255,255,.86);
-      box-shadow: 0 14px 28px rgba(31,31,31,.08);
-    }
-
-    .stack-card strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-top: 10px;
     }
 
     .hero-actions {
@@ -452,9 +392,6 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-art {
-        min-height: auto;
-      }
     }
 
     @media (max-width: 720px) {
@@ -547,7 +484,6 @@
           </div>
         </article>
 
-        <article class="panel hero-art" aria-hidden="true"></article>
       </section>
 
       <section id="catalog">
