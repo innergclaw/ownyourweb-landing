@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Matter The Batter | Daily Sweets Menu Demo</title>
+  <meta name="description" content="A daily-menu landing page demo for a fresh baked cookies and cake brand with pre-orders, delivery updates, and exclusive sweets signup.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@500;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17100d;
+      --cream: #fff7ea;
+      --vanilla: #ffe6bd;
+      --sugar: #fdf7ee;
+      --navy: #172a46;
+      --blue: #315d82;
+      --cocoa: #6d3e22;
+      --caramel: #b87039;
+      --butter: #f2be5c;
+      --berry: #d65066;
+      --mint: #8bc7b2;
+      --line: rgba(23, 16, 13, .16);
+      --white: #fffdf8;
+      --shadow: 0 26px 80px rgba(39, 23, 12, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--cream);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(242, 190, 92, .32), transparent 26%),
+        radial-gradient(circle at 88% 8%, rgba(49, 93, 130, .22), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(214, 80, 102, .16), transparent 30%),
+        linear-gradient(180deg, #fffaf0 0%, #f6e7d2 56%, #fff7ea 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .2;
+      background-image:
+        radial-gradient(circle, rgba(23,16,13,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,16,13,.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(23,16,13,.05) 1px, transparent 1px);
+      background-size: 18px 18px, 64px 64px, 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.62), rgba(0,0,0,.1));
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top-note {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      background: var(--navy);
+      color: var(--cream);
+      font-size: .74rem;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 247, 234, .86);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border: 2px solid rgba(109, 62, 34, .28);
+      border-radius: 50%;
+      box-shadow: 0 14px 32px rgba(23, 16, 13, .14);
+      background: var(--white);
+    }
+
+    .brand strong,
+    h1,
+    h2,
+    h3 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -.02em;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.12rem;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 4px;
+      color: rgba(23, 16, 13, .62);
+      font-size: .7rem;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .nav a {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 13px;
+      color: rgba(23, 16, 13, .74);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      border-color: var(--line);
+      background: var(--white);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .nav .order {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 74px 0 68px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, 420px);
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      min-height: 34px;
+      border: 1px solid rgba(49, 93, 130, .22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.68);
+      padding: 0 13px;
+      color: var(--blue);
+      font-size: .74rem;
+      font-weight: 950;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 18px;
+      color: var(--cocoa);
+      font-size: clamp(3.8rem, 10vw, 8rem);
+      line-height: .86;
+    }
+
+    .script {
+      font-family: Pacifico, cursive;
+      color: var(--berry);
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 0 0 28px;
+      color: rgba(23,16,13,.74);
+      font-size: clamp(1.05rem, 2vw, 1.26rem);
+      line-height: 1.65;
+      font-weight: 700;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 0 20px;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: .82rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 14px 32px rgba(23,16,13,.18);
+    }
+
+    .button.alt {
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255,255,255,.7);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-stats div {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .hero-stats div:last-child { border-right: 0; }
+
+    .hero-stats strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.35rem;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .hero-stats span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(23,16,13,.62);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .logo-card {
+      position: relative;
+      border: 1px solid rgba(109, 62, 34, .18);
+      border-radius: 30px;
+      padding: 16px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,230,189,.62)),
+        radial-gradient(circle at 70% 8%, rgba(49, 93, 130, .18), transparent 28%);
+      box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
+    }
+
+    .logo-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px -12px -12px 18px;
+      z-index: -1;
+      border-radius: 28px;
+      background: var(--cocoa);
+      opacity: .14;
+    }
+
+    .logo-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1.08;
+      object-fit: cover;
+      border-radius: 22px;
+      background: var(--white);
+    }
+
+    .logo-card figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      color: rgba(23,16,13,.72);
+      font-size: .74rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: var(--cocoa);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: .92;
+    }
+
+    .section-head p {
+      max-width: 470px;
+      margin: 0;
+      color: rgba(23,16,13,.68);
+      font-size: .98rem;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .menu-poster {
+      position: sticky;
+      top: 116px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 12px;
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-poster img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    .menu-groups {
+      display: grid;
+      gap: 16px;
+    }
+
+    .menu-group {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 20px;
+      background: rgba(255,253,248,.82);
+      box-shadow: 0 14px 38px rgba(23,16,13,.08);
+    }
+
+    .menu-group h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 1.72rem;
+      line-height: 1;
+    }
+
+    .price-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      border-radius: 999px;
+      padding: 0 12px;
+      background: var(--vanilla);
+      color: var(--cocoa);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: .8rem;
+      font-weight: 950;
+      letter-spacing: .04em;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .item {
+      min-height: 96px;
+      border: 1px dashed rgba(23,16,13,.22);
+      border-radius: 18px;
+      padding: 14px;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(242,190,92,.22), transparent 28%),
+        rgba(255,255,255,.7);
+    }
+
+    .item strong {
+      display: block;
+      color: var(--ink);
+      font-size: .98rem;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    .item span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(23,16,13,.62);
+      font-size: .78rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .update-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .update-note {
+      border: 1px solid rgba(49,93,130,.18);
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(49, 93, 130, .08);
+      color: rgba(23,16,13,.72);
+      font-size: .86rem;
+      font-weight: 850;
+      line-height: 1.48;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(255,253,248,.78);
+      box-shadow: 0 16px 42px rgba(23,16,13,.08);
+    }
+
+    .feature .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--butter);
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .feature h3 {
+      margin: 18px 0 10px;
+      color: var(--cocoa);
+      font-size: 1.74rem;
+      line-height: 1;
+    }
+
+    .feature p {
+      margin: 0;
+      color: rgba(23,16,13,.68);
+      font-size: .9rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .signup {
+      border: 1px solid rgba(109,62,34,.18);
+      border-radius: 34px;
+      padding: 26px;
+      background:
+        linear-gradient(135deg, rgba(23,42,70,.96), rgba(49,93,130,.92)),
+        radial-gradient(circle at 90% 20%, rgba(242,190,92,.36), transparent 30%);
+      color: var(--cream);
+      box-shadow: var(--shadow);
+    }
+
+    .signup-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .signup h2 {
+      margin: 0 0 14px;
+      color: var(--cream);
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: .92;
+    }
+
+    .signup p {
+      margin: 0;
+      color: rgba(255,247,234,.78);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .signup-form {
+      display: grid;
+      gap: 12px;
+      border-radius: 24px;
+      padding: 16px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .signup-form label {
+      display: grid;
+      gap: 7px;
+      color: rgba(255,247,234,.82);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .signup-form input,
+    .signup-form select {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(255,247,234,.34);
+      border-radius: 16px;
+      padding: 0 13px;
+      background: rgba(255,253,248,.94);
+      color: var(--ink);
+      font: 800 .95rem Inter, system-ui, sans-serif;
+      outline: none;
+    }
+
+    .signup-form input:focus,
+    .signup-form select:focus {
+      border-color: var(--butter);
+      box-shadow: 0 0 0 4px rgba(242,190,92,.18);
+    }
+
+    .signup-form button {
+      min-height: 52px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--butter);
+      color: var(--ink);
+      cursor: pointer;
+      font: 950 .84rem Inter, system-ui, sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .thanks {
+      display: none;
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(139,199,178,.18);
+      color: var(--cream);
+      font-size: .86rem;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .thanks.show { display: block; }
+
+    .brand-panel {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 24px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 24px;
+      background: rgba(255,253,248,.76);
+      box-shadow: var(--shadow);
+    }
+
+    .brand-panel img {
+      width: 100%;
+      border-radius: 24px;
+      background: var(--white);
+    }
+
+    .brand-copy h2 {
+      margin: 0 0 14px;
+      color: var(--cocoa);
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: .92;
+    }
+
+    .brand-copy p {
+      margin: 0 0 18px;
+      color: rgba(23,16,13,.7);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.65;
+    }
+
+    .swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .swatch {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(23,16,13,.14);
+      border-radius: 999px;
+      padding: 0 12px 0 7px;
+      background: var(--white);
+      color: rgba(23,16,13,.72);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .swatch::before {
+      content: "";
+      width: 28px;
+      height: 28px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--color);
+    }
+
+    .footer {
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--line);
+      color: rgba(23,16,13,.62);
+      font-size: .78rem;
+      font-weight: 850;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero-grid,
+      .menu-layout,
+      .signup-grid,
+      .brand-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-poster {
+        position: relative;
+        top: auto;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 24px, 1160px); }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      h1 {
+        font-size: clamp(3.4rem, 18vw, 5rem);
+      }
+
+      .hero-stats,
+      .items,
+      .update-band {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats div {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-stats div:last-child { border-bottom: 0; }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .signup,
+      .brand-panel {
+        border-radius: 26px;
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-note">FOR SALE DEMO - built for daily menus, pre-orders, and exclusive treat drops</div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#home" aria-label="No Matter The Batter home">
+        <img src="assets/no-matter-the-batter/logo.jpg" alt="No Matter The Batter logo">
+        <span>
+          <strong>No Matter The Batter</strong>
+          <small>Freshly baked cookies</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#menu">Menu</a>
+        <a href="#drops">Treat Drops</a>
+        <a href="#brand">Brand</a>
+        <a class="order" href="#exclusive">Join List</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Daily sweets landing page</span>
+          <h1>No Matter<br><span class="script">The Batter</span></h1>
+          <p class="hero-copy">A clean home base for fresh cookies, cake slices, preorder updates, delivery details, and an exclusive sweets list so customers know what is available before everything sells out.</p>
+          <div class="cta-row">
+            <a class="button" href="#menu">View Today's Menu</a>
+            <a class="button alt" href="#exclusive">Exclusive Sweets List</a>
+          </div>
+          <div class="hero-stats" aria-label="Demo highlights">
+            <div>
+              <strong>Daily</strong>
+              <span>Menu update area</span>
+            </div>
+            <div>
+              <strong>$5</strong>
+              <span>Delivery note ready</span>
+            </div>
+            <div>
+              <strong>Fast</strong>
+              <span>Pre-order flow</span>
+            </div>
+          </div>
+        </div>
+
+        <figure class="logo-card">
+          <img src="assets/no-matter-the-batter/logo.jpg" alt="No Matter The Batter illustrated bakery logo">
+          <figcaption>
+            <span>Brand identity</span>
+            <span>Fresh baked</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Today's Menu</h2>
+          <p>Menu cards can be swapped daily so customers always see the freshest cookies, cakes, boxes, pickup notes, and delivery updates.</p>
+        </div>
+
+        <div class="menu-layout">
+          <figure class="menu-poster">
+            <img src="assets/no-matter-the-batter/menu.jpg" alt="No Matter The Batter menu with cookies, cake, and special boxes">
+          </figure>
+
+          <div class="menu-groups">
+            <article class="menu-group">
+              <h3>Cookies <span class="price-pill">$3.50 each</span></h3>
+              <div class="items">
+                <div class="item">
+                  <strong>Chocolate Chip</strong>
+                  <span>The classic that never goes out of style.</span>
+                </div>
+                <div class="item">
+                  <strong>Strawberry Crunch</strong>
+                  <span>Sweet, crunchy, and berry irresistible.</span>
+                </div>
+                <div class="item">
+                  <strong>Banana Pudding</strong>
+                  <span>Creamy, dreamy, and banana-y bliss.</span>
+                </div>
+                <div class="item">
+                  <strong>Cookies N Cream</strong>
+                  <span>Cookies in every bite of pure delight.</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-group">
+              <h3>Cake <span class="price-pill">$6 each</span></h3>
+              <div class="items">
+                <div class="item">
+                  <strong>Vanilla Bean Dream</strong>
+                  <span>Smooth, sweet, and simply timeless.</span>
+                </div>
+                <div class="item">
+                  <strong>Cookies & Cream Crush</strong>
+                  <span>Cookies in every bite of pure delight.</span>
+                </div>
+                <div class="item">
+                  <strong>Strawberry Shortcake</strong>
+                  <span>Sweet, fluffy, and full of strawberry love.</span>
+                </div>
+                <div class="item">
+                  <strong>Birthday Cake Bliss</strong>
+                  <span>Sprinkled with joy in every slice.</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-group">
+              <h3>Special Boxes <span class="price-pill">Pre-order ready</span></h3>
+              <div class="items">
+                <div class="item">
+                  <strong>Special Treat Box - $15</strong>
+                  <span>3 cookies plus 1 cake for a quick sweet fix.</span>
+                </div>
+                <div class="item">
+                  <strong>Emergency Sweetz Box - $20</strong>
+                  <span>4 cookies plus 2 cakes when the craving is serious.</span>
+                </div>
+              </div>
+              <div class="update-band">
+                <div class="update-note">Inventory stock-up and delivery notes can be posted here so customers know when pre-orders open.</div>
+                <div class="update-note">Delivery fee: $5. Cash App and Apple Pay notes can be connected when the site is purchased.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drops">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>How Customers Order</h2>
+          <p>A simple flow makes the business easier to manage: update the menu, collect demand, then send customers to the right payment or pickup path.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="num">1</span>
+            <h3>Daily menu updates</h3>
+            <p>Swap the menu image or update the flavor list when new cookies, cake slices, boxes, or delivery windows are available.</p>
+          </article>
+          <article class="feature">
+            <span class="num">2</span>
+            <h3>Pre-orders first</h3>
+            <p>Customers can join the exclusive list so they get early notice before the limited drops sell out.</p>
+          </article>
+          <article class="feature">
+            <span class="num">3</span>
+            <h3>Payment path ready</h3>
+            <p>The site can connect to Cash App, Apple Pay instructions, Stripe, Square, or a custom order form after purchase.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="exclusive">
+      <div class="wrap signup">
+        <div class="signup-grid">
+          <div>
+            <span class="eyebrow">Exclusive sweets and treats</span>
+            <h2>Get the next drop before it sells out.</h2>
+            <p>Join the list for flavor previews, limited boxes, delivery updates, and pre-order alerts.</p>
+          </div>
+
+          <form class="signup-form" id="treatForm">
+            <label>
+              Name
+              <input name="name" type="text" autocomplete="name" placeholder="Your name" required>
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+            </label>
+            <label>
+              Phone
+              <input name="phone" type="tel" autocomplete="tel" placeholder="Text me the drops">
+            </label>
+            <label>
+              Favorite Treat
+              <select name="favorite">
+                <option>Cookies</option>
+                <option>Cake slices</option>
+                <option>Special boxes</option>
+                <option>Surprise me</option>
+              </select>
+            </label>
+            <button type="submit">Join The List</button>
+            <div class="thanks" id="thanksMessage">You're on the demo list. In the live build, this connects to email, text, or a customer table.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="brand">
+      <div class="wrap brand-panel">
+        <img src="assets/no-matter-the-batter/announcement.jpg" alt="No Matter The Batter preorder announcement graphic">
+        <div class="brand-copy">
+          <span class="eyebrow">Brand identity direction</span>
+          <h2>Warm bakery energy with a polished ordering system.</h2>
+          <p>The logo already has personality: cocoa ribbon, blue sugar dust, fresh ingredients, and a friendly baker character. This demo turns that identity into a website customers can actually use.</p>
+          <div class="swatches" aria-label="Brand color palette">
+            <span class="swatch" style="--color:#172a46">Blue sugar</span>
+            <span class="swatch" style="--color:#6d3e22">Cocoa ribbon</span>
+            <span class="swatch" style="--color:#f2be5c">Butter gold</span>
+            <span class="swatch" style="--color:#d65066">Strawberry</span>
+            <span class="swatch" style="--color:#fff7ea">Vanilla cream</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    OWNYOURWEB demo concept for a bakery, dessert brand, or home-based sweets business. Purchase the demo and customize the menu, forms, payment links, and launch setup.
+  </footer>
+
+  <script>
+    const form = document.getElementById("treatForm");
+    const thanks = document.getElementById("thanksMessage");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      thanks.classList.add("show");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
