@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OMNI Global Solutions LLC | Business Solutions</title>
-  <meta name="description" content="OMNI Global Solutions LLC helps organizations strengthen operations, coordinate projects, and build practical systems for sustainable growth.">
+  <title>OMNI Global Solutions LLC | Freight & Cold Chain Transportation</title>
+  <meta name="description" content="OMNI Global Solutions LLC is an owner-operated interstate freight carrier providing 26-foot box truck transportation, dry freight, refrigerated cargo, and nationwide delivery solutions.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -273,6 +273,30 @@
       line-height: 1.8;
     }
 
+    .about-panel {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      padding: clamp(28px, 5vw, 54px);
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel h2 {
+      font-size: clamp(3rem, 5.8vw, 5.9rem);
+      line-height: .88;
+    }
+
+    .about-panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-panel p:last-child { margin-bottom: 0; }
+
     .solution-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -314,6 +338,32 @@
     }
     .solution-card h3 { margin-top: 14px; font-size: 1.75rem; line-height: 1; }
     .solution-card p { margin: 16px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+    .service-list {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.45;
+    }
+
+    .service-list li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .service-list li::before {
+      content: "";
+      position: absolute;
+      top: .58em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+    }
 
     .approach {
       color: var(--white);
@@ -470,7 +520,7 @@
       .metrics, .solution-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .metric:nth-child(2) { border-right: 0; }
       .metric:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.13); }
-      .section-head, .approach-grid, .outcome-layout, .contact-grid { grid-template-columns: 1fr; }
+      .section-head, .about-panel, .approach-grid, .outcome-layout, .contact-grid { grid-template-columns: 1fr; }
       .section-head, .approach-grid { gap: 36px; }
       .outcome-visual { min-height: 480px; }
       .contact-grid { justify-items: start; }
@@ -521,10 +571,10 @@
         <img src="assets/omni-site/omni-global-solutions-header-logo.png" alt="OMNI Global Solutions LLC">
       </a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#solutions">Solutions</a>
-        <a href="#approach">Approach</a>
-        <a href="#outcomes">Outcomes</a>
-        <a class="nav-cta" href="#contact">Let's Talk</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#coverage">Coverage</a>
+        <a class="nav-cta" href="#contact">Request Quote</a>
       </nav>
     </div>
   </header>
@@ -532,113 +582,156 @@
   <main id="home">
     <section class="hero">
       <div class="wrap hero-content">
-        <span class="eyebrow">Business clarity. Global perspective.</span>
-        <h1>Solutions that move business forward.</h1>
+        <span class="eyebrow">Owner-operated freight carrier</span>
+        <h1>From dry freight to cold chain, we've got it covered.</h1>
         <p class="hero-copy">
-          OMNI Global Solutions helps organizations organize complex work, strengthen operations, and move from ideas to practical execution.
+          Omni Global Solutions provides dependable interstate freight transportation throughout the United States with 26-foot box trucks built for general freight, refrigerated cargo, and business-to-business delivery needs.
         </p>
         <div class="actions">
-          <a class="button primary" href="#solutions">Explore Solutions <i data-lucide="arrow-down-right"></i></a>
-          <a class="button secondary" href="#contact">Start a Conversation</a>
+          <a class="button primary" href="#services">View Services <i data-lucide="arrow-down-right"></i></a>
+          <a class="button secondary" href="#contact">Request a Quote</a>
         </div>
       </div>
     </section>
 
     <div class="metric-band">
       <div class="wrap metrics">
-        <div class="metric"><strong>01</strong><span>Strategy built around the real objective</span></div>
-        <div class="metric"><strong>02</strong><span>Systems that make execution clearer</span></div>
-        <div class="metric"><strong>03</strong><span>Support across teams and projects</span></div>
-        <div class="metric"><strong>04</strong><span>Solutions designed to scale</span></div>
+        <div class="metric"><strong>26FT</strong><span>Box truck transportation for commercial freight</span></div>
+        <div class="metric"><strong>DRY</strong><span>General freight, retail goods, and palletized shipments</span></div>
+        <div class="metric"><strong>COLD</strong><span>Refrigerated cargo and cold chain transportation</span></div>
+        <div class="metric"><strong>USA</strong><span>Nationwide interstate freight coverage</span></div>
       </div>
     </div>
 
-    <section class="section" id="solutions">
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="about-panel reveal">
+          <div>
+            <span class="eyebrow">About us</span>
+            <h2>Professional freight with personal ownership.</h2>
+          </div>
+          <div>
+            <p>
+              Omni Global Solutions is an owner-operated transportation company specializing in interstate freight transportation throughout the United States. Operating a fleet of 26-foot box trucks, we provide dependable transportation solutions for both general freight and refrigerated cargo.
+            </p>
+            <p>
+              With operations originating from New Jersey, Pennsylvania, and Delaware, we proudly serve businesses nationwide, delivering every shipment with professionalism, reliability, and attention to detail.
+            </p>
+            <p>
+              Whether transporting dry freight, retail merchandise, distribution center transfers, or temperature-sensitive products, our commitment remains the same: safe, efficient, and on-time delivery with clear communication from pickup to delivery.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <span class="eyebrow">Core capabilities</span>
-            <h2>Built for the work behind growth.</h2>
+            <span class="eyebrow">Our services</span>
+            <h2>Reliable freight movement from pickup to delivery.</h2>
           </div>
           <p>
-            Every engagement starts with understanding the challenge, identifying the operational gaps, and creating a practical path from where the business is now to where it needs to go.
+            Omni Global Solutions specializes in interstate freight transportation for both general freight and temperature-sensitive cargo. Every shipment is handled with professionalism, clear communication, and attention to detail.
           </p>
         </div>
 
         <div class="solution-grid">
           <article class="solution-card reveal">
-            <div class="icon-box"><i data-lucide="compass"></i></div>
+            <div class="icon-box"><i data-lucide="truck"></i></div>
             <div>
-              <small>Strategy</small>
-              <h3>Business Direction</h3>
-              <p>Clarify priorities, align resources, and build a focused roadmap around the next objective.</p>
+              <small>General freight</small>
+              <h3>Dry Freight Transportation</h3>
+              <ul class="service-list">
+                <li>26-foot box truck deliveries</li>
+                <li>Retail and commercial goods</li>
+                <li>Palletized shipments</li>
+                <li>Business-to-business transportation</li>
+              </ul>
             </div>
           </article>
           <article class="solution-card reveal">
-            <div class="icon-box"><i data-lucide="workflow"></i></div>
+            <div class="icon-box"><i data-lucide="snowflake"></i></div>
             <div>
-              <small>Operations</small>
-              <h3>Process Improvement</h3>
-              <p>Turn scattered workflows into repeatable systems that reduce friction and support consistency.</p>
+              <small>Cold chain</small>
+              <h3>Refrigerated Transportation</h3>
+              <ul class="service-list">
+                <li>Temperature-controlled freight</li>
+                <li>Fresh and frozen food products</li>
+                <li>Produce and beverages</li>
+                <li>Pharmaceutical and specialty products</li>
+              </ul>
             </div>
           </article>
           <article class="solution-card reveal">
-            <div class="icon-box"><i data-lucide="briefcase-business"></i></div>
+            <div class="icon-box"><i data-lucide="warehouse"></i></div>
             <div>
-              <small>Execution</small>
-              <h3>Project Support</h3>
-              <p>Coordinate priorities, timelines, communication, and deliverables so important work keeps moving.</p>
+              <small>Transfers</small>
+              <h3>Distribution Support</h3>
+              <ul class="service-list">
+                <li>Warehouse transfers</li>
+                <li>Distribution center moves</li>
+                <li>Scheduled deliveries</li>
+                <li>Dedicated freight services</li>
+              </ul>
             </div>
           </article>
           <article class="solution-card reveal">
             <div class="icon-box"><i data-lucide="globe-2"></i></div>
             <div>
-              <small>Scale</small>
-              <h3>Growth Systems</h3>
-              <p>Create stronger infrastructure for expansion, partnerships, service delivery, and long-term growth.</p>
+              <small>Delivery</small>
+              <h3>Expedited & Last-Mile</h3>
+              <ul class="service-list">
+                <li>Expedited deliveries</li>
+                <li>Last-mile delivery solutions</li>
+                <li>Regional transportation</li>
+                <li>Long-distance freight solutions</li>
+              </ul>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section approach" id="approach">
+    <section class="section approach" id="coverage">
       <div class="wrap approach-grid">
         <div class="approach-copy reveal">
-          <span class="eyebrow">How OMNI works</span>
-          <h2>Clear thinking. Practical movement.</h2>
+          <span class="eyebrow">Service area</span>
+          <h2>Operating locally. Moving freight nationwide.</h2>
           <p>
-            OMNI brings structure to the moving pieces, then turns that structure into decisions, systems, and accountable next steps.
+            With operations originating from New Jersey, Pennsylvania, and Delaware, Omni Global Solutions has the capability to transport freight throughout the United States.
           </p>
         </div>
         <div class="steps reveal">
           <article class="step">
-            <div><h3>Understand the environment</h3><p>Review the goals, people, processes, constraints, and opportunities shaping the work.</p></div>
+            <div><h3>Nationwide interstate freight</h3><p>Reliable transportation for local deliveries, regional routes, and long-distance freight needs.</p></div>
           </article>
           <article class="step">
-            <div><h3>Define the right solution</h3><p>Build a focused plan that fits the actual organization instead of forcing a generic playbook.</p></div>
+            <div><h3>General and refrigerated cargo</h3><p>Flexible coverage for dry freight, cold chain transportation, retail goods, food products, and specialty shipments.</p></div>
           </article>
           <article class="step">
-            <div><h3>Move into execution</h3><p>Translate strategy into clear ownership, practical actions, and measurable progress.</p></div>
+            <div><h3>Built for business customers</h3><p>Support for food and beverage, retail, manufacturing, warehousing, wholesale, healthcare, e-commerce, and growing businesses.</p></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="outcomes" id="outcomes">
+    <section class="outcomes" id="why-omni">
       <div class="outcome-layout">
         <div class="outcome-visual">
           <div class="orbit" aria-hidden="true"></div>
           <img class="globe-mark" src="assets/omni-site/omni-global-solutions-icon.png" alt="OMNI Global Solutions globe identity mark">
         </div>
         <div class="outcome-copy reveal">
-          <span class="eyebrow">The result</span>
-          <h2>A stronger operating position.</h2>
+          <span class="eyebrow">Why choose Omni</span>
+          <h2>A stronger freight partner.</h2>
           <div class="outcome-list">
-            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Clearer priorities and decisions</span></div>
-            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Better organized workflows</span></div>
-            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Stronger team coordination</span></div>
-            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Systems prepared for growth</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Owner-operated service with personalized customer care</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Reliable, on-time deliveries and professional freight handling</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Nationwide coverage for general and refrigerated freight</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Flexible solutions, competitive pricing, and dedicated support</span></div>
+            <div class="outcome-item"><i data-lucide="circle-check"></i><span>Built for food and beverage, retail, manufacturing, healthcare, wholesale, e-commerce, and growing businesses</span></div>
           </div>
         </div>
       </div>
@@ -647,11 +740,19 @@
     <section class="contact" id="contact">
       <div class="wrap contact-grid">
         <div class="contact-copy reveal">
-          <span class="eyebrow">Start the conversation</span>
-          <h2>Bring the challenge. Build the solution.</h2>
-          <p>Tell OMNI what needs to move, improve, or become more organized. The first step is a focused conversation around the objective.</p>
+          <span class="eyebrow">Request a quote</span>
+          <h2>Need reliable transportation for your freight?</h2>
+          <p>Contact Omni Global Solutions for a customized shipping solution and keep your freight moving safely, efficiently, and on time.</p>
+          <p>
+            Phone: <a href="tel:+18562467781">(856) 246-7781</a><br>
+            Email: <a href="mailto:omniglobal247@icloud.com">omniglobal247@icloud.com</a><br>
+            USDOT Number: 5472831<br>
+            Home Base: New Jersey &bull; Pennsylvania &bull; Delaware<br>
+            Service Area: Nationwide<br>
+            Owner-Operated &bull; 26-Foot Box Trucks &bull; General Freight &bull; Refrigerated Freight
+          </p>
         </div>
-        <a class="button primary reveal" href="mailto:darealtorr@icloud.com?subject=OMNI%20Global%20Solutions%20Consultation">Request Consultation <i data-lucide="arrow-up-right"></i></a>
+        <a class="button primary reveal" href="mailto:omniglobal247@icloud.com?subject=Omni%20Global%20Solutions%20Freight%20Quote%20Request">Request Quote <i data-lucide="arrow-up-right"></i></a>
       </div>
     </section>
   </main>
