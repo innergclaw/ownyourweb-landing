@@ -149,7 +149,7 @@
     }
 
     .demo-sites-section {
-      padding: 10px 0 0;
+      padding: 0;
     }
 
     .demo-sites-shell {
@@ -192,8 +192,12 @@
 
     .demo-menu {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      max-height: 590px;
+      overflow: auto;
+      padding: 2px 8px 8px 2px;
+      scrollbar-width: thin;
     }
 
     .demo-menu .demo-site-card {
@@ -272,7 +276,8 @@
       color: var(--ink);
     }
 
-    .hero {
+    .website-layout-section {
+      padding: clamp(18px, 3vw, 34px) 0;
       overflow: hidden;
       border-bottom: 3px solid var(--line);
       background:
@@ -280,14 +285,48 @@
         linear-gradient(315deg, rgba(49,216,255,.26) 0 28%, transparent 28% 100%);
     }
 
+    .website-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, .82fr) minmax(0, 1.68fr);
+      gap: 18px;
+      align-items: stretch;
+      min-height: min(760px, calc(100vh - 128px));
+    }
+
+    .website-info-panel,
+    .website-work-panel {
+      border: 3px solid var(--line);
+      background: rgba(251, 250, 245, .86);
+      box-shadow: 9px 9px 0 var(--line);
+      min-width: 0;
+    }
+
+    .website-info-panel {
+      display: grid;
+      align-content: stretch;
+    }
+
+    .website-work-panel {
+      padding: clamp(14px, 2.5vw, 18px);
+      overflow: hidden;
+    }
+
+    .hero {
+      height: 100%;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(200,255,46,.28) 0 28%, transparent 28% 100%),
+        rgba(255,255,255,.6);
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: 34px;
       align-items: center;
-      padding: 54px 0 38px;
-      min-height: calc(100vh - 74px);
-      max-height: 880px;
+      padding: clamp(24px, 3vw, 34px);
+      min-height: 100%;
+      max-height: none;
     }
 
     .hero-grid > * { min-width: 0; }
@@ -322,10 +361,10 @@
     }
 
     h1 {
-      max-width: 760px;
+      max-width: 520px;
       margin: 0;
       font-family: Anton, Impact, sans-serif;
-      font-size: clamp(4rem, 10vw, 9.6rem);
+      font-size: clamp(3.6rem, 7vw, 7.2rem);
       line-height: .82;
       font-weight: 400;
       text-transform: uppercase;
@@ -338,7 +377,7 @@
     }
 
     .lead {
-      max-width: 620px;
+      max-width: 520px;
       margin: 24px 0 0;
       color: var(--graphite);
       font-size: clamp(1rem, 1.8vw, 1.24rem);
@@ -390,10 +429,10 @@
 
     .value-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       border: 3px solid var(--line);
       margin-top: 34px;
-      max-width: 740px;
+      max-width: 520px;
       background: var(--white);
       box-shadow: var(--shadow);
     }
@@ -404,7 +443,8 @@
     }
 
     .value-strip div + div {
-      border-left: 3px solid var(--line);
+      border-left: 0;
+      border-top: 3px solid var(--line);
     }
 
     .value-strip b {
@@ -1116,6 +1156,7 @@
     }
 
     @media (max-width: 980px) {
+      .website-layout,
       .hero-grid,
       .section-head,
       .demo-panel,
@@ -1124,10 +1165,19 @@
         grid-template-columns: 1fr;
       }
 
+      .website-layout {
+        min-height: 0;
+      }
+
       .hero-grid {
         min-height: auto;
         max-height: none;
         padding-top: 34px;
+      }
+
+      .demo-menu {
+        max-height: none;
+        overflow: visible;
       }
 
       .browser-stack {
@@ -1184,6 +1234,11 @@
 
       .demo-sites-shell {
         padding: 12px;
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .website-info-panel,
+      .website-work-panel {
         box-shadow: 5px 5px 0 var(--line);
       }
 
@@ -1348,34 +1403,36 @@
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="wrap hero-grid">
-          <div>
-            <div class="eyebrow">Owned websites for real businesses</div>
-            <h1><span class="hero-title-kicker">Own</span><br>Your<br>Web</h1>
-            <p class="lead">Custom websites, launch pages, funnels, and web systems with the same bold OWNYOURWEB energy as the prompt pack: fast, useful, branded, and built so the business can actually move.</p>
-            <div class="hero-actions">
-              <a class="btn primary" href="#start">Start A Website</a>
-              <a class="btn secondary" href="demos/towing-roadside.html" target="_blank" rel="noopener">See Demo Site</a>
-            </div>
-            <div class="value-strip" aria-label="Service highlights">
-              <div><b>Fast</b><span>launch-ready builds</span></div>
-              <div><b>Owned</b><span>your site, your system</span></div>
-              <div><b>Clear</b><span>designed to convert</span></div>
-            </div>
-          </div>
+      <section class="website-layout-section" aria-label="OWNYOURWEB website overview">
+        <div class="wrap website-layout">
+          <aside class="website-info-panel">
+            <section class="hero">
+              <div class="hero-grid">
+                <div>
+                  <div class="eyebrow">Owned websites for real businesses</div>
+                  <h1><span class="hero-title-kicker">Own</span><br>Your<br>Web</h1>
+                  <p class="lead">Custom websites, launch pages, funnels, and web systems with the same bold OWNYOURWEB energy as the prompt pack: fast, useful, branded, and built so the business can actually move.</p>
+                  <div class="hero-actions">
+                    <a class="btn primary" href="#start">Start A Website</a>
+                    <a class="btn secondary" href="demos/towing-roadside.html" target="_blank" rel="noopener">See Demo Site</a>
+                  </div>
+                  <div class="value-strip" aria-label="Service highlights">
+                    <div><b>Fast</b><span>launch-ready builds</span></div>
+                    <div><b>Owned</b><span>your site, your system</span></div>
+                    <div><b>Clear</b><span>designed to convert</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </aside>
 
-        </div>
-      </section>
-
-      <section class="section demo-sites-section" id="demo-sites">
-        <div class="wrap">
-          <div class="demo-sites-shell">
-            <div class="demo-sites-heading">
-              <h2>Purchase Demo Sites</h2>
-              <p>Ready-to-preview website concepts for local businesses and organizations. Pick a for-sale demo, then OWNYOURWEB customizes the copy, colors, sections, forms, and launch path for you.</p>
-            </div>
-            <div class="demo-menu" aria-label="Demo sites for purchase">
+          <section class="website-work-panel demo-sites-section" id="demo-sites">
+            <div class="demo-sites-shell">
+              <div class="demo-sites-heading">
+                <h2>Purchase Demo Sites</h2>
+                <p>Ready-to-preview website concepts for local businesses and organizations. Pick a for-sale demo, then OWNYOURWEB customizes the copy, colors, sections, forms, and launch path for you.</p>
+              </div>
+              <div class="demo-menu" aria-label="Demo sites for purchase">
               <a class="demo-site-card" href="demos/ownyourweb-neuform-demo.html" target="_blank" rel="noopener">
                 <div class="demo-card-topline">
                   <small>Premium Business</small>
@@ -1440,8 +1497,9 @@
                 <strong>tinystarslearn.com</strong>
                 <span>Warm early learning site for programs, parent trust, enrollment, and family contact flow.</span>
               </a>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
       </section>
 
