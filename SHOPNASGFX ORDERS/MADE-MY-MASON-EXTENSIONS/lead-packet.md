@@ -8,9 +8,9 @@ Industry: Hair / Extensions / Beauty Brand
 Package: ShopNasGFX Logo Suite
 Standard package value: $250
 Discounted client price: $200
-Payment status: pending confirmation
-Project status: creative direction updated
-Stage: Brief / Design Direction
+Payment status: paid
+Project status: preview creation in progress
+Stage: Logo Previews
 Source: ShopNasGFX
 
 ## Creative Direction Update
@@ -58,8 +58,11 @@ Included deliverables:
 
 ## Next Steps
 
-- Confirm payment/deposit status.
 - Build around the existing made by Mason reference while developing the Mason Extensions logo suite.
 - Explore hair-strand styling inside the Extensions lettering where it remains readable.
 - Create first logo preview directions.
 - Prepare logo suite previews for client review.
+
+## Latest Update
+
+2026-07-06: Order marked paid. First preview creation has started.

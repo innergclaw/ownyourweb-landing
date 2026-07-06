@@ -59,4 +59,4 @@ Reference asset:
 
 ## Current Status
 
-Creative direction has been updated from the client note. Waiting on payment confirmation and any remaining text/initials confirmations before preview creation.
+Order is paid. Creative direction has been updated from the client note, and first logo previews are now in progress.
