@@ -59,4 +59,4 @@ Reference asset:
 
 ## Current Status
 
-Order is paid. Creative direction has been updated from the client note, and first logo previews are now in progress.
+Order is paid. Creative direction has been updated from the client note, and Preview #1 has been added for client review.

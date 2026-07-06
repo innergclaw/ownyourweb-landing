@@ -9,7 +9,7 @@ Package: ShopNasGFX Logo Suite
 Standard package value: $250
 Discounted client price: $200
 Payment status: paid
-Project status: preview creation in progress
+Project status: preview 01 posted for review
 Stage: Logo Previews
 Source: ShopNasGFX
 
@@ -65,4 +65,8 @@ Included deliverables:
 
 ## Latest Update
 
-2026-07-06: Order marked paid. First preview creation has started.
+2026-07-06: Order marked paid. Preview #1 has been added for client review.
+
+## Previews
+
+- Preview #1: `previews/mason-extensions-preview-01.png`

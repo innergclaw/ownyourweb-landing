@@ -348,6 +348,38 @@
       text-transform: uppercase;
     }
 
+    .preview-panel {
+      grid-column: 1 / -1;
+    }
+
+    .preview-card {
+      margin-top: 18px;
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 14px;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .preview-card img {
+      width: 100%;
+      display: block;
+      border: 3px solid var(--line);
+      background: var(--white);
+      object-fit: contain;
+    }
+
+    .preview-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 900;
+      line-height: 1.4;
+    }
+
     @media (max-width: 900px) {
       .topbar,
       .section,
@@ -405,7 +437,7 @@
             <span class="pill lime">Paid</span>
             <span class="pill cyan">Logo Suite</span>
             <span class="pill lime">$200 Discounted</span>
-            <span class="pill violet">Previews In Progress</span>
+            <span class="pill violet">Preview #1 Posted</span>
           </div>
 
           <div class="meta-grid">
@@ -431,14 +463,14 @@
             </div>
             <div class="status-step active">
               <span class="status-icon">03</span>
-              <div><strong>Preview creation</strong><span>First Mason Extensions logo suite previews are now being created.</span></div>
+              <div><strong>Preview #1 posted</strong><span>First Mason Extensions direction is ready for review.</span></div>
             </div>
             <div class="status-step">
               <span class="status-icon">04</span>
               <div><strong>Final delivery</strong><span>Deliver final logo suite files after review and approval.</span></div>
             </div>
           </div>
-          <div class="complete-card">Current status: order is paid and first logo previews are in progress.</div>
+          <div class="complete-card">Current status: order is paid and Preview #1 is posted for client review.</div>
           <div class="actions">
             <a class="button" href="#brief">Review Brief Questions</a>
             <a class="button secondary" href="mailto:mason@madebynason.net">Email Client</a>
@@ -464,8 +496,25 @@
           <div class="list">
             <div class="price-card"><span>Standard Logo Suite Price</span><strong>$250</strong></div>
             <div class="price-card"><span>Amber's Discounted Price</span><strong>$200</strong></div>
-            <div class="note"><strong>Payment status</strong>Paid. First previews are now in progress.</div>
+            <div class="note"><strong>Payment status</strong>Paid. Preview #1 is ready for client review.</div>
           </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <article class="panel preview-panel">
+          <span class="tag lime">Preview #1</span>
+          <h2>Mason Extensions Direction</h2>
+          <p class="lede">
+            First black-and-white logo direction using an elegant Mason wordmark, clean Extensions lockup, and subtle hair/scissor details built into the letterforms.
+          </p>
+          <figure class="preview-card">
+            <img src="../SHOPNASGFX%20ORDERS/MADE-MY-MASON-EXTENSIONS/previews/mason-extensions-preview-01.png" alt="Mason Extensions logo preview number one" />
+            <figcaption class="preview-caption">
+              <span>Direction: refined black-and-white hair extensions identity.</span>
+              <span>Status: posted for review.</span>
+            </figcaption>
+          </figure>
         </article>
       </section>
 
