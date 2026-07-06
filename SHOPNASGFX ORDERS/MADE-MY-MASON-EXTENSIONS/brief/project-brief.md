@@ -1,4 +1,4 @@
-# MADE MY MASON EXTENSIONS Project Brief
+# MADE BY MASON EXTENSIONS Project Brief
 
 ## Client
 
@@ -7,7 +7,7 @@ mason@madebynason.net
 
 ## Business
 
-MADE MY MASON EXTENSIONS
+MADE BY MASON EXTENSIONS
 
 ## Selected Package
 
@@ -23,18 +23,40 @@ Discounted client price: $200
 - Initials/text-only logo
 - Optional symbol/icon if needed
 
-## Brief Questions To Confirm
+## Confirmed Creative Direction
 
-1. What should the main logo text say exactly?
-2. Should the brand feel luxury, soft glam, bold, clean, editorial, playful, or another direction?
-3. What colors should be used or avoided?
-4. Who is the ideal customer?
-5. What products or services should the logo represent?
-6. Where will the logo be used first: website, Instagram, packaging, business cards, labels, or flyers?
-7. Are there any reference logos, brands, or styles the client likes?
-8. Are there any symbols, icons, initials, or visual ideas the client wants included?
+Amber wants to keep the current "made by Mason" visual direction because it is already on her site and packaging. The new logo suite should be the same design family, but updated for Mason Extensions.
+
+Core direction:
+
+- Keep "made by Mason" as the existing brand foundation
+- Keep "Mason" close to the current look
+- Use "Mason Extensions" for the updated logo direction
+- Explore making the Extensions letters feel like hair strands where possible
+- Add hair-focused details only if they keep the design cohesive and readable
+- Keep everything clean enough for packaging, website use, social media, and vendor files
+
+Fonts:
+
+- Cinzel Decorative
+- Montserrat
+
+Palette:
+
+- Black
+- White
+
+Reference asset:
+
+- `../assets/logo-files/made-by-mason-current-reference.webp`
+
+## Remaining Questions To Confirm
+
+1. Confirm whether the main logo text should read "Mason Extensions" or include "made by Mason" above/beside it.
+2. Confirm if the client wants the optional symbol/icon as the 4th mark.
+3. Confirm if the initials/text-only version should use MBM, ME, or Mason only.
+4. Confirm where the first use will be: website header, packaging, labels, Instagram, or business cards.
 
 ## Current Status
 
-Project brief created. Waiting on final direction and payment confirmation before preview creation.
-
+Creative direction has been updated from the client note. Waiting on payment confirmation and any remaining text/initials confirmations before preview creation.

@@ -1,17 +1,41 @@
-# MADE MY MASON EXTENSIONS Client Tracker
+# MADE BY MASON EXTENSIONS Client Tracker
 
 Created: 2026-07-06
 Client: Amber Washington
 Contact: mason@madebynason.net
-Business: MADE MY MASON EXTENSIONS
+Business: MADE BY MASON EXTENSIONS
 Industry: Hair / Extensions / Beauty Brand
 Package: ShopNasGFX Logo Suite
 Standard package value: $250
 Discounted client price: $200
 Payment status: pending confirmation
-Project status: brief setup
-Stage: Intake
+Project status: creative direction updated
+Stage: Brief / Design Direction
 Source: ShopNasGFX
+
+## Creative Direction Update
+
+Amber wants to keep the existing "made by Mason" direction because it is already used across the website and packaging. The updated logo suite should feel cohesive with that existing design, while shifting the new logo direction toward:
+
+- Mason Extensions
+- Keep "Mason" visually close to the current made by Mason style
+- Explore making parts of "Extensions" feel like hair strands where it works naturally
+- Add subtle hair-focused details if they strengthen the logo without making it too busy
+- Keep the design cohesive, clean, and usable across site, packaging, and digital assets
+
+Fonts:
+
+- Cinzel Decorative
+- Montserrat
+
+Color palette:
+
+- Black
+- White
+
+Reference asset:
+
+- `assets/logo-files/made-by-mason-current-reference.webp`
 
 ## Package Scope
 
@@ -35,7 +59,7 @@ Included deliverables:
 ## Next Steps
 
 - Confirm payment/deposit status.
-- Collect brand direction, colors, references, audience, and preferred style.
+- Build around the existing made by Mason reference while developing the Mason Extensions logo suite.
+- Explore hair-strand styling inside the Extensions lettering where it remains readable.
 - Create first logo preview directions.
 - Prepare logo suite previews for client review.
-
