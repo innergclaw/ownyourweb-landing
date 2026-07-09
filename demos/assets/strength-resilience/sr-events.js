@@ -40,6 +40,12 @@
       paymentUrl: "https://square.link/u/TMuheSKC",
       dates: [["2026-07-17", "Friday, July 17"]],
     },
+    august30: {
+      label: "August 30 Special Event",
+      time: "See Square checkout for details",
+      paymentUrl: "https://square.link/u/I6grnO8z",
+      dates: [["2026-08-30", "Sunday, August 30"]],
+    },
   };
 
   const eventSelect = form.querySelector("[name='event_name']");
