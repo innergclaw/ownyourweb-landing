@@ -59,4 +59,4 @@ Reference asset:
 
 ## Current Status
 
-Order is paid. Creative direction has been updated from the client note, and Preview #1 has been added for client review.
+Order is paid. Creative direction has been updated from the client note, and Previews #1–#3 have been added for client review. Preview #1 was uploaded July 6 and updated July 9; Preview #2 was uploaded July 9; Preview #3 was uploaded July 12.
