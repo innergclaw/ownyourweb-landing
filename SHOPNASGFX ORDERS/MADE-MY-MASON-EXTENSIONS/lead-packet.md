@@ -67,10 +67,10 @@ Included deliverables:
 
 2026-07-06: Order marked paid. Preview #1 uploaded for client review.
 2026-07-09: Preview #1 updated and Preview #2 uploaded for client review.
-2026-07-12: Preview #3 uploaded with three Extensions by Mason wordmark concepts.
+2026-07-12: Preview #3 uploaded, then replaced with the revised mirror, hair, comb, and scissor composition.
 
 ## Previews
 
 - Preview #1: `previews/mason-extensions-preview-01.png`
 - Preview #2: `previews/mason-extensions-preview-02.png`
-- Preview #3: `previews/mason-extensions-preview-03.png`
+- Preview #3: `previews/mason-extensions-preview-03-revised.png`
