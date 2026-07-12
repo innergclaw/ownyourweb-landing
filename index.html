@@ -1755,6 +1755,7 @@
   </div>
 
   <script src="/api-config.js"></script>
+  <script type="module" src="./interaction-sounds.js"></script>
   <script>
     const siteMenu = document.querySelector('.site-menu');
     const menuTrigger = document.querySelector('.menu-trigger');
@@ -1846,12 +1847,14 @@
           messageTitle.textContent = 'Packet Created';
           messageText.textContent = 'Your request is in the OWNYOURWEB build queue. We will review the scope, then send the right next step.';
           leadForm.reset();
+          document.dispatchEvent(new CustomEvent('cuelume:success'));
         } catch (error) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send Request';
           messageBox.classList.add('show');
           messageTitle.textContent = 'Try Again';
           messageText.textContent = 'The request did not reach the OWNYOURWEB build queue. Please call or message us directly while we reconnect the live intake system.';
+          document.dispatchEvent(new CustomEvent('cuelume:error'));
           console.error('OWNYOURWEB form submission failed:', error);
         }
       });
