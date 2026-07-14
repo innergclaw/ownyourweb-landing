@@ -8,6 +8,9 @@
   --steel: oklch(0.63 0.009 255);
   --chrome: oklch(0.91 0.005 255);
   --graphite: oklch(0.29 0.008 255);
+  --paper: oklch(0.965 0.004 255);
+  --paper-soft: oklch(0.92 0.006 255);
+  --ink-muted: oklch(0.36 0.009 255);
   --line: oklch(1 0 0 / 0.11);
   --line-strong: oklch(0.91 0.005 255 / 0.34);
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
@@ -278,6 +281,24 @@ p { text-wrap: pretty; }
 .fact strong { font-size: 0.9rem; line-height: 1.35; }
 
 .section { padding-block: 124px; }
+.light-section {
+  color: var(--black);
+  background: var(--paper);
+  box-shadow: 0 0 0 100vmax var(--paper);
+  clip-path: inset(0 -100vmax);
+}
+.light-section .eyebrow { color: var(--graphite); }
+.light-section .section-copy, .light-section .profile-bio p { color: var(--ink-muted); }
+.light-section .section-copy strong, .light-section .profile-bio .lead { color: var(--black); }
+.light-section .manifesto-card {
+  color: var(--black);
+  background: var(--paper-soft);
+  box-shadow: 0 0 0 1px oklch(0 0 0 / 0.08), 0 24px 64px oklch(0 0 0 / 0.1);
+}
+.light-section .manifesto-card.large { background: linear-gradient(145deg, oklch(0.7 0.009 255 / 0.24), transparent 70%), var(--paper-soft); }
+.light-section .manifesto-card small, .light-section .manifesto-quote em { color: var(--graphite); }
+.light-section .manifesto-card p { color: var(--ink-muted); }
+.light-section .manifesto-card:hover { box-shadow: 0 0 0 1px oklch(0 0 0 / 0.14), 0 28px 72px oklch(0 0 0 / 0.14); }
 .section-head { display: grid; grid-template-columns: 0.58fr 1.42fr; gap: 64px; align-items: start; margin-block-end: 50px; }
 h2 { margin: 0; font-size: clamp(3rem, 6.2vw, 6.6rem); font-weight: 650; letter-spacing: -0.07em; line-height: 0.9; text-transform: uppercase; }
 h3 { margin: 0; font-size: 1.2rem; letter-spacing: -0.035em; line-height: 1.18; }
@@ -427,6 +448,8 @@ h3 { margin: 0; font-size: 1.2rem; letter-spacing: -0.035em; line-height: 1.18; 
 .vinyl-showcase-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 7vw, 88px); }
 .vinyl-showcase-copy h3 { max-width: 12ch; margin-block: 22px 24px; font-size: clamp(2.8rem, 5.4vw, 5.7rem); font-weight: 680; letter-spacing: -0.07em; line-height: 0.9; text-transform: uppercase; }
 .vinyl-showcase-copy > p:not(.eyebrow) { max-width: 52ch; margin-block-end: 30px; color: var(--muted); line-height: 1.62; }
+.light-section .vinyl-showcase { color: var(--black); background: var(--paper-soft); box-shadow: 0 0 0 1px oklch(0 0 0 / 0.08), 0 28px 80px oklch(0 0 0 / 0.13); }
+.light-section .vinyl-showcase-copy > p:not(.eyebrow) { color: var(--ink-muted); }
 .artist-info { display: flex; flex-direction: column; justify-content: center; padding: clamp(36px, 6vw, 78px); }
 .artist-info h2 { margin-block: 18px 24px; }
 .artist-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-block: 2px 28px; }
@@ -461,6 +484,7 @@ h3 { margin: 0; font-size: 1.2rem; letter-spacing: -0.035em; line-height: 1.18; 
 .release-card .status { display: inline-flex; width: max-content; min-height: 34px; align-items: center; padding-inline: 10px; color: var(--chrome); box-shadow: 0 0 0 1px var(--line-strong); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 
 .final-cta { padding-block: 138px; text-align: center; }
+.final-crown { display: block; width: clamp(110px, 13vw, 156px); height: auto; margin: 0 auto 18px; filter: drop-shadow(0 16px 24px oklch(0 0 0 / 0.42)); }
 .final-cta h2 { max-width: 12ch; margin: 18px auto 24px; }
 .final-cta p { max-width: 62ch; margin: 0 auto 30px; color: var(--muted); line-height: 1.62; }
 .final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }

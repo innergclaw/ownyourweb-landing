@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="190" viewBox="0 0 320 190" role="img" aria-labelledby="title">
+  <title id="title">Chrome crown</title>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="oklch(0.41 0 0)"/>
+      <stop offset="0.22" stop-color="oklch(0.97 0 0)"/>
+      <stop offset="0.46" stop-color="oklch(0.62 0 0)"/>
+      <stop offset="0.7" stop-color="oklch(1 0 0)"/>
+      <stop offset="1" stop-color="oklch(0.45 0 0)"/>
+    </linearGradient>
+    <linearGradient id="band" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="oklch(0.96 0 0)"/>
+      <stop offset="0.48" stop-color="oklch(0.56 0 0)"/>
+      <stop offset="1" stop-color="oklch(0.89 0 0)"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="10" stdDeviation="7" flood-color="oklch(0 0 0)" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" stroke="oklch(0.17 0 0)" stroke-width="6" stroke-linejoin="round">
+    <path fill="url(#metal)" d="M37 146 29 70l48 40 15-74 40 64 28-80 28 80 40-64 15 74 48-40-8 76Z"/>
+    <path fill="url(#band)" d="M39 139h242l-7 34H46Z"/>
+    <path fill="oklch(0.23 0 0)" d="m91 119 13-17 13 17-13 17Zm56 0 13-17 13 17-13 17Zm56 0 13-17 13 17-13 17Z" stroke-width="4"/>
+    <g fill="url(#metal)">
+      <circle cx="29" cy="70" r="11"/>
+      <circle cx="92" cy="36" r="11"/>
+      <circle cx="160" cy="20" r="12"/>
+      <circle cx="228" cy="36" r="11"/>
+      <circle cx="291" cy="70" r="11"/>
+    </g>
+  </g>
+</svg>
