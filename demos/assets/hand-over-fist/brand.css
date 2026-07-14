@@ -228,6 +228,43 @@ p { text-wrap: pretty; }
 .monogram-bottom { position: absolute; inset: auto 28px 28px; align-items: end; }
 .monogram-bottom strong { max-width: 8ch; font-size: 2rem; letter-spacing: -0.055em; line-height: 0.92; text-transform: uppercase; }
 .monogram-bottom span { color: var(--muted); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; writing-mode: vertical-rl; }
+.artist-portrait {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 100%);
+  aspect-ratio: 0.82;
+  margin: 0;
+  overflow: hidden;
+  background: var(--black);
+  box-shadow: var(--shadow);
+  transform: rotate(1deg);
+  transition-property: transform, box-shadow;
+  transition-duration: 420ms;
+  transition-timing-function: var(--ease-out);
+}
+.artist-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% center;
+  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline-offset: -1px;
+}
+.artist-portrait figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 72px 24px 24px;
+  color: var(--chrome);
+  background: linear-gradient(to bottom, transparent, oklch(0.08 0 0 / 0.9));
+  font-size: 0.61rem;
+  font-weight: 820;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
 .seal {
   position: absolute;
   inset: auto -16px 54px auto;
@@ -509,6 +546,7 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
   .button:hover { background: var(--chrome); box-shadow: 0 0 0 1px oklch(1 0 0 / 0.17), 0 18px 44px oklch(0.91 0.005 255 / 0.18); }
   .button.secondary:hover { background: oklch(1 0 0 / 0.1); }
   .logo-stage:hover { transform: translateY(-5px) rotate(0); box-shadow: 0 0 0 1px var(--line-strong), 0 34px 94px oklch(0 0 0 / 0.42); }
+  .artist-portrait:hover { transform: translateY(-5px) rotate(0); box-shadow: 0 0 0 1px var(--line-strong), 0 34px 94px oklch(0 0 0 / 0.42); }
   .vinyl-link:hover { transform: translateY(-4px) scale(1.015); filter: drop-shadow(0 18px 28px oklch(0 0 0 / 0.24)); }
   .vinyl-link:hover .youtube-cue { color: var(--black); background: var(--chrome); }
 }
@@ -518,6 +556,7 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
   .hero, .profile-hero { min-height: auto; grid-template-columns: 1fr; padding-block: 74px 96px; }
   .hero-copy { max-width: 850px; }
   .hero-aside { min-height: 570px; }
+  .artist-portrait { width: min(680px, 92%); aspect-ratio: 1.15; transform: none; }
   .section-head, .manifesto-grid, .artist-feature, .release-grid, .vinyl-showcase { grid-template-columns: 1fr; }
   .artist-art { box-shadow: inset 0 -1px var(--line); }
   .vinyl-showcase-stage { box-shadow: inset 0 -1px var(--line); }
@@ -544,6 +583,7 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
   .hero-aside { min-height: 500px; }
   .label-page .hero-aside { min-height: 360px; }
   .logo-stage { width: 100%; padding: 10px; transform: none; }
+  .artist-portrait { width: 100%; aspect-ratio: 0.8; }
   .monogram-card { width: calc(100% - 28px); max-width: 100%; transform: none; }
   .seal { inset-inline-end: 0; }
   .facts, .feature-grid, .code-grid, .profile-bio { grid-template-columns: 1fr; }
