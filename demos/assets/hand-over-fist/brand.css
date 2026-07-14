@@ -52,6 +52,134 @@ body::before {
   mask-image: linear-gradient(to bottom, black, transparent 82%);
 }
 
+html.intro-pending, html.intro-pending body { overflow: hidden; }
+.smoky-intro { display: none; }
+.js .smoky-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  isolation: isolate;
+  color: var(--chrome);
+  background:
+    radial-gradient(circle at 50% 48%, oklch(0.28 0.008 255 / 0.34), transparent 32rem),
+    var(--black);
+}
+.smoky-intro::before, .smoky-intro::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(72vw, 880px);
+  aspect-ratio: 1.8;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, oklch(0.91 0.005 255 / 0.12), transparent 68%);
+  filter: blur(38px);
+  opacity: 0;
+  transform: translate3d(-22%, 24%, 0) scale(0.72);
+}
+.smoky-intro::after { transform: translate3d(26%, -20%, 0) scale(0.64); }
+.smoky-intro.is-ready::before { animation: smoky-haze 2.8s var(--ease-out) both; }
+.smoky-intro.is-ready::after { animation: smoky-haze-alt 2.8s 180ms var(--ease-out) both; }
+.smoky-intro-inner { position: relative; display: grid; justify-items: center; padding-inline: 20px; }
+.smoky-word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: clamp(7rem, 28vw, 22rem);
+  font-weight: 900;
+  letter-spacing: -0.14em;
+  line-height: 0.72;
+  user-select: none;
+}
+.smoky-letter {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  color: var(--chrome);
+  text-shadow: 0 0 0 var(--chrome);
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+}
+.smoky-letter::before {
+  content: attr(data-char);
+  position: absolute;
+  inset: 0;
+  color: oklch(0.91 0.005 255 / 0.42);
+  filter: blur(18px);
+  opacity: 0;
+  transform: translate3d(-18%, 20%, 0) scale(1.18);
+}
+.smoky-intro.is-ready .smoky-letter { animation: smoky-reveal 1.95s calc(var(--i) * 140ms) var(--ease-out) both; }
+.smoky-intro.is-ready .smoky-letter::before { animation: smoky-ghost 1.8s calc(var(--i) * 140ms) var(--ease-out) both; }
+.smoky-intro-name {
+  margin: 34px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 780;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+}
+.smoky-intro.is-ready .smoky-intro-name { animation: smoky-name-in 620ms 1.5s var(--ease-out) both; }
+.smoky-intro-skip {
+  position: absolute;
+  inset: 24px 24px auto auto;
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 15px;
+  color: var(--muted);
+  background: oklch(1 0 0 / 0.055);
+  border: 0;
+  box-shadow: 0 0 0 1px var(--line);
+  font: inherit;
+  font-size: 0.64rem;
+  font-weight: 780;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition-property: color, background-color, transform;
+  transition-duration: 160ms;
+  transition-timing-function: var(--ease-out);
+}
+.smoky-intro-skip:active { transform: scale(0.96); }
+.smoky-intro-skip:focus-visible { outline: 2px solid var(--chrome); outline-offset: 5px; }
+.smoky-intro.is-leaving { animation: smoky-intro-away 900ms 120ms var(--ease-out) both; pointer-events: none; }
+.smoky-intro.is-leaving .smoky-letter { animation: smoky-letter-away 760ms calc(var(--i) * 55ms) var(--ease-out) both; }
+.smoky-intro.is-leaving .smoky-letter::before { animation: smoky-ghost-away 720ms calc(var(--i) * 55ms) var(--ease-out) both; }
+.smoky-intro.is-leaving .smoky-intro-name { animation: smoky-name-away 360ms var(--ease-out) both; }
+@keyframes smoky-reveal {
+  0% { opacity: 0; filter: blur(32px); transform: translate3d(-0.42em, 0.26em, 0) scale(1.3); text-shadow: 0 0 42px oklch(0.91 0.005 255 / 0.64); }
+  46% { opacity: 0.72; filter: blur(11px); }
+  100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); text-shadow: 0 0 0 var(--chrome); }
+}
+@keyframes smoky-ghost {
+  0% { opacity: 0; transform: translate3d(-32%, 34%, 0) scale(1.38); }
+  38% { opacity: 0.62; }
+  100% { opacity: 0; transform: translate3d(34%, -24%, 0) scale(1.08); }
+}
+@keyframes smoky-haze {
+  0% { opacity: 0; transform: translate3d(-22%, 24%, 0) scale(0.72); }
+  48% { opacity: 0.72; }
+  100% { opacity: 0; transform: translate3d(18%, -10%, 0) scale(1.18); }
+}
+@keyframes smoky-haze-alt {
+  0% { opacity: 0; transform: translate3d(26%, -20%, 0) scale(0.64); }
+  52% { opacity: 0.5; }
+  100% { opacity: 0; transform: translate3d(-18%, 16%, 0) scale(1.12); }
+}
+@keyframes smoky-name-in { to { opacity: 1; transform: translateY(0); } }
+@keyframes smoky-letter-away { to { opacity: 0; filter: blur(28px); transform: translate3d(0.38em, -0.18em, 0) scale(1.18); } }
+@keyframes smoky-ghost-away { 0% { opacity: 0.42; } to { opacity: 0; transform: translate3d(46%, -32%, 0) scale(1.34); } }
+@keyframes smoky-name-away { to { opacity: 0; filter: blur(7px); transform: translateY(-7px); } }
+@keyframes smoky-intro-away { to { opacity: 0; visibility: hidden; } }
+
 ::selection { color: var(--black); background: var(--chrome); }
 a { color: inherit; text-decoration: none; }
 a:focus-visible { outline: 2px solid var(--chrome); outline-offset: 5px; }
@@ -543,6 +671,7 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
 @keyframes enter { from { opacity: 0; transform: translate3d(0, 24px, 0); filter: blur(4px); } to { opacity: 1; transform: none; filter: blur(0); } }
 
 @media (hover: hover) and (pointer: fine) {
+  .smoky-intro-skip:hover { color: var(--black); background: var(--chrome); }
   .button:hover { background: var(--chrome); box-shadow: 0 0 0 1px oklch(1 0 0 / 0.17), 0 18px 44px oklch(0.91 0.005 255 / 0.18); }
   .button.secondary:hover { background: oklch(1 0 0 / 0.1); }
   .logo-stage:hover { transform: translateY(-5px) rotate(0); box-shadow: 0 0 0 1px var(--line-strong), 0 34px 94px oklch(0 0 0 / 0.42); }
@@ -568,6 +697,9 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
 @media (max-width: 680px) {
   .shell { width: min(1180px, calc(100% - 24px)); }
   .site-header { padding-block: 10px; }
+  .smoky-intro-skip { inset: 14px 14px auto auto; }
+  .smoky-word { font-size: clamp(7rem, 36vw, 12rem); }
+  .smoky-intro-name { margin-block-start: 26px; letter-spacing: 0.22em; }
   .nav { grid-template-columns: 64px minmax(0, 1fr); gap: 12px; min-height: 56px; padding-inline-start: 8px; }
   .nav .label-lockup { width: 64px; }
   .label-logo { width: 64px; height: 40px; }
@@ -606,5 +738,6 @@ footer { padding-block: 30px 44px; color: var(--muted); box-shadow: inset 0 1px 
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .js .reveal { opacity: 1; transform: none; filter: none; }
   .progress { display: none; }
+  .smoky-intro { display: none !important; }
   .vinyl-record { animation: none; will-change: auto; }
 }
