@@ -455,6 +455,9 @@ h3 { margin: 0; font-size: 1.2rem; letter-spacing: -0.035em; line-height: 1.18; 
 .artist-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-block: 2px 28px; }
 .tag { padding: 8px 10px; color: var(--muted); background: oklch(1 0 0 / 0.045); box-shadow: 0 0 0 1px var(--line); font-size: 0.62rem; font-weight: 720; letter-spacing: 0.08em; text-transform: uppercase; }
 .artist-info p { max-width: 59ch; color: var(--muted); line-height: 1.62; }
+.light-section .artist-feature { color: var(--black); background: var(--paper-soft); box-shadow: 0 0 0 1px oklch(0 0 0 / 0.08), 0 28px 80px oklch(0 0 0 / 0.13); }
+.light-section .artist-info > p:not(.eyebrow) { color: var(--ink-muted); }
+.light-section .tag { color: var(--graphite); background: oklch(0 0 0 / 0.045); box-shadow: 0 0 0 1px oklch(0 0 0 / 0.1); }
 
 .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .feature-card { min-height: 270px; }
