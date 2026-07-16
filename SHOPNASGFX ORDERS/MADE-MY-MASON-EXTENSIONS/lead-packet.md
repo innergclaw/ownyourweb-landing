@@ -9,8 +9,8 @@ Package: ShopNasGFX Logo Suite
 Standard package value: $250
 Discounted client price: $200
 Payment status: paid
-Project status: previews 01–03 posted for review
-Stage: Logo Previews
+Project status: preview 04 posted with requested phone-call revisions
+Stage: Revision Review
 Source: ShopNasGFX
 
 ## Creative Direction Update
@@ -68,9 +68,11 @@ Included deliverables:
 2026-07-06: Order marked paid. Preview #1 uploaded for client review.
 2026-07-09: Preview #1 updated and Preview #2 uploaded for client review.
 2026-07-12: Preview #3 uploaded, then replaced with the revised mirror, hair, comb, and scissor composition.
+2026-07-16: Preview #4 uploaded. It removes "Made" and "By," places Mason above Extensions, keeps the bottom Preview #3 lettering direction, and compares same-height and oversized hair-shaped S options.
 
 ## Previews
 
 - Preview #1: `previews/mason-extensions-preview-01.png`
 - Preview #2: `previews/mason-extensions-preview-02.png`
 - Preview #3: `previews/mason-extensions-preview-03-revised.png`
+- Preview #4: `previews/mason-extensions-preview-04-client-request.png`

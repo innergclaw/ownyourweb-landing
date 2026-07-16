@@ -50,13 +50,13 @@ Reference asset:
 
 - `../assets/logo-files/made-by-mason-current-reference.webp`
 
-## Remaining Questions To Confirm
+## Latest Client Revision Request
 
-1. Confirm whether the main logo text should read "Mason Extensions" or include "made by Mason" above/beside it.
-2. Confirm if the client wants the optional symbol/icon as the 4th mark.
-3. Confirm if the initials/text-only version should use MBM, ME, or Mason only.
-4. Confirm where the first use will be: website header, packaging, labels, Instagram, or business cards.
+1. Use the exact wording "Mason Extensions" with no "Made" or "By."
+2. Place the plain Mason wordmark above Extensions; horizontal lines are optional if they improve the balance.
+3. Keep the Extensions lettering from the bottom Preview #3 concept as the foundation.
+4. Show the hair-shaped final S at the same height as the other letters and at its current oversized height for comparison.
 
 ## Current Status
 
-Order is paid. Creative direction has been updated from the client note, and Previews #1–#3 have been added for client review. Preview #1 was uploaded July 6 and updated July 9; Preview #2 was uploaded July 9; Preview #3 was uploaded July 12.
+Order is paid. Preview #4 was uploaded July 16 with the latest phone-call revisions: Mason above Extensions, no "Made" or "By," and two hair-shaped final-S sizes for client comparison.
