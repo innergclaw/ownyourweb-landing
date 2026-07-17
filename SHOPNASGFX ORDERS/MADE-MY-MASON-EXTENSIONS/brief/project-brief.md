@@ -56,7 +56,8 @@ Reference asset:
 2. Place the plain Mason wordmark above Extensions; horizontal lines are optional if they improve the balance.
 3. Keep the Extensions lettering from the bottom Preview #3 concept as the foundation.
 4. Show the hair-shaped final S at the same height as the other letters and at its current oversized height for comparison.
+5. Final confirmation: use the balanced same-height S and set the top Mason wordmark in Cinzel Decorative. Everything else is approved.
 
 ## Current Status
 
-Order is paid. Preview #4 was uploaded July 16 with the latest phone-call revisions: Mason above Extensions, no "Made" or "By," and two hair-shaped final-S sizes for client comparison.
+Order is paid. The client confirmed the balanced composition on July 17. Preview #5 applies Cinzel Decorative to the top Mason wordmark while retaining all other approved logo elements.

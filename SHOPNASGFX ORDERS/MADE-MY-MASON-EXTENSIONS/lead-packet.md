@@ -9,8 +9,8 @@ Package: ShopNasGFX Logo Suite
 Standard package value: $250
 Discounted client price: $200
 Payment status: paid
-Project status: preview 04 posted with requested phone-call revisions
-Stage: Revision Review
+Project status: composition confirmed; preview 05 posted with Cinzel Decorative correction
+Stage: Final Export Preparation
 Source: ShopNasGFX
 
 ## Creative Direction Update
@@ -69,6 +69,7 @@ Included deliverables:
 2026-07-09: Preview #1 updated and Preview #2 uploaded for client review.
 2026-07-12: Preview #3 uploaded, then replaced with the revised mirror, hair, comb, and scissor composition.
 2026-07-16: Preview #4 uploaded. It removes "Made" and "By," places Mason above Extensions, keeps the bottom Preview #3 lettering direction, and compares same-height and oversized hair-shaped S options.
+2026-07-17: Client confirmed the balanced composition. Preview #5 changes the top Mason wordmark to Cinzel Decorative while keeping the approved Extensions artwork intact.
 
 ## Previews
 
@@ -76,3 +77,4 @@ Included deliverables:
 - Preview #2: `previews/mason-extensions-preview-02.png`
 - Preview #3: `previews/mason-extensions-preview-03-revised.png`
 - Preview #4: `previews/mason-extensions-preview-04-client-request.png`
+- Preview #5: `previews/mason-extensions-preview-05-cinzel-mason.png`
