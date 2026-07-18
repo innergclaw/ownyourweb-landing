@@ -60,4 +60,4 @@ Reference asset:
 
 ## Current Status
 
-Order is paid. The client confirmed the balanced composition on July 17. Preview #5 applies Cinzel Decorative to the top Mason wordmark while retaining all other approved logo elements.
+Order is paid. On July 18, the client approved the main logo, secondary logo, icon, and ME initials mark. The final production package now includes SVG and EPS editable vectors, vector PDFs, transparent 300-DPI PNGs, online JPGs, and a four-page email PDF.
