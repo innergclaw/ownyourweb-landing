@@ -1676,8 +1676,8 @@
           <div class="steps">
             <article class="step">
               <span class="step-number">1</span>
-              <h3>Show us the gap</h3>
-              <p>Share your business, offer, audience, and where customers currently get confused, delayed, or lost.</p>
+              <h3>Tell us the goal</h3>
+              <p>Share your business, offer, audience, and what you want customers to do next.</p>
             </article>
             <article class="step">
               <span class="step-number">2</span>
@@ -1698,7 +1698,7 @@
           <div class="contact-panel">
             <div class="eyebrow">Build the missing system</div>
             <h2>What should your website help a customer do?</h2>
-            <p>Tell us where people currently get stuck and what action matters most. We’ll review the goal and recommend a clear path to calls, bookings, orders, payments, applications, or qualified leads.</p>
+            <p>Tell us where people currently get stuck and what action matters most. We build clear paths to calls, bookings, orders, payments, applications, and new leads.</p>
             <ul class="contact-list">
               <li>Business websites</li>
               <li>Service pages and lead forms</li>
@@ -1745,7 +1745,7 @@
                 </div>
                 <button type="submit" class="btn submit-btn" id="submitBtn">Send Request</button>
               </form>
-              <p class="form-note">Your request goes straight into the OWNYOURWEB build queue and Telegram command center.</p>
+              <p class="form-note">Submit the form and we’ll follow up with your next step.</p>
             </div>
             <div class="message-box" id="messageBox">
               <h3 id="messageTitle">Submitted</h3>
@@ -1856,8 +1856,8 @@
 
           signupForm.classList.add('hide');
           messageBox.classList.add('show');
-          messageTitle.textContent = 'Packet Created';
-          messageText.textContent = 'Your request is in the OWNYOURWEB build queue. We will review the scope, then send the right next step.';
+          messageTitle.textContent = 'Request Received';
+          messageText.textContent = 'Thanks—your request was received. We’ll contact you with the next step.';
           leadForm.reset();
           document.dispatchEvent(new CustomEvent('cuelume:success'));
         } catch (error) {
@@ -1865,7 +1865,7 @@
           submitBtn.textContent = 'Send Request';
           messageBox.classList.add('show');
           messageTitle.textContent = 'Try Again';
-          messageText.textContent = 'The request did not reach the OWNYOURWEB build queue. Please call or message us directly while we reconnect the live intake system.';
+          messageText.textContent = 'We could not send your request. Please try again, or call or message us directly.';
           document.dispatchEvent(new CustomEvent('cuelume:error'));
           console.error('OWNYOURWEB form submission failed:', error);
         }
