@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="OwnYourWeb member dashboard." />
+  <title>Member dashboard | OwnYourWeb</title>
+  <link rel="stylesheet" href="../member-access.css" />
+</head>
+<body data-member-page="dashboard" style="--member-bg:#f7fbfd;--member-ink:#14222b;--member-muted:#5d6b73;--member-line:rgba(0,136,204,.22);--member-surface:#ffffff;--member-accent:#0088cc">
+  <main class="member-page">
+    <div class="member-shell">
+      <div class="member-topline"><a href="../">Back to OwnYourWeb</a><span>Member dashboard</span></div>
+      <p class="member-eyebrow">Website systems member</p>
+      <h1 class="member-title">Your OwnYourWeb room.</h1>
+      <p class="member-lede">Continue into website examples, service information, and the next step for your online system.</p>
+      <p class="member-status" id="member-status" role="status" aria-live="polite">Checking your secure session...</p>
+      <section class="member-dashboard" id="member-dashboard" aria-labelledby="member-continue-title">
+        <div class="member-focus">
+          <p class="member-eyebrow">Your next move</p>
+          <h2 id="member-continue-title">Choose where to continue.</h2>
+          <p id="member-email">Your member access is active.</p>
+        </div>
+        <nav class="member-grid" aria-label="OwnYourWeb member destinations">
+        <a class="member-link" href="../demos/"><strong>Explore website demos</strong><span aria-hidden="true">↗</span></a>
+        <a class="member-link" href="../"><strong>Return to OwnYourWeb</strong><span aria-hidden="true">↗</span></a>
+        <a class="member-link" href="../#signupForm"><strong>Start your website</strong><span aria-hidden="true">↗</span></a>
+        <a class="member-link" href="https://nasirr.innergintel.org/"><strong>Open Home Base</strong><span aria-hidden="true">↗</span></a>
+        </nav>
+        <button class="member-button member-signout" id="member-signout" type="button">Sign out</button>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="../member-auth.mjs"></script>
+</body>
+</html>
