@@ -1,0 +1,377 @@
+:root {
+  --ink: #151515;
+  --paper: #f7f6f0;
+  --white: #fffef9;
+  --graphite: #30302d;
+  --muted: #6e6e68;
+  --line: rgba(21, 21, 21, .14);
+  --lime: #c7ff38;
+  --amber: #ead8ad;
+  --coral: #ff6b55;
+  --cyan: #c8d9ff;
+  --shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 18px 46px rgba(21, 21, 21, .07);
+  --soft: 0 24px 60px rgba(21, 21, 21, .09);
+  --family-ease: cubic-bezier(.23, 1, .32, 1);
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  color: var(--ink);
+  background: radial-gradient(circle at 18% 0%, rgba(199, 255, 56, .13), transparent 27rem), var(--paper);
+  background-size: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: min(1180px, calc(100% - 32px));
+}
+
+.topbar {
+  top: 10px;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.topbar-inner {
+  min-height: 68px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 10px 12px;
+  background: rgba(255, 254, 249, .9);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.brand-mark {
+  border: 0;
+  border-radius: 11px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.menu-trigger,
+.nav-cta,
+.btn,
+.back-top {
+  border: 0;
+  border-radius: 999px;
+  box-shadow: none;
+  transition: transform 160ms var(--family-ease), background-color 160ms ease, color 160ms ease, box-shadow 180ms ease;
+}
+
+.menu-trigger {
+  min-height: 44px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.nav-dropdown {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--soft);
+}
+
+.nav-dropdown a {
+  border-radius: 10px;
+}
+
+.website-layout-section {
+  padding: 34px 0 18px;
+  border: 0;
+  background: transparent;
+}
+
+.website-layout {
+  gap: 16px;
+}
+
+.website-info-panel,
+.website-work-panel,
+.demo-sites-shell,
+.shopnas-copy,
+.shopnas-card,
+.contact-panel,
+.form-card {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.hero {
+  background: radial-gradient(circle at 6% 6%, rgba(199, 255, 56, .34), transparent 20rem), rgba(255, 254, 249, .82);
+}
+
+.eyebrow {
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--lime);
+  box-shadow: none;
+  padding: 8px 11px;
+  font-size: .68rem;
+  letter-spacing: .09em;
+}
+
+.eyebrow::before {
+  display: none;
+}
+
+h1,
+h2,
+.demo-sites-heading h2,
+.service-card h3,
+.step h3,
+.form-card h3,
+.demo-menu .demo-site-card strong,
+.shopnas-card strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.06em;
+  text-transform: none;
+}
+
+h1 {
+  max-width: 9ch;
+  font-size: clamp(3.8rem, 6.4vw, 6.2rem);
+  line-height: .9;
+}
+
+.hero-title-kicker {
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+.lead,
+.section-head p,
+.shopnas-copy p,
+.step p,
+.contact-panel p {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.btn {
+  min-height: 48px;
+  padding: 0 20px;
+  color: var(--white);
+  background: var(--ink);
+  text-transform: none;
+}
+
+.btn.secondary {
+  color: var(--ink);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  color: var(--ink);
+  background: var(--lime);
+  box-shadow: 0 10px 24px rgba(111, 143, 24, .16);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(.96);
+}
+
+.value-strip {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.value-strip div + div {
+  border-top: 1px solid var(--line);
+}
+
+.value-strip b {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.demo-sites-section {
+  background: rgba(255, 254, 249, .7);
+}
+
+.demo-menu .demo-site-card,
+.service-card,
+.step,
+.contact-list li {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: none;
+}
+
+.demo-menu .demo-site-card:hover,
+.demo-menu .demo-site-card:focus-visible {
+  box-shadow: 0 14px 34px rgba(21, 21, 21, .08);
+  transform: translateY(-2px);
+}
+
+.demo-status {
+  border: 0;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.section {
+  border-bottom: 1px solid var(--line);
+}
+
+.section.amber {
+  background: rgba(234, 216, 173, .42);
+}
+
+.section-head h2 {
+  line-height: .95;
+}
+
+.service-grid {
+  gap: 10px;
+}
+
+.service-card {
+  min-height: 210px;
+}
+
+.service-card:nth-child(2) {
+  background: rgba(199, 255, 56, .46);
+}
+
+.service-card:nth-child(3),
+.service-card:nth-child(4),
+.service-card:nth-child(5) {
+  color: var(--ink);
+  background: rgba(255, 255, 255, .7);
+}
+
+.service-card:nth-child(4) small {
+  color: var(--muted);
+}
+
+.shopnas-copy {
+  background: radial-gradient(circle at 8% 8%, rgba(199, 255, 56, .3), transparent 20rem), var(--white);
+}
+
+.shopnas-card {
+  background: var(--ink);
+}
+
+.shopnas-card::before,
+.shopnas-card::after {
+  border-width: 1px;
+  border-radius: 20px;
+}
+
+.shopnas-card small,
+.shopnas-card-bottom span,
+.shopnas-proof-grid a {
+  border-width: 1px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.shopnas-proof-grid a:nth-child(1),
+.shopnas-proof-grid a:nth-child(2),
+.shopnas-proof-grid a:nth-child(3) {
+  transform: none;
+}
+
+.step-number {
+  border: 0;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.form-card {
+  color: var(--white);
+  background: var(--ink);
+}
+
+.form-card input,
+.form-card textarea {
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 12px;
+}
+
+.footer {
+  color: var(--muted);
+  background: transparent;
+}
+
+.footer-brand {
+  color: var(--ink);
+}
+
+.back-top {
+  color: var(--ink);
+  background: var(--lime);
+  box-shadow: 0 12px 30px rgba(21, 21, 21, .16);
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .topbar {
+    top: 8px;
+  }
+
+  .topbar-inner {
+    min-height: 62px;
+    border-radius: 18px;
+    padding: 8px 10px;
+  }
+
+  .website-layout-section {
+    padding-top: 24px;
+  }
+
+  .website-info-panel,
+  .website-work-panel,
+  .demo-sites-shell,
+  .shopnas-copy,
+  .shopnas-card,
+  .contact-panel,
+  .form-card {
+    border-radius: 22px;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(3.2rem, 15vw, 4.35rem);
+    overflow-wrap: anywhere;
+  }
+
+  .hero-actions .btn,
+  .shopnas-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

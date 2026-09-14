@@ -8,6 +8,7 @@ test("OWNYOURWEB homepage leads with customer actions", () => {
   assert.match(html, /Make It Easier for Customers to Act/);
   assert.match(html, /Build around the customer action that matters\./);
   assert.match(html, /Where are customers getting stuck\?/);
+  assert.match(html, /href="ecosystem\.css"/);
   for (const action of ["Find You", "Understand The Offer", "Contact You", "Book Or Buy", "Stay Updated"]) {
     assert.match(html, new RegExp(action));
   }
