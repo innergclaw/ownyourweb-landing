@@ -5,3 +5,9 @@ verify_jwt = false
 
 [functions.owner-readiness-signup]
 verify_jwt = false
+
+[functions.ai-app-audit]
+verify_jwt = false
+
+[functions.ai-app-audit-webhook]
+verify_jwt = false

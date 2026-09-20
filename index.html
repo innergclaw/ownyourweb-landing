@@ -751,7 +751,7 @@
 
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -775,6 +775,24 @@
       color: rgba(255,255,255,.72);
     }
     .service-card:nth-child(5) { background: #ffe4d9; }
+
+    .service-card:nth-child(6) {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .service-card:nth-child(6) small { color: var(--lime); }
+
+    a.service-card {
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    a.service-card:hover,
+    a.service-card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 10px 12px 0 var(--lime);
+      outline: none;
+    }
 
     .service-card small {
       font-weight: 950;
@@ -1477,6 +1495,7 @@
             <a href="free-owner-stack.html">Free Owner Stack <span aria-hidden="true">→</span></a>
             <a href="#demo-sites">Purchase Demo Sites <span aria-hidden="true">↓</span></a>
             <a href="#services">Services <span aria-hidden="true">↓</span></a>
+            <a href="services/ai-app-audit/">AI App Audit <span aria-hidden="true">→</span></a>
             <a href="account/">Member access <span aria-hidden="true">→</span></a>
             <a href="https://ownyourweb.marketing">Social Media Management <span aria-hidden="true">↗</span></a>
           </div>
@@ -1643,6 +1662,10 @@
               <small>05</small>
               <h3>Stay Updated</h3>
             </article>
+            <a class="service-card" href="services/ai-app-audit/" aria-label="Open the AI App Audit service">
+              <small>06 · New</small>
+              <h3>Audit Your AI-Built App</h3>
+            </a>
           </div>
         </div>
       </section>

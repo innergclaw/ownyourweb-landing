@@ -8,7 +8,7 @@
     "start": "node server.js",
     "dev": "node server.js",
     "static": "python3 serve.py",
-    "test": "node --check server.js",
+    "test": "node --check server.js && node --check services/ai-app-audit/app.js && node ai-app-audit.test.mjs",
     "sync:requests": "node scripts/pull-ownyourweb-requests.mjs",
     "sync:client-trackers": "node scripts/sync-client-trackers.mjs",
     "sync:queue-and-trackers": "node scripts/pull-ownyourweb-requests.mjs && node scripts/sync-client-trackers.mjs"

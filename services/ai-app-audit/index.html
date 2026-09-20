@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10110f">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://zkyhhoxcrjkhywblzehr.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="description" content="OWNYOURWEB AI App Audit reveals dependency, install-script, permission, and maintenance risks inside AI-built software.">
+  <title>AI App Audit | OWNYOURWEB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#scanner">skip to scanner</a>
+
+  <header class="site-header">
+    <a class="brand" href="../../" aria-label="OWNYOURWEB home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span><strong>OWNYOURWEB</strong><small>security intelligence</small></span>
+    </a>
+    <div class="header-actions">
+      <span class="secure-pill"><i aria-hidden="true"></i> private processing</span>
+      <a class="text-link" href="../../account/">sign in</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>new service</span> built for AI-made apps</p>
+        <h1>see what your AI actually installed.</h1>
+        <p class="hero-lead">an independent security intelligence layer for vibe-coded software. we trace what entered your project, what can run, what it can reach, and what deserves your attention.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#scanner">scan my app free <span aria-hidden="true">↘</span></a>
+          <a class="button quiet" href="#sample-report">see what gets checked</a>
+        </div>
+        <div class="hero-trust" aria-label="Product principles">
+          <span>evidence first</span>
+          <span>no fear language</span>
+          <span>facts separated from assumptions</span>
+        </div>
+      </div>
+
+      <aside class="terminal-card" aria-label="Sample audit result">
+        <div class="terminal-top">
+          <span><i></i><i></i><i></i></span>
+          <code>audit://project/latest</code>
+          <em>preview</em>
+        </div>
+        <div class="terminal-body">
+          <div class="risk-dial" aria-label="Sample risk score 72 out of 100">
+            <svg viewBox="0 0 130 130" role="img" aria-hidden="true">
+              <circle cx="65" cy="65" r="55"></circle>
+              <circle class="progress" cx="65" cy="65" r="55"></circle>
+            </svg>
+            <span><strong>72</strong><small>elevated</small></span>
+          </div>
+          <div class="metric-grid">
+            <div><small>packages</small><strong>312</strong></div>
+            <div><small>direct</small><strong>31</strong></div>
+            <div><small>install scripts</small><strong class="hot">04</strong></div>
+            <div><small>review areas</small><strong class="warm">23</strong></div>
+          </div>
+          <div class="terminal-line"><span>verified</span><p>lockfile found + analyzed</p></div>
+          <div class="terminal-line"><span>reach</span><p>filesystem · env · network</p></div>
+          <div class="terminal-line muted"><span>locked</span><p>20 findings require full audit</p></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="principle-bar" aria-label="Privacy information">
+      <div class="shell">
+        <strong>manifest-first.</strong>
+        <p>start with <code>package.json</code> and your lockfile. your full source code does not need to enter the free preview.</p>
+      </div>
+    </section>
+
+    <section class="scanner-section shell" id="scanner">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">01 / free preview</p>
+          <h2>drop the files your AI left behind.</h2>
+        </div>
+        <p>we read dependency metadata, not your idea. upload one package manifest and one supported lockfile to map what was intentionally added and what came with it.</p>
+      </div>
+
+      <div class="scanner-layout">
+        <form class="scanner-card" id="audit-form" novalidate>
+          <label class="project-field" for="project-name">
+            <span>project name</span>
+            <input id="project-name" name="project_name" maxlength="80" placeholder="my ai-built app" autocomplete="off">
+          </label>
+
+          <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-describedby="drop-help">
+            <input id="file-input" type="file" accept=".json,application/json" multiple hidden>
+            <span class="upload-icon" aria-hidden="true">↥</span>
+            <strong>drop package files here</strong>
+            <p id="drop-help">package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock</p>
+            <button class="file-button" type="button" id="choose-files">choose files</button>
+          </div>
+
+          <ul class="file-list" id="file-list" aria-live="polite"></ul>
+
+          <div class="scanner-actions">
+            <button class="button primary" type="submit" id="scan-button">run free preview</button>
+            <button class="sample-button" type="button" id="sample-button">or load a safe sample</button>
+          </div>
+          <p class="form-status" id="form-status" role="status"></p>
+          <p class="micro-note">accepted files are JSON dependency manifests up to 2 MB each. never upload <code>.env</code> files, API keys, passwords, or private source code.</p>
+        </form>
+
+        <aside class="scan-map" aria-label="Audit process">
+          <p class="kicker">what happens next</p>
+          <ol>
+            <li><span>01</span><div><strong>inventory</strong><p>count direct and inherited packages.</p></div></li>
+            <li><span>02</span><div><strong>trace execution</strong><p>identify install hooks and automatic code paths.</p></div></li>
+            <li><span>03</span><div><strong>map reach</strong><p>separate verified access from possible access.</p></div></li>
+            <li><span>04</span><div><strong>explain risk</strong><p>turn raw evidence into decisions you can act on.</p></div></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <section class="results-section" id="results" hidden>
+      <div class="shell">
+        <div class="results-header">
+          <div>
+            <p class="kicker">preview complete</p>
+            <h2 id="result-title">your project has areas to review.</h2>
+          </div>
+          <div class="score-chip"><span id="result-score">0</span><small>risk signal</small></div>
+        </div>
+
+        <div class="result-metrics" id="result-metrics"></div>
+        <div class="findings-grid" id="visible-findings"></div>
+
+        <div class="locked-report">
+          <div class="locked-copy">
+            <span class="lock-icon" aria-hidden="true">⌁</span>
+            <p class="kicker">full intelligence</p>
+            <h3><span id="locked-count">0</span> review areas remain locked.</h3>
+            <p>unlock the evidence, reach analysis, plain-language explanation, and a prioritized fix path for this exact project.</p>
+          </div>
+          <div class="locked-list" aria-hidden="true">
+            <span>dependency ownership changes</span>
+            <span>maintainer concentration</span>
+            <span>install permission map</span>
+            <span>outdated + abandoned packages</span>
+            <span>AI agent install authority</span>
+            <span>recommended fixes in order</span>
+          </div>
+          <div class="unlock-card">
+            <p>one complete audit</p>
+            <strong>$29</strong>
+            <span>one-time · no subscription</span>
+            <button class="button primary" type="button" id="unlock-button">unlock full report</button>
+            <small>secure checkout · report stays private</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-section shell" id="full-report" hidden>
+      <div class="report-toolbar">
+        <div><p class="kicker">paid report</p><h2>your full audit.</h2></div>
+        <button class="button quiet" type="button" id="print-report">print / save PDF</button>
+      </div>
+      <div class="report-status" id="report-status"></div>
+      <div class="report-content" id="report-content"></div>
+    </section>
+
+    <section class="coverage-section shell" id="sample-report">
+      <div class="section-heading compact">
+        <div><p class="kicker">02 / full report</p><h2>understand the system beneath the screen.</h2></div>
+        <p>the report answers the questions vibe coding usually leaves behind.</p>
+      </div>
+      <div class="question-grid">
+        <article><span>intent</span><h3>what did i choose?</h3><p>direct packages and versions explicitly named by your project.</p></article>
+        <article><span>inheritance</span><h3>what came with it?</h3><p>transitive packages installed underneath the tools you selected.</p></article>
+        <article><span>execution</span><h3>what can run?</h3><p>install scripts, build hooks, and automatic execution paths.</p></article>
+        <article><span>reach</span><h3>what can it touch?</h3><p>filesystem, network, process, and environment exposure.</p></article>
+        <article><span>trust</span><h3>who maintains it?</h3><p>release recency, maintainer concentration, and ownership changes.</p></article>
+        <article><span>decision</span><h3>what matters first?</h3><p>plain-language priorities with evidence and recommended action.</p></article>
+      </div>
+    </section>
+
+    <section class="method-section">
+      <div class="shell method-grid">
+        <div>
+          <p class="kicker light">our rule</p>
+          <h2>report reach.<br>never invent intent.</h2>
+        </div>
+        <div class="method-copy">
+          <p>a package being unmaintained is a fact. a package being malicious is a claim that requires evidence. every report separates:</p>
+          <ul>
+            <li><span>verified</span> what the files and metadata prove</li>
+            <li><span>inferred</span> what the evidence reasonably suggests</li>
+            <li><span>unknown</span> what requires deeper inspection</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans-section shell">
+      <div class="section-heading compact">
+        <div><p class="kicker">03 / access</p><h2>start with one app. scale when the work does.</h2></div>
+        <p>the single audit is ready for early access. builder and agency access are the next service tiers.</p>
+      </div>
+      <div class="plans-grid">
+        <article>
+          <span class="plan-label">single audit</span>
+          <strong>$29</strong><small>one time</small>
+          <ul><li>1 complete dependency report</li><li>evidence + reach analysis</li><li>prioritized recommendations</li><li>print-ready report</li></ul>
+          <a class="button primary" href="#scanner">scan first</a>
+        </article>
+        <article class="featured">
+          <span class="plan-label">builder</span>
+          <strong>coming next</strong><small>continuous protection</small>
+          <ul><li>multiple scans each month</li><li>change tracking between audits</li><li>project history</li><li>new-risk alerts</li></ul>
+          <a class="button quiet" href="mailto:hello@ownyourweb.xyz?subject=Builder%20audit%20access">join builder waitlist</a>
+        </article>
+        <article>
+          <span class="plan-label">agency</span>
+          <strong>custom</strong><small>client-ready</small>
+          <ul><li>multiple client projects</li><li>team access</li><li>white-label reports</li><li>API + workflow support</li></ul>
+          <a class="button quiet" href="../../#start">talk to OWNYOURWEB</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="shell">
+        <p class="kicker">build fast. know what you built.</p>
+        <h2>AI can help you ship it.<br>we help you see underneath it.</h2>
+        <a class="button primary inverse" href="#scanner">run the free preview</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><strong>OWNYOURWEB</strong><p>design · systems · ownership</p></div>
+      <div><a href="../../">all services</a><a href="../../account/">member access</a><a href="mailto:hello@ownyourweb.xyz">contact</a></div>
+      <p>this report supports risk review. it does not guarantee that software is secure or replace a full penetration test.</p>
+    </div>
+  </footer>
+
+  <dialog class="auth-dialog" id="auth-dialog">
+    <form method="dialog" class="dialog-shell" id="auth-form">
+      <button class="dialog-close" type="button" aria-label="Close">×</button>
+      <p class="kicker">secure your report</p>
+      <h2>sign in before checkout.</h2>
+      <p>your payment and full audit will be tied to this account, so nobody else can request the report.</p>
+      <label><span>email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label><span>password</span><input type="password" name="password" minlength="8" autocomplete="current-password" required></label>
+      <div class="dialog-actions">
+        <button class="button primary" type="submit" data-auth-action="signin">sign in + continue</button>
+        <button class="button quiet" type="button" data-auth-action="signup">create account</button>
+      </div>
+      <p class="dialog-status" id="auth-status" role="status"></p>
+    </form>
+  </dialog>
+
+  <script src="../../api-config.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

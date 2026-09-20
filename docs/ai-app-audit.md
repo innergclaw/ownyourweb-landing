@@ -1,0 +1,128 @@
+# OWNYOURWEB AI App Audit
+
+Manifest-first supply-chain audit service for AI-built applications.
+
+## Public route
+
+`/services/ai-app-audit/`
+
+The GitHub Pages client accepts:
+
+- `package.json`
+- `package-lock.json`
+- `npm-shrinkwrap.json`
+
+The free preview uploads only dependency metadata to the Edge Function. It does not ask for source code, `.env` files, API keys, or passwords.
+
+## Security boundary
+
+```text
+GitHub Pages UI
+  -> public preview request
+  -> Supabase Edge Function
+  -> private audit row
+  -> authenticated Stripe Checkout
+  -> signed Stripe webhook
+  -> paid entitlement
+  -> server-side deterministic + AI report
+  -> authenticated report response
+```
+
+The frontend receives three preview findings and a locked count. The private prompt, complete evidence, full findings, Stripe key, Supabase secret key, and OpenAI key remain server-side.
+
+## Database
+
+Migration:
+
+`supabase/migrations/20260920061222_create_ai_app_audits.sql`
+
+Tables:
+
+- `ai_app_audits`
+- `ai_app_audit_events`
+
+RLS is enabled. Authenticated users can only select audit rows where `auth.uid() = user_id`. Browser clients receive no insert or update grants. All writes pass through the Edge Function.
+
+Public previews are limited to 12 requests per server-salted request fingerprint per hour. Raw IP addresses are not stored.
+
+## Edge Functions
+
+- `ai-app-audit`: preview, checkout creation, and full report retrieval
+- `ai-app-audit-webhook`: signed Stripe entitlement updates
+
+Both functions use `verify_jwt = false` because the preview is public and Stripe webhooks do not carry Supabase user JWTs. The main function validates user access tokens inside authenticated actions. The webhook validates the raw Stripe signature before changing payment state.
+
+## Required production secrets
+
+Set these through Supabase Edge Function secrets. Do not commit them.
+
+```text
+STRIPE_SECRET_KEY
+STRIPE_AUDIT_PRICE_ID
+STRIPE_AUDIT_WEBHOOK_SECRET
+OPENAI_API_KEY
+OPENAI_MODEL
+```
+
+Optional configuration:
+
+```text
+STRIPE_API_VERSION=2026-02-25.clover
+AI_AUDIT_SITE_URL=https://ownyourweb.xyz/services/ai-app-audit
+AI_AUDIT_ALLOWED_ORIGINS=https://ownyourweb.xyz,https://www.ownyourweb.xyz,https://innergclaw.github.io
+```
+
+`OPENAI_MODEL` must name a model available to the connected OpenAI project that supports Structured Outputs in the Responses API.
+
+## Stripe setup
+
+1. Create a one-time $29 product/price in Stripe.
+2. Store its `price_...` ID as `STRIPE_AUDIT_PRICE_ID`.
+3. Add a webhook endpoint:
+
+   `https://zkyhhoxcrjkhywblzehr.supabase.co/functions/v1/ai-app-audit-webhook`
+
+4. Subscribe to:
+
+   - `checkout.session.completed`
+   - `checkout.session.async_payment_succeeded`
+   - `checkout.session.expired`
+
+5. Store the endpoint signing secret as `STRIPE_AUDIT_WEBHOOK_SECRET`.
+
+## Current v1 evidence boundary
+
+Verified by the deterministic scanner:
+
+- direct dependency count
+- transitive dependency count from supported npm lockfiles
+- lockfile presence and version
+- exact versus ranged direct declarations
+- root install lifecycle scripts
+- lockfile `hasInstallScript` flags
+- git, URL, file, link, and workspace dependency sources
+- current npm registry release date and maintainer count for up to 40 direct packages in a paid report
+
+Not claimed without further evidence:
+
+- malicious intent
+- confirmed package abandonment
+- runtime network calls
+- actual secret access
+- source-code vulnerabilities
+- exploitability
+
+## Launch verification
+
+Before accepting live payments:
+
+1. Run a preview with the safe sample.
+2. Run a preview with a real npm project containing a lockfile.
+3. Confirm anonymous users cannot read `ai_app_audits` through the Data API.
+4. Confirm one signed-in user cannot retrieve another user's report.
+5. Complete a Stripe test-mode purchase.
+6. Confirm the signed webhook changes the audit to `paid`.
+7. Confirm the first paid report request generates and stores one report.
+8. Confirm later requests return the stored report without another AI call.
+9. Review Supabase security and performance advisors.
+10. Repeat the full flow in Stripe live mode before announcing access.

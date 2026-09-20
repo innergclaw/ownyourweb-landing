@@ -260,6 +260,15 @@ h1 {
   background: rgba(255, 255, 255, .7);
 }
 
+.service-card:nth-child(6) {
+  color: var(--white);
+  background: var(--ink);
+}
+
+.service-card:nth-child(6) small {
+  color: var(--lime);
+}
+
 .service-card:nth-child(4) small {
   color: var(--muted);
 }
