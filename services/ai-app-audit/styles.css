@@ -92,6 +92,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
 .text-link { font-size: .8rem; font-weight: 800; border-bottom: 1px solid currentColor; }
+.account-button { padding: 0; color: inherit; background: transparent; cursor: pointer; }
 .secure-pill {
   display: inline-flex;
   align-items: center;
@@ -325,6 +326,7 @@ h1 {
 .unlock-card .button { width: 100%; margin: 15px 0 4px; }
 
 .report-section { padding: 100px 0; }
+.report-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 .report-status { margin-top: 30px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; color: var(--muted); background: var(--white); font: 400 .74rem/1.6 var(--mono); }
 .report-content { margin-top: 18px; display: grid; gap: 12px; }
 .report-summary, .report-finding, .report-list { padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); }
@@ -338,6 +340,21 @@ h1 {
 .report-finding dl { margin: 20px 0 0; display: grid; grid-template-columns: 150px 1fr; gap: 9px 20px; }
 .report-finding dt { color: var(--muted); font: 500 .65rem/1.5 var(--mono); text-transform: uppercase; }
 .report-finding dd { margin: 0; font-size: .82rem; line-height: 1.5; }
+
+.receipt-library { padding: 0 0 110px; }
+.receipt-library-header { padding-bottom: 28px; display: flex; align-items: end; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
+.receipt-library-header h2 { margin: 0; font-size: clamp(2.7rem, 5.4vw, 5.3rem); line-height: .94; letter-spacing: -.04em; }
+.receipt-library-header > div > p:last-child { margin: 16px 0 0; color: var(--muted); font: 400 .72rem/1.5 var(--mono); }
+.receipt-library-list { display: grid; }
+.receipt-row { min-height: 92px; padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 22px; border-bottom: 1px solid var(--line); }
+.receipt-row > div { min-width: 0; display: grid; gap: 7px; }
+.receipt-row strong { font-size: 1.05rem; letter-spacing: -.02em; }
+.receipt-row small { color: var(--muted); font: 400 .68rem/1.4 var(--mono); text-transform: uppercase; }
+.receipt-empty { margin-top: 18px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: rgba(201,255,70,.18); }
+.receipt-empty strong { font-size: 1.05rem; }
+.receipt-empty p { max-width: 700px; margin: 8px 0 0; color: #414924; font-size: .84rem; line-height: 1.6; }
+.receipt-loading { margin: 22px 0 0; color: var(--muted); font: 400 .72rem/1.5 var(--mono); }
+.receipt-loading.error { color: #bd321e; }
 
 .question-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .question-grid article { min-height: 260px; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,254,249,.78); }
@@ -375,15 +392,17 @@ footer { padding: 55px 0; color: #aaaea3; background: var(--ink); }
 .footer-grid strong { color: var(--white); }
 .footer-grid p { margin: 8px 0 0; font-size: .72rem; line-height: 1.6; }
 .footer-grid > div:nth-child(2) { display: grid; gap: 9px; color: var(--white); font-size: .78rem; }
+.footer-grid > div:nth-child(2) button { width: fit-content; padding: 0; border: 0; color: inherit; background: transparent; cursor: pointer; font: inherit; text-align: left; }
 
 .auth-dialog { width: min(540px, calc(100% - 24px)); padding: 0; border: 0; border-radius: 24px; background: var(--paper); box-shadow: 0 30px 100px rgba(0,0,0,.35); }
 .auth-dialog::backdrop { background: rgba(16,17,15,.68); backdrop-filter: blur(7px); }
 .dialog-shell { position: relative; padding: 34px; }
 .dialog-shell h2 { margin: 0; font-size: 2.45rem; line-height: .95; letter-spacing: -.04em; }
 .dialog-shell > p:not(.kicker):not(.dialog-status) { color: var(--muted); line-height: 1.6; }
-.dialog-shell label { display: grid; gap: 8px; margin-top: 14px; }
 .dialog-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border: 0; border-radius: 50%; cursor: pointer; background: #e6e4dc; font-size: 1.35rem; }
-.dialog-actions .button { flex: 1 1 180px; }
+.dialog-separation { margin: 20px 0; padding: 14px 16px; border: 1px solid rgba(168,218,44,.65); border-radius: 12px; background: rgba(201,255,70,.16); font-size: .8rem; }
+.dialog-separation strong { color: var(--ink); }
+.google-auth-button { width: 100%; margin-top: 4px; }
 .dialog-status { min-height: 20px; margin: 14px 0 0; font: 400 .68rem/1.5 var(--mono); }
 
 [hidden] { display: none !important; }
@@ -426,6 +445,8 @@ footer { padding: 55px 0; color: #aaaea3; background: var(--ink); }
   .scanner-actions .button { width: 100%; }
   .results-section { padding: 80px 0; }
   .results-header, .report-toolbar { align-items: flex-start; flex-direction: column; }
+  .report-actions { width: 100%; justify-content: stretch; }
+  .report-actions .button { flex: 1 1 180px; }
   .result-metrics, .findings-grid, .question-grid, .plans-grid { grid-template-columns: 1fr; }
   .result-metrics article + article { border-left: 0; border-top: 1px solid var(--line); }
   .locked-report { grid-template-columns: 1fr; }
@@ -436,6 +457,10 @@ footer { padding: 55px 0; color: #aaaea3; background: var(--ink); }
   .method-section, .final-cta { padding: 82px 0; }
   .report-finding dl { grid-template-columns: 1fr; gap: 4px; }
   .report-finding dd { margin-bottom: 12px; }
+  .receipt-library { padding-bottom: 82px; }
+  .receipt-library-header { align-items: flex-start; flex-direction: column; }
+  .receipt-row { align-items: flex-start; flex-direction: column; }
+  .receipt-row .button { width: 100%; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-grid > p { grid-column: auto; }
   .dialog-shell { padding: 28px 22px 22px; }

@@ -23,7 +23,7 @@
     </a>
     <div class="header-actions">
       <span class="secure-pill"><i aria-hidden="true"></i> private processing</span>
-      <a class="text-link" href="../../account/">sign in</a>
+      <button class="text-link account-button" type="button" id="audit-account-button">receipt account</button>
     </div>
   </header>
 
@@ -167,7 +167,7 @@
             <span class="lock-icon" aria-hidden="true">⌁</span>
             <p class="kicker">full intelligence</p>
             <h3><span id="locked-count">0</span> deeper analysis areas stay locked.</h3>
-            <p>Stripe payment unlocks one private audit. The full deterministic and AI analysis starts only after payment is confirmed.</p>
+            <p>Sign in with Google before checkout. Stripe then confirms the $9 payment and starts one private audit tied to your receipt account.</p>
           </div>
           <div class="locked-list" aria-label="Full audit coverage">
             <span><strong>AI build dependency map</strong><small>locked</small></span>
@@ -182,7 +182,7 @@
             <strong>$9</strong>
             <span>one-time · one app · no subscription</span>
             <button class="button primary" type="button" id="unlock-button">unlock + start full audit</button>
-            <small>Stripe confirms payment before AI starts</small>
+            <small>Google account → $9 payment → private download</small>
           </div>
         </div>
       </div>
@@ -191,10 +191,25 @@
     <section class="report-section shell" id="full-report" hidden>
       <div class="report-toolbar">
         <div><p class="kicker">private build receipt</p><h2>your full audit.</h2></div>
-        <button class="button quiet" type="button" id="print-report">print / save PDF</button>
+        <div class="report-actions">
+          <button class="button primary" type="button" id="download-report">download full file</button>
+          <button class="button quiet" type="button" id="print-report">print / save PDF</button>
+        </div>
       </div>
       <div class="report-status" id="report-status"></div>
       <div class="report-content" id="report-content"></div>
+    </section>
+
+    <section class="receipt-library shell" id="receipt-library" hidden aria-labelledby="receipt-library-title">
+      <div class="receipt-library-header">
+        <div>
+          <p class="kicker">receipt account</p>
+          <h2 id="receipt-library-title">your build receipts.</h2>
+          <p id="receipt-account-email"></p>
+        </div>
+        <button class="button quiet" type="button" id="receipt-signout">sign out</button>
+      </div>
+      <div class="receipt-library-list" id="receipt-library-list" aria-live="polite"></div>
     </section>
 
     <section class="coverage-section shell" id="sample-report">
@@ -268,25 +283,21 @@
   <footer>
     <div class="shell footer-grid">
       <div><strong>OWNYOURWEB</strong><p>design · systems · ownership</p></div>
-      <div><a href="../../">all services</a><a href="../../account/">member access</a><a href="mailto:hello@ownyourweb.xyz">contact</a></div>
+      <div><a href="../../">all services</a><button type="button" id="footer-account-button">receipt account</button><a href="mailto:hello@ownyourweb.xyz">contact</a></div>
       <p>this report supports risk review. it does not guarantee that software is secure or replace a full penetration test.</p>
     </div>
   </footer>
 
   <dialog class="auth-dialog" id="auth-dialog">
-    <form method="dialog" class="dialog-shell" id="auth-form">
+    <div class="dialog-shell">
       <button class="dialog-close" type="button" aria-label="Close">×</button>
-      <p class="kicker">secure your report</p>
-      <h2>sign in before checkout.</h2>
-      <p>your payment and full audit will be tied to this account, so nobody else can request the report.</p>
-      <label><span>email</span><input type="email" name="email" autocomplete="email" required></label>
-      <label><span>password</span><input type="password" name="password" minlength="8" autocomplete="current-password" required></label>
-      <div class="dialog-actions">
-        <button class="button primary" type="submit" data-auth-action="signin">sign in + continue</button>
-        <button class="button quiet" type="button" data-auth-action="signup">create account</button>
-      </div>
+      <p class="kicker">private delivery</p>
+      <h2>create your receipt account.</h2>
+      <p>Continue with Google before checkout. Your payment, completed report, and downloads stay connected to that account.</p>
+      <p class="dialog-separation"><strong>No membership required.</strong> This account only holds your AI Build Receipts.</p>
+      <button class="button primary google-auth-button" type="button" id="google-auth-button">continue with Google</button>
       <p class="dialog-status" id="auth-status" role="status"></p>
-    </form>
+    </div>
   </dialog>
 
   <script src="../../api-config.js"></script>

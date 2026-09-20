@@ -8,6 +8,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const MAX_FILE_BYTES = 2 * 1024 * 1024;
 const ALLOWED_FILES = new Set(["package.json", "package-lock.json", "npm-shrinkwrap.json"]);
 const storageKey = "ownyourweb.ai-app-audit.current";
+const checkoutIntentKey = "ownyourweb.ai-app-audit.checkout_pending";
 
 const form = document.querySelector("#audit-form");
 const projectName = document.querySelector("#project-name");
@@ -26,14 +27,21 @@ const formStatus = document.querySelector("#form-status");
 const results = document.querySelector("#results");
 const unlockButton = document.querySelector("#unlock-button");
 const authDialog = document.querySelector("#auth-dialog");
-const authForm = document.querySelector("#auth-form");
 const authStatus = document.querySelector("#auth-status");
+const googleAuthButton = document.querySelector("#google-auth-button");
+const accountButton = document.querySelector("#audit-account-button");
+const footerAccountButton = document.querySelector("#footer-account-button");
 const fullReport = document.querySelector("#full-report");
 const reportStatus = document.querySelector("#report-status");
 const reportContent = document.querySelector("#report-content");
+const receiptLibrary = document.querySelector("#receipt-library");
+const receiptLibraryList = document.querySelector("#receipt-library-list");
+const receiptAccountEmail = document.querySelector("#receipt-account-email");
 
 let selectedFiles = new Map();
 let pendingCheckout = false;
+let currentReport = null;
+let currentReportAuditId = "";
 
 const lockfileNames = new Set(["package-lock.json", "npm-shrinkwrap.json"]);
 
@@ -48,6 +56,12 @@ const setStatus = (element, message, state = "") => {
 
 const readCurrentAudit = () => safeJson(sessionStorage.getItem(storageKey) || "null");
 const saveCurrentAudit = (audit) => sessionStorage.setItem(storageKey, JSON.stringify(audit));
+const receiptHomeURL = () => {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+  return url.toString();
+};
 
 const updateReadiness = () => {
   const hasManifest = selectedFiles.has("package.json");
@@ -350,6 +364,8 @@ const startCheckout = async () => {
     const { data } = await supabase.auth.getSession();
     if (!data.session) {
       pendingCheckout = true;
+      sessionStorage.setItem(checkoutIntentKey, "true");
+      setStatus(authStatus, "sign in with Google to connect this purchase to your receipt account.");
       authDialog.showModal();
       return;
     }
@@ -361,6 +377,7 @@ const startCheckout = async () => {
   } catch (error) {
     if (error.message === "SIGN_IN_REQUIRED") {
       pendingCheckout = true;
+      sessionStorage.setItem(checkoutIntentKey, "true");
       authDialog.showModal();
     } else if (["PAYMENTS_NOT_CONFIGURED", "AUDIT_ENGINE_NOT_CONFIGURED"].includes(error.code)) {
       unlockButton.textContent = "early access opening soon";
@@ -379,46 +396,105 @@ const startCheckout = async () => {
 
 unlockButton.addEventListener("click", startCheckout);
 
-const authenticate = async (mode) => {
-  const data = new FormData(authForm);
-  const email = String(data.get("email") || "").trim();
-  const password = String(data.get("password") || "");
-  if (!email || password.length < 8) {
-    setStatus(authStatus, "use a valid email and a password with at least 8 characters.", "error");
-    return;
-  }
-  authForm.querySelectorAll("button").forEach((button) => { button.disabled = true; });
-  setStatus(authStatus, mode === "signup" ? "creating your secure account..." : "signing you in...");
-
-  const result = mode === "signup"
-    ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.href.split("?")[0] } })
-    : await supabase.auth.signInWithPassword({ email, password });
-
-  authForm.querySelectorAll("button").forEach((button) => { button.disabled = false; });
-  if (result.error) {
-    setStatus(authStatus, result.error.message || "we could not complete that request.", "error");
-    return;
-  }
-  if (mode === "signup" && !result.data.session) {
-    setStatus(authStatus, "check your email to confirm the account, then return here to unlock the report.", "success");
-    return;
-  }
-  setStatus(authStatus, "account verified. opening secure checkout...", "success");
-  authDialog.close();
-  if (pendingCheckout) {
-    pendingCheckout = false;
-    await startCheckout();
+const signInWithGoogle = async () => {
+  googleAuthButton.disabled = true;
+  setStatus(authStatus, "opening Google sign-in...");
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: receiptHomeURL() },
+  });
+  if (error) {
+    googleAuthButton.disabled = false;
+    setStatus(authStatus, error.message || "Google sign-in could not open.", "error");
   }
 };
 
-authForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  authenticate("signin");
-});
-authForm.querySelector("[data-auth-action='signup']").addEventListener("click", () => authenticate("signup"));
-authForm.querySelector(".dialog-close").addEventListener("click", () => {
+googleAuthButton.addEventListener("click", signInWithGoogle);
+authDialog.querySelector(".dialog-close").addEventListener("click", () => {
   pendingCheckout = false;
+  sessionStorage.removeItem(checkoutIntentKey);
   authDialog.close();
+});
+
+const openReceiptAccount = async () => {
+  const { data } = await supabase.auth.getSession();
+  if (!data.session) {
+    pendingCheckout = false;
+    setStatus(authStatus, "sign in with Google to open your private receipt account.");
+    authDialog.showModal();
+    return;
+  }
+  receiptLibrary.hidden = false;
+  receiptLibrary.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+accountButton.addEventListener("click", openReceiptAccount);
+footerAccountButton.addEventListener("click", openReceiptAccount);
+
+const updateAccountState = (session) => {
+  const signedIn = Boolean(session?.user);
+  accountButton.textContent = signedIn ? "account ready" : "receipt account";
+  receiptLibrary.hidden = !signedIn;
+  if (signedIn) receiptAccountEmail.textContent = `signed in as ${session.user.email || "your Google account"}`;
+};
+
+const renderReceiptLibrary = (reports = []) => {
+  receiptLibraryList.replaceChildren();
+  if (!reports.length) {
+    const empty = document.createElement("div");
+    empty.className = "receipt-empty";
+    const title = document.createElement("strong");
+    title.textContent = "your receipt account is ready.";
+    const copy = document.createElement("p");
+    copy.textContent = "Complete a $9 checkout and your finished Build Receipt will appear here for private viewing and download.";
+    empty.append(title, copy);
+    receiptLibraryList.append(empty);
+    return;
+  }
+
+  reports.forEach((report) => {
+    const row = document.createElement("article");
+    row.className = "receipt-row";
+    const copy = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = report.project_name || "untitled app";
+    const meta = document.createElement("small");
+    const date = report.completed_at || report.updated_at || report.created_at;
+    meta.textContent = `${date ? new Date(date).toLocaleDateString() : "date unavailable"} · ${report.status === "complete" ? "ready" : "processing"}`;
+    copy.append(title, meta);
+    const open = document.createElement("button");
+    open.className = "button quiet";
+    open.type = "button";
+    open.textContent = report.status === "complete" ? "open report" : "check status";
+    open.addEventListener("click", () => loadPaidReport(report.id));
+    row.append(copy, open);
+    receiptLibraryList.append(row);
+  });
+};
+
+const loadReceiptLibrary = async () => {
+  receiptLibraryList.replaceChildren();
+  const loading = document.createElement("p");
+  loading.className = "receipt-loading";
+  loading.textContent = "loading your private receipts...";
+  receiptLibraryList.append(loading);
+  try {
+    const response = await apiRequest("list_reports", {}, true);
+    renderReceiptLibrary(response.reports || []);
+  } catch (error) {
+    const message = document.createElement("p");
+    message.className = "receipt-loading error";
+    message.textContent = error.message || "your receipts could not be loaded.";
+    receiptLibraryList.replaceChildren(message);
+  }
+};
+
+document.querySelector("#receipt-signout").addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  updateAccountState(null);
+  currentReport = null;
+  currentReportAuditId = "";
+  fullReport.hidden = true;
 });
 
 const reportFinding = (finding, index) => {
@@ -483,6 +559,80 @@ const renderReport = (report) => {
   fullReport.scrollIntoView({ behavior: "smooth" });
 };
 
+const appendDownloadText = (parent, tag, text, className = "") => {
+  const element = parent.ownerDocument.createElement(tag);
+  if (className) element.className = className;
+  element.textContent = String(text || "");
+  parent.append(element);
+  return element;
+};
+
+const buildDownloadDocument = (report) => {
+  const documentCopy = document.implementation.createHTMLDocument(report.title || "AI Build Receipt");
+  const viewport = documentCopy.createElement("meta");
+  viewport.name = "viewport";
+  viewport.content = "width=device-width, initial-scale=1";
+  const style = documentCopy.createElement("style");
+  style.textContent = "body{max-width:900px;margin:0 auto;padding:48px 24px;color:#10110f;background:#fffef9;font:16px/1.65 system-ui,sans-serif}header{padding-bottom:28px;border-bottom:1px solid #10110f}h1{font-size:clamp(2.5rem,8vw,5rem);line-height:.92;letter-spacing:-.06em}h2{margin-top:46px}article{margin:16px 0;padding:22px;border:1px solid #d5d2c8;border-radius:16px}dl{display:grid;grid-template-columns:160px 1fr;gap:8px 18px}dt{font-size:.75rem;font-weight:700;text-transform:uppercase}dd{margin:0}small,.meta{color:#5b5d56}ol{padding-left:24px}@media(max-width:600px){dl{grid-template-columns:1fr}dd{margin-bottom:10px}}";
+  documentCopy.head.append(viewport, style);
+  const main = documentCopy.createElement("main");
+  const header = documentCopy.createElement("header");
+  appendDownloadText(header, "p", "OWNYOURWEB · AI BUILD RECEIPT", "meta");
+  appendDownloadText(header, "h1", report.title || "AI Build Receipt");
+  appendDownloadText(header, "p", report.executive_summary || "Your complete audit is ready.");
+  appendDownloadText(header, "p", `risk: ${report.risk_level || "not established"} · audit version ${report.audit_version || "1.0"} · receipt ${currentReportAuditId}`, "meta");
+  main.append(header);
+
+  const appendList = (heading, items) => {
+    if (!Array.isArray(items) || !items.length) return;
+    appendDownloadText(main, "h2", heading);
+    const list = documentCopy.createElement("ol");
+    items.forEach((item) => appendDownloadText(list, "li", item));
+    main.append(list);
+  };
+  appendList("What to act on first", report.priorities);
+  appendList("What this audit could not verify", report.unknowns);
+
+  if (Array.isArray(report.findings) && report.findings.length) appendDownloadText(main, "h2", "Full findings");
+  (report.findings || []).forEach((finding, index) => {
+    const article = documentCopy.createElement("article");
+    appendDownloadText(article, "h3", `${String(index + 1).padStart(2, "0")} · ${finding.title || "Review area"}`);
+    appendDownloadText(article, "p", finding.summary || "");
+    const details = documentCopy.createElement("dl");
+    [
+      ["level", finding.severity],
+      ["evidence class", finding.evidence_type],
+      ["verified", finding.verified],
+      ["possible reach", Array.isArray(finding.reach) ? finding.reach.join(" · ") : finding.reach],
+      ["recommended action", finding.recommendation],
+    ].forEach(([label, value]) => {
+      appendDownloadText(details, "dt", label);
+      appendDownloadText(details, "dd", value || "not established");
+    });
+    article.append(details);
+    main.append(article);
+  });
+  documentCopy.body.append(main);
+  return `<!doctype html>\n${documentCopy.documentElement.outerHTML}`;
+};
+
+document.querySelector("#download-report").addEventListener("click", () => {
+  if (!currentReport) {
+    setStatus(reportStatus, "open a completed report before downloading.", "error");
+    return;
+  }
+  const file = new Blob([buildDownloadDocument(currentReport)], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(file);
+  const link = document.createElement("a");
+  const project = String(currentReport.title || "ai-build-receipt").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "ai-build-receipt";
+  link.href = url;
+  link.download = `${project}.html`;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+});
+
 const loadPaidReport = async (auditId, attempt = 0) => {
   fullReport.hidden = false;
   setStatus(reportStatus, "checking payment and opening your private report...");
@@ -505,7 +655,10 @@ const loadPaidReport = async (auditId, attempt = 0) => {
       return;
     }
     setStatus(reportStatus, `report ready · audit version ${response.report?.audit_version || "1.0"}`, "success");
+    currentReport = response.report;
+    currentReportAuditId = auditId;
     renderReport(response.report);
+    loadReceiptLibrary();
   } catch (error) {
     if (error.message === "SIGN_IN_REQUIRED") {
       pendingCheckout = false;
@@ -520,6 +673,10 @@ const loadPaidReport = async (auditId, attempt = 0) => {
 document.querySelector("#print-report").addEventListener("click", () => window.print());
 
 const initialize = async () => {
+  const { data } = await supabase.auth.getSession();
+  updateAccountState(data.session);
+  if (data.session) await loadReceiptLibrary();
+
   const params = new URLSearchParams(window.location.search);
   const auditId = params.get("audit");
   const checkout = params.get("checkout");
@@ -529,7 +686,16 @@ const initialize = async () => {
     await loadPaidReport(auditId);
   } else if (checkout === "cancelled") {
     setStatus(formStatus, "checkout was cancelled. your preview is still available in this browser.");
+  } else if (data.session && sessionStorage.getItem(checkoutIntentKey) === "true") {
+    sessionStorage.removeItem(checkoutIntentKey);
+    pendingCheckout = false;
+    await startCheckout();
   }
 };
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  updateAccountState(session);
+  if (session) window.setTimeout(loadReceiptLibrary, 0);
+});
 
 initialize();

@@ -661,6 +661,24 @@ async function getReport(req: Request, body: Record<string, unknown>) {
   return json(req, { status: "complete", report: result.report });
 }
 
+async function listReports(req: Request) {
+  const user = await authenticatedUser(req);
+  if (!user?.id) return json(req, { error: "Sign in to open your receipt account.", code: "AUTH_REQUIRED" }, 401);
+  const loaded = await rest<Array<Record<string, unknown>>>(
+    `ai_app_audits?user_id=eq.${encodeURIComponent(user.id)}&payment_status=eq.paid&select=id,project_name,status,created_at,updated_at,completed_at&order=created_at.desc&limit=50`,
+  );
+  if (!loaded.ok) return json(req, { error: "Your receipts could not be loaded." }, 500);
+  const reports = (loaded.data || []).map((report) => ({
+    id: clean(report.id, 80),
+    project_name: clean(report.project_name, 80) || "untitled app",
+    status: clean(report.status, 40) || "paid",
+    created_at: clean(report.created_at, 80),
+    updated_at: clean(report.updated_at, 80),
+    completed_at: clean(report.completed_at, 80),
+  }));
+  return json(req, { reports });
+}
+
 async function processPaid(req: Request, body: Record<string, unknown>) {
   if (!internalRequestIsAuthorized(req)) return json(req, { error: "Internal authorization failed." }, 403);
   const auditId = clean(body.audit_id, 80);
@@ -685,5 +703,6 @@ Deno.serve(async (req) => {
   if (action === "create_checkout") return createCheckout(req, body as Record<string, unknown>);
   if (action === "process_paid") return processPaid(req, body as Record<string, unknown>);
   if (action === "get_report") return getReport(req, body as Record<string, unknown>);
+  if (action === "list_reports") return listReports(req);
   return json(req, { error: "Unknown audit action." }, 400);
 });
