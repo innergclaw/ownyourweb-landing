@@ -1,6 +1,18 @@
 # OWNYOURWEB AI App Audit
 
-Manifest-first supply-chain audit service for AI-built applications.
+Manifest-first AI build receipt for AI-built applications. The product shows what the project declares directly, what arrived through those packages, what can execute, and what deserves review.
+
+## Product lane
+
+The service is an AI build provenance report, presented to customers as an **AI Build Receipt**. It does not compete as a broad vulnerability scanner. It explains the dependency trail an AI-built app leaves behind:
+
+- packages declared directly by the project
+- packages inherited through those direct choices
+- install-time execution paths
+- verified and possible reach
+- evidence that requires human review
+
+Manifest data cannot prove whether the user or an AI agent chose a package. The report states that boundary instead of inventing authorship.
 
 ## Public route
 
@@ -95,7 +107,7 @@ AI_AUDIT_ALLOWED_ORIGINS=https://ownyourweb.xyz,https://www.ownyourweb.xyz,https
 
 ## Stripe setup
 
-1. Create a one-time $29 product/price in Stripe.
+1. Create a one-time $9 product/price in Stripe.
 2. Store its `price_...` ID as `STRIPE_AUDIT_PRICE_ID`.
 3. Add a webhook endpoint:
 

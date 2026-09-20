@@ -452,7 +452,7 @@ const renderReport = (report) => {
   const summary = document.createElement("article");
   summary.className = "report-summary";
   const title = document.createElement("h3");
-  title.textContent = report.title || "AI App Audit report";
+  title.textContent = report.title || "AI Build Receipt";
   const body = document.createElement("p");
   body.textContent = report.executive_summary || "Your complete audit is ready.";
   const meta = document.createElement("small");
