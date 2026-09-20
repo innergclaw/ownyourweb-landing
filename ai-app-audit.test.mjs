@@ -29,6 +29,8 @@ assert.match(client, /visible_findings_count/);
 assert.match(client, /waiting for Stripe to confirm payment/);
 assert.match(client, /signInWithOAuth/);
 assert.match(client, /provider: "google"/);
+assert.match(client, /view=dashboard/);
+assert.match(client, /enterAuditDashboard/);
 assert.match(client, /apiRequest\("list_reports"/);
 assert.match(client, /buildDownloadDocument/);
 assert.doesNotMatch(client, /OPENAI_API_KEY|STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY/);

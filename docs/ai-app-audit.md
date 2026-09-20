@@ -50,6 +50,8 @@ The v1 entitlement is the paid state on one audit row. A separate credits table 
 
 The free preview does not require an account. Before checkout, the customer signs in with Google and creates a standalone receipt account for this service. This is not an OWNYOURWEB or INNERG membership.
 
+The Google return URL points to `/services/ai-app-audit/?view=dashboard#receipt-library`. The signed-in view removes the marketing sections and opens a dedicated audit dashboard with the customer's report history.
+
 The Edge Function assigns the audit to the authenticated Supabase user before Stripe Checkout opens. After payment, the same account can list its paid receipts, open the private report, download a complete HTML file, or print the report as a PDF. The browser never receives reports owned by another user.
 
 Checkout stays closed unless Stripe and the paid AI engine are both configured. A paid audit never silently falls back to a reduced report. If the AI job fails, the audit moves to `failed`, the payment record remains saved, and support can resolve the paid order.

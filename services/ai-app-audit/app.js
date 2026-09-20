@@ -56,11 +56,18 @@ const setStatus = (element, message, state = "") => {
 
 const readCurrentAudit = () => safeJson(sessionStorage.getItem(storageKey) || "null");
 const saveCurrentAudit = (audit) => sessionStorage.setItem(storageKey, JSON.stringify(audit));
-const receiptHomeURL = () => {
+const auditDashboardURL = () => {
   const url = new URL(window.location.href);
-  url.search = "";
-  url.hash = "";
+  url.search = "?view=dashboard";
+  url.hash = "receipt-library";
   return url.toString();
+};
+
+const enterAuditDashboard = (updateHistory = true) => {
+  document.body.classList.add("dashboard-view");
+  receiptLibrary.hidden = false;
+  if (updateHistory) history.pushState({}, "", auditDashboardURL());
+  receiptLibrary.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 const updateReadiness = () => {
@@ -401,7 +408,7 @@ const signInWithGoogle = async () => {
   setStatus(authStatus, "opening Google sign-in...");
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: receiptHomeURL() },
+    options: { redirectTo: auditDashboardURL() },
   });
   if (error) {
     googleAuthButton.disabled = false;
@@ -424,8 +431,7 @@ const openReceiptAccount = async () => {
     authDialog.showModal();
     return;
   }
-  receiptLibrary.hidden = false;
-  receiptLibrary.scrollIntoView({ behavior: "smooth", block: "start" });
+  enterAuditDashboard();
 };
 
 accountButton.addEventListener("click", openReceiptAccount);
@@ -433,7 +439,7 @@ footerAccountButton.addEventListener("click", openReceiptAccount);
 
 const updateAccountState = (session) => {
   const signedIn = Boolean(session?.user);
-  accountButton.textContent = signedIn ? "account ready" : "receipt account";
+  accountButton.textContent = signedIn ? "audit dashboard" : "receipt account";
   receiptLibrary.hidden = !signedIn;
   if (signedIn) receiptAccountEmail.textContent = `signed in as ${session.user.email || "your Google account"}`;
 };
@@ -673,11 +679,17 @@ const loadPaidReport = async (auditId, attempt = 0) => {
 document.querySelector("#print-report").addEventListener("click", () => window.print());
 
 const initialize = async () => {
+  const params = new URLSearchParams(window.location.search);
   const { data } = await supabase.auth.getSession();
   updateAccountState(data.session);
-  if (data.session) await loadReceiptLibrary();
+  if (data.session) {
+    await loadReceiptLibrary();
+    if (params.get("view") === "dashboard") enterAuditDashboard(false);
+  } else if (params.get("view") === "dashboard") {
+    setStatus(authStatus, "sign in with Google to open your private audit dashboard.");
+    authDialog.showModal();
+  }
 
-  const params = new URLSearchParams(window.location.search);
   const auditId = params.get("audit");
   const checkout = params.get("checkout");
   if (auditId && checkout === "success") {
