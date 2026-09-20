@@ -6,7 +6,7 @@ const AUDIT_ENDPOINT = window.OWNYOURWEB_AI_AUDIT_ENDPOINT || `${SUPABASE_URL}/f
 const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 const MAX_FILE_BYTES = 2 * 1024 * 1024;
-const ALLOWED_FILES = new Set(["package.json", "package-lock.json", "npm-shrinkwrap.json", "bun.lock"]);
+const ALLOWED_FILES = new Set(["package.json", "package-lock.json", "npm-shrinkwrap.json"]);
 const storageKey = "ownyourweb.ai-app-audit.current";
 
 const form = document.querySelector("#audit-form");
@@ -35,7 +35,7 @@ const reportContent = document.querySelector("#report-content");
 let selectedFiles = new Map();
 let pendingCheckout = false;
 
-const lockfileNames = new Set(["package-lock.json", "npm-shrinkwrap.json", "bun.lock"]);
+const lockfileNames = new Set(["package-lock.json", "npm-shrinkwrap.json"]);
 
 const safeJson = (text) => {
   try { return JSON.parse(text); } catch { return null; }
@@ -61,7 +61,7 @@ const updateReadiness = () => {
   dropTitle.textContent = hasFiles ? "package files added" : "drop package files here";
   dropHelp.textContent = hasFiles
     ? "add another supported file or replace one below"
-    : "package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock";
+    : "package.json + package-lock.json or npm-shrinkwrap.json";
   chooseFiles.textContent = hasFiles ? "add files" : "choose files";
 
   if (!hasFiles) {
@@ -238,15 +238,24 @@ const metric = (label, value) => {
   const strong = document.createElement("strong");
   caption.textContent = label;
   strong.textContent = String(value);
+  if (typeof value === "string" && !/^\d+$/.test(value)) article.classList.add("text-metric");
   article.append(caption, strong);
   return article;
 };
 
 const renderPreview = (preview) => {
   const resultTitle = document.querySelector("#result-title");
+  const visibleCount = Number(preview.visible_findings_count ?? preview.visible_findings?.length ?? 0);
+  const lockedCount = Number(preview.locked_analysis_areas ?? preview.locked_findings ?? 0);
+  const accessPercent = Math.max(0, Math.min(100, Number(preview.preview_access_percent ?? 0)));
   resultTitle.textContent = preview.headline || "your project has areas to review.";
   document.querySelector("#result-score").textContent = String(preview.risk_score ?? 0);
-  document.querySelector("#locked-count").textContent = String(preview.locked_findings ?? 0);
+  document.querySelector("#locked-count").textContent = String(lockedCount);
+  document.querySelector("#revealed-count").textContent = String(visibleCount);
+  document.querySelector("#access-locked-count").textContent = String(lockedCount);
+  document.querySelector("#access-percent").textContent = `${accessPercent}%`;
+  document.querySelector("#access-fill").style.transform = `scaleX(${accessPercent / 100})`;
+  document.querySelector("#access-meter").setAttribute("aria-valuenow", String(accessPercent));
 
   const metrics = document.querySelector("#result-metrics");
   metrics.replaceChildren(
@@ -254,6 +263,8 @@ const renderPreview = (preview) => {
     metric("direct choices", preview.direct_dependencies ?? 0),
     metric("transitive", preview.transitive_dependencies ?? 0),
     metric("install scripts", preview.install_scripts ?? 0),
+    metric("framework", preview.framework || "not declared"),
+    metric("runtime", preview.runtime || "not declared"),
   );
 
   const findingGrid = document.querySelector("#visible-findings");
@@ -351,9 +362,9 @@ const startCheckout = async () => {
     if (error.message === "SIGN_IN_REQUIRED") {
       pendingCheckout = true;
       authDialog.showModal();
-    } else if (error.code === "PAYMENTS_NOT_CONFIGURED") {
+    } else if (["PAYMENTS_NOT_CONFIGURED", "AUDIT_ENGINE_NOT_CONFIGURED"].includes(error.code)) {
       unlockButton.textContent = "early access opening soon";
-      setStatus(formStatus, "the preview works now. secure paid checkout is being connected for launch.", "success");
+      setStatus(formStatus, "the preview works now. paid checkout opens after the full audit engine is ready.", "success");
       document.querySelector("#scanner").scrollIntoView({ behavior: "smooth" });
     } else {
       window.alert(error.message || "Checkout could not open. Please try again.");
@@ -361,7 +372,7 @@ const startCheckout = async () => {
   } finally {
     if (!window.location.href.includes("checkout.stripe.com")) {
       unlockButton.disabled = false;
-      if (unlockButton.textContent === "opening checkout...") unlockButton.textContent = "unlock full report";
+      if (unlockButton.textContent === "opening checkout...") unlockButton.textContent = "unlock + start full audit";
     }
   }
 };
@@ -420,6 +431,7 @@ const reportFinding = (finding, index) => {
   const details = document.createElement("dl");
   const fields = [
     ["level", finding.severity],
+    ["evidence class", finding.evidence_type],
     ["verified", finding.verified],
     ["possible reach", Array.isArray(finding.reach) ? finding.reach.join(" · ") : finding.reach],
     ["recommended action", finding.recommendation],
@@ -443,26 +455,53 @@ const renderReport = (report) => {
   title.textContent = report.title || "AI App Audit report";
   const body = document.createElement("p");
   body.textContent = report.executive_summary || "Your complete audit is ready.";
-  summary.append(title, body);
+  const meta = document.createElement("small");
+  meta.textContent = `risk: ${report.risk_level || "not established"} · audit version ${report.audit_version || "1.0"}`;
+  summary.append(title, body, meta);
   reportContent.append(summary);
+
+  const reportList = (heading, items, className) => {
+    if (!Array.isArray(items) || !items.length) return;
+    const section = document.createElement("article");
+    section.className = `report-list ${className}`;
+    const sectionTitle = document.createElement("h3");
+    sectionTitle.textContent = heading;
+    const list = document.createElement("ol");
+    items.forEach((item) => {
+      const row = document.createElement("li");
+      row.textContent = String(item);
+      list.append(row);
+    });
+    section.append(sectionTitle, list);
+    reportContent.append(section);
+  };
+
+  reportList("what to act on first", report.priorities, "priorities");
+  reportList("what this audit could not verify", report.unknowns, "unknowns");
   (report.findings || []).forEach((finding, index) => reportContent.append(reportFinding(finding, index)));
   fullReport.hidden = false;
   fullReport.scrollIntoView({ behavior: "smooth" });
 };
 
-const loadPaidReport = async (auditId) => {
+const loadPaidReport = async (auditId, attempt = 0) => {
   fullReport.hidden = false;
-  setStatus(reportStatus, "verifying payment and preparing your full report...");
+  setStatus(reportStatus, "checking payment and opening your private report...");
   fullReport.scrollIntoView({ behavior: "smooth" });
   try {
     const response = await apiRequest("get_report", { audit_id: auditId }, true);
     if (response.status === "processing") {
-      setStatus(reportStatus, "payment confirmed. the AI interpretation is processing. this page will check again in a moment.");
-      window.setTimeout(() => loadPaidReport(auditId), 5000);
+      setStatus(reportStatus, "payment confirmed. the full audit is running on the server. this page will check again in a moment.");
+      if (attempt < 60) window.setTimeout(() => loadPaidReport(auditId, attempt + 1), 5000);
+      else setStatus(reportStatus, "the audit is taking longer than expected. refresh this page to check the saved report.", "error");
       return;
     }
     if (response.status === "locked") {
-      setStatus(reportStatus, "checkout has not been confirmed yet. if you just paid, refresh in a moment.", "error");
+      if (attempt < 12) {
+        setStatus(reportStatus, "waiting for Stripe to confirm payment. this page will check again automatically.");
+        window.setTimeout(() => loadPaidReport(auditId, attempt + 1), 5000);
+      } else {
+        setStatus(reportStatus, "Stripe has not confirmed this checkout. your preview remains available.", "error");
+      }
       return;
     }
     setStatus(reportStatus, `report ready · audit version ${response.report?.audit_version || "1.0"}`, "success");

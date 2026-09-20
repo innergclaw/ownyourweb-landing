@@ -23,12 +23,31 @@ GitHub Pages UI
   -> private audit row
   -> authenticated Stripe Checkout
   -> signed Stripe webhook
-  -> paid entitlement
-  -> server-side deterministic + AI report
+  -> paid audit entitlement
+  -> background deterministic + AI report job
+  -> private saved report
   -> authenticated report response
 ```
 
-The frontend receives three preview findings and a locked count. The private prompt, complete evidence, full findings, Stripe key, Supabase secret key, and OpenAI key remain server-side.
+The free preview is deterministic. It does not call OpenAI. The frontend receives up to three preview findings, a count of locked analysis areas, framework and runtime signals, and package metrics. The private prompt, complete evidence, paid findings, Stripe key, Supabase secret key, and OpenAI key remain server-side.
+
+The v1 entitlement is the paid state on one audit row. A separate credits table is intentionally deferred until builder or agency demand makes reusable credits necessary.
+
+Checkout stays closed unless Stripe and the paid AI engine are both configured. A paid audit never silently falls back to a reduced report. If the AI job fails, the audit moves to `failed`, the payment record remains saved, and support can resolve the paid order.
+
+## Two-scan state machine
+
+```text
+previewed
+  -> checkout_created
+  -> paid
+  -> processing
+  -> complete
+```
+
+The Stripe webhook is the only payment authority. After it verifies Stripe's signature and confirms `payment_status=paid`, it marks the audit as paid and starts the full report job with `EdgeRuntime.waitUntil`.
+
+The private report route polls the saved state. It can claim a paid audit if the background trigger has not started it, but it cannot start an unpaid audit. A browser-side paywall is never treated as authorization.
 
 ## Database
 
@@ -48,7 +67,7 @@ Public previews are limited to 12 requests per server-salted request fingerprint
 ## Edge Functions
 
 - `ai-app-audit`: preview, checkout creation, and full report retrieval
-- `ai-app-audit-webhook`: signed Stripe entitlement updates
+- `ai-app-audit-webhook`: signed Stripe entitlement updates and paid-job trigger
 
 Both functions use `verify_jwt = false` because the preview is public and Stripe webhooks do not carry Supabase user JWTs. The main function validates user access tokens inside authenticated actions. The webhook validates the raw Stripe signature before changing payment state.
 
@@ -101,6 +120,8 @@ Verified by the deterministic scanner:
 - root install lifecycle scripts
 - lockfile `hasInstallScript` flags
 - git, URL, file, link, and workspace dependency sources
+- framework signal from declared direct dependencies
+- runtime signal from `engines` or `packageManager`
 - current npm registry release date and maintainer count for up to 40 direct packages in a paid report
 
 Not claimed without further evidence:
@@ -122,7 +143,8 @@ Before accepting live payments:
 4. Confirm one signed-in user cannot retrieve another user's report.
 5. Complete a Stripe test-mode purchase.
 6. Confirm the signed webhook changes the audit to `paid`.
-7. Confirm the first paid report request generates and stores one report.
-8. Confirm later requests return the stored report without another AI call.
-9. Review Supabase security and performance advisors.
-10. Repeat the full flow in Stripe live mode before announcing access.
+7. Confirm the webhook moves the audit from `paid` to `processing` without a browser report request.
+8. Confirm the background job generates and stores one report.
+9. Confirm later requests return the stored report without another AI call.
+10. Review Supabase security and performance advisors.
+11. Repeat the full flow in Stripe live mode before announcing access.

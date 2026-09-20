@@ -137,6 +137,32 @@ function isExactVersion(value: string) {
   return /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(value);
 }
 
+function detectedFramework(directNames: string[]) {
+  const frameworks: Array<[string, string]> = [
+    ["next", "Next.js"],
+    ["nuxt", "Nuxt"],
+    ["@angular/core", "Angular"],
+    ["svelte", "Svelte"],
+    ["vue", "Vue"],
+    ["react", "React"],
+    ["express", "Express"],
+    ["fastify", "Fastify"],
+    ["hono", "Hono"],
+  ];
+  return frameworks.find(([name]) => directNames.includes(name))?.[1] || "not declared";
+}
+
+function detectedRuntime(manifest: Record<string, unknown>) {
+  const engines = manifest.engines && typeof manifest.engines === "object"
+    ? manifest.engines as Record<string, unknown>
+    : {};
+  if (engines.node) return `Node ${clean(engines.node, 40)}`;
+  if (engines.bun) return `Bun ${clean(engines.bun, 40)}`;
+  const packageManager = clean(manifest.packageManager, 80);
+  if (packageManager) return packageManager.replace("@", " ");
+  return "not declared";
+}
+
 function packageNameFromPath(path: string) {
   const marker = "node_modules/";
   const last = path.lastIndexOf(marker);
@@ -147,6 +173,8 @@ function packageNameFromPath(path: string) {
 function analyze(manifest: Record<string, unknown>, lockfile: Record<string, unknown> | null, lockfileName: string | null) {
   const direct = directEntries(manifest);
   const directNames = Object.keys(direct);
+  const framework = detectedFramework(directNames);
+  const runtime = detectedRuntime(manifest);
   const packages = lockPackages(lockfile);
   const packageNames = new Set(packages.map(([path]) => packageNameFromPath(path)));
   const totalPackages = packageNames.size || directNames.length;
@@ -262,7 +290,8 @@ function analyze(manifest: Record<string, unknown>, lockfile: Record<string, unk
     Math.min(10, remoteOrLocalSources.length * 3),
   ));
 
-  const lockedFindings = Math.max(6, findings.length + 5);
+  const visibleFindings = findings.slice(0, 3);
+  const lockedAnalysisAreas = 6;
   return {
     preview: {
       headline: riskScore >= 65 ? "your project has elevated review signals." : riskScore >= 35 ? "your project has areas to review." : "your dependency baseline looks controlled.",
@@ -271,18 +300,26 @@ function analyze(manifest: Record<string, unknown>, lockfile: Record<string, unk
       direct_dependencies: directNames.length,
       transitive_dependencies: transitive,
       install_scripts: installScriptPackages.length + lifecycleScripts.length,
-      visible_findings: findings.slice(0, 3).map((item) => ({
+      framework,
+      runtime,
+      lockfile_status: lockfile ? "recorded" : "missing",
+      visible_findings: visibleFindings.map((item) => ({
         title: item.title,
         summary: item.summary,
         evidence: item.verified,
         label: item.severity === "info" || item.severity === "low" ? "controlled" : item.severity,
         level: item.severity === "info" || item.severity === "low" ? "good" : item.severity === "medium" ? "review" : "elevated",
       })),
-      locked_findings: lockedFindings,
+      visible_findings_count: visibleFindings.length,
+      locked_analysis_areas: lockedAnalysisAreas,
+      locked_findings: lockedAnalysisAreas,
+      preview_access_percent: Math.round((visibleFindings.length / (visibleFindings.length + lockedAnalysisAreas)) * 100),
     },
     evidence: {
       package_name: clean(manifest.name || "unnamed project", 120),
       package_manager: lockfileName?.includes("package-lock") || lockfileName?.includes("shrinkwrap") ? "npm" : lockfileName === "bun.lock" ? "bun" : "not established",
+      framework,
+      runtime,
       lockfile_name: lockfileName,
       lockfile_version: lockfile?.lockfileVersion || null,
       direct_dependencies: direct,
@@ -345,6 +382,19 @@ async function authenticatedUser(req: Request) {
   });
   if (!response.ok) return null;
   return response.json();
+}
+
+function constantTimeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+  let difference = 0;
+  for (let index = 0; index < a.length; index += 1) difference |= a.charCodeAt(index) ^ b.charCodeAt(index);
+  return difference === 0;
+}
+
+function internalRequestIsAuthorized(req: Request) {
+  const expected = secretKey();
+  const supplied = req.headers.get("x-ai-audit-internal") || "";
+  return Boolean(expected && supplied && constantTimeEqual(expected, supplied));
 }
 
 async function preview(req: Request, body: Record<string, unknown>) {
@@ -413,6 +463,9 @@ async function createCheckout(req: Request, body: Record<string, unknown>) {
   if (!stripeKey || !stripePriceId) {
     return json(req, { error: "Secure checkout is not configured yet.", code: "PAYMENTS_NOT_CONFIGURED" }, 503);
   }
+  if (!Deno.env.get("OPENAI_API_KEY") || !Deno.env.get("OPENAI_MODEL")) {
+    return json(req, { error: "The paid audit engine is not configured yet.", code: "AUDIT_ENGINE_NOT_CONFIGURED" }, 503);
+  }
 
   const siteUrl = (Deno.env.get("AI_AUDIT_SITE_URL") || "https://ownyourweb.xyz/services/ai-app-audit/").replace(/\/$/, "");
   const stripeBody = new URLSearchParams({
@@ -455,53 +508,6 @@ async function createCheckout(req: Request, body: Record<string, unknown>) {
   return json(req, { checkout_url: checkout.url });
 }
 
-function fallbackReport(audit: Record<string, unknown>, registry: Record<string, Json>, aiStatus: string) {
-  const baseFindings = Array.isArray(audit.deterministic_findings) ? audit.deterministic_findings as Finding[] : [];
-  const maintenanceFindings: Finding[] = [];
-  Object.entries(registry).forEach(([name, value]) => {
-    const metadata = value as Record<string, unknown>;
-    if (!metadata.available) return;
-    const days = Number(metadata.days_since_latest_release);
-    const maintainers = Number(metadata.maintainer_count);
-    if (maintainers === 1) maintenanceFindings.push({
-      id: `single-maintainer-${name}`,
-      title: `${name} lists one maintainer`,
-      severity: "medium",
-      summary: "single-maintainer ownership can increase continuity risk if access is lost or maintenance stops.",
-      verified: "The current npm registry metadata lists one maintainer.",
-      reach: ["package publishing continuity"],
-      recommendation: "Confirm the package is necessary, pin the resolved version, and identify a supported alternative.",
-      evidence_type: "verified",
-    });
-    if (Number.isFinite(days) && days > 730) maintenanceFindings.push({
-      id: `release-age-${name}`,
-      title: `${name} has not released recently`,
-      severity: "medium",
-      summary: `the latest registry release is approximately ${days} days old. release age alone does not prove abandonment.`,
-      verified: `The npm registry reports the latest release date used to calculate ${days} days.`,
-      reach: ["maintenance continuity"],
-      recommendation: "Review repository activity, open issues, and replacement options before treating the package as abandoned.",
-      evidence_type: "inferred",
-    });
-  });
-  const findings = [...baseFindings, ...maintenanceFindings].slice(0, 24);
-  return {
-    title: `${clean(audit.project_name, 80)} · AI App Audit`,
-    executive_summary: `This report separates evidence present in the supplied dependency files from maintenance signals retrieved at audit time. ${aiStatus}`,
-    risk_level: Number((audit.preview as Record<string, unknown>)?.risk_score || 0) >= 65 ? "elevated" : "review",
-    findings,
-    priorities: findings.filter((item) => ["critical", "high", "medium"].includes(item.severity)).slice(0, 5).map((item) => item.recommendation),
-    unknowns: [
-      "Source-code behavior was not inspected in this manifest-first audit.",
-      "Malicious intent is not claimed without direct evidence.",
-      "Network and environment reach may require sandboxed runtime testing to verify.",
-    ],
-    audit_version: "1.0",
-    generated_at: new Date().toISOString(),
-    ai_status: aiStatus,
-  };
-}
-
 function extractResponseText(response: Record<string, unknown>) {
   const output = Array.isArray(response.output) ? response.output : [];
   for (const item of output as Array<Record<string, unknown>>) {
@@ -516,7 +522,7 @@ function extractResponseText(response: Record<string, unknown>) {
 async function aiReport(audit: Record<string, unknown>, evidence: Record<string, unknown>, registry: Record<string, Json>) {
   const apiKey = Deno.env.get("OPENAI_API_KEY") || "";
   const model = Deno.env.get("OPENAI_MODEL") || "";
-  if (!apiKey || !model) return { report: fallbackReport(audit, registry, "AI interpretation is not configured; deterministic evidence is shown."), model: null, responseId: null };
+  if (!apiKey || !model) throw new Error("paid audit engine is not configured");
 
   const schema = {
     type: "object",
@@ -582,41 +588,40 @@ async function aiReport(audit: Record<string, unknown>, evidence: Record<string,
   const data = await response.json();
   if (!response.ok) {
     console.error("OpenAI report request failed", response.status, data?.error?.type || "unknown");
-    return { report: fallbackReport(audit, registry, "AI interpretation was unavailable; deterministic evidence is shown."), model, responseId: null };
+    throw new Error("AI report request failed");
   }
   const text = extractResponseText(data);
   try {
     const report = JSON.parse(text);
     return { report: { ...report, generated_at: new Date().toISOString(), ai_status: "completed" }, model, responseId: data.id || null };
   } catch {
-    return { report: fallbackReport(audit, registry, "AI output could not be parsed; deterministic evidence is shown."), model, responseId: data.id || null };
+    throw new Error("AI report output could not be parsed");
   }
 }
 
-async function getReport(req: Request, body: Record<string, unknown>) {
-  const user = await authenticatedUser(req);
-  if (!user?.id) return json(req, { error: "Sign in to open this report.", code: "AUTH_REQUIRED" }, 401);
-  const auditId = clean(body.audit_id, 80);
-  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&user_id=eq.${encodeURIComponent(user.id)}&select=*&limit=1`);
+async function processPaidAudit(auditId: string, userId?: string) {
+  const ownerFilter = userId ? `&user_id=eq.${encodeURIComponent(userId)}` : "";
+  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}&select=*&limit=1`);
   const audit = loaded.data?.[0];
-  if (!loaded.ok || !audit) return json(req, { error: "Report not found for this account." }, 404);
-  if (audit.payment_status !== "paid") return json(req, { status: "locked" });
-  if (audit.status === "complete" && audit.full_report) return json(req, { status: "complete", report: audit.full_report });
-  if (audit.status === "processing") return json(req, { status: "processing" }, 202);
+  if (!loaded.ok || !audit) return { status: "not_found" as const };
+  if (audit.payment_status !== "paid") return { status: "locked" as const };
+  if (audit.status === "complete" && audit.full_report) return { status: "complete" as const, report: audit.full_report };
+  if (audit.status === "processing") return { status: "processing" as const };
+  if (audit.status === "failed") return { status: "failed" as const };
 
-  const claim = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&status=eq.paid&select=id`, {
+  const claim = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}&payment_status=eq.paid&status=eq.paid&select=id`, {
     method: "PATCH",
     headers: { "Prefer": "return=representation" },
     body: JSON.stringify({ status: "processing", updated_at: new Date().toISOString() }),
   });
-  if (!claim.ok || !claim.data?.length) return json(req, { status: "processing" }, 202);
+  if (!claim.ok || !claim.data?.length) return { status: "processing" as const };
 
   try {
     const manifest = audit.source_manifest as Record<string, unknown>;
     const analysis = analyze(manifest, audit.source_lockfile as Record<string, unknown> | null, clean(audit.source_lockfile_name, 80) || null);
     const registry = await registryMetadata(Object.keys(directEntries(manifest)));
     const generated = await aiReport(audit, analysis.evidence, registry);
-    const saved = await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&user_id=eq.${encodeURIComponent(user.id)}`, {
+    const saved = await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}`, {
       method: "PATCH",
       headers: { "Prefer": "return=minimal" },
       body: JSON.stringify({
@@ -631,7 +636,7 @@ async function getReport(req: Request, body: Record<string, unknown>) {
       }),
     });
     if (!saved.ok) throw new Error("report save failed");
-    return json(req, { status: "complete", report: generated.report });
+    return { status: "complete" as const, report: generated.report };
   } catch (error) {
     console.error("Full report generation failed", error instanceof Error ? error.message : String(error));
     await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}`, {
@@ -639,8 +644,31 @@ async function getReport(req: Request, body: Record<string, unknown>) {
       headers: { "Prefer": "return=minimal" },
       body: JSON.stringify({ status: "failed", failure_reason: "report_generation_failed", updated_at: new Date().toISOString() }),
     });
-    return json(req, { error: "The report could not be completed. Your payment record is preserved for support.", code: "REPORT_FAILED" }, 500);
+    return { status: "failed" as const };
   }
+}
+
+async function getReport(req: Request, body: Record<string, unknown>) {
+  const user = await authenticatedUser(req);
+  if (!user?.id) return json(req, { error: "Sign in to open this report.", code: "AUTH_REQUIRED" }, 401);
+  const auditId = clean(body.audit_id, 80);
+  const result = await processPaidAudit(auditId, user.id);
+  if (result.status === "not_found") return json(req, { error: "Report not found for this account." }, 404);
+  if (result.status === "locked") return json(req, { status: "locked" });
+  if (result.status === "processing") return json(req, { status: "processing" }, 202);
+  if (result.status === "failed") return json(req, { error: "The report could not be completed. Your payment record is preserved for support.", code: "REPORT_FAILED" }, 500);
+  return json(req, { status: "complete", report: result.report });
+}
+
+async function processPaid(req: Request, body: Record<string, unknown>) {
+  if (!internalRequestIsAuthorized(req)) return json(req, { error: "Internal authorization failed." }, 403);
+  const auditId = clean(body.audit_id, 80);
+  if (!auditId) return json(req, { error: "Audit ID is required." }, 400);
+  const result = await processPaidAudit(auditId);
+  if (result.status === "not_found") return json(req, { error: "Audit not found." }, 404);
+  if (result.status === "locked") return json(req, { error: "Payment is not confirmed." }, 409);
+  if (result.status === "failed") return json(req, { error: "Paid audit processing failed." }, 500);
+  return json(req, { status: result.status });
 }
 
 Deno.serve(async (req) => {
@@ -654,6 +682,7 @@ Deno.serve(async (req) => {
   const action = clean((body as Record<string, unknown>).action, 40);
   if (action === "preview") return preview(req, body as Record<string, unknown>);
   if (action === "create_checkout") return createCheckout(req, body as Record<string, unknown>);
+  if (action === "process_paid") return processPaid(req, body as Record<string, unknown>);
   if (action === "get_report") return getReport(req, body as Record<string, unknown>);
   return json(req, { error: "Unknown audit action." }, 400);
 });

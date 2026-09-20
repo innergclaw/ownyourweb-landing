@@ -1,5 +1,7 @@
 const allowedMethods = "POST, OPTIONS";
 
+declare const EdgeRuntime: { waitUntil(promise: Promise<unknown>): void };
+
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -35,6 +37,21 @@ async function rest<T>(path: string, init: RequestInit = {}) {
   let data: T | null = null;
   try { data = text ? JSON.parse(text) : null; } catch { data = null; }
   return { ok: response.ok, status: response.status, data, text };
+}
+
+async function triggerPaidAudit(auditId: string) {
+  const response = await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/ai-app-audit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-ai-audit-internal": secretKey(),
+    },
+    body: JSON.stringify({ action: "process_paid", audit_id: auditId }),
+  });
+  if (!response.ok) {
+    const body = await response.text();
+    console.error("Paid audit trigger failed", response.status, body.slice(0, 300));
+  }
 }
 
 function parseSignature(header: string) {
@@ -89,12 +106,19 @@ Deno.serve(async (req) => {
   const eventType = String(event.type || "").slice(0, 255);
   if (!eventId || !eventType) return json({ error: "Invalid Stripe event." }, 400);
 
-  const previous = await rest<Array<{ id: number }>>(`ai_app_audit_events?provider_event_id=eq.${encodeURIComponent(eventId)}&select=id&limit=1`);
-  if (previous.ok && previous.data?.length) return json({ received: true, duplicate: true });
+  const previous = await rest<Array<{ id: number; audit_id: string; event_type: string }>>(`ai_app_audit_events?provider_event_id=eq.${encodeURIComponent(eventId)}&select=id,audit_id,event_type&limit=1`);
+  if (previous.ok && previous.data?.length) {
+    const recorded = previous.data[0];
+    if (["checkout.session.completed", "checkout.session.async_payment_succeeded"].includes(recorded.event_type) && recorded.audit_id) {
+      EdgeRuntime.waitUntil(triggerPaidAudit(recorded.audit_id));
+    }
+    return json({ received: true, duplicate: true });
+  }
 
   const session = event.data?.object || {};
   const auditId = String(session.metadata?.audit_id || session.client_reference_id || "").slice(0, 80);
   if (!auditId) return json({ received: true, ignored: true });
+  let shouldProcessPaidAudit = false;
 
   if (["checkout.session.completed", "checkout.session.async_payment_succeeded"].includes(eventType)) {
     if (!["paid", "no_payment_required"].includes(session.payment_status)) {
@@ -117,6 +141,7 @@ Deno.serve(async (req) => {
       console.error("Paid audit update failed", update.status, update.text);
       return json({ error: "Payment event could not be applied." }, 500);
     }
+    shouldProcessPaidAudit = true;
   }
 
   if (eventType === "checkout.session.expired") {
@@ -146,5 +171,6 @@ Deno.serve(async (req) => {
   if (!inserted.ok && inserted.status !== 409) {
     console.error("Audit event log failed", inserted.status, inserted.text);
   }
+  if (shouldProcessPaidAudit) EdgeRuntime.waitUntil(triggerPaidAudit(auditId));
   return json({ received: true });
 });

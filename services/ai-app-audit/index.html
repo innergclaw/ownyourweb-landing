@@ -99,7 +99,7 @@
             <span class="upload-icon" aria-hidden="true">↥</span>
             <div class="drop-copy">
               <strong id="drop-title">drop package files here</strong>
-              <p id="drop-help">package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock</p>
+              <p id="drop-help">package.json + package-lock.json or npm-shrinkwrap.json</p>
             </div>
             <button class="file-button" type="button" id="choose-files">choose files</button>
           </div>
@@ -146,29 +146,43 @@
         </div>
 
         <div class="result-metrics" id="result-metrics"></div>
+
+        <div class="report-access" aria-label="Free preview access">
+          <div class="access-copy">
+            <p class="kicker">your free preview</p>
+            <h3><span id="revealed-count">0</span> findings revealed. <span id="access-locked-count">0</span> deeper checks stay locked.</h3>
+            <p>the preview uses deterministic rules. the full AI audit has not started, and no paid findings were sent to this browser.</p>
+          </div>
+          <div class="access-meter" id="access-meter" role="progressbar" aria-label="Report access" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div><span>report access</span><strong id="access-percent">0%</strong></div>
+            <div class="meter-track"><span id="access-fill"></span></div>
+            <small>pay once to start the private full audit</small>
+          </div>
+        </div>
+
         <div class="findings-grid" id="visible-findings"></div>
 
         <div class="locked-report">
           <div class="locked-copy">
             <span class="lock-icon" aria-hidden="true">⌁</span>
             <p class="kicker">full intelligence</p>
-            <h3><span id="locked-count">0</span> review areas remain locked.</h3>
-            <p>unlock the evidence, reach analysis, plain-language explanation, and a prioritized fix path for this exact project.</p>
+            <h3><span id="locked-count">0</span> deeper analysis areas stay locked.</h3>
+            <p>Stripe payment unlocks one private audit. The full deterministic and AI analysis starts only after payment is confirmed.</p>
           </div>
-          <div class="locked-list" aria-hidden="true">
-            <span>dependency ownership changes</span>
-            <span>maintainer concentration</span>
-            <span>install permission map</span>
-            <span>outdated + abandoned packages</span>
-            <span>AI agent install authority</span>
-            <span>recommended fixes in order</span>
+          <div class="locked-list" aria-label="Full audit coverage">
+            <span><strong>full dependency analysis</strong><small>locked</small></span>
+            <span><strong>permission + reach analysis</strong><small>locked</small></span>
+            <span><strong>environment exposure boundaries</strong><small>locked</small></span>
+            <span><strong>maintainer concentration signals</strong><small>locked</small></span>
+            <span><strong>post-install behavior</strong><small>locked</small></span>
+            <span><strong>recommended fixes in order</strong><small>locked</small></span>
           </div>
           <div class="unlock-card">
             <p>one complete audit</p>
             <strong>$29</strong>
-            <span>one-time · no subscription</span>
-            <button class="button primary" type="button" id="unlock-button">unlock full report</button>
-            <small>secure checkout · report stays private</small>
+            <span>one-time · one app · no subscription</span>
+            <button class="button primary" type="button" id="unlock-button">unlock + start full audit</button>
+            <small>Stripe confirms payment before AI starts</small>
           </div>
         </div>
       </div>
@@ -176,7 +190,7 @@
 
     <section class="report-section shell" id="full-report" hidden>
       <div class="report-toolbar">
-        <div><p class="kicker">paid report</p><h2>your full audit.</h2></div>
+        <div><p class="kicker">private report dashboard</p><h2>your full audit.</h2></div>
         <button class="button quiet" type="button" id="print-report">print / save PDF</button>
       </div>
       <div class="report-status" id="report-status"></div>
