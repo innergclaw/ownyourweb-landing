@@ -15,6 +15,11 @@ const dropZone = document.querySelector("#drop-zone");
 const fileInput = document.querySelector("#file-input");
 const chooseFiles = document.querySelector("#choose-files");
 const fileList = document.querySelector("#file-list");
+const readiness = document.querySelector("#file-readiness");
+const readinessTitle = document.querySelector("#readiness-title");
+const readinessDetail = document.querySelector("#readiness-detail");
+const dropTitle = document.querySelector("#drop-title");
+const dropHelp = document.querySelector("#drop-help");
 const scanButton = document.querySelector("#scan-button");
 const sampleButton = document.querySelector("#sample-button");
 const formStatus = document.querySelector("#form-status");
@@ -30,6 +35,8 @@ const reportContent = document.querySelector("#report-content");
 let selectedFiles = new Map();
 let pendingCheckout = false;
 
+const lockfileNames = new Set(["package-lock.json", "npm-shrinkwrap.json", "bun.lock"]);
+
 const safeJson = (text) => {
   try { return JSON.parse(text); } catch { return null; }
 };
@@ -41,6 +48,40 @@ const setStatus = (element, message, state = "") => {
 
 const readCurrentAudit = () => safeJson(sessionStorage.getItem(storageKey) || "null");
 const saveCurrentAudit = (audit) => sessionStorage.setItem(storageKey, JSON.stringify(audit));
+
+const updateReadiness = () => {
+  const hasManifest = selectedFiles.has("package.json");
+  const hasLockfile = Array.from(lockfileNames).some((name) => selectedFiles.has(name));
+  const hasFiles = selectedFiles.size > 0;
+
+  form.classList.toggle("has-files", hasFiles);
+  dropZone.classList.toggle("has-files", hasFiles);
+  scanButton.disabled = !hasManifest;
+
+  dropTitle.textContent = hasFiles ? "package files added" : "drop package files here";
+  dropHelp.textContent = hasFiles
+    ? "add another supported file or replace one below"
+    : "package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock";
+  chooseFiles.textContent = hasFiles ? "add files" : "choose files";
+
+  if (!hasFiles) {
+    readiness.dataset.state = "empty";
+    readinessTitle.textContent = "package.json required";
+    readinessDetail.textContent = "add the manifest first. a lockfile gives the preview stronger evidence.";
+  } else if (!hasManifest) {
+    readiness.dataset.state = "error";
+    readinessTitle.textContent = "package.json is still needed";
+    readinessDetail.textContent = "keep the lockfile, then add package.json to start the preview.";
+  } else if (!hasLockfile) {
+    readiness.dataset.state = "partial";
+    readinessTitle.textContent = "ready for a basic preview";
+    readinessDetail.textContent = "add a supported lockfile to map inherited packages and resolved versions.";
+  } else {
+    readiness.dataset.state = "ready";
+    readinessTitle.textContent = "ready for the strongest preview";
+    readinessDetail.textContent = "the manifest and lockfile are present. no private source code is needed.";
+  }
+};
 
 const apiRequest = async (action, payload = {}, requireAuth = false) => {
   const headers = {
@@ -73,8 +114,13 @@ const renderFiles = () => {
   fileList.replaceChildren();
   selectedFiles.forEach((file, name) => {
     const item = document.createElement("li");
-    const label = document.createElement("span");
-    label.textContent = `${name} · ${Math.max(1, Math.round(file.size / 1024))} KB`;
+    const fileInfo = document.createElement("span");
+    fileInfo.className = "file-info";
+    const label = document.createElement("strong");
+    label.textContent = name;
+    const detail = document.createElement("small");
+    detail.textContent = `${name === "package.json" ? "manifest" : "lockfile"} · ${Math.max(1, Math.round(file.size / 1024))} KB`;
+    fileInfo.append(label, detail);
     const remove = document.createElement("button");
     remove.type = "button";
     remove.setAttribute("aria-label", `Remove ${name}`);
@@ -82,10 +128,12 @@ const renderFiles = () => {
     remove.addEventListener("click", () => {
       selectedFiles.delete(name);
       renderFiles();
+      setStatus(formStatus, selectedFiles.has("package.json") ? "files updated. ready when you are." : "add package.json before running the preview.", selectedFiles.has("package.json") ? "success" : "error");
     });
-    item.append(label, remove);
+    item.append(fileInfo, remove);
     fileList.append(item);
   });
+  updateReadiness();
 };
 
 const addFiles = (files) => {
@@ -116,7 +164,10 @@ dropZone.addEventListener("keydown", (event) => {
     fileInput.click();
   }
 });
-fileInput.addEventListener("change", () => addFiles(fileInput.files));
+fileInput.addEventListener("change", () => {
+  addFiles(fileInput.files);
+  fileInput.value = "";
+});
 
 ["dragenter", "dragover"].forEach((name) => dropZone.addEventListener(name, (event) => {
   event.preventDefault();
@@ -127,6 +178,8 @@ fileInput.addEventListener("change", () => addFiles(fileInput.files));
   dropZone.classList.remove("is-dragging");
 }));
 dropZone.addEventListener("drop", (event) => addFiles(event.dataTransfer.files));
+
+renderFiles();
 
 const samplePackage = {
   name: "sample-vibe-app",
@@ -190,7 +243,8 @@ const metric = (label, value) => {
 };
 
 const renderPreview = (preview) => {
-  document.querySelector("#result-title").textContent = preview.headline || "your project has areas to review.";
+  const resultTitle = document.querySelector("#result-title");
+  resultTitle.textContent = preview.headline || "your project has areas to review.";
   document.querySelector("#result-score").textContent = String(preview.risk_score ?? 0);
   document.querySelector("#locked-count").textContent = String(preview.locked_findings ?? 0);
 
@@ -208,7 +262,8 @@ const renderPreview = (preview) => {
     const card = document.createElement("article");
     card.className = "finding-card";
     const severity = document.createElement("span");
-    severity.className = `severity ${finding.level || "review"}`;
+    const level = String(finding.level || "review").toLowerCase().replace(/[^a-z0-9_-]/g, "");
+    severity.className = `severity ${level || "review"}`;
     severity.textContent = finding.label || "review";
     const title = document.createElement("h3");
     title.textContent = finding.title || "Review area";
@@ -222,6 +277,7 @@ const renderPreview = (preview) => {
 
   results.hidden = false;
   results.scrollIntoView({ behavior: "smooth", block: "start" });
+  resultTitle.focus({ preventScroll: true });
 };
 
 form.addEventListener("submit", async (event) => {
@@ -232,6 +288,12 @@ form.addEventListener("submit", async (event) => {
   }
   scanButton.disabled = true;
   scanButton.textContent = "mapping packages...";
+  fileInput.disabled = true;
+  chooseFiles.disabled = true;
+  sampleButton.disabled = true;
+  dropZone.classList.add("is-disabled");
+  fileList.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+  form.setAttribute("aria-busy", "true");
   document.body.classList.add("is-busy");
   setStatus(formStatus, "inventorying direct and transitive dependencies...");
 
@@ -246,10 +308,19 @@ form.addEventListener("submit", async (event) => {
     setStatus(formStatus, "preview complete. your locked findings were not sent to this browser.", "success");
   } catch (error) {
     console.error("AI App Audit preview failed", error);
-    setStatus(formStatus, error.message || "the preview could not run. try again.", "error");
+    const message = error instanceof TypeError && /fetch/i.test(error.message)
+      ? "the audit service could not connect. check your connection and try again."
+      : error.message || "the preview could not run. try again.";
+    setStatus(formStatus, message, "error");
   } finally {
-    scanButton.disabled = false;
+    scanButton.disabled = !selectedFiles.has("package.json");
     scanButton.textContent = "run free preview";
+    fileInput.disabled = false;
+    chooseFiles.disabled = false;
+    sampleButton.disabled = false;
+    dropZone.classList.remove("is-disabled");
+    fileList.querySelectorAll("button").forEach((button) => { button.disabled = false; });
+    form.removeAttribute("aria-busy");
     document.body.classList.remove("is-busy");
   }
 });

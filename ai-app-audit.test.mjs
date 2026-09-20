@@ -8,9 +8,13 @@ const webhook = await readFile(new URL("./supabase/functions/ai-app-audit-webhoo
 const migration = await readFile(new URL("./supabase/migrations/20260920061222_create_ai_app_audits.sql", import.meta.url), "utf8");
 
 assert.match(html, /id="audit-form"/);
-assert.match(html, /id="results" hidden/);
+assert.match(html, /id="results"[^>]*hidden/);
 assert.match(html, /id="auth-dialog"/);
+assert.match(html, /id="file-readiness"/);
+assert.match(html, /id="scan-button" disabled/);
 assert.match(client, /action, \.\.\.payload/);
+assert.match(client, /ready for the strongest preview/);
+assert.match(client, /resultTitle\.focus/);
 assert.doesNotMatch(client, /OPENAI_API_KEY|STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY/);
 
 assert.match(api, /action === "preview"/);

@@ -94,18 +94,28 @@
             <input id="project-name" name="project_name" maxlength="80" placeholder="my ai-built app" autocomplete="off">
           </label>
 
-          <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-describedby="drop-help">
+          <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-describedby="drop-help readiness-detail">
             <input id="file-input" type="file" accept=".json,application/json" multiple hidden>
             <span class="upload-icon" aria-hidden="true">↥</span>
-            <strong>drop package files here</strong>
-            <p id="drop-help">package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock</p>
+            <div class="drop-copy">
+              <strong id="drop-title">drop package files here</strong>
+              <p id="drop-help">package.json + package-lock.json, npm-shrinkwrap.json, or bun.lock</p>
+            </div>
             <button class="file-button" type="button" id="choose-files">choose files</button>
+          </div>
+
+          <div class="file-readiness" id="file-readiness" data-state="empty" aria-live="polite">
+            <span class="readiness-mark" aria-hidden="true"></span>
+            <div>
+              <strong id="readiness-title">package.json required</strong>
+              <p id="readiness-detail">add the manifest first. a lockfile gives the preview stronger evidence.</p>
+            </div>
           </div>
 
           <ul class="file-list" id="file-list" aria-live="polite"></ul>
 
           <div class="scanner-actions">
-            <button class="button primary" type="submit" id="scan-button">run free preview</button>
+            <button class="button primary" type="submit" id="scan-button" disabled>run free preview</button>
             <button class="sample-button" type="button" id="sample-button">or load a safe sample</button>
           </div>
           <p class="form-status" id="form-status" role="status"></p>
@@ -124,12 +134,13 @@
       </div>
     </section>
 
-    <section class="results-section" id="results" hidden>
+    <section class="results-section" id="results" role="region" aria-labelledby="result-title" hidden>
       <div class="shell">
         <div class="results-header">
           <div>
             <p class="kicker">preview complete</p>
-            <h2 id="result-title">your project has areas to review.</h2>
+            <h2 id="result-title" tabindex="-1">your project has areas to review.</h2>
+            <p class="result-context">use this signal to choose what to review first. it is not a security grade or proof that the app is unsafe.</p>
           </div>
           <div class="score-chip"><span id="result-score">0</span><small>risk signal</small></div>
         </div>
