@@ -32,27 +32,24 @@ The free preview uploads only dependency metadata to the Edge Function. It does 
 GitHub Pages UI
   -> public preview request
   -> Supabase Edge Function
-  -> standalone Google receipt account
   -> private audit row
-  -> authenticated Stripe Checkout
+  -> guest email + Stripe Checkout
   -> signed Stripe webhook
   -> paid audit entitlement
   -> background deterministic + AI report job
   -> private saved report
-  -> authenticated report response
+  -> signed private report link by email
 ```
 
 The free preview is deterministic. It does not call OpenAI. The frontend receives up to three preview findings, a count of locked analysis areas, framework and runtime signals, and package metrics. The private prompt, complete evidence, paid findings, Stripe key, Supabase secret key, and OpenAI key remain server-side.
 
 The v1 entitlement is the paid state on one audit row. A separate credits table is intentionally deferred until builder or agency demand makes reusable credits necessary.
 
-## Receipt account
+## Guest email delivery
 
-The free preview does not require an account. Before checkout, the customer signs in with Google and creates a standalone receipt account for this service. This is not an OWNYOURWEB or INNERG membership.
+The free preview does not require an account. Before checkout, the customer enters an email address. Stripe uses that address for the one-time $9 payment. After the signed webhook confirms payment and the AI report is complete, the service sends one private report link to that address.
 
-The Google return URL points to `/services/ai-app-audit/?view=dashboard#receipt-library`. The signed-in view removes the marketing sections and opens a dedicated audit dashboard with the customer's report history.
-
-The Edge Function assigns the audit to the authenticated Supabase user before Stripe Checkout opens. After payment, the same account can list its paid receipts, open the private report, download a complete HTML file, or print the report as a PDF. The browser never receives reports owned by another user.
+The delivery link contains a signed token. The raw token is never stored in the database. The report endpoint checks the token and the paid state on the server before it returns the report. No Google sign-in, membership, or client dashboard is part of this purchase path.
 
 Checkout stays closed unless Stripe and the paid AI engine are both configured. A paid audit never silently falls back to a reduced report. If the AI job fails, the audit moves to `failed`, the payment record remains saved, and support can resolve the paid order.
 
@@ -81,13 +78,13 @@ Tables:
 - `ai_app_audits`
 - `ai_app_audit_events`
 
-RLS is enabled. Authenticated users can only select audit rows where `auth.uid() = user_id`. Browser clients receive no insert or update grants. All writes pass through the Edge Function.
+RLS is enabled. Browser clients receive no insert, update, or select grants. All reads and writes pass through the Edge Function, which checks the signed delivery token before returning a paid report.
 
 Public previews are limited to 12 requests per server-salted request fingerprint per hour. Raw IP addresses are not stored.
 
 ## Edge Functions
 
-- `ai-app-audit`: preview, checkout creation, receipt listing, and full report retrieval
+- `ai-app-audit`: preview, checkout creation, paid processing, and signed report retrieval
 - `ai-app-audit-webhook`: signed Stripe entitlement updates and paid-job trigger
 
 Both functions use `verify_jwt = false` because the preview is public and Stripe webhooks do not carry Supabase user JWTs. The main function validates user access tokens inside authenticated actions. The webhook validates the raw Stripe signature before changing payment state.
@@ -102,6 +99,8 @@ STRIPE_AUDIT_PRICE_ID
 STRIPE_AUDIT_WEBHOOK_SECRET
 OPENAI_API_KEY
 OPENAI_MODEL
+RESEND_API_KEY
+AI_AUDIT_FROM_EMAIL
 ```
 
 Optional configuration:
@@ -162,12 +161,12 @@ Before accepting live payments:
 2. Run a preview with a real npm project containing a lockfile.
 3. Confirm anonymous users cannot read `ai_app_audits` through the Data API.
 4. Confirm one signed-in user cannot retrieve another user's report.
-5. Confirm Google sign-in returns to the audit route and shows the standalone receipt account.
-6. Complete a Stripe test-mode purchase.
-7. Confirm the signed webhook changes the audit to `paid`.
-8. Confirm the webhook moves the audit from `paid` to `processing` without a browser report request.
-9. Confirm the background job generates and stores one report.
-10. Confirm the receipt appears only in the purchaser's account and the full file downloads.
+5. Complete a Stripe test-mode purchase with the email entered on the audit page.
+6. Confirm the signed webhook changes the audit to `paid`.
+7. Confirm the webhook moves the audit from `paid` to `processing` without a browser report request.
+8. Confirm the background job generates and stores one report.
+9. Confirm the report email arrives and its private link opens the report.
+10. Confirm a changed or incomplete delivery token returns `403`.
 11. Confirm later requests return the stored report without another AI call.
 12. Review Supabase security and performance advisors.
 13. Repeat the full flow in Stripe live mode before announcing access.

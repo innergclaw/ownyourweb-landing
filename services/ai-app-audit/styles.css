@@ -408,10 +408,11 @@ footer { padding: 55px 0; color: #aaaea3; background: var(--ink); }
 .dialog-shell { position: relative; padding: 34px; }
 .dialog-shell h2 { margin: 0; font-size: 2.45rem; line-height: .95; letter-spacing: -.04em; }
 .dialog-shell > p:not(.kicker):not(.dialog-status) { color: var(--muted); line-height: 1.6; }
+.dialog-shell label { display: grid; gap: 8px; margin-top: 16px; }
 .dialog-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border: 0; border-radius: 50%; cursor: pointer; background: #e6e4dc; font-size: 1.35rem; }
 .dialog-separation { margin: 20px 0; padding: 14px 16px; border: 1px solid rgba(168,218,44,.65); border-radius: 12px; background: rgba(201,255,70,.16); font-size: .8rem; }
 .dialog-separation strong { color: var(--ink); }
-.google-auth-button { width: 100%; margin-top: 4px; }
+.email-submit { width: 100%; margin-top: 4px; }
 .dialog-status { min-height: 20px; margin: 14px 0 0; font: 400 .68rem/1.5 var(--mono); }
 
 [hidden] { display: none !important; }

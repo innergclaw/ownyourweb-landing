@@ -1,14 +1,10 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/+esm";
-
 const SUPABASE_URL = window.OWNYOURWEB_SUPABASE_URL || "https://zkyhhoxcrjkhywblzehr.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = window.OWNYOURWEB_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_bdi3BexAKWDBaUIh40hJ_A_8CNVdnM_";
 const AUDIT_ENDPOINT = window.OWNYOURWEB_AI_AUDIT_ENDPOINT || `${SUPABASE_URL}/functions/v1/ai-app-audit`;
-const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 const MAX_FILE_BYTES = 2 * 1024 * 1024;
 const ALLOWED_FILES = new Set(["package.json", "package-lock.json", "npm-shrinkwrap.json"]);
 const storageKey = "ownyourweb.ai-app-audit.current";
-const checkoutIntentKey = "ownyourweb.ai-app-audit.checkout_pending";
 
 const form = document.querySelector("#audit-form");
 const projectName = document.querySelector("#project-name");
@@ -26,20 +22,16 @@ const sampleButton = document.querySelector("#sample-button");
 const formStatus = document.querySelector("#form-status");
 const results = document.querySelector("#results");
 const unlockButton = document.querySelector("#unlock-button");
-const authDialog = document.querySelector("#auth-dialog");
-const authStatus = document.querySelector("#auth-status");
-const googleAuthButton = document.querySelector("#google-auth-button");
-const accountButton = document.querySelector("#audit-account-button");
-const footerAccountButton = document.querySelector("#footer-account-button");
+const emailDialog = document.querySelector("#email-dialog");
+const emailForm = document.querySelector("#email-form");
+const emailInput = document.querySelector("#customer-email");
+const emailSubmit = document.querySelector("#email-submit");
+const emailStatus = document.querySelector("#email-status");
 const fullReport = document.querySelector("#full-report");
 const reportStatus = document.querySelector("#report-status");
 const reportContent = document.querySelector("#report-content");
-const receiptLibrary = document.querySelector("#receipt-library");
-const receiptLibraryList = document.querySelector("#receipt-library-list");
-const receiptAccountEmail = document.querySelector("#receipt-account-email");
 
 let selectedFiles = new Map();
-let pendingCheckout = false;
 let currentReport = null;
 let currentReportAuditId = "";
 
@@ -56,19 +48,6 @@ const setStatus = (element, message, state = "") => {
 
 const readCurrentAudit = () => safeJson(sessionStorage.getItem(storageKey) || "null");
 const saveCurrentAudit = (audit) => sessionStorage.setItem(storageKey, JSON.stringify(audit));
-const auditDashboardURL = () => {
-  const url = new URL(window.location.href);
-  url.search = "?view=dashboard";
-  url.hash = "receipt-library";
-  return url.toString();
-};
-
-const enterAuditDashboard = (updateHistory = true) => {
-  document.body.classList.add("dashboard-view");
-  receiptLibrary.hidden = false;
-  if (updateHistory) history.pushState({}, "", auditDashboardURL());
-  receiptLibrary.scrollIntoView({ behavior: "smooth", block: "start" });
-};
 
 const updateReadiness = () => {
   const hasManifest = selectedFiles.has("package.json");
@@ -365,143 +344,46 @@ const startCheckout = async () => {
     return;
   }
 
-  unlockButton.disabled = true;
-  unlockButton.textContent = "opening checkout...";
-  try {
-    const { data } = await supabase.auth.getSession();
-    if (!data.session) {
-      pendingCheckout = true;
-      sessionStorage.setItem(checkoutIntentKey, "true");
-      setStatus(authStatus, "sign in with Google to connect this purchase to your receipt account.");
-      authDialog.showModal();
-      return;
-    }
-    const response = await apiRequest("create_checkout", {
-      audit_id: current.id,
-      preview_token: current.preview_token,
-    }, true);
-    window.location.assign(response.checkout_url);
-  } catch (error) {
-    if (error.message === "SIGN_IN_REQUIRED") {
-      pendingCheckout = true;
-      sessionStorage.setItem(checkoutIntentKey, "true");
-      authDialog.showModal();
-    } else if (["PAYMENTS_NOT_CONFIGURED", "AUDIT_ENGINE_NOT_CONFIGURED"].includes(error.code)) {
-      unlockButton.textContent = "early access opening soon";
-      setStatus(formStatus, "the preview works now. paid checkout opens after the full audit engine is ready.", "success");
-      document.querySelector("#scanner").scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.alert(error.message || "Checkout could not open. Please try again.");
-    }
-  } finally {
-    if (!window.location.href.includes("checkout.stripe.com")) {
-      unlockButton.disabled = false;
-      if (unlockButton.textContent === "opening checkout...") unlockButton.textContent = "unlock + start full audit";
-    }
-  }
+  emailInput.value = "";
+  setStatus(emailStatus, "");
+  emailDialog.showModal();
+  emailInput.focus();
 };
 
 unlockButton.addEventListener("click", startCheckout);
 
-const signInWithGoogle = async () => {
-  googleAuthButton.disabled = true;
-  setStatus(authStatus, "opening Google sign-in...");
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: auditDashboardURL() },
-  });
-  if (error) {
-    googleAuthButton.disabled = false;
-    setStatus(authStatus, error.message || "Google sign-in could not open.", "error");
-  }
-};
-
-googleAuthButton.addEventListener("click", signInWithGoogle);
-authDialog.querySelector(".dialog-close").addEventListener("click", () => {
-  pendingCheckout = false;
-  sessionStorage.removeItem(checkoutIntentKey);
-  authDialog.close();
-});
-
-const openReceiptAccount = async () => {
-  const { data } = await supabase.auth.getSession();
-  if (!data.session) {
-    pendingCheckout = false;
-    setStatus(authStatus, "sign in with Google to open your private receipt account.");
-    authDialog.showModal();
+emailForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const current = readCurrentAudit();
+  const customerEmail = emailInput.value.trim().toLowerCase();
+  if (!current?.id || !current?.preview_token) {
+    setStatus(emailStatus, "run a preview before checkout.", "error");
     return;
   }
-  enterAuditDashboard();
-};
-
-accountButton.addEventListener("click", openReceiptAccount);
-footerAccountButton.addEventListener("click", openReceiptAccount);
-
-const updateAccountState = (session) => {
-  const signedIn = Boolean(session?.user);
-  accountButton.textContent = signedIn ? "audit dashboard" : "receipt account";
-  receiptLibrary.hidden = !signedIn;
-  if (signedIn) receiptAccountEmail.textContent = `signed in as ${session.user.email || "your Google account"}`;
-};
-
-const renderReceiptLibrary = (reports = []) => {
-  receiptLibraryList.replaceChildren();
-  if (!reports.length) {
-    const empty = document.createElement("div");
-    empty.className = "receipt-empty";
-    const title = document.createElement("strong");
-    title.textContent = "your receipt account is ready.";
-    const copy = document.createElement("p");
-    copy.textContent = "Complete a $9 checkout and your finished Build Receipt will appear here for private viewing and download.";
-    empty.append(title, copy);
-    receiptLibraryList.append(empty);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+    setStatus(emailStatus, "enter a valid email address.", "error");
     return;
   }
-
-  reports.forEach((report) => {
-    const row = document.createElement("article");
-    row.className = "receipt-row";
-    const copy = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = report.project_name || "untitled app";
-    const meta = document.createElement("small");
-    const date = report.completed_at || report.updated_at || report.created_at;
-    meta.textContent = `${date ? new Date(date).toLocaleDateString() : "date unavailable"} · ${report.status === "complete" ? "ready" : "processing"}`;
-    copy.append(title, meta);
-    const open = document.createElement("button");
-    open.className = "button quiet";
-    open.type = "button";
-    open.textContent = report.status === "complete" ? "open report" : "check status";
-    open.addEventListener("click", () => loadPaidReport(report.id));
-    row.append(copy, open);
-    receiptLibraryList.append(row);
-  });
-};
-
-const loadReceiptLibrary = async () => {
-  receiptLibraryList.replaceChildren();
-  const loading = document.createElement("p");
-  loading.className = "receipt-loading";
-  loading.textContent = "loading your private receipts...";
-  receiptLibraryList.append(loading);
+  emailSubmit.disabled = true;
+  setStatus(emailStatus, "opening secure checkout...");
   try {
-    const response = await apiRequest("list_reports", {}, true);
-    renderReceiptLibrary(response.reports || []);
+    const response = await apiRequest("create_checkout", {
+      audit_id: current.id,
+      preview_token: current.preview_token,
+      customer_email: customerEmail,
+    });
+    window.location.assign(response.checkout_url);
   } catch (error) {
-    const message = document.createElement("p");
-    message.className = "receipt-loading error";
-    message.textContent = error.message || "your receipts could not be loaded.";
-    receiptLibraryList.replaceChildren(message);
+    if (["PAYMENTS_NOT_CONFIGURED", "AUDIT_ENGINE_NOT_CONFIGURED"].includes(error.code)) {
+      setStatus(emailStatus, "the preview works now. paid checkout opens after the full audit engine is ready.", "success");
+    } else {
+      setStatus(emailStatus, error.message || "checkout could not open. try again.", "error");
+    }
+    emailSubmit.disabled = false;
   }
-};
-
-document.querySelector("#receipt-signout").addEventListener("click", async () => {
-  await supabase.auth.signOut();
-  updateAccountState(null);
-  currentReport = null;
-  currentReportAuditId = "";
-  fullReport.hidden = true;
 });
+
+emailDialog.querySelector(".dialog-close").addEventListener("click", () => emailDialog.close());
 
 const reportFinding = (finding, index) => {
   const article = document.createElement("article");
@@ -639,22 +521,22 @@ document.querySelector("#download-report").addEventListener("click", () => {
   URL.revokeObjectURL(url);
 });
 
-const loadPaidReport = async (auditId, attempt = 0) => {
+const loadPaidReport = async (auditId, attempt = 0, deliveryToken = "") => {
   fullReport.hidden = false;
   setStatus(reportStatus, "checking payment and opening your private report...");
   fullReport.scrollIntoView({ behavior: "smooth" });
   try {
-    const response = await apiRequest("get_report", { audit_id: auditId }, true);
+    const response = await apiRequest("get_report_by_delivery_token", { audit_id: auditId, delivery_token: deliveryToken });
     if (response.status === "processing") {
       setStatus(reportStatus, "payment confirmed. the full audit is running on the server. this page will check again in a moment.");
-      if (attempt < 60) window.setTimeout(() => loadPaidReport(auditId, attempt + 1), 5000);
+      if (attempt < 60) window.setTimeout(() => loadPaidReport(auditId, attempt + 1, deliveryToken), 5000);
       else setStatus(reportStatus, "the audit is taking longer than expected. refresh this page to check the saved report.", "error");
       return;
     }
     if (response.status === "locked") {
       if (attempt < 12) {
         setStatus(reportStatus, "waiting for Stripe to confirm payment. this page will check again automatically.");
-        window.setTimeout(() => loadPaidReport(auditId, attempt + 1), 5000);
+        window.setTimeout(() => loadPaidReport(auditId, attempt + 1, deliveryToken), 5000);
       } else {
         setStatus(reportStatus, "Stripe has not confirmed this checkout. your preview remains available.", "error");
       }
@@ -666,13 +548,7 @@ const loadPaidReport = async (auditId, attempt = 0) => {
     renderReport(response.report);
     loadReceiptLibrary();
   } catch (error) {
-    if (error.message === "SIGN_IN_REQUIRED") {
-      pendingCheckout = false;
-      authDialog.showModal();
-      setStatus(authStatus, "sign in with the account used at checkout to open your report.");
-    } else {
-      setStatus(reportStatus, error.message || "the report could not be loaded.", "error");
-    }
+    setStatus(reportStatus, error.message || "the report could not be loaded.", "error");
   }
 };
 
@@ -680,34 +556,17 @@ document.querySelector("#print-report").addEventListener("click", () => window.p
 
 const initialize = async () => {
   const params = new URLSearchParams(window.location.search);
-  const { data } = await supabase.auth.getSession();
-  updateAccountState(data.session);
-  if (data.session) {
-    await loadReceiptLibrary();
-    if (params.get("view") === "dashboard") enterAuditDashboard(false);
-  } else if (params.get("view") === "dashboard") {
-    setStatus(authStatus, "sign in with Google to open your private audit dashboard.");
-    authDialog.showModal();
-  }
-
   const auditId = params.get("audit");
   const checkout = params.get("checkout");
-  if (auditId && checkout === "success") {
-    const current = readCurrentAudit() || {};
-    saveCurrentAudit({ ...current, id: auditId });
-    await loadPaidReport(auditId);
+  const delivery = params.get("delivery") || "";
+  if (delivery.includes(".")) {
+    const [deliveryAuditId, deliveryToken] = delivery.split(".", 2);
+    await loadPaidReport(deliveryAuditId, 0, deliveryToken);
+  } else if (auditId && checkout === "success") {
+    setStatus(formStatus, "payment received. your private Build Receipt will arrive by email when the audit is complete.", "success");
   } else if (checkout === "cancelled") {
     setStatus(formStatus, "checkout was cancelled. your preview is still available in this browser.");
-  } else if (data.session && sessionStorage.getItem(checkoutIntentKey) === "true") {
-    sessionStorage.removeItem(checkoutIntentKey);
-    pendingCheckout = false;
-    await startCheckout();
   }
 };
-
-supabase.auth.onAuthStateChange((_event, session) => {
-  updateAccountState(session);
-  if (session) window.setTimeout(loadReceiptLibrary, 0);
-});
 
 initialize();

@@ -22,8 +22,7 @@
       <span><strong>OWNYOURWEB</strong><small>AI build intelligence</small></span>
     </a>
     <div class="header-actions">
-      <span class="secure-pill"><i aria-hidden="true"></i> private processing</span>
-      <button class="text-link account-button" type="button" id="audit-account-button">receipt account</button>
+      <span class="secure-pill"><i aria-hidden="true"></i> email delivery</span>
     </div>
   </header>
 
@@ -167,7 +166,7 @@
             <span class="lock-icon" aria-hidden="true">⌁</span>
             <p class="kicker">full intelligence</p>
             <h3><span id="locked-count">0</span> deeper analysis areas stay locked.</h3>
-            <p>Sign in with Google before checkout. Stripe then confirms the $9 payment and starts one private audit tied to your receipt account.</p>
+            <p>Enter your email before checkout. Stripe confirms the $9 payment, then we send one private audit to that address.</p>
           </div>
           <div class="locked-list" aria-label="Full audit coverage">
             <span><strong>AI build dependency map</strong><small>locked</small></span>
@@ -181,8 +180,8 @@
             <p>one AI build receipt</p>
             <strong>$9</strong>
             <span>one-time · one app · no subscription</span>
-            <button class="button primary" type="button" id="unlock-button">unlock + start full audit</button>
-            <small>Google account → $9 payment → private download</small>
+            <button class="button primary" type="button" id="unlock-button">unlock by email</button>
+            <small>email → $9 payment → private report link</small>
           </div>
         </div>
       </div>
@@ -198,18 +197,6 @@
       </div>
       <div class="report-status" id="report-status"></div>
       <div class="report-content" id="report-content"></div>
-    </section>
-
-    <section class="receipt-library shell" id="receipt-library" hidden aria-labelledby="receipt-library-title">
-      <div class="receipt-library-header">
-        <div>
-          <p class="kicker">receipt account</p>
-          <h2 id="receipt-library-title">your build receipts.</h2>
-          <p id="receipt-account-email"></p>
-        </div>
-        <button class="button quiet" type="button" id="receipt-signout">sign out</button>
-      </div>
-      <div class="receipt-library-list" id="receipt-library-list" aria-live="polite"></div>
     </section>
 
     <section class="coverage-section shell" id="sample-report">
@@ -283,21 +270,22 @@
   <footer>
     <div class="shell footer-grid">
       <div><strong>OWNYOURWEB</strong><p>design · systems · ownership</p></div>
-      <div><a href="../../">all services</a><button type="button" id="footer-account-button">receipt account</button><a href="mailto:hello@ownyourweb.xyz">contact</a></div>
+      <div><a href="../../">all services</a><a href="mailto:hello@ownyourweb.xyz">contact</a></div>
       <p>this report supports risk review. it does not guarantee that software is secure or replace a full penetration test.</p>
     </div>
   </footer>
 
-  <dialog class="auth-dialog" id="auth-dialog">
-    <div class="dialog-shell">
+  <dialog class="auth-dialog" id="email-dialog">
+    <form class="dialog-shell" id="email-form">
       <button class="dialog-close" type="button" aria-label="Close">×</button>
       <p class="kicker">private delivery</p>
-      <h2>create your receipt account.</h2>
-      <p>Continue with Google before checkout. Your payment, completed report, and downloads stay connected to that account.</p>
-      <p class="dialog-separation"><strong>No membership required.</strong> This account only holds your AI Build Receipts.</p>
-      <button class="button primary google-auth-button" type="button" id="google-auth-button">continue with Google</button>
-      <p class="dialog-status" id="auth-status" role="status"></p>
-    </div>
+      <h2>where should we send the report?</h2>
+      <p>Use an email address you can open after payment. No account or membership is required.</p>
+      <label><span>email address</span><input id="customer-email" name="customer_email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com"></label>
+      <p class="dialog-separation"><strong>One-time delivery.</strong> Stripe handles the $9 payment. Your private report link arrives by email when the audit is complete.</p>
+      <button class="button primary email-submit" type="submit" id="email-submit">continue to secure checkout</button>
+      <p class="dialog-status" id="email-status" role="status"></p>
+    </form>
   </dialog>
 
   <script src="../../api-config.js"></script>

@@ -87,6 +87,26 @@ async function sha256(value: string) {
   return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+async function hmacHex(secret: string, value: string) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(signature)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function deliveryToken(auditId: string, email: string) {
+  return hmacHex(secretKey(), `${auditId}.${email.toLowerCase()}`);
+}
+
+function validEmail(value: string) {
+  return value.length <= 320 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 function randomToken() {
   const bytes = crypto.getRandomValues(new Uint8Array(32));
   return Array.from(bytes).map((byte) => byte.toString(16).padStart(2, "0")).join("");
@@ -404,7 +424,7 @@ async function preview(req: Request, body: Record<string, unknown>) {
     `ai_app_audits?request_fingerprint=eq.${encodeURIComponent(fingerprint)}&created_at=gte.${encodeURIComponent(oneHourAgo)}&select=id&limit=12`,
   );
   if (recent.ok && (recent.data?.length || 0) >= 12) {
-    return json(req, { error: "Preview limit reached. Try again later or sign in for continued access.", code: "RATE_LIMITED" }, 429);
+    return json(req, { error: "Preview limit reached. Try again later.", code: "RATE_LIMITED" }, 429);
   }
 
   const files = body.files && typeof body.files === "object" ? body.files as Record<string, unknown> : {};
@@ -446,16 +466,15 @@ async function preview(req: Request, body: Record<string, unknown>) {
 }
 
 async function createCheckout(req: Request, body: Record<string, unknown>) {
-  const user = await authenticatedUser(req);
-  if (!user?.id) return json(req, { error: "Sign in before checkout.", code: "AUTH_REQUIRED" }, 401);
   const auditId = clean(body.audit_id, 80);
   const previewToken = clean(body.preview_token, 200);
-  if (!auditId || !previewToken) return json(req, { error: "Audit and preview token are required." }, 400);
+  const customerEmail = clean(body.customer_email, 320).toLowerCase();
+  if (!auditId || !previewToken || !customerEmail) return json(req, { error: "Audit, preview token, and email are required." }, 400);
+  if (!validEmail(customerEmail)) return json(req, { error: "Enter a valid email address.", code: "INVALID_EMAIL" }, 400);
 
-  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&select=id,user_id,preview_secret_hash,status,stripe_checkout_session_id&limit=1`);
+  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&select=id,preview_secret_hash,status,stripe_checkout_session_id&limit=1`);
   const audit = loaded.data?.[0];
   if (!loaded.ok || !audit) return json(req, { error: "Audit not found." }, 404);
-  if (audit.user_id && audit.user_id !== user.id) return json(req, { error: "This audit belongs to another account." }, 403);
   if (await sha256(previewToken) !== audit.preview_secret_hash) return json(req, { error: "Preview verification failed." }, 403);
 
   const stripeKey = Deno.env.get("STRIPE_SECRET_KEY") || "";
@@ -474,7 +493,7 @@ async function createCheckout(req: Request, body: Record<string, unknown>) {
     "line_items[0][quantity]": "1",
     client_reference_id: auditId,
     "metadata[audit_id]": auditId,
-    customer_email: clean(user.email, 320),
+    customer_email: customerEmail,
     success_url: `${siteUrl}/?checkout=success&audit=${encodeURIComponent(auditId)}&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${siteUrl}/?checkout=cancelled&audit=${encodeURIComponent(auditId)}`,
   });
@@ -493,11 +512,13 @@ async function createCheckout(req: Request, body: Record<string, unknown>) {
     return json(req, { error: "Secure checkout could not be created.", code: "CHECKOUT_FAILED" }, 502);
   }
 
+  const rawDeliveryToken = await deliveryToken(auditId, customerEmail);
   const updated = await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&preview_secret_hash=eq.${encodeURIComponent(String(audit.preview_secret_hash))}`, {
     method: "PATCH",
     headers: { "Prefer": "return=minimal" },
     body: JSON.stringify({
-      user_id: user.id,
+      customer_email: customerEmail,
+      delivery_token_hash: await sha256(rawDeliveryToken),
       status: "checkout_created",
       payment_status: "pending",
       stripe_checkout_session_id: checkout.id,
@@ -600,9 +621,54 @@ async function aiReport(audit: Record<string, unknown>, evidence: Record<string,
   }
 }
 
-async function processPaidAudit(auditId: string, userId?: string) {
-  const ownerFilter = userId ? `&user_id=eq.${encodeURIComponent(userId)}` : "";
-  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}&select=*&limit=1`);
+function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+async function sendReportEmail(audit: Record<string, unknown>, report: Record<string, unknown>) {
+  const email = clean(audit.customer_email, 320).toLowerCase();
+  const resendKey = Deno.env.get("RESEND_API_KEY") || "";
+  const fromEmail = Deno.env.get("AI_AUDIT_FROM_EMAIL") || "reports@ownyourweb.xyz";
+  if (!email || !resendKey) {
+    console.warn("Report email not sent: RESEND_API_KEY or customer email is missing.");
+    return false;
+  }
+  const token = await deliveryToken(clean(audit.id, 80), email);
+  const siteUrl = (Deno.env.get("AI_AUDIT_SITE_URL") || "https://ownyourweb.xyz/services/ai-app-audit/").replace(/\/$/, "");
+  const reportUrl = `${siteUrl}/?delivery=${encodeURIComponent(`${clean(audit.id, 80)}.${token}`)}`;
+  const title = clean(report.title || "Your AI Build Receipt", 160);
+  const risk = clean(report.risk_level || "review", 40);
+  const summary = clean(report.executive_summary || "Your full audit is ready.", 1200);
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${resendKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: [email],
+      subject: `Your OWNYOURWEB Build Receipt is ready`,
+      html: `<div style="font-family:system-ui,sans-serif;max-width:620px;margin:0 auto;color:#10110f"><p style="font:600 12px monospace;letter-spacing:.08em">OWNYOURWEB · AI BUILD RECEIPT</p><h1>${escapeHtml(title)}</h1><p>${escapeHtml(summary)}</p><p><strong>Risk signal:</strong> ${escapeHtml(risk)}</p><p><a href="${escapeHtml(reportUrl)}" style="display:inline-block;padding:14px 20px;border-radius:999px;background:#10110f;color:#fffef9;text-decoration:none;font-weight:700">open your private report</a></p><p style="color:#575a52;font-size:13px">This private link is tied to your purchase. Keep it with your receipt.</p></div>`,
+      text: `${title}\n\n${summary}\n\nRisk signal: ${risk}\n\nOpen your private report: ${reportUrl}`,
+    }),
+  });
+  if (!response.ok) {
+    console.error("Report email failed", response.status, (await response.text()).slice(0, 300));
+    return false;
+  }
+  await rest(`ai_app_audits?id=eq.${encodeURIComponent(clean(audit.id, 80))}&delivery_sent_at=is.null`, {
+    method: "PATCH",
+    headers: { "Prefer": "return=minimal" },
+    body: JSON.stringify({ delivery_sent_at: new Date().toISOString(), updated_at: new Date().toISOString() }),
+  });
+  return true;
+}
+
+async function processPaidAudit(auditId: string) {
+  const loaded = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&select=*&limit=1`);
   const audit = loaded.data?.[0];
   if (!loaded.ok || !audit) return { status: "not_found" as const };
   if (audit.payment_status !== "paid") return { status: "locked" as const };
@@ -610,7 +676,7 @@ async function processPaidAudit(auditId: string, userId?: string) {
   if (audit.status === "processing") return { status: "processing" as const };
   if (audit.status === "failed") return { status: "failed" as const };
 
-  const claim = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}&payment_status=eq.paid&status=eq.paid&select=id`, {
+  const claim = await rest<Array<Record<string, unknown>>>(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}&payment_status=eq.paid&status=eq.paid&select=id`, {
     method: "PATCH",
     headers: { "Prefer": "return=representation" },
     body: JSON.stringify({ status: "processing", updated_at: new Date().toISOString() }),
@@ -622,7 +688,7 @@ async function processPaidAudit(auditId: string, userId?: string) {
     const analysis = analyze(manifest, audit.source_lockfile as Record<string, unknown> | null, clean(audit.source_lockfile_name, 80) || null);
     const registry = await registryMetadata(Object.keys(directEntries(manifest)));
     const generated = await aiReport(audit, analysis.evidence, registry);
-    const saved = await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}${ownerFilter}`, {
+    const saved = await rest(`ai_app_audits?id=eq.${encodeURIComponent(auditId)}`, {
       method: "PATCH",
       headers: { "Prefer": "return=minimal" },
       body: JSON.stringify({
@@ -637,6 +703,7 @@ async function processPaidAudit(auditId: string, userId?: string) {
       }),
     });
     if (!saved.ok) throw new Error("report save failed");
+    await sendReportEmail({ ...audit, id: auditId }, generated.report);
     return { status: "complete" as const, report: generated.report };
   } catch (error) {
     console.error("Full report generation failed", error instanceof Error ? error.message : String(error));
@@ -649,34 +716,30 @@ async function processPaidAudit(auditId: string, userId?: string) {
   }
 }
 
-async function getReport(req: Request, body: Record<string, unknown>) {
-  const user = await authenticatedUser(req);
-  if (!user?.id) return json(req, { error: "Sign in to open this report.", code: "AUTH_REQUIRED" }, 401);
+async function getReportByDeliveryToken(req: Request, body: Record<string, unknown>) {
   const auditId = clean(body.audit_id, 80);
-  const result = await processPaidAudit(auditId, user.id);
-  if (result.status === "not_found") return json(req, { error: "Report not found for this account." }, 404);
+  const suppliedToken = clean(body.delivery_token, 200);
+  if (!auditId || !suppliedToken) return json(req, { error: "A delivery link is required." }, 400);
+
+  const loaded = await rest<Array<Record<string, unknown>>>(
+    `ai_app_audits?id=eq.${encodeURIComponent(auditId)}&select=id,customer_email,delivery_token_hash,payment_status,status&limit=1`,
+  );
+  const audit = loaded.data?.[0];
+  if (!loaded.ok || !audit) return json(req, { error: "Report not found." }, 404);
+
+  const email = clean(audit.customer_email, 320).toLowerCase();
+  const expectedToken = await deliveryToken(auditId, email);
+  const storedHash = clean(audit.delivery_token_hash, 200);
+  if (!email || !storedHash || !constantTimeEqual(storedHash, await sha256(expectedToken)) || !constantTimeEqual(expectedToken, suppliedToken)) {
+    return json(req, { error: "This delivery link is invalid or expired." }, 403);
+  }
+
+  const result = await processPaidAudit(auditId);
+  if (result.status === "not_found") return json(req, { error: "Report not found." }, 404);
   if (result.status === "locked") return json(req, { status: "locked" });
   if (result.status === "processing") return json(req, { status: "processing" }, 202);
-  if (result.status === "failed") return json(req, { error: "The report could not be completed. Your payment record is preserved for support.", code: "REPORT_FAILED" }, 500);
+  if (result.status === "failed") return json(req, { error: "The report could not be completed.", code: "REPORT_FAILED" }, 500);
   return json(req, { status: "complete", report: result.report });
-}
-
-async function listReports(req: Request) {
-  const user = await authenticatedUser(req);
-  if (!user?.id) return json(req, { error: "Sign in to open your receipt account.", code: "AUTH_REQUIRED" }, 401);
-  const loaded = await rest<Array<Record<string, unknown>>>(
-    `ai_app_audits?user_id=eq.${encodeURIComponent(user.id)}&payment_status=eq.paid&select=id,project_name,status,created_at,updated_at,completed_at&order=created_at.desc&limit=50`,
-  );
-  if (!loaded.ok) return json(req, { error: "Your receipts could not be loaded." }, 500);
-  const reports = (loaded.data || []).map((report) => ({
-    id: clean(report.id, 80),
-    project_name: clean(report.project_name, 80) || "untitled app",
-    status: clean(report.status, 40) || "paid",
-    created_at: clean(report.created_at, 80),
-    updated_at: clean(report.updated_at, 80),
-    completed_at: clean(report.completed_at, 80),
-  }));
-  return json(req, { reports });
 }
 
 async function processPaid(req: Request, body: Record<string, unknown>) {
@@ -702,7 +765,6 @@ Deno.serve(async (req) => {
   if (action === "preview") return preview(req, body as Record<string, unknown>);
   if (action === "create_checkout") return createCheckout(req, body as Record<string, unknown>);
   if (action === "process_paid") return processPaid(req, body as Record<string, unknown>);
-  if (action === "get_report") return getReport(req, body as Record<string, unknown>);
-  if (action === "list_reports") return listReports(req);
+  if (action === "get_report_by_delivery_token") return getReportByDeliveryToken(req, body as Record<string, unknown>);
   return json(req, { error: "Unknown audit action." }, 400);
 });
