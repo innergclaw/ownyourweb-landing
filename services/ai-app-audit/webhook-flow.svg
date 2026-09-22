@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">OWNYOURWEB AI Build Receipt webhook flow</title>
+  <desc id="desc">A flow diagram showing Stripe payment confirmation moving through the OwnYourWeb webhook, audit engine, database, and Resend email delivery.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111111"/>
+      <stop offset="1" stop-color="#252525"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity=".28"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#f2a900"/>
+    </marker>
+    <style>
+      .sans{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+      .eyebrow{font:700 16px Inter,ui-sans-serif,system-ui;letter-spacing:2.8px;fill:#f2a900}
+      .title{font:800 48px Inter,ui-sans-serif,system-ui;letter-spacing:-1.8px;fill:#fff}
+      .subtitle{font:400 21px Inter,ui-sans-serif,system-ui;fill:#c9c4b8}
+      .card-title{font:800 23px Inter,ui-sans-serif,system-ui;fill:#111}
+      .card-copy{font:500 16px Inter,ui-sans-serif,system-ui;fill:#4d4a42}
+      .code{font:700 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#7a5200}
+      .small{font:600 14px Inter,ui-sans-serif,system-ui;fill:#c9c4b8}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1420" cy="-40" r="270" fill="#f2a900" opacity=".08"/>
+  <circle cx="80" cy="900" r="220" fill="#f2a900" opacity=".06"/>
+
+  <text x="100" y="86" class="eyebrow">OWNYOURWEB · AI BUILD RECEIPT</text>
+  <text x="100" y="146" class="title">How the paid report gets delivered</text>
+  <text x="100" y="188" class="subtitle">The browser never unlocks the report. Stripe confirms payment, then the server sends it privately.</text>
+
+  <!-- connectors -->
+  <path d="M355 410 H425" stroke="#f2a900" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M710 410 H780" stroke="#f2a900" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1065 410 H1135" stroke="#f2a900" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1345 525 V625 H1000 V675" stroke="#f2a900" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <text x="367" y="392" class="small">payment succeeds</text>
+  <text x="721" y="392" class="small">signature verified</text>
+  <text x="1077" y="392" class="small">report complete</text>
+  <text x="1030" y="646" class="small">private delivery link</text>
+
+  <!-- cards -->
+  <g filter="url(#shadow)">
+    <rect x="100" y="300" width="255" height="220" rx="22" fill="#f6f2e8"/>
+    <rect x="425" y="300" width="285" height="220" rx="22" fill="#f6f2e8"/>
+    <rect x="780" y="300" width="285" height="220" rx="22" fill="#f6f2e8"/>
+    <rect x="1135" y="300" width="330" height="220" rx="22" fill="#f6f2e8"/>
+    <rect x="720" y="675" width="560" height="145" rx="22" fill="#f2a900"/>
+  </g>
+
+  <!-- card 1 -->
+  <circle cx="145" cy="350" r="25" fill="#111"/>
+  <text x="145" y="358" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="#f2a900">1</text>
+  <text x="185" y="358" class="card-title">Customer pays</text>
+  <text x="130" y="407" class="card-copy">Stripe Checkout receives</text>
+  <text x="130" y="432" class="card-copy">the one-time $9 payment.</text>
+  <text x="130" y="480" class="code">checkout.session.completed</text>
+
+  <!-- card 2 -->
+  <circle cx="470" cy="350" r="25" fill="#111"/>
+  <text x="470" y="358" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="#f2a900">2</text>
+  <text x="510" y="358" class="card-title">Webhook verifies</text>
+  <text x="455" y="407" class="card-copy">Stripe sends the event to</text>
+  <text x="455" y="432" class="card-copy">the private Supabase function.</text>
+  <text x="455" y="480" class="code">verify signature · prevent replay</text>
+
+  <!-- card 3 -->
+  <circle cx="825" cy="350" r="25" fill="#111"/>
+  <text x="825" y="358" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="#f2a900">3</text>
+  <text x="865" y="358" class="card-title">Full audit runs</text>
+  <text x="810" y="407" class="card-copy">The server starts the paid</text>
+  <text x="810" y="432" class="card-copy">AI analysis and saves the report.</text>
+  <text x="810" y="480" class="code">full scan · report · private record</text>
+
+  <!-- card 4 -->
+  <circle cx="1180" cy="350" r="25" fill="#111"/>
+  <text x="1180" y="358" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="#f2a900">4</text>
+  <text x="1220" y="358" class="card-title">Email is sent</text>
+  <text x="1165" y="407" class="card-copy">Resend sends the private</text>
+  <text x="1165" y="432" class="card-copy">report link to the buyer’s email.</text>
+  <text x="1165" y="480" class="code">reports@ownyourweb.xyz</text>
+
+  <!-- delivery card -->
+  <circle cx="775" cy="725" r="25" fill="#111"/>
+  <text x="775" y="733" text-anchor="middle" class="sans" font-size="20" font-weight="800" fill="#f2a900">✓</text>
+  <text x="820" y="723" class="sans" font-size="23" font-weight="800" fill="#111">Buyer receives the full report</text>
+  <text x="820" y="757" class="sans" font-size="17" font-weight="600" fill="#4d3a00">No account. No dashboard. One private email link.</text>
+  <text x="820" y="787" class="mono" font-size="14" font-weight="700" fill="#5e4300">payment → webhook → audit → email</text>
+
+  <text x="100" y="850" class="small">Security boundary: locked findings are created and returned only after the server confirms payment.</text>
+</svg>
