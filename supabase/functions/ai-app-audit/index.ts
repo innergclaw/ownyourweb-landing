@@ -485,6 +485,24 @@ async function createCheckout(req: Request, body: Record<string, unknown>) {
   if (!Deno.env.get("OPENAI_API_KEY") || !Deno.env.get("OPENAI_MODEL")) {
     return json(req, { error: "The paid audit engine is not configured yet.", code: "AUDIT_ENGINE_NOT_CONFIGURED" }, 503);
   }
+  const sender = Deno.env.get("AI_AUDIT_FROM_EMAIL") || "";
+  const emailKey = Deno.env.get("RESEND_API_KEY") || "";
+  const senderDomain = sender.match(/@([^>\s]+)>?$/)?.[1]?.toLowerCase();
+  if (!emailKey || !senderDomain || !Deno.env.get("STRIPE_AUDIT_WEBHOOK_SECRET")) {
+    return json(req, { error: "Report email delivery is not ready yet. No payment has been taken.", code: "EMAIL_DELIVERY_NOT_CONFIGURED" }, 503);
+  }
+  try {
+    const domainsResponse = await fetch("https://api.resend.com/domains", {
+      headers: { Authorization: `Bearer ${emailKey}` },
+      signal: AbortSignal.timeout(8000),
+    });
+    const domains = await domainsResponse.json();
+    if (!domainsResponse.ok || !domains.data?.some((domain: { name: string; status: string }) => domain.name.toLowerCase() === senderDomain && domain.status === "verified")) {
+      return json(req, { error: "Report email delivery is not ready yet. No payment has been taken.", code: "EMAIL_DELIVERY_NOT_CONFIGURED" }, 503);
+    }
+  } catch {
+    return json(req, { error: "We could not confirm email delivery. Please try again later. No payment has been taken.", code: "EMAIL_DELIVERY_UNAVAILABLE" }, 503);
+  }
 
   const siteUrl = (Deno.env.get("AI_AUDIT_SITE_URL") || "https://ownyourweb.xyz/services/ai-app-audit/").replace(/\/$/, "");
   const stripeBody = new URLSearchParams({

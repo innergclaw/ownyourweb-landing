@@ -115,6 +115,17 @@ AI_AUDIT_ALLOWED_ORIGINS=https://ownyourweb.xyz,https://www.ownyourweb.xyz,https
 
 ## Stripe setup
 
+Configured on 2026-09-22 in Own Your Web account `acct_1T4DFIQPiPou53Wc`:
+
+- Product: `prod_VJ0kkwlavlC0Uk`
+- One-time USD 9 price: `price_1UIOitQPiPou53WcEAUXDuh3`
+- Webhook: `we_1UIOlAQPiPou53WccqQ6flWH`
+- A live checkout returned 900 cents USD and was expired without payment.
+- The existing OpenAI key can access `gpt-4.1-mini`; report generation is not yet verified.
+- Resend reports no verified sender domain. Checkout now requires a configured sender with a verified domain. Finish domain verification before enabling purchases.
+
+The temporary protected provider diagnostic function `ai-audit-readiness` was disabled after the checks and returns HTTP 410.
+
 1. Create a one-time $9 product/price in Stripe.
 2. Store its `price_...` ID as `STRIPE_AUDIT_PRICE_ID`.
 3. Add a webhook endpoint:
