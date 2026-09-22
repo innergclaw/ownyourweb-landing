@@ -35,6 +35,25 @@ let selectedFiles = new Map();
 let currentReport = null;
 let currentReportAuditId = "";
 
+const revealItems = document.querySelectorAll("[data-reveal]");
+const showReveal = (item) => item.classList.add("is-visible");
+if (revealItems.length) {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach(showReveal);
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          showReveal(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.22, rootMargin: "0px 0px -8% 0px" });
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
+}
+
 const lockfileNames = new Set(["package-lock.json", "npm-shrinkwrap.json"]);
 
 const safeJson = (text) => {

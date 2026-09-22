@@ -43,31 +43,34 @@
         </div>
       </div>
 
-      <aside class="terminal-card" aria-label="Sample audit result">
-        <div class="terminal-top">
-          <span><i></i><i></i><i></i></span>
-          <code>audit://project/latest</code>
-          <em>preview</em>
+    </section>
+
+    <section class="receipt-reveal shell" data-reveal aria-labelledby="receipt-reveal-title">
+      <div class="receipt-reveal-copy">
+        <p class="kicker">build trace</p>
+        <h2 id="receipt-reveal-title">the build leaves a trail.</h2>
+        <p>direct choices, inherited packages, and automatic execution become a readable receipt.</p>
+      </div>
+      <div class="receipt-trace" aria-label="Sample build trace">
+        <div class="trace-node">
+          <span class="trace-label">declared</span>
+          <strong>31</strong>
+          <small>direct packages</small>
         </div>
-        <div class="terminal-body">
-          <div class="risk-dial" aria-label="Sample risk score 72 out of 100">
-            <svg viewBox="0 0 130 130" role="img" aria-hidden="true">
-              <circle cx="65" cy="65" r="55"></circle>
-              <circle class="progress" cx="65" cy="65" r="55"></circle>
-            </svg>
-            <span><strong>72</strong><small>elevated</small></span>
-          </div>
-          <div class="metric-grid">
-            <div><small>packages</small><strong>312</strong></div>
-            <div><small>direct</small><strong>31</strong></div>
-            <div><small>install scripts</small><strong class="hot">04</strong></div>
-            <div><small>review areas</small><strong class="warm">23</strong></div>
-          </div>
-          <div class="terminal-line"><span>verified</span><p>lockfile found + analyzed</p></div>
-          <div class="terminal-line"><span>reach</span><p>filesystem · env · network</p></div>
-          <div class="terminal-line muted"><span>locked</span><p>20 findings require full audit</p></div>
+        <div class="trace-rule" aria-hidden="true"></div>
+        <div class="trace-node">
+          <span class="trace-label">resolved</span>
+          <strong>312</strong>
+          <small>packages mapped</small>
         </div>
-      </aside>
+        <div class="trace-rule" aria-hidden="true"></div>
+        <div class="trace-node">
+          <span class="trace-label">reviewed</span>
+          <strong>23</strong>
+          <small>areas to inspect</small>
+        </div>
+        <p class="trace-note">sample receipt</p>
+      </div>
     </section>
 
     <section class="principle-bar" aria-label="Privacy information">
