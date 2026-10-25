@@ -13,7 +13,7 @@ I was checking out [business name] on Instagram and your work looks great — bu
 
 That's chaos waiting to happen. Accounts get locked. Messages get buried. Your audience never actually belongs to you.
 
-**Here's what I do:** I build professional websites that you fully own. Not rented platforms. Not monthly subscriptions. Your website. Your domain. Your control.
+**Here's what I do:** I build professional websites that you fully own. Not rented platforms. Your website. Your domain. Your control. Then I keep it working for you, month to month.
 
 **Starting at $999**, you get:
 - Custom 1–5 page professional website
@@ -56,7 +56,14 @@ I help businesses like yours get a professional website that you fully own. Not 
 | Protection & Performance | Security hardening, automated backups, uptime monitoring | +$750 |
 | Automation & Organization | Client intake automation, form routing, workflows | +$1,000 |
 
-**One-time investment. Permanent ownership.**
+**You own the build. Care plans keep it sharp.**
+
+**After launch ~ pick a plan (optional):**
+- Care ~ $150-300/mo: hosting watch, backups, updates, small edits
+- Growth ~ $500-1,000/mo: care + monthly promos, page updates, reporting
+- SI agent ops ~ $1,000-2,500/mo: growth + SI agents running your intake, follow-up and ops
+
+You own your site either way. Cancel a plan, keep everything.
 
 Your website works while you sleep. Captures leads. Builds credibility. Protects your business from platform volatility.
 
@@ -91,9 +98,9 @@ Most service businesses (barbershops, contractors, local brands) rely on Instagr
 ✓ Professional booking/contact forms
 ✓ SEO — people find you on Google
 ✓ You own everything (no platform risk)
-✓ One-time investment (no monthly fees)
+✓ Optional care plans from $150/mo (cancel anytime, you keep everything)
 
-I built [business name] a professional website starting at $999. You own the domain. You own the hosting. No monthly subscriptions.
+I built [business name] a professional website starting at $999. You own the domain. You own the hosting. Want it maintained and growing? Care from $150/mo, growth from $500/mo, SI agent ops from $1,000/mo.
 
 If you want to see what that looks like, reply "interested" and I'll share some examples.
 
@@ -125,7 +132,7 @@ Starting at $999, you get a website that:
 - Works for you 24/7
 - **You own it forever**
 
-No monthly fees. No platform drama.
+No platform drama. Optional monthly care if you want me on it.
 
 If you're ready to upgrade [business name]'s presence, reply or book a call: [LINK]
 
@@ -144,7 +151,7 @@ Love your work with [business name]. Quick question — do you have a profession
 
 Most people rely on IG but it's risky (account locked = business paused).
 
-I build professional websites for service businesses that you fully own. One-time investment starting at $999.
+I build professional websites for service businesses that you fully own. Builds start at $999, with monthly care, growth and SI agent ops plans after launch.
 
 If you want to see examples or chat about it, reply "website" and I'll DM you more info.
 
@@ -168,7 +175,7 @@ Right now, your business runs on chaos:
 ✅ Professional website captures leads 24/7
 ✅ Contact forms organize everything
 ✅ Google search brings you new customers
-✅ **You own everything — forever**
+✅ **You own everything ~ forever**
 
 **Here's what I build:**
 
@@ -190,7 +197,7 @@ Right now, your business runs on chaos:
 - Form routing
 - Content workflows
 
-**One-time investment. Permanent ownership.**
+**You own the build. Care plans keep it sharp.**
 
 Let's turn [business name] from DM chaos into an organized system that works while you sleep.
 
@@ -216,7 +223,7 @@ I build custom websites for service businesses that you fully own.
 - Custom 1–5 page site
 - Your own domain
 - Secure hosting
-- No monthly fees
+- Monthly plans optional: care $150-300, growth $500-1,000, SI agent ops $1,000-2,500
 - You own everything
 
 Reply "yes" and I'll send you some examples or we can chat more.
