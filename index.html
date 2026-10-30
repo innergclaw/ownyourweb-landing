@@ -1471,6 +1471,61 @@
         scroll-behavior: auto !important;
       }
     }
+
+    /* EasyUI-inspired (Suraj Maurya, MIT): path stepper, before/after reveal cards, submitted check. Styled to match ecosystem.css */
+    .path-stepper { position: relative; margin-bottom: 10px; }
+    .path-rail { position: absolute; left: 10%; right: 10%; top: 27px; height: 2px; background: var(--line); z-index: 0; border-radius: 2px; overflow: hidden; }
+    .path-fill { display: block; height: 100%; width: calc(var(--progress, 0) * 100%); background: var(--ink); transition: width 420ms cubic-bezier(.23,1,.32,1); }
+    .path-steps { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+    .path-step { width: 100%; display: grid; justify-items: center; gap: 12px; border: 0; background: none; padding: 0; color: var(--ink); cursor: pointer; font: inherit; }
+    .path-num { width: 56px; height: 56px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-weight: 800; font-size: .95rem; transition: transform 200ms cubic-bezier(.23,1,.32,1), background 200ms ease, box-shadow 200ms ease; }
+    .path-name { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; letter-spacing: -.03em; line-height: 1.05; text-align: center; color: var(--muted); transition: color 200ms ease; }
+    .path-step[aria-selected="true"] .path-num { background: var(--lime); border-color: transparent; transform: scale(1.06); box-shadow: 0 10px 24px rgba(111, 143, 24, .2); }
+    .path-step[aria-selected="true"] .path-name { color: var(--ink); }
+    .path-step:hover .path-num { transform: translateY(-2px); }
+    .path-step:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; border-radius: 12px; }
+    .path-panels { margin-top: 22px; }
+    .path-panel { border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, .7); padding: 24px; margin-bottom: 10px; }
+    .js-path .path-panel { display: none; margin-bottom: 0; }
+    .js-path .path-panel.is-active { display: block; animation: path-in 360ms cubic-bezier(.23,1,.32,1) both; }
+    .path-panel small { font-weight: 800; font-size: .68rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+    .path-panel h3 { margin: 8px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; line-height: 1; font-weight: 500; letter-spacing: -.05em; }
+    .path-panel p { margin: 10px 0 0; max-width: 640px; color: var(--muted); line-height: 1.55; font-weight: 500; }
+    @keyframes path-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .service-grid-extra { grid-template-columns: 1fr !important; margin-top: 10px; }
+    .service-grid-extra .service-card { min-height: 150px; color: var(--white); background: var(--ink); }
+    .service-grid-extra .service-card small { color: var(--lime); }
+    .reveal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+    .reveal-card { position: relative; min-height: 210px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, .7); padding: 0; overflow: hidden; cursor: pointer; text-align: left; font: inherit; color: var(--ink); transition: transform 200ms cubic-bezier(.23,1,.32,1), box-shadow 200ms ease; }
+    .reveal-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(21, 21, 21, .08); }
+    .reveal-face { position: absolute; inset: 0; display: grid; align-content: space-between; gap: 14px; padding: 24px; }
+    .reveal-face small { font-weight: 800; font-size: .68rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+    .reveal-face strong { font-family: Georgia, "Times New Roman", serif; font-weight: 500; letter-spacing: -.05em; font-size: 1.9rem; line-height: 1.02; }
+    .reveal-face em { font-style: normal; font-weight: 700; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    .reveal-after { background: var(--lime); clip-path: circle(0% at 90% 90%); transition: clip-path 560ms cubic-bezier(.23,1,.32,1); }
+    .reveal-after small, .reveal-after em { color: var(--ink); }
+    .reveal-card[aria-pressed="true"] .reveal-after { clip-path: circle(150% at 90% 90%); }
+    .reveal-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+    .submit-check { display: none; width: 52px; height: 52px; margin-bottom: 14px; fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+    .message-box.is-success .submit-check { display: block; }
+    .submit-check circle { stroke-dasharray: 145; stroke-dashoffset: 145; }
+    .submit-check path { stroke-dasharray: 40; stroke-dashoffset: 40; }
+    .message-box.is-success .submit-check circle { animation: check-draw 520ms cubic-bezier(.23,1,.32,1) forwards; }
+    .message-box.is-success .submit-check path { animation: check-draw 360ms 420ms cubic-bezier(.23,1,.32,1) forwards; }
+    @keyframes check-draw { to { stroke-dashoffset: 0; } }
+    @media (max-width: 720px) {
+      .path-rail { display: none; }
+      .path-steps { grid-template-columns: 1fr; gap: 8px; }
+      .path-step { grid-template-columns: 48px 1fr; justify-items: start; align-items: center; }
+      .path-num { width: 48px; height: 48px; }
+      .path-name { text-align: left; }
+      .reveal-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-after, .path-fill, .path-num, .reveal-card { transition: none !important; }
+      .reveal-card:hover, .path-step:hover .path-num { transform: none; }
+      .submit-check circle, .submit-check path { stroke-dashoffset: 0 !important; animation: none !important; }
+    }
   </style>
   <link rel="stylesheet" href="ecosystem.css" />
 </head>
@@ -1491,13 +1546,13 @@
             <span>Menu</span>
           </button>
           <div class="nav-dropdown" id="primary-menu" aria-hidden="true" inert>
-            <a class="nav-cta" href="#start">Start <span aria-hidden="true">→</span></a>
-            <a href="free-owner-stack.html">Free Owner Stack <span aria-hidden="true">→</span></a>
-            <a href="#demo-sites">Purchase Demo Sites <span aria-hidden="true">↓</span></a>
-            <a href="#services">Services <span aria-hidden="true">↓</span></a>
-            <a href="services/ai-app-audit/">AI App Audit <span aria-hidden="true">→</span></a>
-            <a href="account/">Member access <span aria-hidden="true">→</span></a>
-            <a href="https://ownyourweb.marketing">Social Media Management <span aria-hidden="true">↗</span></a>
+            <a class="nav-cta" href="#start">Start</a>
+            <a href="free-owner-stack.html">Free Owner Stack</a>
+            <a href="#demo-sites">Purchase Demo Sites</a>
+            <a href="#services">Services</a>
+            <a href="services/ai-app-audit/">SI App Audit</a>
+            <a href="account/">Member access</a>
+            <a href="https://ownyourweb.marketing">Social Media Management</a>
           </div>
         </nav>
       </div>
@@ -1633,30 +1688,28 @@
             <h2>Build around the customer action that matters.</h2>
             <p>Start with the result. We create a clear path for customers to understand the offer, contact you, book, order, or buy.</p>
           </div>
-          <div class="service-grid">
-            <article class="service-card">
-              <small>01</small>
-              <h3>Find You</h3>
-            </article>
-            <article class="service-card">
-              <small>02</small>
-              <h3>Understand The Offer</h3>
-            </article>
-            <article class="service-card">
-              <small>03</small>
-              <h3>Contact You</h3>
-            </article>
-            <article class="service-card">
-              <small>04</small>
-              <h3>Book Or Buy</h3>
-            </article>
-            <article class="service-card">
-              <small>05</small>
-              <h3>Stay Updated</h3>
-            </article>
-            <a class="service-card" href="services/ai-app-audit/" aria-label="Open the AI App Audit service">
+          <!-- Path stepper and before/after reveal cards adapted from EasyUI (https://easyui.site) by Suraj Maurya, MIT License. Rebuilt in plain HTML/CSS/JS. -->
+          <div class="path-stepper" data-active="0">
+            <div class="path-rail" aria-hidden="true"><span class="path-fill"></span></div>
+            <ol class="path-steps" role="tablist" aria-label="The customer path">
+              <li><button type="button" class="path-step" role="tab" id="path-tab-0" aria-controls="path-panel-0" aria-selected="true" style="--step-bg:var(--white)"><span class="path-num">01</span><span class="path-name">Find You</span></button></li>
+              <li><button type="button" class="path-step" role="tab" id="path-tab-1" aria-controls="path-panel-1" aria-selected="false" style="--step-bg:var(--lime)"><span class="path-num">02</span><span class="path-name">Understand The Offer</span></button></li>
+              <li><button type="button" class="path-step" role="tab" id="path-tab-2" aria-controls="path-panel-2" aria-selected="false" style="--step-bg:var(--cyan)"><span class="path-num">03</span><span class="path-name">Contact You</span></button></li>
+              <li><button type="button" class="path-step" role="tab" id="path-tab-3" aria-controls="path-panel-3" aria-selected="false" style="--step-bg:var(--coral)"><span class="path-num">04</span><span class="path-name">Book Or Buy</span></button></li>
+              <li><button type="button" class="path-step" role="tab" id="path-tab-4" aria-controls="path-panel-4" aria-selected="false" style="--step-bg:#ffe4d9"><span class="path-num">05</span><span class="path-name">Stay Updated</span></button></li>
+            </ol>
+            <div class="path-panels">
+              <div class="path-panel" role="tabpanel" id="path-panel-0" aria-labelledby="path-tab-0"><small>Step 01</small><h3>Find You</h3><p>Customers search, and your business shows up looking clear and easy to trust.</p></div>
+              <div class="path-panel" role="tabpanel" id="path-panel-1" aria-labelledby="path-tab-1"><small>Step 02</small><h3>Understand The Offer</h3><p>In a few seconds they know what you do, who it is for, and why you.</p></div>
+              <div class="path-panel" role="tabpanel" id="path-panel-2" aria-labelledby="path-tab-2"><small>Step 03</small><h3>Contact You</h3><p>One tap to call, text, or send a message. No hunting for a phone number.</p></div>
+              <div class="path-panel" role="tabpanel" id="path-panel-3" aria-labelledby="path-tab-3"><small>Step 04</small><h3>Book Or Buy</h3><p>They pick a time, place an order, or pay, right there on the page.</p></div>
+              <div class="path-panel" role="tabpanel" id="path-panel-4" aria-labelledby="path-tab-4"><small>Step 05</small><h3>Stay Updated</h3><p>They join your list, so you can bring them back with news and offers.</p></div>
+            </div>
+          </div>
+          <div class="service-grid service-grid-extra">
+            <a class="service-card" href="services/ai-app-audit/" aria-label="Open the SI App Audit service">
               <small>06 · New</small>
-              <h3>Audit Your AI-Built App</h3>
+              <h3>Audit Your SI-Built App</h3>
             </a>
           </div>
         </div>
@@ -1722,6 +1775,16 @@
               <p>Your site lives with your domain, your content, and a foundation built to support the business as it grows.</p>
             </article>
           </div>
+          <div class="reveal-grid">
+            <button type="button" class="reveal-card" aria-pressed="false">
+              <span class="reveal-face reveal-before"><small>Before</small><strong>Your offer is spread across posts, DMs, and old links.</strong><em>Tap to see after</em></span>
+              <span class="reveal-face reveal-after" aria-hidden="true"><small>After</small><strong>Your offer lives on one clean page anyone can read.</strong><em>Tap to see before</em></span>
+            </button>
+            <button type="button" class="reveal-card" aria-pressed="false">
+              <span class="reveal-face reveal-before"><small>Before</small><strong>Customers have to guess how to reach you.</strong><em>Tap to see after</em></span>
+              <span class="reveal-face reveal-after" aria-hidden="true"><small>After</small><strong>One clear button to call, book, or buy.</strong><em>Tap to see before</em></span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -1780,6 +1843,7 @@
               <p class="form-note">Submit the form and we’ll follow up with your next step.</p>
             </div>
             <div class="message-box" id="messageBox">
+              <svg class="submit-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23" /><path d="M15 27 l7 7 l15 -16" /></svg>
               <h3 id="messageTitle">Submitted</h3>
               <p id="messageText">We received your info and will be in touch within 24 hours.</p>
             </div>
@@ -1795,7 +1859,7 @@
       </div>
     </footer>
 
-    <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+    <a class="back-top" href="#top" aria-label="Back to top">Top</a>
   </div>
 
   <script src="/api-config.js"></script>
@@ -1887,14 +1951,15 @@
           if (!response.ok) throw new Error(data.detail || data.error || 'Submission failed');
 
           signupForm.classList.add('hide');
-          messageBox.classList.add('show');
-          messageTitle.textContent = 'Request Received';
-          messageText.textContent = 'Thanks—your request was received. We’ll contact you with the next step.';
+          messageBox.classList.add('show', 'is-success');
+          messageTitle.textContent = 'Submitted';
+          messageText.textContent = 'Thank you. We got your request and will reach out with your next step.';
           leadForm.reset();
           document.dispatchEvent(new CustomEvent('cuelume:success'));
         } catch (error) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send Request';
+          messageBox.classList.remove('is-success');
           messageBox.classList.add('show');
           messageTitle.textContent = 'Try Again';
           messageText.textContent = 'We could not send your request. Please try again, or call or message us directly.';
@@ -1905,5 +1970,38 @@
     }
   </script>
 
+  <script>
+    /* Path stepper + reveal cards, adapted from EasyUI (Suraj Maurya, MIT License) */
+    (function () {
+      var stepper = document.querySelector('.path-stepper');
+      if (stepper) {
+        stepper.classList.add('js-path');
+        var tabs = Array.prototype.slice.call(stepper.querySelectorAll('.path-step'));
+        var panels = Array.prototype.slice.call(stepper.querySelectorAll('.path-panel'));
+        var select = function (i, focus) {
+          tabs.forEach(function (t, j) { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
+          panels.forEach(function (p, j) { p.classList.toggle('is-active', i === j); });
+          stepper.style.setProperty('--progress', String(i / (tabs.length - 1)));
+          if (focus) tabs[i].focus();
+        };
+        tabs.forEach(function (t, i) {
+          t.addEventListener('click', function () { select(i); });
+          t.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); select((i + 1) % tabs.length, true); }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+          });
+        });
+        select(0);
+      }
+      document.querySelectorAll('.reveal-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var on = card.getAttribute('aria-pressed') !== 'true';
+          card.setAttribute('aria-pressed', String(on));
+          card.querySelector('.reveal-after').setAttribute('aria-hidden', String(!on));
+          card.querySelector('.reveal-before').setAttribute('aria-hidden', String(on));
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
