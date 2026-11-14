@@ -328,6 +328,14 @@ h1 {
   color: var(--ink);
 }
 
+.footer-inner {
+  color: var(--muted);
+}
+
+.footer-inner a {
+  color: var(--ink);
+}
+
 .back-top {
   color: var(--ink);
   background: var(--lime);
