@@ -1,6 +1,42 @@
 {
   "requests": [
     {
+      "id": 54,
+      "request_id": "2026-11-15T11-10-59-890Z-explee",
+      "created_at": "2026-11-15T11:10:59.89+00:00",
+      "status": "pending_owner_approval",
+      "payment_status": "pending_owner_approval",
+      "source_page": "OWNYOURWEB Main Site",
+      "customer_first_name": "Holly",
+      "customer_last_name": "Dean",
+      "customer_email": "h+f3807319a@havencalm.org",
+      "business_name": "Explee",
+      "industry": "Website / Web System Inquiry",
+      "package": "Local Website System",
+      "budget_range": "$1,500 - $3,000",
+      "timeline": "",
+      "buyer_agent_or_contact": "h+f3807319a@havencalm.org",
+      "current_website": "https://explee.com",
+      "request": "Hi OWNYOURWEB team,\n\nFound you via your website. We just opened an AI Startup Program at Explee: 3,000 free Claude credits (worth $30) are reserved for OWNYOURWEB. Our agent finds your buyers, writes personalized emails and books demos until it lines up 3-5 warm leads, for example:\n- Small business owner, local service provider needs a clear site that turns visitors into calls and bookings\n- Independent chef or caterer, food business needs simple online ordering with pickup or delivery options\n- Founder or solo operator, personal brand business needs one home for services, rentals, and products that takes payment\n\nStart here, takes 2 minutes: https://explee.com/?q=ownyourweb.xyz&utm_source=form&utm_content=ownyourweb.xyz\nOr just reply to this message.\n\nHolly, Explee",
+      "assets_available": "Current website: https://explee.com\nSubmitted from ownyourweb.xyz main site form",
+      "raw_payload": {
+        "assets": "Current website: https://explee.com\nSubmitted from ownyourweb.xyz main site form",
+        "package": "Local Website System",
+        "request": "Hi OWNYOURWEB team,\n\nFound you via your website. We just opened an AI Startup Program at Explee: 3,000 free Claude credits (worth $30) are reserved for OWNYOURWEB. Our agent finds your buyers, writes personalized emails and books demos until it lines up 3-5 warm leads, for example:\n- Small business owner, local service provider needs a clear site that turns visitors into calls and bookings\n- Independent chef or caterer, food business needs simple online ordering with pickup or delivery options\n- Founder or solo operator, personal brand business needs one home for services, rentals, and products that takes payment\n\nStart here, takes 2 minutes: https://explee.com/?q=ownyourweb.xyz&utm_source=form&utm_content=ownyourweb.xyz\nOr just reply to this message.\n\nHolly, Explee",
+        "industry": "Website / Web System Inquiry",
+        "timeline": "",
+        "buyer_agent": "h+f3807319a@havencalm.org",
+        "source_page": "OWNYOURWEB Main Site",
+        "budget_range": "$1,500 - $3,000",
+        "business_name": "Explee",
+        "customer_email": "h+f3807319a@havencalm.org",
+        "current_website": "https://explee.com",
+        "customer_last_name": "Dean",
+        "customer_first_name": "Holly"
+      },
+      "customer_phone": null
+    },
+    {
       "id": 53,
       "request_id": "2026-11-14T11-24-33-575Z-name-your-price-single-promotional-graphic-15-intro-bjcuqijz-zfkjpfgp",
       "created_at": "2026-11-14T11:24:33.575+00:00",
